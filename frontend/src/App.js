@@ -407,23 +407,31 @@ const App = () => {
             <SearchBar onSearch={handleSearch} loading={loading} />
             
             <div className="features-section">
-              <h3>Why Choose PeopleCheck?</h3>
+              <h3>Why Choose PeopleCheck AI?</h3>
               <div className="features-grid">
                 <div className="feature-card">
-                  <h4>📋 Comprehensive Reports</h4>
-                  <p>Criminal records, social media, property, and professional information</p>
+                  <h4>🔍 Easy & Instant</h4>
+                  <p>Simple search - just type a name and get results in seconds. No complicated forms or confusing steps.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚖️ Legal Clarity</h4>
-                  <p>Clear case statuses - pending, dismissed, or convicted with full context</p>
+                  <h4>👨‍👩‍👧‍👦 Family Safety First</h4>
+                  <p>Know who your children and grandchildren are spending time with. Peace of mind is priceless.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🔒 Privacy Focused</h4>
-                  <p>No spam emails, no hidden fees, legitimate use only</p>
+                  <h4>🏘️ Neighborhood Watch</h4>
+                  <p>Check on new neighbors, delivery people, or anyone in your community. Stay informed and safe.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>💰 Affordable Pricing</h4>
-                  <p>Starting free with competitive paid options</p>
+                  <h4>⚖️ Clear, Honest Results</h4>
+                  <p>No confusing legal jargon. We explain everything in plain English - pending vs. convicted vs. dismissed.</p>
+                </div>
+                <div className="feature-card">
+                  <h4>💰 Senior-Friendly Pricing</h4>
+                  <p>Start free, pay only when you need details. No monthly subscriptions required - perfect for occasional use.</p>
+                </div>
+                <div className="feature-card">
+                  <h4>🤖 AI Makes It Smart</h4>
+                  <p>Unlike old-school services, our AI connects the dots and gives you the full picture instantly.</p>
                 </div>
               </div>
             </div>
