@@ -396,10 +396,11 @@ const App = () => {
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
             <div className="hero-section">
-              <h2 className="hero-title">Find Anyone. Know Everything.</h2>
+              <h2 className="hero-title">AI-Powered People Search</h2>
               <p className="hero-subtitle">
-                Get comprehensive background checks with criminal records, social media profiles, 
-                and more. Perfect for meeting new people, hiring decisions, or personal verification.
+                Get instant, AI-analyzed background reports with smart insights. Unlike traditional services, 
+                our AI instantly correlates data, explains case statuses, and provides clear recommendations.
+                <strong> Why wait hours when AI delivers results in seconds?</strong>
               </p>
             </div>
             
