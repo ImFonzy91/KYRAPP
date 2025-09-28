@@ -365,7 +365,7 @@ const App = () => {
           <h1 className="app-title" onClick={() => setCurrentView('home')}>
             Scan'Em
           </h1>
-          <p className="app-tagline">Your AI Detective • Just Facts • No Gossip • Worth Knowing</p>
+          <p className="app-tagline">Street Smart Advice • Know Who You're Dealing With • Avoid The Drama</p>
         </div>
         <nav className="header-nav">
           <button 
