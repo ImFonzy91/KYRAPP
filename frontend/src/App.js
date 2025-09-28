@@ -396,11 +396,11 @@ const App = () => {
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
             <div className="hero-section">
-              <h2 className="hero-title">Just Facts. No Drama.</h2>
+              <h2 className="hero-title">Look, Just Check 'Em Out First</h2>
               <p className="hero-subtitle">
-                Get solid, verified information that could save you trouble. No gossip, no made-up stuff - 
-                just real facts from public records. Pay once, get your money's worth, and know exactly 
-                who you're dealing with. <strong>Worth knowing before it's too late.</strong>
+                Your dad was right - it's smart to know who you're dealing with before problems start. 
+                See what kind of paper trail they're leaving, avoid the drama, save yourself some headaches. 
+                A few bucks now could save you a whole lot of trouble later. <strong>Trust me on this one.</strong>
               </p>
             </div>
             
