@@ -407,31 +407,31 @@ const App = () => {
             <SearchBar onSearch={handleSearch} loading={loading} />
             
             <div className="features-section">
-              <h3>Why Scan'Em Gets Results</h3>
+              <h3>Why Your Dad Would Approve</h3>
               <div className="features-grid">
                 <div className="feature-card">
-                  <h4>🔍 Solid Facts Only</h4>
-                  <p>No gossip, no rumors - just verified public records and real information you can trust.</p>
+                  <h4>🔍 See Their Paper Trail</h4>
+                  <p>Court cases, arrests, what they've been up to. Better to know now than find out the hard way.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>💰 Worth Every Penny</h4>
-                  <p>Pay once, get the full story. Could save you from bad situations - that's priceless.</p>
+                  <h4>💰 Smart Money Spent</h4>
+                  <p>Few bucks now beats dealing with problems later. Your time and peace of mind are worth more.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚡ Your AI Detective</h4>
-                  <p>Smart AI digs through records instantly. No waiting days - know what you need to know now.</p>
+                  <h4>⚡ Get Answers Fast</h4>
+                  <p>No waiting around wondering. AI finds what you need to know in seconds, not days.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>👨‍👩‍👧‍👦 Family Protection</h4>
-                  <p>Check who your kids are hanging with. Peace of mind for parents and grandparents.</p>
+                  <h4>👨‍👩‍👧‍👦 Protect Your Family</h4>
+                  <p>Your kids dating someone new? New neighbor moved in? Just check 'em out - be smart about it.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🏘️ Know Your Neighborhood</h4>
-                  <p>New neighbors? Service workers? Know who's around before problems start.</p>
+                  <h4>🏘️ Neighborhood Common Sense</h4>
+                  <p>Service workers, new people around - a little homework never hurt anybody. Stay sharp.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚖️ Clear Truth</h4>
-                  <p>Pending vs convicted vs dismissed - we explain it all in plain English. No confusion.</p>
+                  <h4>⚖️ Real Talk on Records</h4>
+                  <p>Accused vs convicted vs dropped charges - we break it down so you know what's what.</p>
                 </div>
               </div>
             </div>
