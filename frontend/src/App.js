@@ -396,12 +396,11 @@ const App = () => {
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
             <div className="hero-section">
-              <h2 className="hero-title">AI-Powered People Search</h2>
+              <h2 className="hero-title">Just Facts. No Drama.</h2>
               <p className="hero-subtitle">
-                Get instant, AI-analyzed background reports with smart insights. Perfect for parents, grandparents, 
-                and anyone who wants to know more about the people in their lives. Unlike traditional services that take hours, 
-                our AI delivers clear, easy-to-understand results in seconds.
-                <strong> Know who you're dealing with - it's that simple!</strong>
+                Get solid, verified information that could save you trouble. No gossip, no made-up stuff - 
+                just real facts from public records. Pay once, get your money's worth, and know exactly 
+                who you're dealing with. <strong>Worth knowing before it's too late.</strong>
               </p>
             </div>
             
