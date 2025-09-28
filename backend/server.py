@@ -206,7 +206,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
                     case_number="CR-2023-001234",
                     charge="Misdemeanor Theft",
                     description="Accused of shoplifting at retail store - surveillance footage unclear",
-                    date=date(2023, 8, 20),
+                    date="2023-08-20",
                     status=CaseStatus.PENDING,
                     status_description="Case pending trial - accused but not convicted. Defense claims mistaken identity. Next court date: January 15, 2025",
                     court="Superior Court of California",
@@ -217,7 +217,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
                     case_number="CR-2021-005678",
                     charge="DUI",
                     description="Driving under influence - BAC 0.08",
-                    date=date(2021, 3, 10),
+                    date="2021-03-10",
                     status=CaseStatus.CHARGES_DROPPED,
                     status_description="Charges dropped - breathalyzer equipment found to be faulty during that period",
                     court="Municipal Court",
@@ -230,7 +230,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
                     address="123 Main St, Los Angeles, CA 90210",
                     property_type="Single Family Home",
                     estimated_value=750000,
-                    ownership_date=date(2020, 5, 15),
+                    ownership_date="2020-05-15",
                     county="Los Angeles",
                     state="CA"
                 )
