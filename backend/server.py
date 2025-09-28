@@ -65,7 +65,7 @@ class CriminalRecord(BaseModel):
     case_number: str
     charge: str
     description: str
-    date: date
+    date: str
     status: CaseStatus
     status_description: str
     court: str
