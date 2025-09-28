@@ -551,7 +551,7 @@ const App = () => {
       </main>
 
       <footer className="app-footer">
-        <p>© 2025 PeopleCheck. Legitimate use only. All data from public records.</p>
+        <p>© 2025 Scan'Em. Just Facts. No Gossip. Know Before It's Too Late.</p>
       </footer>
     </div>
   );
