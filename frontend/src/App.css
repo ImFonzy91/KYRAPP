@@ -787,6 +787,29 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* Accessibility for older users */
+.search-input, .search-button, .nav-link {
+  font-size: 1.1rem;
+  min-height: 48px;
+}
+
+.pricing-button, .btn-free, .btn-basic, .btn-premium {
+  font-size: 1.1rem;
+  min-height: 48px;
+  padding: 1rem 2rem;
+}
+
+.feature-card h4 {
+  font-size: 1.4rem;
+}
+
+.feature-card p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Enhanced readability */
+
 .hero-section {
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
