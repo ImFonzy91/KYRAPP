@@ -407,31 +407,31 @@ const App = () => {
             <SearchBar onSearch={handleSearch} loading={loading} />
             
             <div className="features-section">
-              <h3>Why Choose PeopleCheck AI?</h3>
+              <h3>Why Scan'Em Gets Results</h3>
               <div className="features-grid">
                 <div className="feature-card">
-                  <h4>🔍 Easy & Instant</h4>
-                  <p>Simple search - just type a name and get results in seconds. No complicated forms or confusing steps.</p>
+                  <h4>🔍 Solid Facts Only</h4>
+                  <p>No gossip, no rumors - just verified public records and real information you can trust.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>👨‍👩‍👧‍👦 Family Safety First</h4>
-                  <p>Know who your children and grandchildren are spending time with. Peace of mind is priceless.</p>
+                  <h4>💰 Worth Every Penny</h4>
+                  <p>Pay once, get the full story. Could save you from bad situations - that's priceless.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🏘️ Neighborhood Watch</h4>
-                  <p>Check on new neighbors, delivery people, or anyone in your community. Stay informed and safe.</p>
+                  <h4>⚡ Your AI Detective</h4>
+                  <p>Smart AI digs through records instantly. No waiting days - know what you need to know now.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚖️ Clear, Honest Results</h4>
-                  <p>No confusing legal jargon. We explain everything in plain English - pending vs. convicted vs. dismissed.</p>
+                  <h4>👨‍👩‍👧‍👦 Family Protection</h4>
+                  <p>Check who your kids are hanging with. Peace of mind for parents and grandparents.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>💰 Senior-Friendly Pricing</h4>
-                  <p>Start free, pay only when you need details. No monthly subscriptions required - perfect for occasional use.</p>
+                  <h4>🏘️ Know Your Neighborhood</h4>
+                  <p>New neighbors? Service workers? Know who's around before problems start.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🤖 AI Makes It Smart</h4>
-                  <p>Unlike old-school services, our AI connects the dots and gives you the full picture instantly.</p>
+                  <h4>⚖️ Clear Truth</h4>
+                  <p>Pending vs convicted vs dismissed - we explain it all in plain English. No confusion.</p>
                 </div>
               </div>
             </div>
