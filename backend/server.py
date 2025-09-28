@@ -132,7 +132,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
                     case_number="CR-2023-****",
                     charge="Traffic Violation",
                     description="Speeding - 15 mph over limit",
-                    date=date(2023, 6, 15),
+                    date="2023-06-15",
                     status=CaseStatus.DISMISSED,
                     status_description="Case dismissed - traffic school completed",
                     court="Municipal Court",
