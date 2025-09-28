@@ -359,7 +359,7 @@ const App = () => {
   };
 
   return (
-    <div className="app" data-testid="peoplecheck-app">
+    <div className="app" data-testid="scanem-app">
       <header className="app-header">
         <div className="header-content">
           <h1 className="app-title" onClick={() => setCurrentView('home')}>
