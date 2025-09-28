@@ -76,7 +76,7 @@ class PropertyRecord(BaseModel):
     address: str
     property_type: str
     estimated_value: Optional[int] = None
-    ownership_date: Optional[date] = None
+    ownership_date: Optional[str] = None
     county: str
     state: str
 
