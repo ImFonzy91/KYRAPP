@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Query
+from fastapi import FastAPI, APIRouter, HTTPException, Query, Request
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -9,9 +9,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime, date
-import json
 from enum import Enum
-
+from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -46,6 +45,12 @@ class CaseStatus(str, Enum):
     DISMISSED = "dismissed"
     CHARGES_DROPPED = "charges_dropped"
     ACQUITTED = "acquitted"
+
+class PaymentStatus(str, Enum):
+    PENDING = "pending"
+    PAID = "paid"
+    FAILED = "failed"
+    EXPIRED = "expired"
 
 # Models
 class PersonSearch(BaseModel):
@@ -102,6 +107,38 @@ class BackgroundReport(BaseModel):
     relatives: List[str] = []
     report_tier: ReportTier
     generated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PaymentTransaction(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str
+    amount: float
+    currency: str = "usd"
+    payment_status: PaymentStatus
+    metadata: Dict[str, str] = {}
+    person_id: Optional[str] = None
+    report_tier: Optional[ReportTier] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class CheckoutRequest(BaseModel):
+    package_id: str
+    person_id: str
+    origin_url: str
+
+class CheckoutStatusRequest(BaseModel):
+    session_id: str
+
+# Fixed Packages - NEVER accept amounts from frontend
+PACKAGES = {
+    "free": {"price": 0.0, "tier": ReportTier.FREE, "name": "Free Report"},
+    "basic": {"price": 2.99, "tier": ReportTier.BASIC, "name": "Basic Report"},
+    "premium": {"price": 5.99, "tier": ReportTier.PREMIUM, "name": "Premium Report"},
+    "subscription_basic": {"price": 14.99, "tier": ReportTier.BASIC, "name": "Basic Subscription"},
+    "subscription_pro": {"price": 29.99, "tier": ReportTier.PREMIUM, "name": "Pro Subscription"}
+}
+
+# Initialize Stripe
+stripe_api_key = os.environ.get('STRIPE_API_KEY')
 
 # Mock Data Generator
 def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
@@ -257,7 +294,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
 # API Routes
 @api_router.get("/")
 async def root():
-    return {"message": "PeopleCheck API - Background Checks Made Simple"}
+    return {"message": "Scan'Em API - Street Smart Background Checks"}
 
 @api_router.post("/search")
 async def search_person(
@@ -299,31 +336,184 @@ async def get_background_report(
     
     return report
 
+# PAYMENT ROUTES
+@api_router.post("/payments/checkout")
+async def create_checkout_session(request: CheckoutRequest):
+    """Create Stripe checkout session for background report"""
+    
+    # Validate package exists
+    if request.package_id not in PACKAGES:
+        raise HTTPException(status_code=400, detail="Invalid package selected")
+    
+    package = PACKAGES[request.package_id]
+    
+    # Free reports don't need payment
+    if package["price"] == 0.0:
+        # Generate free report directly
+        report = generate_mock_report("John Smith", package["tier"])
+        await db.reports.insert_one(report.dict())
+        return {
+            "type": "free_report",
+            "report": report
+        }
+    
+    try:
+        # Initialize Stripe checkout
+        host_url = str(request.origin_url)
+        webhook_url = f"{host_url}/api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
+        
+        # Build success and cancel URLs
+        success_url = f"{request.origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{request.origin_url}/payment-cancel"
+        
+        # Create checkout session
+        checkout_request = CheckoutSessionRequest(
+            amount=package["price"],
+            currency="usd",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={
+                "person_id": request.person_id,
+                "package_id": request.package_id,
+                "tier": package["tier"].value,
+                "source": "scanem_app"
+            }
+        )
+        
+        session = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # Create payment transaction record
+        transaction = PaymentTransaction(
+            session_id=session.session_id,
+            amount=package["price"],
+            currency="usd",
+            payment_status=PaymentStatus.PENDING,
+            metadata=checkout_request.metadata,
+            person_id=request.person_id,
+            report_tier=package["tier"]
+        )
+        
+        await db.payment_transactions.insert_one(transaction.dict())
+        
+        return {
+            "type": "payment_required",
+            "checkout_url": session.url,
+            "session_id": session.session_id
+        }
+        
+    except Exception as e:
+        logger.error(f"Stripe checkout error: {e}")
+        raise HTTPException(status_code=500, detail=f"Payment setup failed: {str(e)}")
+
+@api_router.get("/payments/status/{session_id}")
+async def check_payment_status(session_id: str):
+    """Check payment status and return report if paid"""
+    
+    try:
+        # Find transaction record
+        transaction = await db.payment_transactions.find_one({"session_id": session_id})
+        if not transaction:
+            raise HTTPException(status_code=404, detail="Payment session not found")
+        
+        # Initialize Stripe checkout
+        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url="")
+        
+        # Check status with Stripe
+        checkout_status = await stripe_checkout.get_checkout_status(session_id)
+        
+        # Update transaction status if changed
+        if checkout_status.payment_status == "paid" and transaction["payment_status"] != PaymentStatus.PAID.value:
+            # Update payment status
+            await db.payment_transactions.update_one(
+                {"session_id": session_id},
+                {
+                    "$set": {
+                        "payment_status": PaymentStatus.PAID.value,
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+            
+            # Generate the paid report
+            tier = ReportTier(transaction["metadata"]["tier"])
+            report = generate_mock_report("John Smith", tier)
+            await db.reports.insert_one(report.dict())
+            
+            return {
+                "payment_status": "paid",
+                "report": report,
+                "amount": checkout_status.amount_total / 100  # Stripe returns cents
+            }
+        
+        elif checkout_status.status == "expired":
+            await db.payment_transactions.update_one(
+                {"session_id": session_id},
+                {"$set": {"payment_status": PaymentStatus.EXPIRED.value, "updated_at": datetime.utcnow()}}
+            )
+            
+        return {
+            "payment_status": checkout_status.payment_status,
+            "session_status": checkout_status.status,
+            "amount": checkout_status.amount_total / 100
+        }
+        
+    except Exception as e:
+        logger.error(f"Payment status check error: {e}")
+        raise HTTPException(status_code=500, detail=f"Payment status check failed: {str(e)}")
+
+@api_router.post("/webhook/stripe")
+async def stripe_webhook(request: Request):
+    """Handle Stripe webhooks"""
+    
+    try:
+        body = await request.body()
+        stripe_signature = request.headers.get("Stripe-Signature")
+        
+        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url="")
+        webhook_response = await stripe_checkout.handle_webhook(body, stripe_signature)
+        
+        # Update payment transaction based on webhook
+        if webhook_response.event_type == "checkout.session.completed":
+            await db.payment_transactions.update_one(
+                {"session_id": webhook_response.session_id},
+                {
+                    "$set": {
+                        "payment_status": PaymentStatus.PAID.value,
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+        
+        return {"status": "success"}
+        
+    except Exception as e:
+        logger.error(f"Webhook error: {e}")
+        raise HTTPException(status_code=400, detail=f"Webhook processing failed: {str(e)}")
+
 @api_router.get("/pricing")
 async def get_pricing():
     """Get current pricing information"""
     return {
-        "free_tier": {
-            "name": "Free Daily Check",
-            "price": 0,
-            "searches_per_day": 1,
-            "features": [
-                "Basic name and age",
-                "Current city",
-                "One criminal record preview",
-                "Limited social media hints"
-            ]
-        },
-        "pay_per_report": {
+        "packages": {
+            "free": {
+                "name": "Free Daily Check",
+                "price": 0.0,
+                "features": [
+                    "Basic name and age",
+                    "Current city",
+                    "One criminal record preview"
+                ]
+            },
             "basic": {
                 "name": "Basic Report",
                 "price": 2.99,
                 "features": [
                     "Full criminal history",
-                    "Address history", 
+                    "Address history",
                     "Phone numbers",
-                    "2 social media profiles",
-                    "Immediate family"
+                    "Social media profiles",
+                    "Family members"
                 ]
             },
             "premium": {
@@ -340,14 +530,14 @@ async def get_pricing():
             }
         },
         "subscriptions": {
-            "basic": {
+            "subscription_basic": {
                 "name": "Basic Plan",
                 "price": 14.99,
                 "billing": "monthly",
                 "reports": 10,
                 "savings": "Save $15/month vs pay-per-report"
             },
-            "professional": {
+            "subscription_pro": {
                 "name": "Professional",
                 "price": 29.99,
                 "billing": "monthly", 
@@ -362,10 +552,12 @@ async def get_app_stats():
     """Get application statistics"""
     total_searches = await db.searches.count_documents({})
     total_reports = await db.reports.count_documents({})
+    total_payments = await db.payment_transactions.count_documents({"payment_status": "paid"})
     
     return {
         "total_searches": total_searches,
         "total_reports": total_reports,
+        "total_payments": total_payments,
         "uptime": "99.9%",
         "last_updated": datetime.utcnow()
     }

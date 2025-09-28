@@ -5,6 +5,35 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Payment status polling function
+const pollPaymentStatus = async (sessionId, onSuccess, onFailure, attempts = 0) => {
+  const maxAttempts = 10;
+  const pollInterval = 2000; // 2 seconds
+
+  if (attempts >= maxAttempts) {
+    onFailure('Payment status check timed out. Please contact support.');
+    return;
+  }
+
+  try {
+    const response = await axios.get(`${API}/payments/status/${sessionId}`);
+    
+    if (response.data.payment_status === 'paid') {
+      onSuccess(response.data);
+      return;
+    } else if (response.data.session_status === 'expired') {
+      onFailure('Payment session expired. Please try again.');
+      return;
+    }
+
+    // Continue polling if still pending
+    setTimeout(() => pollPaymentStatus(sessionId, onSuccess, onFailure, attempts + 1), pollInterval);
+  } catch (error) {
+    console.error('Error checking payment status:', error);
+    onFailure('Error checking payment status. Please try again.');
+  }
+};
+
 // Components
 const SearchBar = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
@@ -47,7 +76,7 @@ const SearchBar = ({ onSearch, loading }) => {
             data-testid="search-button"
             disabled={loading || !query.trim()}
           >
-            {loading ? 'Searching...' : 'Search'}
+            {loading ? 'Searching...' : 'Scan\'Em'}
           </button>
         </div>
       </form>
@@ -55,10 +84,10 @@ const SearchBar = ({ onSearch, loading }) => {
   );
 };
 
-const PricingCard = ({ tier, price, features, isPopular = false, onSelect }) => (
+const PricingCard = ({ packageId, name, price, features, isPopular = false, onSelect }) => (
   <div className={`pricing-card ${isPopular ? 'popular' : ''}`}>
     {isPopular && <div className="popular-badge">Most Popular</div>}
-    <h3 className="pricing-title">{tier}</h3>
+    <h3 className="pricing-title">{name}</h3>
     <div className="pricing-price">
       ${price}
       {price > 0 && <span className="pricing-period">/report</span>}
@@ -70,10 +99,10 @@ const PricingCard = ({ tier, price, features, isPopular = false, onSelect }) => 
     </ul>
     <button 
       className={`pricing-button ${isPopular ? 'popular-button' : ''}`}
-      onClick={() => onSelect(tier.toLowerCase().replace(' ', '_'), price)}
-      data-testid={`select-${tier.toLowerCase().replace(' ', '-')}-plan`}
+      onClick={() => onSelect(packageId, price)}
+      data-testid={`select-${packageId}-plan`}
     >
-      {price === 0 ? 'Try Free' : 'Get Report'}
+      {price === 0 ? 'Get Free Report' : `Pay $${price}`}
     </button>
   </div>
 );
@@ -292,6 +321,63 @@ const BackgroundReport = ({ report }) => {
   );
 };
 
+const PaymentSuccess = ({ sessionId }) => {
+  const [status, setStatus] = useState('checking');
+  const [report, setReport] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (sessionId) {
+      pollPaymentStatus(
+        sessionId,
+        (data) => {
+          setStatus('success');
+          setReport(data.report);
+        },
+        (error) => {
+          setStatus('error');
+          setError(error);
+        }
+      );
+    }
+  }, [sessionId]);
+
+  if (status === 'checking') {
+    return (
+      <div className="payment-status checking" data-testid="payment-checking">
+        <h2>Processing Your Payment...</h2>
+        <p>Please wait while we verify your payment and generate your report.</p>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div className="payment-status error" data-testid="payment-error">
+        <h2>Payment Error</h2>
+        <p>{error}</p>
+        <button onClick={() => window.location.href = '/'}>Try Again</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="payment-status success" data-testid="payment-success">
+      <h2>Payment Successful!</h2>
+      <p>Your background report is ready. Here's what we found:</p>
+      {report && <BackgroundReport report={report} />}
+    </div>
+  );
+};
+
+// Helper function to get URL parameters
+const getUrlParameter = (name) => {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  const results = regex.exec(window.location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
 // Main App Component
 const App = () => {
   const [currentView, setCurrentView] = useState('home');
@@ -303,6 +389,12 @@ const App = () => {
 
   useEffect(() => {
     fetchPricing();
+    
+    // Check if returning from payment
+    const sessionId = getUrlParameter('session_id');
+    if (sessionId) {
+      setCurrentView('payment-success');
+    }
   }, []);
 
   const fetchPricing = async () => {
@@ -330,33 +422,61 @@ const App = () => {
     setLoading(false);
   };
 
-  const handleGetReport = async (personId, tier = 'free') => {
+  const handleGetReport = async (personId, packageId) => {
     setLoading(true);
     setError(null);
+    
     try {
-      const response = await axios.get(`${API}/report/${personId}`, {
-        params: { tier }
+      const originUrl = window.location.origin;
+      
+      const response = await axios.post(`${API}/payments/checkout`, {
+        package_id: packageId,
+        person_id: personId,
+        origin_url: originUrl
       });
-      setCurrentReport(response.data);
-      setCurrentView('report');
+
+      if (response.data.type === 'free_report') {
+        // Free report - show immediately
+        setCurrentReport(response.data.report);
+        setCurrentView('report');
+      } else {
+        // Paid report - redirect to Stripe
+        window.location.href = response.data.checkout_url;
+      }
     } catch (err) {
-      setError('Failed to generate report. Please try again.');
+      setError('Failed to process request. Please try again.');
       console.error('Report error:', err);
     }
     setLoading(false);
   };
 
-  const handlePlanSelect = (planType, price) => {
-    if (price === 0) {
-      // Free tier - generate free report
-      if (searchResults.length > 0) {
-        handleGetReport(searchResults[0].id, 'free');
-      }
+  const handlePlanSelect = (packageId, price) => {
+    if (searchResults.length > 0) {
+      handleGetReport(searchResults[0].id, packageId);
     } else {
-      // Paid plans - would integrate with payment processor
-      alert(`Payment integration would process $${price} for ${planType} plan`);
+      setError('Please search for someone first');
     }
   };
+
+  // Handle payment success page
+  if (currentView === 'payment-success') {
+    const sessionId = getUrlParameter('session_id');
+    return (
+      <div className="app" data-testid="scanem-app">
+        <header className="app-header">
+          <div className="header-content">
+            <h1 className="app-title" onClick={() => setCurrentView('home')}>
+              Scan'Em
+            </h1>
+            <p className="app-tagline">Street Smart Advice • Know Who You're Dealing With • Avoid The Drama</p>
+          </div>
+        </header>
+        <main className="app-main">
+          <PaymentSuccess sessionId={sessionId} />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="app" data-testid="scanem-app">
@@ -492,23 +612,26 @@ const App = () => {
             
             <div className="pricing-cards">
               <PricingCard
-                tier="Free Daily Check"
-                price={0}
-                features={pricing.free_tier.features}
+                packageId="free"
+                name={pricing.packages.free.name}
+                price={pricing.packages.free.price}
+                features={pricing.packages.free.features}
                 onSelect={handlePlanSelect}
               />
               
               <PricingCard
-                tier="Basic Report"
-                price={pricing.pay_per_report.basic.price}
-                features={pricing.pay_per_report.basic.features}
+                packageId="basic"
+                name={pricing.packages.basic.name}
+                price={pricing.packages.basic.price}
+                features={pricing.packages.basic.features}
                 onSelect={handlePlanSelect}
               />
               
               <PricingCard
-                tier="Premium Report"
-                price={pricing.pay_per_report.premium.price}
-                features={pricing.pay_per_report.premium.features}
+                packageId="premium"
+                name={pricing.packages.premium.name}
+                price={pricing.packages.premium.price}
+                features={pricing.packages.premium.features}
                 isPopular={true}
                 onSelect={handlePlanSelect}
               />
@@ -518,16 +641,16 @@ const App = () => {
               <h3>Subscription Plans</h3>
               <div className="subscription-cards">
                 <div className="subscription-card">
-                  <h4>{pricing.subscriptions.basic.name}</h4>
-                  <p className="sub-price">${pricing.subscriptions.basic.price}/month</p>
-                  <p>{pricing.subscriptions.basic.reports} reports included</p>
-                  <p className="sub-savings">{pricing.subscriptions.basic.savings}</p>
+                  <h4>{pricing.subscriptions.subscription_basic.name}</h4>
+                  <p className="sub-price">${pricing.subscriptions.subscription_basic.price}/month</p>
+                  <p>{pricing.subscriptions.subscription_basic.reports} reports included</p>
+                  <p className="sub-savings">{pricing.subscriptions.subscription_basic.savings}</p>
                 </div>
                 <div className="subscription-card">
-                  <h4>{pricing.subscriptions.professional.name}</h4>
-                  <p className="sub-price">${pricing.subscriptions.professional.price}/month</p>
-                  <p>{pricing.subscriptions.professional.reports} reports included</p>
-                  <p className="sub-savings">{pricing.subscriptions.professional.savings}</p>
+                  <h4>{pricing.subscriptions.subscription_pro.name}</h4>
+                  <p className="sub-price">${pricing.subscriptions.subscription_pro.price}/month</p>
+                  <p>{pricing.subscriptions.subscription_pro.reports} reports included</p>
+                  <p className="sub-savings">{pricing.subscriptions.subscription_pro.savings}</p>
                 </div>
               </div>
             </div>
