@@ -363,9 +363,9 @@ const App = () => {
       <header className="app-header">
         <div className="header-content">
           <h1 className="app-title" onClick={() => setCurrentView('home')}>
-            PeopleCheck
+            PeopleCheck AI
           </h1>
-          <p className="app-tagline">Background Checks Made Simple & Accurate</p>
+          <p className="app-tagline">AI-Powered Background Checks • Instant Results • Smart Analysis</p>
         </div>
         <nav className="header-nav">
           <button 
