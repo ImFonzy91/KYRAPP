@@ -396,11 +396,11 @@ const App = () => {
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
             <div className="hero-section">
-              <h2 className="hero-title">Look, Just Check 'Em Out First</h2>
+              <h2 className="hero-title">Smart to Know Who's Around You</h2>
               <p className="hero-subtitle">
-                Your dad was right - it's smart to know who you're dealing with before problems start. 
-                See what kind of paper trail they're leaving, avoid the drama, save yourself some headaches. 
-                A few bucks now could save you a whole lot of trouble later. <strong>Trust me on this one.</strong>
+                Whether it's a new neighbor, coworker, or potential friend - a little background check never hurt. 
+                See what kind of records they have, make better decisions, avoid unnecessary drama. 
+                A few bucks for peace of mind. <strong>Just being smart about it.</strong>
               </p>
             </div>
             
