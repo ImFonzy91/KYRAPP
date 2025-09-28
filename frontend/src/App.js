@@ -407,31 +407,31 @@ const App = () => {
             <SearchBar onSearch={handleSearch} loading={loading} />
             
             <div className="features-section">
-              <h3>Why Your Dad Would Approve</h3>
+              <h3>Make Smarter Decisions</h3>
               <div className="features-grid">
                 <div className="feature-card">
-                  <h4>🔍 See Their Paper Trail</h4>
-                  <p>Court cases, arrests, what they've been up to. Better to know now than find out the hard way.</p>
+                  <h4>🔍 See Their Background</h4>
+                  <p>Court cases, arrests, what they've been up to. Better to know upfront than be surprised later.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>💰 Smart Money Spent</h4>
-                  <p>Few bucks now beats dealing with problems later. Your time and peace of mind are worth more.</p>
+                  <h4>💰 Worth the Investment</h4>
+                  <p>Small price for big peace of mind. Your safety and good judgment are worth more than a few dollars.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚡ Get Answers Fast</h4>
-                  <p>No waiting around wondering. AI finds what you need to know in seconds, not days.</p>
+                  <h4>⚡ Quick & Easy</h4>
+                  <p>AI finds what you need in seconds. No waiting, no hassle - just the info you want.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>👨‍👩‍👧‍👦 Protect Your Family</h4>
-                  <p>Your kids dating someone new? New neighbor moved in? Just check 'em out - be smart about it.</p>
+                  <h4>👥 Know Who's Around</h4>
+                  <p>New neighbors, coworkers, potential friends - just check 'em out. Nothing creepy, just smart.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🏘️ Neighborhood Common Sense</h4>
-                  <p>Service workers, new people around - a little homework never hurt anybody. Stay sharp.</p>
+                  <h4>🏘️ Stay Informed</h4>
+                  <p>Service workers, people in your area - a little homework helps you make better decisions.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚖️ Real Talk on Records</h4>
-                  <p>Accused vs convicted vs dropped charges - we break it down so you know what's what.</p>
+                  <h4>⚖️ Clear Information</h4>
+                  <p>Accused vs convicted vs dropped charges - we explain what it all means in plain English.</p>
                 </div>
               </div>
             </div>
