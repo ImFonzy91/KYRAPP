@@ -160,7 +160,7 @@ def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
                     case_number="CR-2023-001234",
                     charge="Misdemeanor Theft",
                     description="Accused of shoplifting - case pending trial",
-                    date=date(2023, 8, 20),
+                    date="2023-08-20",
                     status=CaseStatus.PENDING,
                     status_description="Case pending - accused but not yet convicted. Next court date: January 15, 2025",
                     court="Superior Court of California",
