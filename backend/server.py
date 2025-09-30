@@ -386,10 +386,14 @@ async def get_background_report(
     person_id: str,
     tier: ReportTier = Query(ReportTier.FREE, description="Report tier to generate")
 ):
-    """Get a detailed background report"""
+    """Get a detailed background report using real SearchBug data"""
     
-    # Generate mock report based on tier
-    report = generate_mock_report("John Smith", tier)
+    # For demo, we'll use "John Smith" but in real app, 
+    # person_id would map to actual search results
+    name = "John Smith"  # This would come from your search results
+    
+    # Get real data from SearchBug
+    report = await search_person_searchbug(name, tier)
     
     # Save report generation
     await db.reports.insert_one(report.dict())
