@@ -314,7 +314,7 @@ const BackgroundReport = ({ report }) => {
         ))}
       </div>
       
-      <div className="report-content">
+      <div className={`report-content ${activeTab}-theme`}>
         {renderTabContent()}
       </div>
     </div>
