@@ -109,7 +109,7 @@ const PricingCard = ({ packageId, name, price, features, isPopular = false, onSe
 
 const ReportTab = ({ title, isActive, onClick, count = null }) => (
   <button
-    className={`report-tab ${isActive ? 'active' : ''}`}
+    className={`report-tab ${isActive ? 'active' : ''} ${title.toLowerCase().replace(' ', '-')}-tab`}
     onClick={onClick}
     data-testid={`tab-${title.toLowerCase().replace(' ', '-')}`}
   >
