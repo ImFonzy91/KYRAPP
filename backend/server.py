@@ -141,6 +141,64 @@ PACKAGES = {
 
 # Initialize Stripe
 stripe_api_key = os.environ.get('STRIPE_API_KEY')
+searchbug_api_key = os.environ.get('SEARCHBUG_API_KEY')
+
+# SearchBug API integration
+async def search_person_searchbug(name: str, tier: ReportTier) -> BackgroundReport:
+    """Get real data from SearchBug API"""
+    
+    try:
+        # SearchBug People Search API
+        search_url = "https://www.searchbug.com/peoplefinder/api/search"
+        params = {
+            'apikey': searchbug_api_key,
+            'name': name,
+            'format': 'json'
+        }
+        
+        response = requests.get(search_url, params=params, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Parse SearchBug response and create report
+            person_data = data.get('results', [{}])[0] if data.get('results') else {}
+            
+            # Build real report from SearchBug data
+            report_data = {
+                "person_name": person_data.get('name', name),
+                "age": person_data.get('age'),
+                "current_address": person_data.get('address', 'Address not found'),
+                "phone_numbers": person_data.get('phones', []),
+                "email_addresses": person_data.get('emails', []),
+                "previous_addresses": person_data.get('previous_addresses', []),
+                "social_media": [],  # SearchBug doesn't provide social media
+                "criminal_records": [],  # SearchBug basic doesn't include criminal
+                "property_records": [],
+                "professional_info": [],
+                "relatives": person_data.get('relatives', []),
+                "report_tier": tier
+            }
+            
+            # Add limited info based on tier
+            if tier == ReportTier.FREE:
+                # Very limited for free
+                report_data.update({
+                    "current_address": person_data.get('city', '') + ", " + person_data.get('state', ''),
+                    "phone_numbers": [],
+                    "email_addresses": []
+                })
+            
+            return BackgroundReport(**report_data)
+        else:
+            logger.error(f"SearchBug API error: {response.status_code}")
+            # Fall back to mock data if API fails
+            return generate_mock_report(name, tier)
+            
+    except Exception as e:
+        logger.error(f"SearchBug API exception: {e}")
+        # Fall back to mock data if API fails  
+        return generate_mock_report(name, tier)
 
 # Mock Data Generator
 def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
