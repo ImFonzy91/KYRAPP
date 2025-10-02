@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Query, Request
+from fastapi import FastAPI, APIRouter, HTTPException, Query
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -8,11 +8,9 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 import uuid
-from datetime import datetime, date
+from datetime import datetime
 from enum import Enum
 from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
-import requests
-import asyncio
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -29,24 +27,12 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # Enums
-class SearchType(str, Enum):
-    NAME = "name"
-    PHONE = "phone"
-    EMAIL = "email"
-    ADDRESS = "address"
-
-class ReportTier(str, Enum):
-    FREE = "free"
-    BASIC = "basic"
-    PREMIUM = "premium"
-    COMPLETE = "complete"
-
-class CaseStatus(str, Enum):
-    PENDING = "pending"
-    CONVICTED = "convicted"
-    DISMISSED = "dismissed"
-    CHARGES_DROPPED = "charges_dropped"
-    ACQUITTED = "acquitted"
+class RightsCategory(str, Enum):
+    TRAFFIC = "traffic"
+    TENANT = "tenant"
+    WORKPLACE = "workplace"
+    CRIMINAL = "criminal"
+    CONSTITUTIONAL = "constitutional"
 
 class PaymentStatus(str, Enum):
     PENDING = "pending"
@@ -55,60 +41,14 @@ class PaymentStatus(str, Enum):
     EXPIRED = "expired"
 
 # Models
-class PersonSearch(BaseModel):
+class RightsContent(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    search_query: str
-    search_type: SearchType
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class SocialMediaProfile(BaseModel):
-    platform: str
-    username: str
-    profile_url: str
-    verified: bool = False
-    last_activity: Optional[str] = None
-
-class CriminalRecord(BaseModel):
-    case_number: str
-    charge: str
-    description: str
-    date: str
-    status: CaseStatus
-    status_description: str
-    court: str
-    county: str
-    state: str
-
-class PropertyRecord(BaseModel):
-    address: str
-    property_type: str
-    estimated_value: Optional[int] = None
-    ownership_date: Optional[str] = None
-    county: str
-    state: str
-
-class ProfessionalInfo(BaseModel):
-    company: str
-    position: str
-    duration: str
-    location: str
-    industry: str
-
-class BackgroundReport(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    person_name: str
-    age: Optional[int] = None
-    current_address: str
-    phone_numbers: List[str] = []
-    email_addresses: List[str] = []
-    previous_addresses: List[str] = []
-    social_media: List[SocialMediaProfile] = []
-    criminal_records: List[CriminalRecord] = []
-    property_records: List[PropertyRecord] = []
-    professional_info: List[ProfessionalInfo] = []
-    relatives: List[str] = []
-    report_tier: ReportTier
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    title: str
+    situation: str
+    content: str
+    category: RightsCategory
+    state_specific: bool = False
+    is_free: bool = False
 
 class PaymentTransaction(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -117,309 +57,536 @@ class PaymentTransaction(BaseModel):
     currency: str = "usd"
     payment_status: PaymentStatus
     metadata: Dict[str, str] = {}
-    person_id: Optional[str] = None
-    report_tier: Optional[ReportTier] = None
+    category: Optional[RightsCategory] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
+class CategoryAccess(BaseModel):
+    user_id: str
+    category: RightsCategory
+    purchased_at: datetime = Field(default_factory=datetime.utcnow)
+    expires_at: Optional[datetime] = None
+
 class CheckoutRequest(BaseModel):
-    package_id: str
-    person_id: str
+    category: RightsCategory
     origin_url: str
-
-class CheckoutStatusRequest(BaseModel):
-    session_id: str
-
-# Fixed Packages - NEVER accept amounts from frontend
-PACKAGES = {
-    "free": {"price": 0.0, "tier": ReportTier.FREE, "name": "Free Report"},
-    "basic": {"price": 2.99, "tier": ReportTier.BASIC, "name": "Basic Report"},
-    "premium": {"price": 5.99, "tier": ReportTier.PREMIUM, "name": "Premium Report"},
-    "subscription_basic": {"price": 14.99, "tier": ReportTier.BASIC, "name": "Basic Subscription"},
-    "subscription_pro": {"price": 29.99, "tier": ReportTier.PREMIUM, "name": "Pro Subscription"}
-}
 
 # Initialize Stripe
 stripe_api_key = os.environ.get('STRIPE_API_KEY')
-searchbug_api_key = os.environ.get('SEARCHBUG_API_KEY')
 
-# SearchBug API integration
-async def search_person_searchbug(name: str, tier: ReportTier) -> BackgroundReport:
-    """Get real data from SearchBug API"""
-    
-    try:
-        # SearchBug People Search API
-        search_url = "https://www.searchbug.com/peoplefinder/api/search"
-        params = {
-            'apikey': searchbug_api_key,
-            'name': name,
-            'format': 'json'
-        }
-        
-        response = requests.get(search_url, params=params, timeout=10)
-        
-        if response.status_code == 200:
-            data = response.json()
-            
-            # Parse SearchBug response and create report
-            person_data = data.get('results', [{}])[0] if data.get('results') else {}
-            
-            # Build real report from SearchBug data
-            report_data = {
-                "person_name": person_data.get('name', name),
-                "age": person_data.get('age'),
-                "current_address": person_data.get('address', 'Address not found'),
-                "phone_numbers": person_data.get('phones', []),
-                "email_addresses": person_data.get('emails', []),
-                "previous_addresses": person_data.get('previous_addresses', []),
-                "social_media": [],  # SearchBug doesn't provide social media
-                "criminal_records": [],  # SearchBug basic doesn't include criminal
-                "property_records": [],
-                "professional_info": [],
-                "relatives": person_data.get('relatives', []),
-                "report_tier": tier
-            }
-            
-            # Add limited info based on tier
-            if tier == ReportTier.FREE:
-                # Very limited for free
-                report_data.update({
-                    "current_address": person_data.get('city', '') + ", " + person_data.get('state', ''),
-                    "phone_numbers": [],
-                    "email_addresses": []
-                })
-            
-            return BackgroundReport(**report_data)
-        else:
-            logger.error(f"SearchBug API error: {response.status_code}")
-            # Fall back to mock data if API fails
-            return generate_mock_report(name, tier)
-            
-    except Exception as e:
-        logger.error(f"SearchBug API exception: {e}")
-        # Fall back to mock data if API fails  
-        return generate_mock_report(name, tier)
+# Rights Content Database
+RIGHTS_CONTENT = {
+    # FREE TRAFFIC RIGHTS
+    "traffic_pulled_over": RightsContent(
+        title="I Got Pulled Over",
+        situation="Police officer pulls you over",
+        content="""
+**STAY CALM AND FOLLOW THESE STEPS:**
 
-# Mock Data Generator
-def generate_mock_report(name: str, tier: ReportTier) -> BackgroundReport:
-    """Generate realistic mock data for demo purposes"""
+1. **Pull over safely** - Use turn signal, slow down, pull to safe location
+2. **Turn off engine** - Keep hands visible on steering wheel
+3. **Stay in vehicle** - Don't get out unless asked
+4. **Be polite but brief** - "Good morning/evening officer"
+
+**WHAT TO SAY:**
+- "I'm exercising my right to remain silent"
+- "I do not consent to searches"
+- "Am I free to leave?"
+
+**YOUR RIGHTS:**
+✅ You have right to remain silent
+✅ You can refuse vehicle searches (without warrant)
+✅ You can ask if you're free to leave
+✅ You can record the interaction
+
+**WHAT NOT TO DO:**
+❌ Don't argue or resist
+❌ Don't consent to searches
+❌ Don't answer questions beyond ID
+❌ Don't make sudden movements
+
+**ID REQUIREMENTS:**
+Most states require driver's license, registration, insurance if driving.
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
     
-    # Base info available for all tiers
-    base_report = {
-        "person_name": name,
-        "age": 32,
-        "current_address": "123 Main St, Los Angeles, CA 90210",
-        "phone_numbers": ["+1-555-0123"],
-        "email_addresses": [],
-        "previous_addresses": [],
-        "social_media": [],
-        "criminal_records": [],
-        "property_records": [],
-        "professional_info": [],
-        "relatives": [],
-        "report_tier": tier
-    }
+    "traffic_search_car": RightsContent(
+        title="Can Police Search My Car?",
+        situation="Officer wants to search your vehicle",
+        content="""
+**YOU CAN SAY NO TO SEARCHES!**
+
+**MAGIC WORDS:**
+"Officer, I do not consent to any searches of my person or property."
+
+**WHEN POLICE CAN SEARCH (Even without consent):**
+- They have a valid warrant
+- They see illegal items in plain view
+- You're arrested (search incident to arrest)
+- Vehicle impounded and inventoried
+
+**WHEN THEY CANNOT SEARCH:**
+- Just because they pulled you over
+- Because they "smell something"
+- If you refuse consent (unless above exceptions apply)
+
+**WHAT TO DO:**
+1. **Clearly state:** "I do not consent to searches"
+2. **Don't physically resist** - Let lawyer fight it later
+3. **Ask:** "Am I free to leave?"
+4. **Stay silent** - Don't explain or justify
+
+**REMEMBER:**
+- Refusing search is NOT suspicious behavior
+- It's your constitutional right
+- Police may try to pressure you - stand firm
+- Even if they search anyway, your refusal helps in court
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
     
-    if tier == ReportTier.FREE:
-        # Very limited info for free tier
-        base_report.update({
-            "email_addresses": ["j****@gmail.com"],
-            "criminal_records": [
-                CriminalRecord(
-                    case_number="CR-2023-****",
-                    charge="Traffic Violation",
-                    description="Speeding - 15 mph over limit",
-                    date="2023-06-15",
-                    status=CaseStatus.DISMISSED,
-                    status_description="Case dismissed - traffic school completed",
-                    court="Municipal Court",
-                    county="Los Angeles",
-                    state="CA"
-                )
-            ]
-        })
+    "traffic_show_id": RightsContent(
+        title="Do I Have to Show ID?",
+        situation="Officer asks for identification",
+        content="""
+**DEPENDS ON THE SITUATION:**
+
+**DRIVING A VEHICLE - YES:**
+- Driver's license REQUIRED
+- Vehicle registration REQUIRED  
+- Insurance proof REQUIRED
+
+**WALKING/NOT DRIVING:**
+**States that REQUIRE ID (Stop & Identify):**
+Alabama, Arizona, Arkansas, Colorado, Delaware, Florida, Georgia, Illinois, Indiana, Kansas, Louisiana, Missouri, Montana, Nevada, New Hampshire, New Mexico, New York, North Dakota, Ohio, Rhode Island, Texas, Utah, Vermont, Wisconsin
+
+**All Other States:**
+You generally do NOT have to show ID unless:
+- You're being arrested
+- You're in a restricted area
+- Officer has reasonable suspicion of crime
+
+**WHAT TO SAY:**
+"Am I being detained or arrested? If not, I'd like to exercise my right to leave."
+
+**IF DETAINED:**
+- Provide ID if in stop-and-identify state
+- Otherwise, invoke right to remain silent
+- Ask for lawyer if arrested
+
+**REMEMBER:**
+- Know your state's laws
+- Being "suspicious" isn't enough in most states
+- Police may lie about ID requirements
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
     
-    elif tier == ReportTier.BASIC:
-        base_report.update({
-            "email_addresses": ["john.smith@gmail.com"],
-            "previous_addresses": ["456 Oak Ave, Beverly Hills, CA 90210"],
-            "social_media": [
-                SocialMediaProfile(
-                    platform="Facebook",
-                    username="john.smith.123",
-                    profile_url="https://facebook.com/john.smith.123",
-                    verified=False,
-                    last_activity="2 weeks ago"
-                )
-            ],
-            "criminal_records": [
-                CriminalRecord(
-                    case_number="CR-2023-001234",
-                    charge="Misdemeanor Theft",
-                    description="Accused of shoplifting - case pending trial",
-                    date="2023-08-20",
-                    status=CaseStatus.PENDING,
-                    status_description="Case pending - accused but not yet convicted. Next court date: January 15, 2025",
-                    court="Superior Court of California",
-                    county="Los Angeles",
-                    state="CA"
-                )
-            ],
-            "relatives": ["Sarah Smith (Spouse)", "Michael Smith (Brother)"]
-        })
-    
-    elif tier == ReportTier.PREMIUM:
-        base_report.update({
-            "email_addresses": ["john.smith@gmail.com", "j.smith@workmail.com"],
-            "previous_addresses": [
-                "456 Oak Ave, Beverly Hills, CA 90210",
-                "789 Pine St, Santa Monica, CA 90404"
-            ],
-            "social_media": [
-                SocialMediaProfile(
-                    platform="Facebook",
-                    username="john.smith.123",
-                    profile_url="https://facebook.com/john.smith.123",
-                    verified=False,
-                    last_activity="2 weeks ago"
-                ),
-                SocialMediaProfile(
-                    platform="LinkedIn",
-                    username="john-smith-marketing",
-                    profile_url="https://linkedin.com/in/john-smith-marketing",
-                    verified=True,
-                    last_activity="3 days ago"
-                ),
-                SocialMediaProfile(
-                    platform="Instagram",
-                    username="jsmith_la",
-                    profile_url="https://instagram.com/jsmith_la",
-                    verified=False,
-                    last_activity="1 day ago"
-                )
-            ],
-            "criminal_records": [
-                CriminalRecord(
-                    case_number="CR-2023-001234",
-                    charge="Misdemeanor Theft",
-                    description="Accused of shoplifting at retail store - surveillance footage unclear",
-                    date="2023-08-20",
-                    status=CaseStatus.PENDING,
-                    status_description="Case pending trial - accused but not convicted. Defense claims mistaken identity. Next court date: January 15, 2025",
-                    court="Superior Court of California",
-                    county="Los Angeles",
-                    state="CA"
-                ),
-                CriminalRecord(
-                    case_number="CR-2021-005678",
-                    charge="DUI",
-                    description="Driving under influence - BAC 0.08",
-                    date="2021-03-10",
-                    status=CaseStatus.CHARGES_DROPPED,
-                    status_description="Charges dropped - breathalyzer equipment found to be faulty during that period",
-                    court="Municipal Court",
-                    county="Los Angeles",
-                    state="CA"
-                )
-            ],
-            "property_records": [
-                PropertyRecord(
-                    address="123 Main St, Los Angeles, CA 90210",
-                    property_type="Single Family Home",
-                    estimated_value=750000,
-                    ownership_date="2020-05-15",
-                    county="Los Angeles",
-                    state="CA"
-                )
-            ],
-            "professional_info": [
-                ProfessionalInfo(
-                    company="Digital Marketing Solutions",
-                    position="Marketing Manager",
-                    duration="2019 - Present",
-                    location="Los Angeles, CA",
-                    industry="Digital Marketing"
-                )
-            ],
-            "relatives": [
-                "Sarah Smith (Spouse)",
-                "Michael Smith (Brother)",
-                "Dorothy Smith (Mother)",
-                "Robert Smith (Father)"
-            ]
-        })
-    
-    return BackgroundReport(**base_report)
+    "traffic_dui_checkpoint": RightsContent(
+        title="DUI Checkpoints Rights",
+        situation="Approaching sobriety checkpoint",
+        content="""
+**YOUR RIGHTS AT CHECKPOINTS:**
+
+**LEGAL CHECKPOINTS MUST:**
+✅ Be announced publicly in advance
+✅ Follow systematic pattern (every 3rd car, etc.)
+✅ Have proper signage and lighting
+✅ Be supervised by high-ranking officer
+
+**YOUR RIGHTS:**
+✅ Remain silent beyond basic ID
+✅ Refuse field sobriety tests (penalties vary by state)
+✅ Refuse breathalyzer (but license may be suspended)
+✅ Ask to speak to lawyer
+✅ Turn around BEFORE checkpoint (if legal opportunity)
+
+**WHAT TO DO:**
+1. **Provide license/registration** when asked
+2. **Be polite:** "Good evening officer"
+3. **Minimal responses:** "I'm exercising my right to remain silent"
+4. **Don't admit to drinking** - Even "just two beers" hurts you
+
+**DON'T VOLUNTEER:**
+❌ "I only had two drinks"
+❌ "I'm coming from a bar/party"  
+❌ Where you're going/been
+❌ Answer questions about drinking
+
+**FIELD SOBRIETY TESTS:**
+- You can refuse (but may face license suspension)
+- These tests are designed for failure
+- Sober people fail 30% of the time
+- Officer is looking for ANY reason to arrest
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
+
+    "traffic_recording": RightsContent(
+        title="Can I Record Police?",
+        situation="You want to record police interaction",
+        content="""
+**YES - YOU CAN RECORD POLICE!**
+
+**YOUR RIGHT TO RECORD:**
+✅ First Amendment protects recording in public
+✅ Applies to traffic stops, protests, arrests
+✅ Police cannot delete your recordings
+✅ You can stream live to cloud storage
+
+**HOW TO RECORD SAFELY:**
+1. **Stay at safe distance** - Don't interfere with police work
+2. **Hold phone openly** - Don't be sneaky about it
+3. **Announce you're recording** - "I'm recording for my safety"
+4. **Keep hands visible** - Don't make sudden movements
+5. **Stay calm and silent** - Let camera do the talking
+
+**WHAT POLICE MIGHT SAY (These are WRONG):**
+❌ "You can't record me" - FALSE
+❌ "It's illegal to record" - FALSE  
+❌ "Delete that video" - You don't have to
+❌ "Give me your phone" - Only with warrant
+
+**PROTECT YOUR RECORDING:**
+- Use apps that auto-upload (ACLU Mobile Justice)
+- Password protect your phone
+- Know your passcode rights vary by state
+- Don't unlock phone for police without warrant
+
+**IF POLICE TAKE YOUR PHONE:**
+- Don't physically resist
+- Say "I do not consent to searches"
+- Contact lawyer immediately
+- Police need warrant to search phone contents
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
+
+    "traffic_arrested": RightsContent(
+        title="What If I Get Arrested?",
+        situation="Police are arresting you during traffic stop",
+        content="""
+**MIRANDA RIGHTS APPLY:**
+
+**THE MAGIC WORDS:**
+"I invoke my right to remain silent and want a lawyer."
+
+**WHAT HAPPENS DURING ARREST:**
+1. **Handcuffs applied** - Don't resist physically
+2. **You're read rights** - Listen carefully  
+3. **Search incident to arrest** - They can search you and car
+4. **Transported to jail** - Booking process begins
+
+**YOUR CRITICAL RIGHTS:**
+✅ Right to remain silent - USE IT
+✅ Right to attorney - REQUEST IMMEDIATELY
+✅ Right to phone call - Call lawyer or family
+✅ Protection from unreasonable search (with exceptions)
+
+**DO NOT:**
+❌ Resist arrest physically (adds charges)
+❌ Talk to police without lawyer
+❌ Sign anything without lawyer
+❌ Answer questions "just to clear this up"
+
+**WHAT TO SAY:**
+- "I'm invoking my right to remain silent"
+- "I want a lawyer"  
+- "I do not consent to searches"
+- Then STOP TALKING
+
+**AFTER ARREST:**
+- Use phone call for lawyer, not to discuss case
+- Don't talk to cellmates about your case
+- Don't sign property receipts you can't read
+- Contact family for bail/lawyer help
+
+**REMEMBER:** 
+Anything you say CAN and WILL be used against you. Police are trained interrogators. Wait for your lawyer.
+        """,
+        category=RightsCategory.TRAFFIC,
+        is_free=True
+    ),
+
+    # PAID TENANT RIGHTS
+    "tenant_eviction": RightsContent(
+        title="Landlord Wants to Evict Me",
+        situation="Facing eviction proceedings",
+        content="""
+**EVICTION PROCESS - YOUR RIGHTS:**
+
+**LANDLORD CANNOT:**
+❌ Kick you out immediately
+❌ Change locks while you live there
+❌ Shut off utilities to force you out
+❌ Remove your belongings without court order
+❌ Evict for discriminatory reasons
+❌ Evict in retaliation for complaints
+
+**LEGAL EVICTION PROCESS:**
+1. **Written Notice Required** (3-30 days depending on reason)
+2. **Court Filing** - Landlord must sue you
+3. **You Receive Court Summons** - Usually 5-10 days to respond
+4. **Court Hearing** - You can defend yourself
+5. **Court Order** - Only sheriff can remove you if you lose
+
+**COMMON EVICTION DEFENSES:**
+✅ Landlord didn't maintain property (habitability)
+✅ Improper notice given
+✅ Discrimination or retaliation
+✅ Landlord accepted rent after violation
+✅ Lease terms were illegal
+
+**WHAT TO DO IMMEDIATELY:**
+1. **Read notice carefully** - Check dates and reasons
+2. **Document everything** - Photos, emails, repair requests
+3. **Gather evidence** - Receipts, communications, witnesses
+4. **Contact legal aid** - Many areas have free tenant lawyers
+5. **Prepare for court** - Don't ignore court date
+
+**EMERGENCY SITUATIONS:**
+If landlord illegally locks you out or shuts off utilities:
+- Call police (it's illegal "self-help" eviction)
+- Document with photos/video
+- Contact emergency tenant hotline
+- File complaint with housing authority
+        """,
+        category=RightsCategory.TENANT,
+        is_free=False
+    ),
+
+    "tenant_security_deposit": RightsContent(
+        title="Getting Security Deposit Back",
+        situation="Moving out and want deposit returned",
+        content="""
+**SECURITY DEPOSIT LAWS:**
+
+**LANDLORD MUST:**
+✅ Return deposit within 15-60 days (varies by state)
+✅ Provide itemized list of deductions
+✅ Return remainder with written explanation
+✅ Only deduct for actual damages beyond normal wear
+✅ Keep deposits in separate account (some states)
+
+**NORMAL WEAR vs DAMAGE:**
+**NORMAL WEAR (Can't charge you):**
+- Faded paint after 2+ years
+- Worn carpet in walkways
+- Small nail holes from pictures
+- Minor scuffs on walls
+- Worn door handles/hinges
+
+**DAMAGE (Can charge you):**
+- Large holes in walls
+- Broken windows/doors
+- Stains on carpet from spills
+- Missing fixtures you removed
+- Excessive cleaning needed
+
+**PROTECT YOUR DEPOSIT:**
+**MOVE-IN:**
+- Document existing damage with photos/video
+- Get landlord to acknowledge condition in writing
+- Keep copies of move-in inspection
+
+**MOVE-OUT:**
+- Clean thoroughly (hire professionals if needed)
+- Fix any damage you caused
+- Take photos/video of clean condition
+- Do walk-through with landlord if possible
+
+**IF LANDLORD WRONGFULLY KEEPS DEPOSIT:**
+1. **Send demand letter** - Certified mail
+2. **File in small claims court** - Usually no lawyer needed
+3. **Gather evidence** - Photos, receipts, communications
+4. **Know your state's penalties** - Some states double/triple damages for bad faith
+        """,
+        category=RightsCategory.TENANT,
+        is_free=False
+    ),
+
+    "tenant_landlord_entry": RightsContent(
+        title="Landlord Entering Without Notice",
+        situation="Landlord entering your rental without permission",
+        content="""
+**YOUR RIGHT TO PRIVACY:**
+
+**LANDLORD ENTRY RULES:**
+Most states require 24-48 hour written notice except for:
+- True emergencies (fire, flood, gas leak)
+- Court orders or warrants
+- Abandonment situations
+- Tenant consent given
+
+**VALID REASONS FOR ENTRY:**
+✅ Make necessary repairs
+✅ Show property to prospective tenants/buyers
+✅ Inspect property (reasonable intervals)
+✅ Emergency situations
+
+**INVALID REASONS:**
+❌ "Just checking up on things"
+❌ Harassment or intimidation  
+❌ Retaliation for complaints
+❌ Showing property without proper notice
+
+**WHAT TO DO IF ILLEGAL ENTRY:**
+1. **Document everything** - Date, time, reason given
+2. **Take photos/video** - Evidence of entry
+3. **Send written complaint** - Certified mail to landlord
+4. **Know your state's penalties** - Some allow rent reduction
+5. **Contact housing authority** - File official complaint
+
+**NOTICE REQUIREMENTS BY STATE:**
+- **24 hours:** Most states including CA, TX, FL
+- **48 hours:** Some states like WA, OR
+- **Reasonable notice:** Some states don't specify exact time
+
+**EMERGENCY ENTRY:**
+Landlord can enter without notice for:
+- Gas/water leaks
+- Fire or smoke
+- Broken pipes flooding
+- Security breaches
+- Medical emergencies
+
+**PROTECT YOURSELF:**
+- Change locks (if lease allows) and provide key
+- Install security cameras (if legal in your area)
+- Keep log of all landlord interactions
+- Know your state's specific tenant laws
+        """,
+        category=RightsCategory.TENANT,
+        is_free=False
+    )
+}
+
+# Pricing for categories
+CATEGORY_PRICES = {
+    RightsCategory.TRAFFIC: 0.0,  # Free
+    RightsCategory.TENANT: 2.99,
+    RightsCategory.WORKPLACE: 2.99,
+    RightsCategory.CRIMINAL: 2.99,
+    RightsCategory.CONSTITUTIONAL: 2.99
+}
 
 # API Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Scan'Em API - Street Smart Background Checks"}
+    return {"message": "Rights Helper API - Know Your Rights Instantly"}
 
-@api_router.post("/search")
-async def search_person(
-    query: str = Query(..., description="Name, phone, email, or address to search"),
-    search_type: SearchType = Query(SearchType.NAME, description="Type of search to perform")
-):
-    """Search for a person - returns basic info for all users"""
-    
-    # Save search query
-    search_record = PersonSearch(search_query=query, search_type=search_type)
-    await db.searches.insert_one(search_record.dict())
-    
-    # Mock search results
-    results = [
-        {
-            "id": str(uuid.uuid4()),
-            "name": query if search_type == SearchType.NAME else "John Smith",
-            "age": 32,
-            "location": "Los Angeles, CA",
-            "possible_matches": True,
-            "preview": "1 criminal record found (pending case)"
-        }
-    ]
-    
-    return {"results": results, "total_found": 1}
+@api_router.get("/categories")
+async def get_categories():
+    """Get all available rights categories"""
+    return {
+        "categories": [
+            {
+                "id": "traffic",
+                "name": "Traffic Stops",
+                "description": "Your rights during police traffic stops",
+                "price": 0.0,
+                "is_free": True,
+                "icon": "🚗"
+            },
+            {
+                "id": "tenant", 
+                "name": "Tenant Rights",
+                "description": "Protect yourself from landlord issues",
+                "price": 2.99,
+                "is_free": False,
+                "icon": "🏠"
+            },
+            {
+                "id": "workplace",
+                "name": "Workplace Rights", 
+                "description": "Employment law and worker protections",
+                "price": 2.99,
+                "is_free": False,
+                "icon": "💼",
+                "coming_soon": True
+            },
+            {
+                "id": "criminal",
+                "name": "Criminal Defense",
+                "description": "Court procedures and arrest rights", 
+                "price": 2.99,
+                "is_free": False,
+                "icon": "⚖️",
+                "coming_soon": True
+            }
+        ]
+    }
 
-@api_router.get("/report/{person_id}")
-async def get_background_report(
-    person_id: str,
-    tier: ReportTier = Query(ReportTier.FREE, description="Report tier to generate")
-):
-    """Get a detailed background report using real SearchBug data"""
+@api_router.get("/rights/{category}")
+async def get_rights_by_category(category: RightsCategory):
+    """Get all rights content for a specific category"""
+    rights = [content for content in RIGHTS_CONTENT.values() 
+             if content.category == category]
     
-    # For demo, we'll use "John Smith" but in real app, 
-    # person_id would map to actual search results
-    name = "John Smith"  # This would come from your search results
-    
-    # Get real data from SearchBug
-    report = await search_person_searchbug(name, tier)
-    
-    # Save report generation
-    await db.reports.insert_one(report.dict())
-    
-    return report
+    return {
+        "category": category.value,
+        "rights": [
+            {
+                "id": key,
+                "title": content.title,
+                "situation": content.situation,
+                "is_free": content.is_free
+            }
+            for key, content in RIGHTS_CONTENT.items()
+            if content.category == category
+        ]
+    }
 
-# PAYMENT ROUTES
-@api_router.post("/payments/checkout")
-async def create_checkout_session(request: CheckoutRequest):
-    """Create Stripe checkout session for background report"""
+@api_router.get("/rights/{category}/{right_id}")
+async def get_specific_right(category: RightsCategory, right_id: str, user_id: str = Query(None)):
+    """Get specific rights content"""
     
-    # Validate package exists
-    if request.package_id not in PACKAGES:
-        raise HTTPException(status_code=400, detail="Invalid package selected")
+    if right_id not in RIGHTS_CONTENT:
+        raise HTTPException(status_code=404, detail="Rights content not found")
     
-    package = PACKAGES[request.package_id]
+    content = RIGHTS_CONTENT[right_id]
     
-    # Free reports don't need payment
-    if package["price"] == 0.0:
-        # Generate free report directly
-        report = generate_mock_report("John Smith", package["tier"])
-        await db.reports.insert_one(report.dict())
-        return {
-            "type": "free_report",
-            "report": report
-        }
+    # Check if content is free or user has purchased access
+    if content.is_free:
+        return content
+    
+    # For paid content, check if user has access (simplified for demo)
+    # In production, you'd check the database for user purchases
+    if user_id:
+        # Check if user purchased this category
+        access = await db.category_access.find_one({
+            "user_id": user_id,
+            "category": category.value
+        })
+        if access:
+            return content
+    
+    # Return preview for paid content
+    return {
+        "id": content.id,
+        "title": content.title,
+        "situation": content.situation,
+        "category": content.category,
+        "preview": content.content[:200] + "...",
+        "is_free": False,
+        "requires_purchase": True,
+        "price": CATEGORY_PRICES[category]
+    }
+
+@api_router.post("/purchase/{category}")
+async def purchase_category(category: RightsCategory, request: CheckoutRequest):
+    """Purchase access to a rights category"""
+    
+    price = CATEGORY_PRICES.get(category, 2.99)
+    
+    if price == 0:
+        return {"message": "This category is free", "access_granted": True}
     
     try:
         # Initialize Stripe checkout
@@ -433,15 +600,13 @@ async def create_checkout_session(request: CheckoutRequest):
         
         # Create checkout session
         checkout_request = CheckoutSessionRequest(
-            amount=package["price"],
+            amount=price,
             currency="usd",
             success_url=success_url,
             cancel_url=cancel_url,
             metadata={
-                "person_id": request.person_id,
-                "package_id": request.package_id,
-                "tier": package["tier"].value,
-                "source": "scanem_app"
+                "category": category.value,
+                "source": "rights_helper_app"
             }
         )
         
@@ -450,181 +615,47 @@ async def create_checkout_session(request: CheckoutRequest):
         # Create payment transaction record
         transaction = PaymentTransaction(
             session_id=session.session_id,
-            amount=package["price"],
+            amount=price,
             currency="usd",
             payment_status=PaymentStatus.PENDING,
             metadata=checkout_request.metadata,
-            person_id=request.person_id,
-            report_tier=package["tier"]
+            category=category
         )
         
         await db.payment_transactions.insert_one(transaction.dict())
         
         return {
-            "type": "payment_required",
             "checkout_url": session.url,
             "session_id": session.session_id
         }
         
     except Exception as e:
-        logger.error(f"Stripe checkout error: {e}")
-        raise HTTPException(status_code=500, detail=f"Payment setup failed: {str(e)}")
+        logger = logging.getLogger(__name__)
+        logger.error(f"Purchase error: {e}")
+        raise HTTPException(status_code=500, detail=f"Purchase failed: {str(e)}")
 
-@api_router.get("/payments/status/{session_id}")
-async def check_payment_status(session_id: str):
-    """Check payment status and return report if paid"""
+@api_router.get("/search")
+async def search_rights(query: str = Query(..., description="Search term")):
+    """Search through all rights content"""
     
-    try:
-        # Find transaction record
-        transaction = await db.payment_transactions.find_one({"session_id": session_id})
-        if not transaction:
-            raise HTTPException(status_code=404, detail="Payment session not found")
-        
-        # Initialize Stripe checkout
-        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url="")
-        
-        # Check status with Stripe
-        checkout_status = await stripe_checkout.get_checkout_status(session_id)
-        
-        # Update transaction status if changed
-        if checkout_status.payment_status == "paid" and transaction["payment_status"] != PaymentStatus.PAID.value:
-            # Update payment status
-            await db.payment_transactions.update_one(
-                {"session_id": session_id},
-                {
-                    "$set": {
-                        "payment_status": PaymentStatus.PAID.value,
-                        "updated_at": datetime.utcnow()
-                    }
-                }
-            )
-            
-            # Generate the paid report
-            tier = ReportTier(transaction["metadata"]["tier"])
-            report = generate_mock_report("John Smith", tier)
-            await db.reports.insert_one(report.dict())
-            
-            return {
-                "payment_status": "paid",
-                "report": report,
-                "amount": checkout_status.amount_total / 100  # Stripe returns cents
-            }
-        
-        elif checkout_status.status == "expired":
-            await db.payment_transactions.update_one(
-                {"session_id": session_id},
-                {"$set": {"payment_status": PaymentStatus.EXPIRED.value, "updated_at": datetime.utcnow()}}
-            )
-            
-        return {
-            "payment_status": checkout_status.payment_status,
-            "session_status": checkout_status.status,
-            "amount": checkout_status.amount_total / 100
-        }
-        
-    except Exception as e:
-        logger.error(f"Payment status check error: {e}")
-        raise HTTPException(status_code=500, detail=f"Payment status check failed: {str(e)}")
-
-@api_router.post("/webhook/stripe")
-async def stripe_webhook(request: Request):
-    """Handle Stripe webhooks"""
+    results = []
+    query_lower = query.lower()
     
-    try:
-        body = await request.body()
-        stripe_signature = request.headers.get("Stripe-Signature")
-        
-        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url="")
-        webhook_response = await stripe_checkout.handle_webhook(body, stripe_signature)
-        
-        # Update payment transaction based on webhook
-        if webhook_response.event_type == "checkout.session.completed":
-            await db.payment_transactions.update_one(
-                {"session_id": webhook_response.session_id},
-                {
-                    "$set": {
-                        "payment_status": PaymentStatus.PAID.value,
-                        "updated_at": datetime.utcnow()
-                    }
-                }
-            )
-        
-        return {"status": "success"}
-        
-    except Exception as e:
-        logger.error(f"Webhook error: {e}")
-        raise HTTPException(status_code=400, detail=f"Webhook processing failed: {str(e)}")
-
-@api_router.get("/pricing")
-async def get_pricing():
-    """Get current pricing information"""
-    return {
-        "packages": {
-            "free": {
-                "name": "Free Daily Check",
-                "price": 0.0,
-                "features": [
-                    "Basic name and age",
-                    "Current city",
-                    "One criminal record preview"
-                ]
-            },
-            "basic": {
-                "name": "Basic Report",
-                "price": 2.99,
-                "features": [
-                    "Full criminal history",
-                    "Address history",
-                    "Phone numbers",
-                    "Social media profiles",
-                    "Family members"
-                ]
-            },
-            "premium": {
-                "name": "Premium Report", 
-                "price": 5.99,
-                "features": [
-                    "Everything in Basic",
-                    "All social media profiles",
-                    "Property records",
-                    "Professional background",
-                    "Extended family network",
-                    "Detailed case descriptions"
-                ]
-            }
-        },
-        "subscriptions": {
-            "subscription_basic": {
-                "name": "Basic Plan",
-                "price": 14.99,
-                "billing": "monthly",
-                "reports": 10,
-                "savings": "Save $15/month vs pay-per-report"
-            },
-            "subscription_pro": {
-                "name": "Professional",
-                "price": 29.99,
-                "billing": "monthly", 
-                "reports": 35,
-                "savings": "Save $40/month vs pay-per-report"
-            }
-        }
-    }
-
-@api_router.get("/stats")
-async def get_app_stats():
-    """Get application statistics"""
-    total_searches = await db.searches.count_documents({})
-    total_reports = await db.reports.count_documents({})
-    total_payments = await db.payment_transactions.count_documents({"payment_status": "paid"})
+    for key, content in RIGHTS_CONTENT.items():
+        if (query_lower in content.title.lower() or 
+            query_lower in content.situation.lower() or 
+            query_lower in content.content.lower()):
+            
+            results.append({
+                "id": key,
+                "title": content.title,
+                "situation": content.situation,
+                "category": content.category.value,
+                "is_free": content.is_free,
+                "price": 0 if content.is_free else CATEGORY_PRICES[content.category]
+            })
     
-    return {
-        "total_searches": total_searches,
-        "total_reports": total_reports,
-        "total_payments": total_payments,
-        "uptime": "99.9%",
-        "last_updated": datetime.utcnow()
-    }
+    return {"query": query, "results": results}
 
 # Include the router in the main app
 app.include_router(api_router)
