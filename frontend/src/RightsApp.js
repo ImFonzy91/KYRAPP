@@ -421,6 +421,40 @@ const RightsApp = () => {
                 Quick, reliable legal guidance for everyday situations. From traffic stops to tenant rights, 
                 get the knowledge you need when you need it most. <strong>Works offline!</strong>
               </p>
+              
+              <div className="theme-selector">
+                <p>Choose Your Style:</p>
+                <div className="theme-buttons">
+                  <button 
+                    className="theme-btn glossy-theme" 
+                    onClick={() => document.body.className = 'glossy-theme'}
+                    data-testid="glossy-theme"
+                  >
+                    ✨ Glossy
+                  </button>
+                  <button 
+                    className="theme-btn matte-theme" 
+                    onClick={() => document.body.className = 'matte-theme'}
+                    data-testid="matte-theme"
+                  >
+                    📱 Matte
+                  </button>
+                  <button 
+                    className="theme-btn wet-theme" 
+                    onClick={() => document.body.className = 'wet-theme'}
+                    data-testid="wet-theme"
+                  >
+                    💧 Wet Look
+                  </button>
+                  <button 
+                    className="theme-btn neon-theme" 
+                    onClick={() => document.body.className = 'neon-theme'}
+                    data-testid="neon-theme"
+                  >
+                    🌈 Neon
+                  </button>
+                </div>
+              </div>
             </div>
             
             <SearchBar onSearch={handleSearch} loading={loading} />
