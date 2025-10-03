@@ -51,11 +51,9 @@ const SearchBar = ({ onSearch, loading }) => {
       setQuery(transcript);
       setIsListening(false);
       
-      // Auto-search after voice input
+      // Immediate search - no delay
       if (transcript.trim()) {
-        setTimeout(() => {
-          onSearch(transcript);
-        }, 500);
+        handleSearch(transcript.trim());
       }
     };
 
