@@ -224,75 +224,213 @@ body.wet-theme {
   100% { left: 100%; }
 }
 
-/* NEON THEME */
+/* NEON THEME - ROYAL BLUE & GOLD */
 body.neon-theme {
-  background: #000;
-  color: #00ff00;
+  background: radial-gradient(circle at center, #1e3c72 0%, #0f1f3c 100%);
+  color: #FFD700;
 }
 
 .neon-theme .app-header {
-  background: #111;
-  color: #00ff00;
-  box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
-  border: 2px solid #00ff00;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #FFD700;
+  box-shadow: 0 0 20px #4169E1, inset 0 0 20px rgba(65, 105, 225, 0.2);
+  border: 2px solid #4169E1;
 }
 
 .neon-theme .app-title {
-  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
-  animation: neonPulse 2s ease-in-out infinite alternate;
+  color: #FFD700;
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+  animation: goldPulse 2s ease-in-out infinite alternate;
 }
 
-@keyframes neonPulse {
-  0% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
-  100% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00; }
+@keyframes goldPulse {
+  0% { text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700; }
+  100% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700, 0 0 20px #FFA500; }
 }
 
 .neon-theme .hero-section {
-  background: #111;
-  color: #00ff00;
-  border: 2px solid #00ff00;
-  box-shadow: 0 0 30px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.1);
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #FFD700;
+  border: 2px solid #4169E1;
+  box-shadow: 0 0 30px #4169E1, inset 0 0 30px rgba(255, 215, 0, 0.1);
+  position: relative;
 }
 
-.neon-theme .category-card, .neon-theme .right-card {
-  background: #111;
-  color: #00ff00;
-  border: 2px solid #00ff00;
-  box-shadow: 0 0 15px #00ff00;
+.neon-theme .hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 48%, rgba(255, 215, 0, 0.1) 50%, transparent 52%);
+  animation: royalShine 3s ease-in-out infinite;
 }
 
-.neon-theme .category-card:hover, .neon-theme .right-card:hover {
-  box-shadow: 0 0 25px #00ff00, inset 0 0 15px rgba(0, 255, 0, 0.2);
+@keyframes royalShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Different colored cards for variety */
+.neon-theme .category-card {
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%);
+  color: #FFD700;
+  border: 2px solid #4169E1;
+  box-shadow: 0 0 15px #4169E1;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-theme .category-card:nth-child(1) {
+  border-color: #4169E1;
+  box-shadow: 0 0 15px #4169E1;
+  color: #87CEEB;
+}
+
+.neon-theme .category-card:nth-child(2) {
+  border-color: #FFD700;
+  box-shadow: 0 0 15px #FFD700;
+  color: #FFD700;
+}
+
+.neon-theme .category-card:nth-child(3) {
+  border-color: #FF6347;
+  box-shadow: 0 0 15px #FF6347;
+  color: #FF6347;
+}
+
+.neon-theme .category-card:nth-child(4) {
+  border-color: #32CD32;
+  box-shadow: 0 0 15px #32CD32;
+  color: #32CD32;
+}
+
+.neon-theme .category-card:hover {
+  box-shadow: 0 0 25px currentColor, inset 0 0 15px rgba(255, 215, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.neon-theme .right-card {
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%);
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 15px #FFD700;
+}
+
+.neon-theme .right-card:hover {
+  box-shadow: 0 0 25px #FFD700, inset 0 0 15px rgba(255, 215, 0, 0.2);
 }
 
 .neon-theme .search-form {
-  background: #111;
-  border: 2px solid #00ff00;
-  box-shadow: 0 0 20px #00ff00;
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%);
+  border: 2px solid #4169E1;
+  box-shadow: 0 0 20px #4169E1;
 }
 
 .neon-theme .search-input {
-  background: #000;
-  color: #00ff00;
-  border: 1px solid #00ff00;
-  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.3);
+  background: rgba(30, 60, 114, 0.3);
+  color: #FFD700;
+  border: 1px solid #4169E1;
+  box-shadow: inset 0 0 10px rgba(65, 105, 225, 0.3);
 }
 
 .neon-theme .search-input::placeholder {
-  color: rgba(0, 255, 0, 0.7);
+  color: rgba(255, 215, 0, 0.7);
+}
+
+.neon-theme .search-input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+/* Voice button special styling */
+.neon-theme .voice-button {
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%) !important;
+  color: #FF6347 !important;
+  border: 2px solid #FF6347 !important;
+  box-shadow: 0 0 15px #FF6347 !important;
+}
+
+.neon-theme .voice-button:hover {
+  box-shadow: 0 0 25px #FF6347, inset 0 0 10px rgba(255, 99, 71, 0.2) !important;
+}
+
+.neon-theme .voice-button.listening {
+  animation: voiceNeonPulse 1s ease-in-out infinite alternate !important;
+}
+
+@keyframes voiceNeonPulse {
+  0% { box-shadow: 0 0 15px #FF6347; }
+  100% { box-shadow: 0 0 30px #FF6347, 0 0 40px #FF6347; }
+}
+
+/* Feature cards with different neon colors */
+.neon-theme .feature-card:nth-child(1) {
+  border-color: #4169E1;
+  box-shadow: 0 0 15px #4169E1;
+}
+
+.neon-theme .feature-card:nth-child(2) {
+  border-color: #FFD700;
+  box-shadow: 0 0 15px #FFD700;
+}
+
+.neon-theme .feature-card:nth-child(3) {
+  border-color: #32CD32;
+  box-shadow: 0 0 15px #32CD32;
+}
+
+.neon-theme .feature-card:nth-child(4) {
+  border-color: #FF6347;
+  box-shadow: 0 0 15px #FF6347;
+}
+
+.neon-theme .feature-card {
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%);
+  color: #FFD700;
+  border: 2px solid;
+  box-shadow: 0 0 15px;
+}
+
+.neon-theme .feature-card:hover {
+  box-shadow: 0 0 25px currentColor, inset 0 0 15px rgba(255, 215, 0, 0.1);
 }
 
 /* All buttons in neon theme */
 .neon-theme button {
-  background: #111 !important;
-  color: #00ff00 !important;
-  border: 2px solid #00ff00 !important;
-  box-shadow: 0 0 15px #00ff00 !important;
-  text-shadow: 0 0 5px #00ff00;
+  background: linear-gradient(135deg, #1e3c72 0%, #0f1f3c 100%) !important;
+  color: #FFD700 !important;
+  border: 2px solid #FFD700 !important;
+  box-shadow: 0 0 15px #FFD700 !important;
+  text-shadow: 0 0 5px #FFD700;
 }
 
 .neon-theme button:hover {
-  box-shadow: 0 0 25px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.2) !important;
+  box-shadow: 0 0 25px #FFD700, inset 0 0 10px rgba(255, 215, 0, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+/* Special styling for different button types */
+.neon-theme .btn-purchase {
+  color: #32CD32 !important;
+  border-color: #32CD32 !important;
+  box-shadow: 0 0 15px #32CD32 !important;
+}
+
+.neon-theme .btn-purchase:hover {
+  box-shadow: 0 0 25px #32CD32, inset 0 0 10px rgba(50, 205, 50, 0.2) !important;
+}
+
+.neon-theme .theme-btn.neon-theme {
+  border-color: #FFD700 !important;
+  box-shadow: 0 0 20px #FFD700 !important;
+  animation: selectedTheme 2s ease-in-out infinite alternate;
+}
+
+@keyframes selectedTheme {
+  0% { box-shadow: 0 0 20px #FFD700; }
+  100% { box-shadow: 0 0 30px #FFD700, 0 0 40px #FFA500; }
 }
 
 .app {
