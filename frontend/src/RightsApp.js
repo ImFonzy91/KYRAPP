@@ -521,81 +521,179 @@ const RightsApp = () => {
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
             <div className="hero-section">
-              <h2 className="hero-title">Know Your Rights Instantly</h2>
+              <h2 className="hero-title">Know Your Rights • Protect Yourself</h2>
               <p className="hero-subtitle">
-                Quick, reliable legal guidance for everyday situations. From traffic stops to tenant rights, 
-                get the knowledge you need when you need it most. <strong>Works offline!</strong>
+                Don't get caught off guard! Get instant access to legal knowledge that could save you thousands in legal fees. 
+                Voice-activated, offline access, plain English explanations. <strong>Be prepared for anything!</strong>
               </p>
-              
-              <div className="theme-selector">
-                <p>Choose Your Style:</p>
-                <div className="theme-buttons">
-                  <button 
-                    className="theme-btn default-theme" 
-                    onClick={() => document.body.className = ''}
-                    data-testid="default-theme"
-                  >
-                    🎯 Default
-                  </button>
-                  <button 
-                    className="theme-btn glossy-theme" 
-                    onClick={() => document.body.className = 'glossy-theme'}
-                    data-testid="glossy-theme"
-                  >
-                    ✨ Glossy
-                  </button>
-                  <button 
-                    className="theme-btn matte-theme" 
-                    onClick={() => document.body.className = 'matte-theme'}
-                    data-testid="matte-theme"
-                  >
-                    📱 Matte
-                  </button>
-                  <button 
-                    className="theme-btn wet-theme" 
-                    onClick={() => document.body.className = 'wet-theme'}
-                    data-testid="wet-theme"
-                  >
-                    💧 Wet Look
-                  </button>
-                </div>
-              </div>
             </div>
             
             <SearchBar onSearch={handleSearch} loading={loading} />
             
-            <div className="categories-section">
-              <h3>Choose Your Rights Category</h3>
-              <div className="categories-grid">
-                {categories.map(category => (
-                  <CategoryCard
-                    key={category.id}
-                    category={category}
-                    onSelect={handlePurchaseCategory}
-                    onViewRights={handleViewCategoryRights}
-                  />
-                ))}
+            <div className="bundles-section">
+              <h3>Choose Your Rights Bundle</h3>
+              <div className="pricing-note">
+                <p>💰 <strong>Bundle Deals:</strong> Any 3 bundles for $12.99 • Complete Package (All 10) for $29.99</p>
+              </div>
+              
+              <div className="bundles-grid">
+                {/* Essential Bundles */}
+                <div className="bundle-card essential">
+                  <div className="bundle-icon">🚗</div>
+                  <h4>Traffic & Vehicle Rights</h4>
+                  <p>Police stops, searches, DUI checkpoints, recording rights, arrest procedures</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('traffic')}>
+                    Get Traffic Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card essential">
+                  <div className="bundle-icon">🏠</div>
+                  <h4>Housing Rights</h4>
+                  <p>Tenant & homeowner rights, evictions, deposits, landlord disputes, property issues</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('housing')}>
+                    Get Housing Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card popular">
+                  <div className="popular-badge">🔥 POPULAR</div>
+                  <div className="bundle-icon">⚠️</div>
+                  <h4>Legal Landmines</h4>
+                  <p>Avoid costly mistakes! Social media, dating, family disputes, neighbor issues, defamation</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
+                    Avoid Legal Trouble
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">⚖️</div>
+                  <h4>Criminal Defense Rights</h4>
+                  <p>Court procedures, bail, lawyers, Miranda rights, plea deals, sentencing</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('criminal')}>
+                    Get Defense Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">💼</div>
+                  <h4>Business & Workplace Rights</h4>
+                  <p>Employment law, harassment, firing, wages, discrimination, small business protection</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('workplace')}>
+                    Get Work Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">👨‍👩‍👧‍👦</div>
+                  <h4>Family & Personal Rights</h4>
+                  <p>Marriage, divorce, child custody, domestic violence, elder care, inheritance</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('family')}>
+                    Get Family Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">🏥</div>
+                  <h4>Healthcare & Privacy Rights</h4>
+                  <p>Medical records, HIPAA, insurance disputes, patient rights, mental health laws</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('healthcare')}>
+                    Get Health Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">🎓</div>
+                  <h4>Student Rights</h4>
+                  <p>School discipline, loans, campus safety, discrimination, free speech, housing</p>
+                  <div className="bundle-price">$3.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('student')}>
+                    Get Student Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">📱</div>
+                  <h4>Digital & Social Media Rights</h4>
+                  <p>Online privacy, cyberbullying, social media posts, digital harassment, data protection</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('digital')}>
+                    Get Digital Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
+                  <div className="bundle-icon">🛡️</div>
+                  <h4>Consumer Protection Rights</h4>
+                  <p>Scams, contracts, warranties, debt collection, identity theft, small claims court</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('consumer')}>
+                    Get Consumer Rights
+                  </button>
+                </div>
+              </div>
+
+              {/* Bundle Deal Cards */}
+              <div className="bundle-deals">
+                <h3>💰 Save with Bundle Deals</h3>
+                <div className="deals-grid">
+                  <div className="deal-card">
+                    <h4>Essential 3-Pack</h4>
+                    <p>Traffic + Housing + Legal Landmines</p>
+                    <div className="deal-pricing">
+                      <span className="original-price">$14.97</span>
+                      <span className="deal-price">$12.99</span>
+                    </div>
+                    <button className="deal-button">Save $2 - Get 3 Pack</button>
+                  </div>
+
+                  <div className="deal-card popular">
+                    <div className="popular-badge">BEST VALUE</div>
+                    <h4>Complete Rights Package</h4>
+                    <p>All 10 bundles - Everything you need!</p>
+                    <div className="deal-pricing">
+                      <span className="original-price">$48.91</span>
+                      <span className="deal-price">$29.99</span>
+                    </div>
+                    <button className="deal-button">Save $19 - Get Everything</button>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="features-section">
-              <h3>Why Rights Helper?</h3>
+              <h3>Why Choose Know Your Rights?</h3>
               <div className="features-grid">
                 <div className="feature-card">
+                  <h4>🎤 Voice Commands</h4>
+                  <p>Just speak your question - perfect for emergencies or hands-free use.</p>
+                </div>
+                <div className="feature-card">
                   <h4>📱 Works Offline</h4>
-                  <p>Access your rights even without internet connection. Perfect for emergencies.</p>
+                  <p>Access your rights even without internet. Perfect for remote areas or emergencies.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>🗺️ State-Specific</h4>
-                  <p>Laws vary by state. Get accurate information for where you live.</p>
+                  <h4>💬 Plain English</h4>
+                  <p>No confusing legal jargon. Real situations, real answers you can understand.</p>
                 </div>
                 <div className="feature-card">
-                  <h4>⚡ Instant Access</h4>
-                  <p>No law degree needed. Plain English explanations you can understand quickly.</p>
+                  <h4>⚡ Instant Answers</h4>
+                  <p>Why Google for 20 minutes when you can get precise answers in seconds?</p>
+                </div>
+                <div className="feature-card">
+                  <h4>🛡️ Avoid Legal Trouble</h4>
+                  <p>Know the legal landmines before you step on them. Prevention is cheaper than lawyers.</p>
                 </div>
                 <div className="feature-card">
                   <h4>💰 One-Time Purchase</h4>
-                  <p>Buy once, own forever. No subscriptions, no hidden fees.</p>
+                  <p>Buy once, own forever. No monthly subscriptions or hidden fees.</p>
                 </div>
               </div>
             </div>
