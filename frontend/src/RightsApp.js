@@ -488,9 +488,9 @@ const RightsApp = () => {
       <header className="app-header">
         <div className="header-content">
           <h1 className="app-title" onClick={() => setCurrentView('home')}>
-            Rights Helper ⚖️
+            Know Your Rights ⚖️
           </h1>
-          <p className="app-tagline">Know Your Rights • Stay Protected • Be Informed</p>
+          <p className="app-tagline">Legal Protection Made Simple • Voice Commands • Offline Access</p>
         </div>
         <nav className="header-nav">
           <button 
