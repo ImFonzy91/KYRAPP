@@ -320,15 +320,104 @@ const RightsApp = () => {
   const handleSearch = async (query) => {
     setLoading(true);
     setError(null);
+    console.log('Searching for:', query);
+    
     try {
       const response = await axios.get(`${API}/search`, { params: { query } });
-      setSearchResults(response.data.results);
-      setCurrentView('search-results');
+      console.log('Search results:', response.data);
+      
+      if (response.data.results && response.data.results.length > 0) {
+        setSearchResults(response.data.results);
+        setCurrentView('search-results');
+      } else {
+        // If no search results, try to find direct matches
+        const directMatches = findDirectMatches(query);
+        if (directMatches.length > 0) {
+          setSearchResults(directMatches);
+          setCurrentView('search-results');
+        } else {
+          setError(`No results found for "${query}". Try searching for: "pulled over", "eviction", "search car", or "tenant rights"`);
+        }
+      }
     } catch (err) {
       setError('Search failed. Please try again.');
       console.error('Search error:', err);
     }
     setLoading(false);
+  };
+
+  const findDirectMatches = (query) => {
+    const queryLower = query.toLowerCase();
+    const directMatches = [];
+    
+    // Common search terms and their matches
+    if (queryLower.includes('pulled over') || queryLower.includes('traffic stop') || queryLower.includes('police stop')) {
+      directMatches.push({
+        id: 'traffic_pulled_over',
+        title: 'I Got Pulled Over',
+        situation: 'Police officer pulls you over',
+        category: 'traffic',
+        is_free: true,
+        price: 0
+      });
+    }
+    
+    if (queryLower.includes('search') && (queryLower.includes('car') || queryLower.includes('vehicle'))) {
+      directMatches.push({
+        id: 'traffic_search_car',
+        title: 'Can Police Search My Car?',
+        situation: 'Officer wants to search your vehicle',
+        category: 'traffic',
+        is_free: true,
+        price: 0
+      });
+    }
+    
+    if (queryLower.includes('id') || queryLower.includes('identification')) {
+      directMatches.push({
+        id: 'traffic_show_id',
+        title: 'Do I Have to Show ID?',
+        situation: 'Officer asks for identification',
+        category: 'traffic',
+        is_free: true,
+        price: 0
+      });
+    }
+    
+    if (queryLower.includes('record') || queryLower.includes('filming')) {
+      directMatches.push({
+        id: 'traffic_recording',
+        title: 'Can I Record Police?',
+        situation: 'You want to record police interaction',
+        category: 'traffic',
+        is_free: true,
+        price: 0
+      });
+    }
+    
+    if (queryLower.includes('evict') || queryLower.includes('landlord')) {
+      directMatches.push({
+        id: 'tenant_eviction',
+        title: 'Landlord Wants to Evict Me',
+        situation: 'Facing eviction proceedings',
+        category: 'tenant',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    if (queryLower.includes('deposit')) {
+      directMatches.push({
+        id: 'tenant_security_deposit',
+        title: 'Getting Security Deposit Back',
+        situation: 'Moving out and want deposit returned',
+        category: 'tenant',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    return directMatches;
   };
 
   const handleViewCategoryRights = async (categoryId) => {
