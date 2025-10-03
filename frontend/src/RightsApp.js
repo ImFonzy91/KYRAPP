@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch, loading }) => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     
     if (!SpeechRecognition) {
-      alert('Speech recognition not supported in your browser');
+      alert('Speech recognition not supported in your browser. Try Chrome or Safari.');
       return;
     }
 
@@ -39,33 +39,51 @@ const SearchBar = ({ onSearch, loading }) => {
     recognition.lang = 'en-US';
 
     setIsListening(true);
+    console.log('Voice recognition starting...');
 
     recognition.onstart = () => {
-      console.log('Voice recognition started');
+      console.log('Voice recognition started - speak now!');
     };
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
+      console.log('Voice recognized:', transcript);
       setQuery(transcript);
       setIsListening(false);
       
       // Auto-search after voice input
       if (transcript.trim()) {
-        onSearch(transcript);
+        setTimeout(() => {
+          onSearch(transcript);
+        }, 500);
       }
     };
 
     recognition.onerror = (event) => {
       console.error('Speech recognition error:', event.error);
       setIsListening(false);
-      alert('Voice recognition failed. Please try again.');
+      
+      if (event.error === 'not-allowed') {
+        alert('Microphone access denied. Please allow microphone access and try again.');
+      } else if (event.error === 'no-speech') {
+        alert('No speech detected. Please try speaking louder or closer to the microphone.');
+      } else {
+        alert(`Voice recognition failed: ${event.error}. Please try again.`);
+      }
     };
 
     recognition.onend = () => {
+      console.log('Voice recognition ended');
       setIsListening(false);
     };
 
-    recognition.start();
+    try {
+      recognition.start();
+    } catch (error) {
+      console.error('Failed to start recognition:', error);
+      setIsListening(false);
+      alert('Failed to start voice recognition. Please try again.');
+    }
   };
 
   const handleSubmit = (e) => {
