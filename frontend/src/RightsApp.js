@@ -16,6 +16,57 @@ const getUrlParameter = (name) => {
 // Components
 const SearchBar = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
+  const [isListening, setIsListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
+
+  useEffect(() => {
+    // Check if speech recognition is supported
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    setSpeechSupported(!!SpeechRecognition);
+  }, []);
+
+  const handleVoiceSearch = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+      alert('Speech recognition not supported in your browser');
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    setIsListening(true);
+
+    recognition.onstart = () => {
+      console.log('Voice recognition started');
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setQuery(transcript);
+      setIsListening(false);
+      
+      // Auto-search after voice input
+      if (transcript.trim()) {
+        onSearch(transcript);
+      }
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      setIsListening(false);
+      alert('Voice recognition failed. Please try again.');
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,20 +83,53 @@ const SearchBar = ({ onSearch, loading }) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search your rights... (e.g., 'pulled over', 'eviction')"
+            placeholder="Search your rights... (e.g., 'pulled over', 'eviction') or use voice 🎤"
             className="search-input"
             data-testid="rights-search-input"
-            disabled={loading}
+            disabled={loading || isListening}
           />
+          
+          {speechSupported && (
+            <button 
+              type="button"
+              className={`voice-button ${isListening ? 'listening' : ''}`}
+              onClick={handleVoiceSearch}
+              disabled={loading || isListening}
+              data-testid="voice-search-button"
+              title="Voice Search"
+            >
+              {isListening ? '🔴 Listening...' : '🎤'}
+            </button>
+          )}
+          
           <button 
             type="submit" 
             className="search-button"
             data-testid="rights-search-button"
-            disabled={loading || !query.trim()}
+            disabled={loading || !query.trim() || isListening}
           >
             {loading ? '🔍 Searching...' : '🔍 Search Rights'}
           </button>
         </div>
+        
+        {isListening && (
+          <div className="voice-feedback">
+            <p>🎤 Listening... Speak now!</p>
+            <p className="voice-tip">Try: "What are my rights when pulled over?"</p>
+          </div>
+        )}
+        
+        {speechSupported && (
+          <div className="voice-examples">
+            <p><strong>Voice commands you can try:</strong></p>
+            <ul>
+              <li>"What are my rights when pulled over?"</li>
+              <li>"Can police search my car?"</li>
+              <li>"Landlord eviction rights"</li>
+              <li>"Recording police officers"</li>
+            </ul>
+          </div>
+        )}
       </form>
     </div>
   );
