@@ -444,6 +444,13 @@ const RightsApp = () => {
                 <p>Choose Your Style:</p>
                 <div className="theme-buttons">
                   <button 
+                    className="theme-btn default-theme" 
+                    onClick={() => document.body.className = ''}
+                    data-testid="default-theme"
+                  >
+                    🎯 Default
+                  </button>
+                  <button 
                     className="theme-btn glossy-theme" 
                     onClick={() => document.body.className = 'glossy-theme'}
                     data-testid="glossy-theme"
@@ -463,13 +470,6 @@ const RightsApp = () => {
                     data-testid="wet-theme"
                   >
                     💧 Wet Look
-                  </button>
-                  <button 
-                    className="theme-btn neon-theme" 
-                    onClick={() => document.body.className = 'neon-theme'}
-                    data-testid="neon-theme"
-                  >
-                    🌈 Neon
                   </button>
                 </div>
               </div>
