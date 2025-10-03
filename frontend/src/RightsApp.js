@@ -53,7 +53,7 @@ const SearchBar = ({ onSearch, loading }) => {
       
       // Immediate search - no delay
       if (transcript.trim()) {
-        handleSearch(transcript.trim());
+        onSearch(transcript.trim());
       }
     };
 
