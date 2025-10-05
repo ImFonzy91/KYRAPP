@@ -800,6 +800,92 @@ Good neighbor relations increase property values. Most disputes can be resolved 
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    "landmines_dating_relationships": RightsContent(
+        title="Dating & Relationship Legal Traps",
+        situation="Legal issues arising from romantic relationships",
+        content="""
+**DATING LEGAL LANDMINES:**
+
+**CONSENT AND COMMUNICATION:**
+- Consent can be withdrawn at any time
+- "No" means no, regardless of relationship status
+- Intoxicated people cannot give consent
+- Document threatening behavior immediately
+
+**REVENGE ACTIONS THAT ARE ILLEGAL:**
+❌ Revenge porn (sharing intimate images)
+❌ Posting private information online (doxxing)
+❌ Accessing their social media accounts
+❌ Stalking or following
+❌ Damaging their property
+❌ Contacting their employer to cause problems
+
+**DOMESTIC VIOLENCE LAWS:**
+Includes more than physical violence:
+- Emotional/psychological abuse
+- Financial control and manipulation  
+- Isolation from friends and family
+- Threats and intimidation
+- Sexual coercion
+
+**BREAKUP LEGAL ISSUES:**
+**SHARED PROPERTY:**
+- Gifts generally don't need to be returned
+- Engagement rings: varies by state
+- Shared lease/mortgage obligations continue
+- Joint bank accounts: either party can empty
+- Pet custody: pets are property, not like children
+
+**RESTRAINING ORDERS:**
+When you can get one:
+- Threats of violence
+- Stalking behavior
+- Harassment after clear "no contact" request
+- Fear for safety based on past behavior
+
+**ONLINE DATING SAFETY:**
+Legal protections are limited:
+- Catfishing is usually not illegal (unless fraud involved)
+- Age misrepresentation can be criminal
+- Meeting strangers carries inherent risks
+- Scam protection varies by platform
+
+**WORKPLACE RELATIONSHIPS:**
+- Check company policies before dating coworkers
+- Supervisor/subordinate relationships often prohibited
+- Sexual harassment laws still apply
+- Document any retaliation for ending relationship
+
+**COHABITATION RIGHTS:**
+**Living Together Without Marriage:**
+- No automatic property rights
+- No spousal support if you break up
+- Consider cohabitation agreements
+- Emergency medical decision limitations
+
+**DIGITAL PRIVACY:**
+- Sharing passwords is risky legally
+- Phone/computer searches may violate privacy
+- Cloud storage access can be illegal
+- Social media monitoring boundaries
+
+**RED FLAGS - SEEK HELP:**
+- Threats of violence or self-harm
+- Extreme jealousy or controlling behavior
+- Isolation from support systems
+- Financial manipulation or control
+- Any physical violence
+
+**RESOURCES:**
+- National Domestic Violence Hotline: 1-800-799-7233
+- Local law enforcement for immediate danger
+- Family court for protective orders
+- Legal aid for low-income assistance
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
