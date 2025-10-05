@@ -978,6 +978,116 @@ Terms of Service and Privacy Policies:
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    "landmines_family_disputes": RightsContent(
+        title="Family Disputes & Legal Consequences",
+        situation="Family conflicts that could become legal issues",
+        content="""
+**FAMILY LEGAL LANDMINES:**
+
+**INHERITANCE DISPUTES:**
+**COMMON TRIGGERS:**
+- Dying without a will (intestate succession)
+- Unequal distributions in wills
+- Questions about mental capacity when will was made
+- Second marriages and stepchildren issues
+- Family members contesting wills
+
+**PROTECT YOURSELF:**
+- Document any promises about inheritance
+- Keep records if you care for aging parents
+- Don't assume verbal promises are binding
+- Consider family meetings about estate plans
+
+**ELDER ABUSE ALLEGATIONS:**
+**WHAT CONSTITUTES ELDER ABUSE:**
+- Physical abuse or neglect
+- Financial exploitation
+- Emotional or psychological abuse
+- Sexual abuse
+- Medical neglect or abandonment
+
+**FINANCIAL EXPLOITATION WARNING SIGNS:**
+- Sudden changes to wills or financial accounts
+- Unexplained disappearance of funds or valuables
+- Isolation from other family members
+- New "best friends" or caregivers with financial access
+
+**CHILD CUSTODY BATTLES:**
+**WHAT HURTS YOUR CASE:**
+❌ Badmouthing other parent to children
+❌ Violating custody orders
+❌ Substance abuse or criminal activity
+❌ Dating multiple partners around children
+❌ Moving far away without court permission
+
+**WHAT HELPS YOUR CASE:**
+✅ Following court orders exactly
+✅ Documenting other parent's violations
+✅ Staying involved in children's activities
+✅ Maintaining stable home environment
+✅ Avoiding conflict in front of children
+
+**DIVORCE FINANCIAL LANDMINES:**
+- Hiding assets (can backfire severely)
+- Running up joint credit cards
+- Emptying joint bank accounts
+- Not disclosing retirement accounts
+- Business valuation disputes
+
+**GRANDPARENTS' RIGHTS:**
+Limited but may include:
+- Visitation rights in some circumstances
+- Custody rights if parents are unfit
+- Legal standing varies greatly by state
+- Best interests of child standard applies
+
+**FAMILY BUSINESS DISPUTES:**
+**COMMON ISSUES:**
+- Succession planning conflicts
+- Unequal contributions vs. equal ownership
+- Mixing family and business decisions
+- Employment of family members
+- Valuation for buyouts or divorce
+
+**MENTAL HEALTH AND COMPETENCY:**
+**Guardianship/Conservatorship Issues:**
+- When family member can't make decisions
+- Court process required for legal authority
+- Alternatives: power of attorney, healthcare directives
+- Family conflicts over what's "best" for person
+
+**FAMILY LOANS AND MONEY:**
+**DOCUMENT EVERYTHING:**
+- Loans between family members
+- Get written agreements for large amounts
+- Consider gift vs. loan tax implications
+- What happens if borrower dies?
+
+**HOLIDAY AND TRADITION DISPUTES:**
+While not typically legal issues, can escalate:
+- Custody scheduling conflicts
+- Religious differences in mixed families
+- Cultural celebration disagreements
+- Gift-giving expectations and financial strain
+
+**PROTECTING FAMILY RELATIONSHIPS:**
+1. **Communicate openly** about expectations
+2. **Document financial arrangements**
+3. **Consider family mediation** for major disputes
+4. **Estate planning discussions** while everyone is healthy
+5. **Professional help** for addiction or mental health issues
+
+**WHEN TO SEEK LEGAL HELP:**
+- Estate planning and will contests
+- Child custody modifications
+- Elder abuse allegations
+- Family business partnership disputes
+- Guardianship proceedings
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
