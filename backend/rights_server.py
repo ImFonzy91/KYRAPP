@@ -2429,36 +2429,86 @@ async def get_categories():
         "categories": [
             {
                 "id": "traffic",
-                "name": "Traffic Stops",
-                "description": "Your rights during police traffic stops",
+                "name": "Traffic & Vehicle Rights",
+                "description": "Police stops, searches, DUI checkpoints, recording rights, arrest procedures",
                 "price": 0.0,
                 "is_free": True,
                 "icon": "🚗"
             },
             {
-                "id": "tenant", 
-                "name": "Tenant Rights",
-                "description": "Protect yourself from landlord issues",
-                "price": 2.99,
+                "id": "housing", 
+                "name": "Housing Rights",
+                "description": "Tenant & homeowner rights, evictions, deposits, landlord disputes, property issues",
+                "price": 4.99,
                 "is_free": False,
                 "icon": "🏠"
             },
             {
-                "id": "workplace",
-                "name": "Workplace Rights", 
-                "description": "Employment law and worker protections",
-                "price": 2.99,
+                "id": "landmines",
+                "name": "Legal Landmines", 
+                "description": "Avoid costly mistakes! Social media, dating, family disputes, neighbor issues, defamation",
+                "price": 4.99,
                 "is_free": False,
-                "icon": "💼",
-                "coming_soon": True
+                "icon": "⚠️"
             },
             {
                 "id": "criminal",
-                "name": "Criminal Defense",
-                "description": "Court procedures and arrest rights", 
-                "price": 2.99,
+                "name": "Criminal Defense Rights",
+                "description": "Court procedures, bail, lawyers, Miranda rights, plea deals, sentencing", 
+                "price": 4.99,
                 "is_free": False,
-                "icon": "⚖️",
+                "icon": "⚖️"
+            },
+            {
+                "id": "workplace",
+                "name": "Business & Workplace Rights",
+                "description": "Employment law, harassment, firing, wages, discrimination, small business protection",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "💼"
+            },
+            {
+                "id": "family",
+                "name": "Family & Personal Rights",
+                "description": "Marriage, divorce, child custody, domestic violence, elder care, inheritance",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "👨‍👩‍👧‍👦"
+            },
+            {
+                "id": "healthcare",
+                "name": "Healthcare & Privacy Rights",
+                "description": "Medical records, HIPAA, insurance disputes, patient rights, mental health laws",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "🏥",
+                "coming_soon": True
+            },
+            {
+                "id": "student",
+                "name": "Student Rights",
+                "description": "School discipline, loans, campus safety, discrimination, free speech, housing",
+                "price": 3.99,
+                "is_free": False,
+                "icon": "🎓",
+                "coming_soon": True
+            },
+            {
+                "id": "digital",
+                "name": "Digital & Social Media Rights",
+                "description": "Online privacy, cyberbullying, social media posts, digital harassment, data protection",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "📱",
+                "coming_soon": True
+            },
+            {
+                "id": "consumer",
+                "name": "Consumer Protection Rights",
+                "description": "Scams, contracts, warranties, debt collection, identity theft, small claims court",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "🛡️",
                 "coming_soon": True
             }
         ]
