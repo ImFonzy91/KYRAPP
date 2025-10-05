@@ -29,10 +29,15 @@ api_router = APIRouter(prefix="/api")
 # Enums
 class RightsCategory(str, Enum):
     TRAFFIC = "traffic"
-    TENANT = "tenant"
-    WORKPLACE = "workplace"
+    HOUSING = "housing"
+    LANDMINES = "landmines"
     CRIMINAL = "criminal"
-    CONSTITUTIONAL = "constitutional"
+    WORKPLACE = "workplace"
+    FAMILY = "family"
+    HEALTHCARE = "healthcare"
+    STUDENT = "student"
+    DIGITAL = "digital"
+    CONSUMER = "consumer"
 
 class PaymentStatus(str, Enum):
     PENDING = "pending"
