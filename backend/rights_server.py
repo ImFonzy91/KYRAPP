@@ -1200,6 +1200,492 @@ What's legal in one place may be illegal in another. Tourist areas, government b
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    # CRIMINAL DEFENSE RIGHTS BUNDLE
+    "criminal_arrest_rights": RightsContent(
+        title="Your Rights When Arrested",
+        situation="Being arrested and need to know your rights",
+        content="""
+**MIRANDA RIGHTS - WHAT THEY MEAN:**
+
+**THE ACTUAL WORDS:**
+"You have the right to remain silent. Anything you say can and will be used against you in a court of law. You have the right to an attorney. If you cannot afford an attorney, one will be provided for you."
+
+**WHEN MIRANDA APPLIES:**
+✅ Custodial interrogation (in custody + questioning)
+✅ Not just when handcuffed - when not free to leave
+✅ Must be read before questioning, not just arrest
+✅ Applies to serious crimes and misdemeanors
+
+**INVOKE YOUR RIGHTS CLEARLY:**
+Say exactly: "I invoke my right to remain silent and want a lawyer."
+- Don't say "maybe I should talk to a lawyer"
+- Don't say "I think I want to remain silent"  
+- Be clear and unambiguous
+
+**WHAT HAPPENS DURING ARREST:**
+1. **Handcuffs applied** - Don't resist
+2. **Search incident to arrest** - They can search you
+3. **Read rights** - Pay attention, ask if not read
+4. **Transport to station** - Stay silent during ride
+5. **Booking process** - Fingerprints, photos, paperwork
+
+**SEARCH RIGHTS DURING ARREST:**
+**POLICE CAN SEARCH:**
+- Your person for weapons and evidence
+- Area within your immediate reach
+- Your vehicle if arrested during traffic stop
+- Any containers that could hold weapons
+
+**POLICE CANNOT SEARCH:**
+- Your entire home without warrant (unless exigent circumstances)
+- Locked containers in your car without probable cause
+- Your phone without warrant (Riley v. California)
+- Areas not within your immediate control
+
+**THE BOOKING PROCESS:**
+**WHAT TO EXPECT:**
+- Personal property inventory
+- Fingerprinting and photographs  
+- Background checks and warrant searches
+- Medical screening questions
+- Assignment to holding cell
+
+**YOUR RIGHTS AT BOOKING:**
+- Right to phone call (usually within reasonable time)
+- Right to medical attention if needed
+- Right to remain silent during processing
+- Right to refuse to answer questions beyond identification
+
+**PHONE CALLS:**
+- Usually get one or two calls
+- Calls may be recorded (except attorney calls)
+- Call a lawyer first, family second
+- Don't discuss your case on recorded lines
+
+**BAIL AND RELEASE:**
+**TYPES OF RELEASE:**
+- Released on own recognizance (OR)
+- Cash bail
+- Property bond  
+- Bail bondsman (usually 10% fee)
+
+**FACTORS AFFECTING BAIL:**
+- Severity of charges
+- Flight risk assessment
+- Criminal history
+- Ties to community
+- Public safety concerns
+
+**CRITICAL DON'TS:**
+❌ Don't talk to police without lawyer
+❌ Don't sign anything you don't understand
+❌ Don't discuss case with other inmates
+❌ Don't resist arrest (even if unlawful)
+❌ Don't consent to searches
+❌ Don't waive important rights
+
+**REMEMBER:**
+Police are trained interrogators. They can legally lie to you. They want you to talk. Exercise your right to remain silent and get a lawyer immediately.
+        """,
+        category=RightsCategory.CRIMINAL,
+        is_free=False
+    ),
+
+    "criminal_court_procedures": RightsContent(
+        title="Criminal Court Process",
+        situation="Facing criminal charges and court proceedings",
+        content="""
+**CRIMINAL COURT PROCESS EXPLAINED:**
+
+**FIRST COURT APPEARANCE - ARRAIGNMENT:**
+**WHAT HAPPENS:**
+- Charges formally read to you
+- Asked to enter plea (guilty, not guilty, no contest)
+- Bail/bond conditions set or reviewed
+- Next court date scheduled
+- Public defender appointed if needed
+
+**PLEAS EXPLAINED:**
+- **Guilty:** Admits you committed the crime
+- **Not Guilty:** Forces prosecution to prove their case
+- **No Contest (Nolo):** Not admitting guilt but not fighting charges
+
+**ADVICE:** Usually plead "Not Guilty" at arraignment to preserve options.
+
+**PRE-TRIAL PHASE:**
+**DISCOVERY PROCESS:**
+- Prosecutor must share evidence with defense
+- Police reports, witness statements, lab results
+- Video/audio evidence from arrests
+- Expert witness information
+
+**PRE-TRIAL MOTIONS:**
+- Motion to suppress evidence (if illegally obtained)
+- Motion to dismiss charges
+- Motion for speedy trial
+- Motion to exclude certain testimony
+
+**PLEA BARGAINING:**
+**COMMON PLEA DEALS:**
+- Reduced charges (felony to misdemeanor)
+- Reduced sentence recommendations
+- Dismissal of some charges
+- Alternative sentencing (probation, treatment)
+
+**SHOULD YOU ACCEPT A PLEA?**
+Consider:
+- Strength of prosecution's evidence
+- Consequences of going to trial
+- Mandatory minimum sentences
+- Collateral consequences (job, immigration, etc.)
+
+**TRIAL RIGHTS:**
+**YOUR CONSTITUTIONAL RIGHTS:**
+✅ Right to jury trial (for crimes punishable by >6 months)
+✅ Right to confront witnesses against you
+✅ Right to present witnesses in your defense
+✅ Right to testify or remain silent
+✅ Presumption of innocence
+✅ Burden on prosecution to prove guilt beyond reasonable doubt
+
+**JURY SELECTION:**
+- Questioning of potential jurors (voir dire)
+- Challenges for cause (biased jurors)
+- Peremptory challenges (limited number, no reason needed)
+- Goal: Fair and impartial jury
+
+**TRIAL PHASES:**
+1. **Opening Statements** - Roadmap of each side's case
+2. **Prosecution's Case** - Evidence and witnesses
+3. **Defense Case** - Your evidence and witnesses (optional)
+4. **Closing Arguments** - Final persuasion attempts
+5. **Jury Instructions** - Judge explains the law
+6. **Deliberation** - Jury decides verdict
+7. **Verdict** - Guilty or not guilty
+
+**SENTENCING:**
+**IF FOUND GUILTY:**
+- Pre-sentence investigation report
+- Victim impact statements
+- Character references for defendant
+- Sentencing hearing
+- Right to appeal conviction
+
+**TYPES OF SENTENCES:**
+- Fines and court costs
+- Probation (supervised or unsupervised)
+- Community service
+- Jail/prison time
+- Restitution to victims
+- Treatment programs
+
+**APPEALS PROCESS:**
+**GROUNDS FOR APPEAL:**
+- Legal errors during trial
+- Ineffective assistance of counsel
+- Prosecutorial misconduct
+- Insufficient evidence
+- Sentencing errors
+
+**TIMELINE:**
+- Usually 30 days to file notice of appeal
+- Appellate brief due within 60-90 days
+- Oral arguments (if requested)
+- Written decision from appellate court
+
+**WORKING WITH YOUR LAWYER:**
+**BE HONEST:**
+- Tell them everything, even bad facts
+- Attorney-client privilege protects communications
+- Lawyer needs full picture to defend you properly
+
+**STAY INVOLVED:**
+- Attend all court dates
+- Follow all bail/bond conditions
+- Keep lawyer updated on changes
+- Ask questions if you don't understand
+        """,
+        category=RightsCategory.CRIMINAL,
+        is_free=False
+    ),
+
+    "criminal_bail_bonds": RightsContent(
+        title="Bail, Bonds & Getting Out of Jail",
+        situation="Understanding bail system and getting released",
+        content="""
+**BAIL SYSTEM EXPLAINED:**
+
+**PURPOSE OF BAIL:**
+- Ensures appearance at future court dates
+- Allows presumption of innocence until trial
+- Not supposed to be punishment before conviction
+- Courts cannot set excessive bail (8th Amendment)
+
+**TYPES OF RELEASE:**
+**Own Recognizance (OR):**
+- Released on promise to appear
+- No money required
+- Based on ties to community, no flight risk
+
+**CASH BAIL:**
+- Full amount paid to court
+- Money returned when case ends (minus fees)
+- Can be paid by anyone
+- Usually for less serious crimes or low amounts
+
+**PROPERTY BOND:**
+- Use real estate as collateral
+- Property value must exceed bail amount
+- Court puts lien on property
+- Lose property if defendant doesn't appear
+
+**BAIL BONDSMAN:**
+- Pay 10-15% of total bail amount (non-refundable fee)
+- Bondsman posts full amount with court
+- Bondsman responsible if defendant flees
+- May require collateral for large bonds
+
+**FACTORS AFFECTING BAIL AMOUNT:**
+**INCREASES BAIL:**
+- Serious charges (especially violent crimes)
+- Flight risk (no local ties, prior failures to appear)
+- Extensive criminal history
+- Danger to community
+- Drug trafficking charges
+- Immigration violations
+
+**DECREASES BAIL:**
+- Strong community ties (family, job, property)
+- No prior criminal record
+- Cooperation with law enforcement
+- Non-violent charges
+- Medical conditions requiring treatment
+
+**BAIL CONDITIONS:**
+**COMMON CONDITIONS:**
+- Report to pretrial services regularly
+- No contact with victims or witnesses
+- No travel outside jurisdiction
+- Surrender passport
+- No alcohol or drug use (with testing)
+- GPS monitoring
+- Stay away from certain locations
+
+**VIOLATING BAIL CONDITIONS:**
+- Immediate arrest and return to jail
+- Bail may be revoked entirely
+- Additional charges possible
+- Harder to get bail on future cases
+
+**WORKING WITH BAIL BONDSMAN:**
+**WHAT YOU NEED:**
+- Valid identification
+- Proof of employment/income
+- Collateral information (property, vehicles)
+- Co-signer with good credit (sometimes)
+
+**BONDSMAN REQUIREMENTS:**
+- Licensed by state
+- Must explain all fees and conditions
+- Cannot charge more than state-set rates
+- Must return collateral when case ends
+
+**ALTERNATIVES TO CASH BAIL:**
+**PRETRIAL RELEASE PROGRAMS:**
+- Electronic monitoring (ankle bracelet)
+- Daily check-ins with pretrial services
+- Drug/alcohol testing and treatment
+- Mental health treatment requirements
+
+**BAIL REDUCTION HEARINGS:**
+**WHEN TO REQUEST:**
+- Bail set too high for your financial situation
+- Change in circumstances since initial setting
+- New information about ties to community
+
+**WHAT TO PRESENT:**
+- Employment records and pay stubs
+- Property ownership documents
+- Family ties and support letters
+- Community involvement proof
+- Treatment program acceptance
+
+**FAILURE TO APPEAR (FTA):**
+**CONSEQUENCES:**
+- Additional criminal charges
+- Immediate arrest warrant issued
+- Bail money forfeited
+- Bondsman can arrest you
+- Makes future bail much harder to get
+
+**GETTING YOUR MONEY BACK:**
+**CASH BAIL REFUND:**
+- Returned when case ends (guilty or not guilty)
+- May take 30-90 days to process
+- Court fees may be deducted
+- Keep all receipts and paperwork
+
+**IMMIGRATION CONCERNS:**
+- ICE holds can prevent release even with bail
+- Notify lawyer immediately if you're not a citizen
+- Some charges can trigger deportation proceedings
+- Consider immigration consequences before pleading guilty
+
+**TIPS FOR FAMILIES:**
+- Don't use rent money or bill money for bail
+- Understand you lose bondsman fee even if innocent
+- Consider if person is likely to show up to court
+- Get everything in writing from bondsman
+- Ask about payment plans if available
+        """,
+        category=RightsCategory.CRIMINAL,
+        is_free=False
+    ),
+
+    "criminal_lawyers": RightsContent(
+        title="Getting a Lawyer & Legal Representation",
+        situation="Need legal representation for criminal charges",
+        content="""
+**YOUR RIGHT TO A LAWYER:**
+
+**WHEN YOU GET A LAWYER:**
+✅ For any crime punishable by jail time
+✅ During custodial interrogation
+✅ At arraignment and all court proceedings
+✅ During lineups after formal charges filed
+✅ For appeals of convictions
+
+**TYPES OF LAWYERS:**
+**PUBLIC DEFENDER:**
+- Free for those who qualify financially
+- Experienced in criminal law
+- Heavy caseloads (may have limited time)
+- Appointed by court, you don't choose which one
+
+**PRIVATE ATTORNEY:**
+- You pay directly (or family pays)
+- You choose which lawyer
+- May have more time for your case
+- Fees can be very expensive
+
+**COURT-APPOINTED COUNSEL:**
+- For those who don't qualify for public defender
+- Private lawyer paid by court
+- Rates set by court (lower than private rates)
+- Quality varies significantly
+
+**QUALIFYING FOR FREE LAWYER:**
+**FINANCIAL ELIGIBILITY:**
+- Income below federal poverty guidelines (usually)
+- Vary by jurisdiction (some more generous)
+- May consider assets, not just income
+- Family help can disqualify you
+
+**APPLICATION PROCESS:**
+- Financial affidavit (sworn statement of income/assets)
+- Pay stubs, bank statements, tax returns
+- Court makes determination
+- Can be reviewed if circumstances change
+
+**CHOOSING A PRIVATE LAWYER:**
+**WHAT TO LOOK FOR:**
+- Criminal law experience (not just any lawyer)
+- Experience with your type of charges
+- Local court experience (knows judges/prosecutors)
+- Good communication skills
+- Reasonable fees and payment plans
+
+**RED FLAGS:**
+❌ Guarantees specific outcomes
+❌ Asks for payment to "fix" charges before investigation
+❌ Doesn't return phone calls promptly
+❌ Has been disciplined by state bar
+❌ Practices many different areas of law
+
+**LEGAL FEES EXPLAINED:**
+**RETAINER FEE:**
+- Upfront payment held in trust account
+- Lawyer bills time against this amount
+- May need to replenish if case is complex
+- Unused portion should be returned
+
+**FLAT FEES:**
+- One payment for entire case
+- Usually for simple cases (DUI, misdemeanors)
+- Doesn't change regardless of time spent
+- Make sure you understand what's included
+
+**HOURLY RATES:**
+- Pay for actual time spent on case
+- Rates vary widely ($200-$800+ per hour)
+- Should get detailed time records
+- Can become very expensive quickly
+
+**WORKING WITH YOUR LAWYER:**
+**YOUR RESPONSIBILITIES:**
+- Be completely honest about all facts
+- Follow all advice about court appearances
+- Don't talk to police/prosecutors without lawyer present
+- Keep lawyer updated on any developments
+- Pay fees as agreed
+
+**WHAT TO EXPECT FROM LAWYER:**
+- Thorough investigation of case
+- Regular communication about developments
+- Honest assessment of strengths and weaknesses
+- Zealous advocacy within bounds of law
+- Confidentiality (attorney-client privilege)
+
+**COMMUNICATION WITH LAWYER:**
+**ATTORNEY-CLIENT PRIVILEGE:**
+- Protects all communications between you and lawyer
+- Cannot be forced to testify against you
+- Extends to lawyer's staff and investigators
+- Only exception: if you plan future crimes
+
+**WHEN TO CALL YOUR LAWYER:**
+- Any contact from police or prosecutors
+- Violation of bail conditions
+- New charges or arrests
+- Questions about plea offers
+- Before talking to anyone about your case
+
+**FIRING YOUR LAWYER:**
+**YOU CAN FIRE LAWYER IF:**
+- Not communicating adequately
+- Not prepared for court
+- Conflicts of interest develop
+- You lose confidence in representation
+
+**CONSEQUENCES:**
+- May delay court proceedings
+- May lose money already paid
+- New lawyer needs time to get up to speed
+- Court may not grant continuances easily
+
+**INEFFECTIVE ASSISTANCE OF COUNSEL:**
+**GROUNDS FOR APPEAL:**
+- Lawyer made serious errors
+- Errors affected outcome of case
+- Performance fell below professional standards
+- Examples: failure to investigate, sleeping during trial, substance abuse
+
+**LEGAL AID ORGANIZATIONS:**
+- Help with appeals and post-conviction relief
+- May assist with finding lawyers
+- Some provide free consultations
+- Law school legal clinics (supervised student practice)
+
+**PAYMENT PLANS AND FINANCING:**
+- Many lawyers offer payment plans
+- Some accept credit cards
+- Legal financing companies (high interest rates)
+- Family/friend loans often cheaper than legal financing
+        """,
+        category=RightsCategory.CRIMINAL,
+        is_free=False
     )
 }
 
