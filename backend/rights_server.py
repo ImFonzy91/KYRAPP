@@ -319,8 +319,8 @@ Anything you say CAN and WILL be used against you. Police are trained interrogat
         is_free=True
     ),
 
-    # PAID TENANT RIGHTS
-    "tenant_eviction": RightsContent(
+    # HOUSING RIGHTS BUNDLE (Previously Tenant Rights)
+    "housing_eviction": RightsContent(
         title="Landlord Wants to Evict Me",
         situation="Facing eviction proceedings",
         content="""
@@ -362,11 +362,11 @@ If landlord illegally locks you out or shuts off utilities:
 - Contact emergency tenant hotline
 - File complaint with housing authority
         """,
-        category=RightsCategory.TENANT,
+        category=RightsCategory.HOUSING,
         is_free=False
     ),
 
-    "tenant_security_deposit": RightsContent(
+    "housing_security_deposit": RightsContent(
         title="Getting Security Deposit Back",
         situation="Moving out and want deposit returned",
         content="""
@@ -412,11 +412,11 @@ If landlord illegally locks you out or shuts off utilities:
 3. **Gather evidence** - Photos, receipts, communications
 4. **Know your state's penalties** - Some states double/triple damages for bad faith
         """,
-        category=RightsCategory.TENANT,
+        category=RightsCategory.HOUSING,
         is_free=False
     ),
 
-    "tenant_landlord_entry": RightsContent(
+    "housing_landlord_entry": RightsContent(
         title="Landlord Entering Without Notice",
         situation="Landlord entering your rental without permission",
         content="""
@@ -467,7 +467,195 @@ Landlord can enter without notice for:
 - Keep log of all landlord interactions
 - Know your state's specific tenant laws
         """,
-        category=RightsCategory.TENANT,
+        category=RightsCategory.HOUSING,
+        is_free=False
+    ),
+
+    "housing_repairs_habitability": RightsContent(
+        title="Landlord Won't Make Repairs",
+        situation="Living conditions are unsafe or unlivable",
+        content="""
+**WARRANTY OF HABITABILITY:**
+
+**LANDLORD MUST PROVIDE:**
+✅ Safe drinking water and plumbing
+✅ Working heat and electricity
+✅ Weatherproofing (roof, windows, doors)
+✅ Pest-free environment
+✅ Safe structure (no falling hazards)
+✅ Working smoke/carbon monoxide detectors
+
+**SERIOUS HABITABILITY ISSUES:**
+- No heat in winter
+- Raw sewage or backed-up drains
+- Mold or significant water damage
+- Electrical hazards (exposed wires, etc.)
+- Broken locks or security issues
+- Pest infestations
+
+**STEPS TO TAKE:**
+1. **Document everything** - Photos, videos, temperature readings
+2. **Written notice to landlord** - Certified mail, demand repairs
+3. **Give reasonable time** - Usually 14-30 days for repairs
+4. **Contact local housing authority** - File complaints
+5. **Know your remedies** - Rent withholding, repair and deduct
+
+**YOUR LEGAL REMEDIES:**
+**Rent Withholding:**
+- Stop paying rent until repairs made (follow state procedures)
+- Must continue paying into escrow account
+- Court may order landlord to make repairs
+
+**Repair and Deduct:**
+- Pay for repairs yourself, deduct from rent
+- Usually limited to 1-2 months rent
+- Keep receipts and follow state laws
+
+**EMERGENCY SITUATIONS:**
+If immediate danger (gas leak, no heat in freezing weather):
+- Call city building inspector immediately
+- Document with photos/video
+- May be able to break lease without penalty
+- Local health department can condemn property
+
+**PROTECT YOURSELF:**
+- Always give written notice before withholding rent
+- Know your state's specific habitability laws
+- Keep records of all communications
+- Never stop paying rent without legal grounds
+        """,
+        category=RightsCategory.HOUSING,
+        is_free=False
+    ),
+
+    "housing_lease_breaking": RightsContent(
+        title="Breaking a Lease Legally",
+        situation="Need to move out before lease ends",
+        content="""
+**LEGAL REASONS TO BREAK LEASE:**
+
+**AUTOMATIC LEASE TERMINATION:**
+✅ Military deployment (SCRA protection)
+✅ Domestic violence situations
+✅ Landlord harassment or illegal entry
+✅ Major habitability violations
+✅ Property becomes uninhabitable
+
+**CONSTRUCTIVE EVICTION:**
+When landlord makes living conditions so bad you're forced to leave:
+- Refusing to make essential repairs
+- Shutting off utilities illegally
+- Allowing dangerous conditions
+- Harassment or privacy violations
+
+**EARLY TERMINATION CLAUSES:**
+Check your lease for:
+- Job relocation clauses
+- Medical emergency provisions
+- Early termination fee options
+- Military service provisions
+
+**BREAKING LEASE - FINANCIAL CONSEQUENCES:**
+**What You May Owe:**
+- Remaining rent until new tenant found
+- Advertising costs for re-renting
+- Lost rent during vacancy period
+- Early termination fees (if in lease)
+
+**MINIMIZE DAMAGES:**
+1. **Give maximum notice** - 30+ days if possible
+2. **Help find replacement tenant** - Show unit, advertise
+3. **Negotiate with landlord** - Offer to forfeit deposit
+4. **Check state laws** - Many limit damages to 1-2 months rent
+
+**STATE-SPECIFIC PROTECTIONS:**
+- **California:** 30-day notice for domestic violence
+- **Texas:** Military deployment, domestic violence
+- **New York:** Senior citizens, disability accommodation
+- **Check your state:** Laws vary significantly
+
+**DOCUMENTATION NEEDED:**
+- Military orders (for SCRA)
+- Police reports (for domestic violence)
+- Medical records (for health-related moves)
+- Photos of habitability issues
+- All communications with landlord
+
+**BEFORE MOVING OUT:**
+- Take photos of condition
+- Return keys properly
+- Provide forwarding address
+- Keep copies of all documents
+        """,
+        category=RightsCategory.HOUSING,
+        is_free=False
+    ),
+
+    "housing_discrimination": RightsContent(
+        title="Housing Discrimination",
+        situation="Being denied housing or facing unfair treatment",
+        content="""
+**FAIR HOUSING LAWS PROTECT YOU:**
+
+**PROTECTED CLASSES (FEDERAL):**
+✅ Race and color
+✅ Religion
+✅ National origin
+✅ Sex/Gender
+✅ Familial status (children under 18, pregnancy)
+✅ Disability/handicap
+✅ Age (in some contexts)
+
+**ADDITIONAL STATE PROTECTIONS:**
+Many states also protect:
+- Sexual orientation and gender identity
+- Source of income (Section 8, disability benefits)
+- Marital status
+- Military status
+
+**ILLEGAL DISCRIMINATION:**
+❌ Refusing to rent based on protected class
+❌ Different terms/conditions for protected groups
+❌ Steering (showing different neighborhoods)
+❌ Discriminatory advertising language
+❌ Refusing reasonable disability accommodations
+
+**COMMON DISCRIMINATION EXAMPLES:**
+- "No children" policies (usually illegal)
+- Refusing Section 8 vouchers (illegal in many states)
+- Different application requirements by race
+- Asking about immigration status
+- Refusing guide dogs/service animals
+
+**REASONABLE ACCOMMODATIONS:**
+Landlords must allow:
+- Service animals (even with no-pets policy)
+- Handicap-accessible modifications
+- Reserved parking spaces for disabilities
+- Communication aids for hearing impaired
+- Caregiver access for disabled tenants
+
+**WHAT TO DO IF DISCRIMINATED:**
+1. **Document everything** - Save emails, texts, applications
+2. **Test for discrimination** - Have others apply with same qualifications
+3. **File complaints** - HUD, state fair housing agency, local commission
+4. **Contact legal aid** - Many organizations help with housing discrimination
+5. **Keep evidence** - Ads, application denials, witness statements
+
+**WHERE TO FILE COMPLAINTS:**
+- **HUD (Federal):** 1-800-669-9777
+- **State fair housing agencies**
+- **Local human rights commissions**
+- **Private attorneys** (may take cases on contingency)
+
+**REMEDIES AVAILABLE:**
+- Monetary damages
+- Forced rental/sale
+- Policy changes
+- Punitive damages
+- Attorney fees
+        """,
+        category=RightsCategory.HOUSING,
         is_free=False
     )
 }
