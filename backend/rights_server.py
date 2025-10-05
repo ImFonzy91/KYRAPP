@@ -2088,6 +2088,318 @@ When employer makes conditions so bad you're forced to quit:
         """,
         category=RightsCategory.WORKPLACE,
         is_free=False
+    ),
+
+    # FAMILY & PERSONAL RIGHTS BUNDLE
+    "family_divorce_separation": RightsContent(
+        title="Divorce & Legal Separation",
+        situation="Going through divorce or considering separation",
+        content="""
+**DIVORCE BASICS:**
+
+**GROUNDS FOR DIVORCE:**
+**NO-FAULT DIVORCE (All States):**
+- Irreconcilable differences
+- Incompatibility  
+- Irretrievable breakdown of marriage
+- Living apart for specified time
+
+**FAULT-BASED GROUNDS (Some States):**
+- Adultery
+- Abandonment
+- Physical or mental cruelty
+- Substance abuse
+- Criminal conviction
+
+**LEGAL SEPARATION vs DIVORCE:**
+**LEGAL SEPARATION:**
+- Still legally married
+- Cannot remarry
+- May keep insurance benefits
+- Religious considerations
+- Trial period before divorce
+
+**DIVORCE:**
+- Marriage completely dissolved
+- Free to remarry
+- All legal ties severed
+- Final division of assets
+
+**PROPERTY DIVISION:**
+**COMMUNITY PROPERTY STATES (9 states):**
+- All marital property split 50/50
+- Separate property remains separate
+- Includes: AZ, CA, ID, LA, NV, NM, TX, WA, WI
+
+**EQUITABLE DISTRIBUTION (Other states):**
+- Fair distribution (not necessarily equal)
+- Court considers multiple factors
+- Length of marriage, income, contributions
+
+**MARITAL vs SEPARATE PROPERTY:**
+**MARITAL PROPERTY:**
+- Assets acquired during marriage
+- Income earned during marriage
+- Retirement benefits accrued during marriage
+- Debt incurred during marriage
+
+**SEPARATE PROPERTY:**
+- Assets owned before marriage
+- Inheritance received by one spouse
+- Gifts to one spouse only
+- Personal injury settlements
+
+**SPOUSAL SUPPORT/ALIMONY:**
+**FACTORS CONSIDERED:**
+- Length of marriage
+- Income disparity between spouses
+- Age and health of parties
+- Standard of living during marriage
+- Contributions to marriage (including homemaking)
+
+**TYPES OF ALIMONY:**
+- Temporary (during divorce proceedings)
+- Rehabilitative (short-term, for education/training)
+- Permanent (ongoing, usually long marriages)
+- Lump sum (one-time payment)
+
+**DEBT DIVISION:**
+**MARITAL DEBT:**
+- Credit cards used for family expenses
+- Mortgage on family home
+- Car loans during marriage
+- Business debts (if for family benefit)
+
+**SEPARATE DEBT:**
+- Debt from before marriage
+- Credit cards for personal use only
+- Gambling debts
+- Student loans (sometimes separate)
+
+**PROTECTING YOUR INTERESTS:**
+**FINANCIAL PREPARATION:**
+- Gather financial documents
+- Open individual bank account
+- Establish individual credit
+- Document all assets and debts
+- Take photos of valuable items
+
+**CHILDREN CONSIDERATIONS:**
+- Child custody and visitation
+- Child support obligations
+- Health insurance coverage
+- Educational expenses
+- Tax exemptions
+
+**ALTERNATIVE DISPUTE RESOLUTION:**
+**MEDIATION:**
+- Neutral third party helps negotiate
+- Less expensive than litigation
+- Confidential process
+- Parties control outcome
+
+**COLLABORATIVE DIVORCE:**
+- Each spouse has lawyer
+- Team approach with financial experts
+- Agreement not to go to court
+- Focus on problem-solving
+
+**RED FLAGS - GET HELP IMMEDIATELY:**
+- Domestic violence or threats
+- Hidden assets or financial deception
+- Complex business interests
+- Significant debt or financial problems
+- International custody issues
+
+**TEMPORARY ORDERS:**
+During divorce proceedings, court can order:
+- Temporary custody and support
+- Who stays in marital home
+- Payment of bills and expenses
+- Restraining orders on assets
+- Protection from harassment
+
+**DIVORCE WITH CHILDREN:**
+**BEST INTERESTS STANDARD:**
+Court considers:
+- Emotional ties with parents
+- Parent's ability to provide care
+- Child's adjustment to home/school/community
+- Mental and physical health of all involved
+- History of domestic violence
+
+**DO NOT:**
+❌ Hide assets or income
+❌ Use children as messengers
+❌ Violate temporary court orders
+❌ Date openly during proceedings (affects some states)
+❌ Make major financial decisions without approval
+        """,
+        category=RightsCategory.FAMILY,
+        is_free=False
+    ),
+
+    "family_child_custody": RightsContent(
+        title="Child Custody & Support",
+        situation="Dealing with child custody or support issues",
+        content="""
+**CHILD CUSTODY TYPES:**
+
+**LEGAL CUSTODY:**
+- Right to make major decisions for child
+- Education, healthcare, religion
+- Can be joint or sole
+- Different from physical custody
+
+**PHYSICAL CUSTODY:**
+- Where child lives day-to-day
+- Can be joint (shared) or sole
+- Determines visitation schedules
+- Affects child support calculations
+
+**CUSTODY ARRANGEMENTS:**
+**JOINT CUSTODY:**
+- Both parents share decision-making
+- May or may not share physical time equally
+- Requires good communication between parents
+- Presumed best for children in many states
+
+**SOLE CUSTODY:**
+- One parent has primary responsibility
+- Other parent may have visitation rights
+- Used when joint custody not feasible
+- Required if domestic violence history
+
+**BEST INTERESTS OF CHILD STANDARD:**
+**FACTORS COURTS CONSIDER:**
+✅ Child's physical and emotional needs
+✅ Parent's ability to care for child
+✅ Child's relationship with each parent
+✅ Stability of home environments
+✅ Child's adjustment to current situation
+✅ Any history of domestic violence
+✅ Parent's mental and physical health
+
+**WHAT HURTS YOUR CUSTODY CASE:**
+❌ Domestic violence history
+❌ Substance abuse problems
+❌ Criminal record (especially violent crimes)
+❌ Alienating child from other parent
+❌ Unstable housing or employment
+❌ Mental health issues (untreated)
+
+**WHAT HELPS YOUR CUSTODY CASE:**
+✅ Stable home and employment
+✅ Active involvement in child's life
+✅ Following court orders
+✅ Encouraging relationship with other parent
+✅ Good physical and mental health
+✅ Strong support system
+
+**CHILD SUPPORT CALCULATIONS:**
+**INCOME SHARES MODEL (Most States):**
+- Based on both parents' incomes
+- Considers number of children
+- Accounts for custody time
+- Uses state guidelines/formulas
+
+**FACTORS AFFECTING SUPPORT:**
+- Gross income of both parents
+- Number of overnight visits
+- Health insurance costs
+- Childcare expenses
+- Other children's support obligations
+
+**TYPES OF INCOME INCLUDED:**
+- Wages and salary
+- Overtime and bonuses
+- Self-employment income
+- Rental income
+- Unemployment benefits
+- Social Security benefits
+
+**MODIFYING CUSTODY/SUPPORT:**
+**SUBSTANTIAL CHANGE REQUIRED:**
+- Significant change in income
+- Relocation of parent
+- Change in child's needs
+- Remarriage affecting circumstances
+- Parent's failure to exercise visitation
+
+**COURT PROCESS:**
+- File petition for modification
+- Serve other parent with papers
+- Attend mediation (if required)
+- Present evidence at hearing
+- Court issues new order
+
+**ENFORCEMENT OF ORDERS:**
+**IF PARENT DOESN'T PAY SUPPORT:**
+- Wage garnishment
+- Asset seizure
+- Tax refund interception
+- License suspension
+- Contempt of court (possible jail)
+
+**IF PARENT VIOLATES CUSTODY:**
+- Document violations
+- File contempt motion
+- Request make-up time
+- Possible custody modification
+- Criminal charges (in extreme cases)
+
+**RELOCATION WITH CHILDREN:**
+**NOTICE REQUIREMENTS:**
+- Must notify other parent (usually 30-60 days)
+- May need court permission
+- Consider impact on visitation
+- Best interests standard applies
+
+**FACTORS COURTS CONSIDER:**
+- Reason for move
+- Distance of relocation
+- Impact on child's relationship with other parent
+- Educational and social opportunities
+- Economic benefits of move
+
+**PARENTING PLANS:**
+**SHOULD INCLUDE:**
+- Detailed visitation schedule
+- Holiday and vacation time
+- Transportation arrangements
+- Communication guidelines
+- Decision-making procedures
+- Dispute resolution process
+
+**VISITATION RIGHTS:**
+**REASONABLE VISITATION:**
+- Parents work out schedule
+- Flexible arrangements
+- Requires good communication
+- Court doesn't specify exact times
+
+**FIXED VISITATION:**
+- Court orders specific schedule
+- Detailed dates and times
+- Used when parents can't agree
+- Provides certainty and structure
+
+**SUPERVISED VISITATION:**
+- Third party present during visits
+- Court orders when safety concerns exist
+- May be temporary or permanent
+- Can be professional or family member
+
+**PROTECTING YOUR CHILDREN:**
+- Never use children as messengers
+- Don't bad-mouth other parent to children
+- Follow court orders exactly
+- Document any safety concerns
+- Put children's needs first
+- Consider counseling if children struggle
+        """,
+        category=RightsCategory.FAMILY,
+        is_free=False
     )
 }
 
