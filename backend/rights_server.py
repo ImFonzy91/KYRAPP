@@ -886,6 +886,98 @@ Legal protections are limited:
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    "landmines_contracts_agreements": RightsContent(
+        title="Contracts & Agreements You Sign",
+        situation="Understanding what you're legally agreeing to",
+        content="""
+**CONTRACT LEGAL TRAPS:**
+
+**WHAT MAKES A CONTRACT BINDING:**
+✅ Offer and acceptance
+✅ Consideration (something of value exchanged)  
+✅ Competent parties (adults, mentally capable)
+✅ Legal purpose
+✅ Written form (for certain contracts)
+
+**CONTRACTS THAT MUST BE WRITTEN:**
+- Real estate transactions
+- Contracts over $500 in goods (UCC)
+- Agreements lasting over 1 year
+- Marriage contracts
+- Debt assumption agreements
+
+**DANGEROUS CLAUSES TO WATCH FOR:**
+❌ **Arbitration clauses** - Give up right to sue in court
+❌ **Liquidated damages** - Pre-set penalty amounts
+❌ **Personal guarantees** - You're liable even if business fails  
+❌ **Broad indemnification** - You pay their legal costs
+❌ **Automatic renewal** - Contract extends without notice
+
+**COMMON CONTRACT SCAMS:**
+- Door-to-door sales (check cooling-off periods)
+- Timeshare presentations with pressure tactics
+- Auto extended warranties with fine print
+- Home improvement contracts with upfront payments
+- Multi-level marketing "business opportunities"
+
+**YOUR RIGHT TO CANCEL:**
+**3-Day Cooling-Off Period for:**
+- Door-to-door sales over $25
+- Home equity loans
+- Timeshare purchases
+- Some home improvement contracts
+
+**UNCONSCIONABLE CONTRACTS:**
+Courts may void contracts that are:
+- Extremely one-sided
+- Take advantage of someone's desperation
+- Have hidden terms or deceptive language
+- Violate public policy
+
+**BEFORE SIGNING ANYTHING:**
+1. **Read everything** - Including fine print
+2. **Ask questions** - Get clarifications in writing
+3. **Take time** - Don't sign under pressure
+4. **Get copies** - Of everything you sign
+5. **Understand penalties** - For breaking the agreement
+
+**BREACH OF CONTRACT:**
+**If You Break Contract:**
+- May owe damages (actual losses caused)
+- Specific performance (forced to complete)
+- Liquidated damages (if clause exists)
+- Legal fees (if contract requires)
+
+**If They Break Contract:**
+- You can sue for damages
+- May get specific performance
+- Might be able to cancel and get money back
+- Legal fees recovery depends on contract terms
+
+**EMPLOYMENT CONTRACTS:**
+Watch for:
+- Non-compete clauses (may not be enforceable)
+- Non-disclosure agreements (NDAs)
+- Intellectual property assignments
+- At-will employment vs. contract terms
+
+**DIGITAL AGREEMENTS:**
+Terms of Service and Privacy Policies:
+- Are legally binding contracts
+- Can change without notice (usually)
+- May include arbitration requirements
+- Data collection and usage rights
+
+**GET HELP BEFORE SIGNING:**
+- Large purchases (homes, cars, business deals)
+- Anything you don't understand
+- Employment contracts with restrictions
+- Any contract over $1,000
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
