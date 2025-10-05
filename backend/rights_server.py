@@ -1088,6 +1088,118 @@ While not typically legal issues, can escalate:
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    "landmines_public_behavior": RightsContent(
+        title="Public Behavior & Legal Consequences",
+        situation="Actions in public that could lead to legal trouble",
+        content="""
+**PUBLIC BEHAVIOR LEGAL TRAPS:**
+
+**WHAT'S LEGAL IN PUBLIC:**
+✅ Taking photos/videos in public spaces
+✅ Peaceful protests and free speech
+✅ Recording police interactions
+✅ Street photography and journalism
+✅ Public performance (with permits if required)
+
+**WHAT CAN GET YOU ARRESTED:**
+❌ Public intoxication (varies by state)
+❌ Disturbing the peace/disorderly conduct
+❌ Public urination or indecent exposure
+❌ Trespassing (staying after being asked to leave)
+❌ Blocking pedestrian or vehicle traffic
+
+**PROTEST AND FREE SPEECH RIGHTS:**
+**PROTECTED ACTIVITIES:**
+- Peaceful demonstrations on public property
+- Distributing leaflets and petitions
+- Wearing clothing with political messages
+- Recording government officials in public
+
+**RESTRICTIONS:**
+- Time, place, and manner restrictions allowed
+- Cannot block traffic without permits
+- Private property owners can restrict speech
+- Cannot incite violence or lawless action
+
+**PHOTOGRAPHY/VIDEO LAWS:**
+**YOU CAN RECORD:**
+- Anyone in public spaces (no expectation of privacy)
+- Police officers performing duties
+- Public officials and government activities
+- Accidents and newsworthy events
+
+**YOU CANNOT RECORD:**
+- Up-skirt or voyeuristic photography
+- Private conversations (wiretapping laws)
+- In bathrooms, changing rooms, private areas
+- Children in some contexts (varies by state)
+
+**BUSINESS AND PUBLIC PROPERTY:**
+**PRIVATE BUSINESSES:**
+- Can ask you to leave for any non-discriminatory reason
+- Can prohibit recording on their property
+- Cannot detain you without reasonable suspicion of theft
+- Security guards have limited authority
+
+**ALCOHOL-RELATED ISSUES:**
+**OPEN CONTAINER LAWS:**
+- Illegal to drink in public in most places
+- Open alcohol containers in vehicles (even passengers)
+- Beach/park alcohol restrictions vary by location
+- Special event permits may allow exceptions
+
+**PUBLIC INTOXICATION:**
+- Being drunk in public is illegal in many states
+- Can be arrested even without driving
+- May face fines, jail time, and court costs
+- Can affect employment and security clearances
+
+**INTERACTIONS WITH SECURITY:**
+**PRIVATE SECURITY GUARDS CANNOT:**
+- Arrest you (unless citizen's arrest applies)
+- Search you without consent
+- Use excessive force
+- Detain you indefinitely
+
+**THEY CAN:**
+- Ask you to leave private property
+- Detain you briefly if they suspect theft
+- Call police for assistance
+- Use reasonable force to protect property
+
+**CROWD CONTROL SITUATIONS:**
+**POLICE ORDERS:**
+- Must follow lawful police orders to disperse
+- "Unlawful assembly" declarations require compliance
+- Cannot resist even unlawful orders (fight in court later)
+- Document police misconduct but don't interfere
+
+**PETS IN PUBLIC:**
+- Leash laws in most municipalities
+- Service animals have special access rights
+- Pet waste cleanup requirements
+- Aggressive dog liability issues
+
+**STREET PERFORMANCE/BUSKING:**
+- Many cities require permits
+- Cannot block pedestrian traffic
+- Noise ordinances apply
+- Donations generally legal, sales may need permits
+
+**PROTECT YOURSELF:**
+1. **Know local ordinances** - Laws vary by city/county
+2. **Stay calm in confrontations** - Don't escalate situations
+3. **ID requirements** - Know when you must provide identification
+4. **Record interactions** - Protect yourself with documentation
+5. **Avoid crowds during tensions** - Legal activities can become illegal in riots
+
+**REMEMBER:**
+What's legal in one place may be illegal in another. Tourist areas, government buildings, and private property often have special rules.
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
