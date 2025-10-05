@@ -722,6 +722,84 @@ Nothing online is truly private. Courts, employers, and investigators can access
         """,
         category=RightsCategory.LANDMINES,
         is_free=False
+    ),
+
+    "landmines_neighbor_disputes": RightsContent(
+        title="Neighbor Disputes & Property Lines",
+        situation="Conflicts with neighbors over noise, property, or boundaries",
+        content="""
+**COMMON NEIGHBOR LEGAL TRAPS:**
+
+**PROPERTY LINE DISPUTES:**
+❌ Building fences without surveys
+❌ Assuming property lines based on existing structures
+❌ Cutting neighbor's trees without permission
+❌ Using neighbor's driveway/land without easement
+❌ Blocking legal access routes
+
+**NOISE COMPLAINTS:**
+**LEGAL NOISE LIMITS:**
+- Most cities: 55-65 decibels during day, 45-55 at night
+- "Quiet hours" typically 10 PM - 7 AM
+- Dogs barking persistently (usually after 10-20 minutes)
+- Construction work restricted hours
+
+**FENCE LAWS:**
+- Check local setback requirements
+- Good neighbor fence laws (shared costs)
+- Height restrictions (usually 6 feet max)
+- Cannot build spite fences
+- May need permits for certain materials
+
+**TREE DISPUTES:**
+**YOU CAN LEGALLY:**
+✅ Cut branches hanging over your property line
+✅ Cut roots damaging your property
+✅ Keep fruit from branches over your land
+
+**YOU CANNOT:**
+❌ Cut neighbor's tree on their property
+❌ Poison or kill neighbor's tree
+❌ Enter neighbor's property to trim
+
+**WATER/DRAINAGE ISSUES:**
+- Cannot divert water onto neighbor's property
+- Natural drainage patterns must be maintained
+- Gutters and downspouts placement matters
+- Swimming pool overflow legal issues
+
+**HOW TO HANDLE DISPUTES:**
+1. **Talk first** - Many issues resolve with conversation
+2. **Know local ordinances** - City codes vary significantly
+3. **Document everything** - Photos, videos, measurements
+4. **Mediation services** - Many cities offer free mediation
+5. **Small claims court** - For damages under $5,000-$10,000
+
+**WHEN TO CALL POLICE:**
+- Threats or intimidation
+- Property damage or trespassing
+- Domestic violence situations
+- Theft of property
+
+**HOMEOWNERS ASSOCIATION (HOA):**
+If you have an HOA:
+- Follow complaint procedures first
+- HOA rules override some local ordinances
+- Architectural changes need approval
+- Fines and liens possible for violations
+
+**AVOID ESCALATION:**
+❌ Retaliatory actions (making noise back)
+❌ Trespassing to "teach a lesson"
+❌ Threatening language or behavior
+❌ Recording neighbors without consent (varies by state)
+❌ Social media shaming campaigns
+
+**PROTECT YOUR INVESTMENT:**
+Good neighbor relations increase property values. Most disputes can be resolved without lawyers if handled respectfully and early.
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
