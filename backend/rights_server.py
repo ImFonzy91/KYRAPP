@@ -1686,6 +1686,408 @@ Consider:
         """,
         category=RightsCategory.CRIMINAL,
         is_free=False
+    ),
+
+    # BUSINESS & WORKPLACE RIGHTS BUNDLE
+    "workplace_harassment": RightsContent(
+        title="Workplace Harassment & Discrimination",
+        situation="Experiencing harassment or discrimination at work",
+        content="""
+**WORKPLACE HARASSMENT LAWS:**
+
+**PROTECTED CLASSES (FEDERAL):**
+✅ Race, color, national origin
+✅ Religion or religious beliefs
+✅ Sex/gender (includes pregnancy)
+✅ Age (40 and over)
+✅ Disability
+✅ Genetic information
+
+**ADDITIONAL STATE PROTECTIONS:**
+Many states also protect:
+- Sexual orientation and gender identity
+- Marital status
+- Political affiliation
+- Height and weight
+- Criminal history (in some contexts)
+
+**TYPES OF HARASSMENT:**
+**QUID PRO QUO:**
+- "This for that" - sexual favors for job benefits
+- Supervisor demanding sexual activity for promotion
+- Threats of firing for refusing advances
+
+**HOSTILE WORK ENVIRONMENT:**
+- Severe or pervasive harassment
+- Interferes with work performance
+- Creates intimidating workplace
+- Based on protected characteristics
+
+**EXAMPLES OF ILLEGAL HARASSMENT:**
+❌ Racial slurs or ethnic jokes
+❌ Sexual comments or advances
+❌ Religious mockery or pressure
+❌ Age-related insults ("old timer")
+❌ Disability-related teasing
+❌ Unwanted touching or sexual conduct
+
+**WHAT TO DO IF HARASSED:**
+1. **Document everything** - Dates, times, witnesses, what was said/done
+2. **Report internally** - Follow company complaint procedures
+3. **Keep copies** - Of all complaints and responses
+4. **Report to EEOC** - File within 180-300 days (varies by state)
+5. **Consult employment lawyer** - Know your options
+
+**COMPANY OBLIGATIONS:**
+**EMPLOYERS MUST:**
+- Have anti-harassment policies
+- Investigate complaints promptly and thoroughly
+- Take corrective action to stop harassment
+- Prevent retaliation against complainers
+- Train supervisors on harassment laws
+
+**RETALIATION IS ILLEGAL:**
+**PROTECTED ACTIVITIES:**
+- Filing harassment/discrimination complaints
+- Participating in EEOC investigations
+- Testifying in harassment cases
+- Requesting reasonable accommodations
+
+**EXAMPLES OF RETALIATION:**
+❌ Firing, demoting, or disciplining complainant
+❌ Cutting hours or changing job duties
+❌ Hostile treatment after complaint
+❌ Spreading rumors or blacklisting
+❌ Denying promotions or benefits
+
+**DISABILITY ACCOMMODATIONS:**
+**REASONABLE ACCOMMODATIONS:**
+- Modified work schedules
+- Equipment modifications
+- Workplace accessibility improvements
+- Job duty adjustments
+- Leave for medical treatment
+
+**UNDUE HARDSHIP EXCEPTIONS:**
+Employers don't have to provide accommodations that:
+- Cost too much relative to company size
+- Fundamentally alter business operations
+- Create safety hazards
+
+**PREGNANCY RIGHTS:**
+**PREGNANCY DISCRIMINATION ACT:**
+- Cannot fire or refuse to hire due to pregnancy
+- Must treat pregnancy like any other medical condition
+- Cannot force leave if able to work
+- Must provide same benefits as other medical leaves
+
+**RELIGIOUS ACCOMMODATIONS:**
+**EMPLOYERS MUST ACCOMMODATE:**
+- Religious dress and appearance
+- Prayer schedules and religious holidays
+- Dietary restrictions
+- Religious practices that don't interfere with work
+
+**AGE DISCRIMINATION:**
+**PROTECTS WORKERS 40 AND OLDER:**
+- Cannot use age in hiring/firing decisions
+- Cannot force retirement (with limited exceptions)
+- Benefits must be equal regardless of age
+- Job ads cannot specify age preferences
+
+**FILING COMPLAINTS:**
+**EEOC PROCESS:**
+1. **File charge** - Within 180-300 days of incident
+2. **EEOC investigation** - Interview witnesses, review documents
+3. **Mediation option** - Voluntary settlement discussions
+4. **EEOC determination** - Cause found or no cause
+5. **Right to sue letter** - If wanting to file lawsuit
+
+**EMPLOYMENT LAWYERS:**
+**WHEN TO CONSULT:**
+- Severe or ongoing harassment
+- Company fails to investigate properly
+- Retaliation after complaining
+- Wrongful termination
+- Complex discrimination cases
+
+**PROTECT YOURSELF:**
+- Keep personal email account for documentation
+- Save text messages and emails as evidence
+- Get witness contact information
+- Follow all company policies and procedures
+- Don't quit without consulting lawyer (may affect claims)
+        """,
+        category=RightsCategory.WORKPLACE,
+        is_free=False
+    ),
+
+    "workplace_firing_layoffs": RightsContent(
+        title="Wrongful Termination & Layoffs",
+        situation="Being fired or laid off and unsure of your rights",
+        content="""
+**EMPLOYMENT AT-WILL EXPLAINED:**
+
+**AT-WILL EMPLOYMENT:**
+- Employer can fire you for any reason or no reason
+- You can quit for any reason or no reason
+- No advance notice required (unless contract states otherwise)
+- Applies in all states except Montana
+
+**EXCEPTIONS TO AT-WILL:**
+**ILLEGAL REASONS TO FIRE:**
+❌ Discrimination based on protected class
+❌ Retaliation for protected activities
+❌ Violation of public policy
+❌ Breach of employment contract
+❌ Violation of implied contract
+
+**PROTECTED ACTIVITIES:**
+✅ Filing discrimination complaints
+✅ Reporting safety violations (OSHA)
+✅ Whistleblowing on illegal activities
+✅ Taking legally protected leave (FMLA)
+✅ Union organizing activities
+✅ Refusing to break the law
+
+**WRONGFUL TERMINATION SIGNS:**
+**RED FLAGS:**
+- Fired immediately after filing complaint
+- Different reasons given for termination
+- Inconsistent discipline compared to others
+- Sudden negative performance reviews after complaint
+- Fired during protected leave
+
+**CONSTRUCTIVE DISCHARGE:**
+When employer makes conditions so bad you're forced to quit:
+- Impossible job assignments
+- Harassment that company ignores
+- Dangerous working conditions
+- Significant pay/benefit cuts
+- Demotion without cause
+
+**SEVERANCE PAY:**
+**NOT REQUIRED BY LAW:**
+- Severance is voluntary (unless contract requires)
+- Can negotiate amount and terms
+- May include COBRA health insurance extension
+- Often includes non-compete or non-disclosure agreements
+
+**NEGOTIATING SEVERANCE:**
+- Ask for more money or benefits
+- Request positive reference letter
+- Negotiate non-compete restrictions
+- Get retraining or outplacement services
+
+**UNEMPLOYMENT BENEFITS:**
+**ELIGIBLE IF:**
+- Lost job through no fault of your own
+- Laid off due to business reasons
+- Fired for poor performance (not misconduct)
+- Meet work history and wage requirements
+
+**DISQUALIFIED IF:**
+- Fired for misconduct
+- Quit without good cause
+- Refuse suitable work offers
+- Not available or actively seeking work
+
+**COBRA HEALTH INSURANCE:**
+**CONTINUATION COVERAGE:**
+- Keep employer health insurance for 18-36 months
+- Must pay full premium plus 2% administrative fee
+- Must elect within 60 days of job loss
+- Covers employee and eligible dependents
+
+**FINAL PAYCHECK LAWS:**
+**VARIES BY STATE:**
+- Some require immediate payment upon termination
+- Others allow until next regular payday
+- Must include accrued vacation time (in most states)
+- Cannot withhold pay for company property
+
+**MASS LAYOFFS - WARN ACT:**
+**60-DAY NOTICE REQUIRED FOR:**
+- 100+ employees laid off at single site
+- 50+ employees if they're 1/3 of workforce
+- Plant closures affecting 50+ employees
+
+**EXCEPTIONS:**
+- Unforeseeable business circumstances
+- Natural disasters
+- Faltering companies seeking capital
+
+**REFERENCES AND BACKGROUND CHECKS:**
+**REFERENCE LAWS:**
+- Most states protect truthful references
+- Some limit references to dates of employment
+- Cannot blacklist or give false information
+- Former employees can sue for defamation
+
+**NON-COMPETE AGREEMENTS:**
+**ENFORCEABILITY VARIES:**
+- Some states don't enforce them at all
+- Must be reasonable in time, geography, scope
+- Cannot prevent you from earning living
+- May be void if fired without cause
+
+**WHAT TO DO IF WRONGFULLY FIRED:**
+1. **Document everything** - Save emails, performance reviews, witness info
+2. **File for unemployment** - Do this immediately
+3. **Preserve evidence** - Don't delete anything from personal devices
+4. **Consult employment lawyer** - Many work on contingency
+5. **File EEOC complaint** - If discrimination involved
+
+**PROTECT YOURSELF:**
+- Keep copies of important documents at home
+- Maintain personal email for job-related communications
+- Know your company's policies and procedures
+- Document all incidents of harassment or discrimination
+- Don't sign severance agreements without legal review
+        """,
+        category=RightsCategory.WORKPLACE,
+        is_free=False
+    ),
+
+    "workplace_wages_hours": RightsContent(
+        title="Wages, Hours & Overtime Pay",
+        situation="Issues with pay, overtime, or work hours",
+        content="""
+**FAIR LABOR STANDARDS ACT (FLSA):**
+
+**MINIMUM WAGE:**
+- Federal minimum: $7.25/hour (as of 2024)
+- States can set higher minimums
+- Applies to most employees
+- Tipped workers: $2.13/hour + tips (must equal minimum wage)
+
+**OVERTIME PAY:**
+**TIME AND A HALF REQUIRED:**
+- After 40 hours in workweek
+- Rate = regular hourly rate × 1.5
+- Cannot average hours across multiple weeks
+- Applies to non-exempt employees only
+
+**EXEMPT vs NON-EXEMPT:**
+**EXEMPT (NO OVERTIME):**
+- Executive, administrative, professional roles
+- Must be paid salary (not hourly)
+- Must meet specific job duty tests
+- Minimum salary: $684/week ($35,568/year)
+
+**NON-EXEMPT (OVERTIME ELIGIBLE):**
+- Most hourly workers
+- Some salaried workers who don't meet exemption tests
+- Blue-collar workers (regardless of pay level)
+- First responders, paramedics
+
+**COMMON WAGE VIOLATIONS:**
+❌ Not paying for all hours worked
+❌ Misclassifying employees as exempt
+❌ Requiring off-the-clock work
+❌ Not paying overtime rates
+❌ Illegal payroll deductions
+❌ Paying below minimum wage
+
+**HOURS THAT MUST BE PAID:**
+✅ Time spent working before/after shifts
+✅ Short breaks (under 20 minutes)
+✅ Training time (usually)
+✅ Travel time between job sites
+✅ On-call time (if restricted in activities)
+✅ Time spent putting on/taking off safety equipment
+
+**HOURS NOT REQUIRED TO BE PAID:**
+- Meal breaks (30+ minutes, completely free from work)
+- Commuting to/from regular workplace
+- Time between shifts
+- On-call time at home (if truly free)
+
+**PAYROLL DEDUCTIONS:**
+**LEGAL DEDUCTIONS:**
+- Federal/state taxes and Social Security
+- Court-ordered garnishments
+- Voluntary deductions (insurance, 401k)
+- Union dues (if authorized)
+
+**ILLEGAL DEDUCTIONS (FOR NON-EXEMPT):**
+- Business expenses (uniforms, tools)
+- Cash register shortages
+- Customer walkouts or bad checks
+- Damage to company property (in most states)
+
+**BREAK AND MEAL PERIOD LAWS:**
+**FEDERAL LAW:**
+- No required breaks or meal periods
+- Short breaks (under 20 min) must be paid
+- Meal breaks (30+ min) unpaid if completely free
+
+**STATE LAWS VARY:**
+- Some require meal breaks after certain hours
+- Some mandate rest breaks
+- Nursing mothers have break rights for pumping
+
+**INDEPENDENT CONTRACTOR vs EMPLOYEE:**
+**FACTORS FOR EMPLOYEE STATUS:**
+- Company controls how work is done
+- Work is integral to business
+- Permanent or indefinite relationship
+- Company provides tools/equipment
+- Work done at company location
+
+**MISCLASSIFICATION CONSEQUENCES:**
+- Owe overtime and minimum wage
+- Must pay employer portion of taxes
+- Penalties and interest
+- Department of Labor investigation
+
+**STATE WAGE LAWS:**
+**STATES OFTEN PROVIDE MORE:**
+- Higher minimum wages
+- Daily overtime (California: over 8 hours/day)
+- Meal and break requirements
+- Paid sick leave
+- Final paycheck timing
+
+**FILING WAGE COMPLAINTS:**
+**DEPARTMENT OF LABOR:**
+- Investigates FLSA violations
+- Can recover back wages
+- May assess penalties
+- Protection from retaliation
+
+**STATE LABOR DEPARTMENTS:**
+- Handle state wage law violations
+- Often faster than federal process
+- May have different remedies available
+
+**STATUTE OF LIMITATIONS:**
+**FLSA CLAIMS:**
+- 2 years for most violations
+- 3 years for willful violations
+- Back pay and "liquidated damages" (double damages)
+
+**COLLECTIVE ACTION LAWSUITS:**
+- Can join with other employees
+- Share legal costs
+- Class action for similar violations
+- Court approval required
+
+**PROTECT YOUR RIGHTS:**
+1. **Keep time records** - Track all hours worked
+2. **Save pay stubs** - Document wage payments
+3. **Know your classification** - Exempt vs non-exempt
+4. **Understand company policies** - But policies can't override law
+5. **Report violations promptly** - Don't wait years to complain
+
+**RETALIATION PROTECTION:**
+- Cannot fire for filing wage complaints
+- Cannot reduce hours or benefits
+- Cannot demote or discipline
+- Separate legal claim if retaliation occurs
+        """,
+        category=RightsCategory.WORKPLACE,
+        is_free=False
     )
 }
 
