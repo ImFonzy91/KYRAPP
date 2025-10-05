@@ -657,6 +657,71 @@ Landlords must allow:
         """,
         category=RightsCategory.HOUSING,
         is_free=False
+    ),
+
+    # LEGAL LANDMINES BUNDLE - Avoid Costly Everyday Legal Mistakes
+    "landmines_social_media": RightsContent(
+        title="Social Media Legal Dangers",
+        situation="Posting content that could get you sued or arrested",
+        content="""
+**SOCIAL MEDIA LEGAL LANDMINES:**
+
+**POSTS THAT CAN GET YOU SUED:**
+❌ Defamatory statements about people/businesses
+❌ Posting photos of people without permission
+❌ Copyright infringement (music, images, videos)
+❌ Revenge posts about ex-partners
+❌ False business reviews
+❌ Sharing private information about others
+
+**POSTS THAT CAN GET YOU ARRESTED:**
+❌ Threats (even "joking" ones)
+❌ Harassment or cyberbullying
+❌ Posting illegal content
+❌ Inciting violence or riots
+❌ Identity theft or impersonation
+❌ Child exploitation material
+
+**EMPLOYMENT CONSEQUENCES:**
+Employers can legally fire you for:
+- Posts that violate company policy
+- Discriminatory or offensive content
+- Revealing confidential information
+- Posts that damage company reputation
+
+**PROTECT YOURSELF:**
+1. **Think before posting** - Would you say this in court?
+2. **Privacy settings** - Don't rely on them for legal protection
+3. **Avoid naming people** - Especially in negative contexts
+4. **No photos without permission** - Especially of minors
+5. **Screenshot everything** - If someone threatens/harasses you
+
+**DIVORCE/CUSTODY IMPLICATIONS:**
+Social media is evidence in family court:
+- Party photos during custody battle
+- Dating posts during divorce proceedings
+- Financial posts contradicting support claims
+- Location check-ins during custody time
+
+**IF YOU'RE BEING HARASSED:**
+1. **Don't respond** - Document everything instead
+2. **Block and report** - Use platform reporting tools
+3. **Save evidence** - Screenshots with timestamps
+4. **Contact police** - If threats of violence
+5. **Consider restraining order** - For persistent harassment
+
+**BUSINESS OWNERS BEWARE:**
+- Fake positive reviews (FTC violations)
+- Attacking competitors online
+- Using copyrighted images
+- Employee social media policies
+- Customer privacy violations
+
+**REMEMBER:**
+Nothing online is truly private. Courts, employers, and investigators can access "deleted" content. When in doubt, don't post it.
+        """,
+        category=RightsCategory.LANDMINES,
+        is_free=False
     )
 }
 
