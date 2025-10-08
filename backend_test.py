@@ -340,7 +340,7 @@ class ScanEmAPITester:
     def run_all_tests(self):
         """Run all test suites"""
         print("=" * 60)
-        print("KNOW YOUR RIGHTS APP - BACKEND API TESTING")
+        print("SCAN'EM PEOPLE SEARCH APP - BACKEND API TESTING")
         print("=" * 60)
         print(f"Testing backend at: {BASE_URL}")
         print()
@@ -350,20 +350,20 @@ class ScanEmAPITester:
             print("❌ CRITICAL: Cannot connect to API. Stopping tests.")
             return False
         
-        print("\n🔍 Testing Categories API...")
-        self.test_categories_api()
+        print("\n💰 Testing Pricing Structure...")
+        self.test_pricing_structure()
         
-        print("\n📋 Testing Rights by Category...")
-        self.test_rights_by_category()
+        print("\n🔍 Testing People Search...")
+        self.test_people_search()
         
-        print("\n📄 Testing Specific Content...")
-        self.test_specific_content()
+        print("\n👤 Testing Person Preview...")
+        self.test_person_preview()
         
-        print("\n🔍 Testing Search Functionality...")
-        self.test_search_functionality()
+        print("\n💳 Testing Stripe Integration...")
+        self.test_stripe_integration()
         
-        print("\n📦 Testing Bundle Completeness...")
-        self.test_bundle_completeness()
+        print("\n📄 Testing Report Retrieval...")
+        self.test_report_retrieval()
         
         # Summary
         print("\n" + "=" * 60)
@@ -382,11 +382,11 @@ class ScanEmAPITester:
         return self.failed_tests == 0
 
 if __name__ == "__main__":
-    tester = KnowYourRightsAPITester()
+    tester = ScanEmAPITester()
     success = tester.run_all_tests()
     
     if success:
-        print("\n🎉 ALL TESTS PASSED! Backend is working correctly.")
+        print("\n🎉 ALL TESTS PASSED! Scan'Em backend is working correctly.")
         sys.exit(0)
     else:
         print(f"\n⚠️  {tester.failed_tests} tests failed. Check the issues above.")
