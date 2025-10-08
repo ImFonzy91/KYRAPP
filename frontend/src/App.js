@@ -410,9 +410,15 @@ const App = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${API}/search`, {}, {
-        params: { query, search_type: searchType }
-      });
+      // Convert frontend searchType to backend parameter names
+      const params = {};
+      if (searchType === 'name') params.name = query;
+      else if (searchType === 'phone') params.phone = query;
+      else if (searchType === 'email') params.email = query;
+      else if (searchType === 'address') params.address = query;
+      else params.name = query; // default to name search
+      
+      const response = await axios.get(`${API}/search`, { params });
       setSearchResults(response.data.results);
       setCurrentView('results');
     } catch (err) {
