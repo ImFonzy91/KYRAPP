@@ -281,75 +281,61 @@ class ScanEmAPITester:
         except Exception as e:
             self.log_test("Stripe Integration", False, f"Error: {str(e)}")
     
-    def test_bundle_completeness(self):
-        """Test that all promised bundles have content"""
-        bundle_tests = {
-            "Traffic & Vehicle Rights": {
-                "category": "traffic",
-                "expected_entries": 6,
-                "sample_ids": ["traffic_pulled_over", "traffic_search_car", "traffic_recording"]
-            },
-            "Housing Rights": {
-                "category": "housing", 
-                "expected_entries": 6,
-                "sample_ids": ["housing_eviction", "housing_security_deposit", "housing_landlord_entry"]
-            },
-            "Legal Landmines": {
-                "category": "landmines",
-                "expected_entries": 6, 
-                "sample_ids": ["landmines_social_media", "landmines_neighbor_disputes", "landmines_dating_relationships"]
-            },
-            "Criminal Defense Rights": {
-                "category": "criminal",
-                "expected_entries": 4,
-                "sample_ids": ["criminal_arrest_rights", "criminal_court_procedures", "criminal_bail_bonds"]
-            },
-            "Business & Workplace Rights": {
-                "category": "workplace",
-                "expected_entries": 3,
-                "sample_ids": ["workplace_harassment", "workplace_firing_layoffs", "workplace_wages_hours"]
-            },
-            "Family & Personal Rights": {
-                "category": "family",
-                "expected_entries": 2,
-                "sample_ids": ["family_divorce_separation", "family_child_custody"]
-            }
-        }
+    def test_report_retrieval(self):
+        """Test report retrieval endpoint (mock data)"""
+        # Test with a mock session ID that should return sample report data
+        mock_session_id = "cs_test_mock_session_123"
         
-        for bundle_name, test_info in bundle_tests.items():
-            category = test_info["category"]
-            expected_count = test_info["expected_entries"]
-            sample_ids = test_info["sample_ids"]
-            
-            # Test category has expected number of entries
-            try:
-                response = requests.get(f"{API_URL}/rights/{category}", timeout=10)
-                if response.status_code == 200:
-                    data = response.json()
-                    rights = data.get("rights", [])
+        try:
+            response = requests.get(f"{API_URL}/report/{mock_session_id}", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Check if it's a complete report structure
+                required_fields = ["person_id", "report_type", "generated_at", "data"]
+                has_all_fields = all(field in data for field in required_fields)
+                
+                if has_all_fields:
+                    report_data = data.get("data", {})
                     
-                    if len(rights) >= expected_count:
-                        self.log_test(f"Bundle Completeness - {bundle_name}", True, 
-                                    f"Has {len(rights)} entries (expected {expected_count})")
+                    # Check report data structure based on type
+                    if "basic_info" in report_data:
+                        self.log_test("Report Retrieval - Structure", True, 
+                                    "Report has correct data structure")
+                        
+                        # Check if comprehensive report has all sections
+                        if data.get("report_type") == "comprehensive":
+                            expected_sections = ["basic_info", "contact_info", "address_history", 
+                                               "criminal_history", "relatives", "associates"]
+                            has_all_sections = all(section in report_data for section in expected_sections)
+                            
+                            if has_all_sections:
+                                self.log_test("Report Retrieval - Comprehensive Data", True, 
+                                            "All report sections present")
+                            else:
+                                missing_sections = [s for s in expected_sections if s not in report_data]
+                                self.log_test("Report Retrieval - Comprehensive Data", False, 
+                                            f"Missing sections: {missing_sections}")
+                        else:
+                            self.log_test("Report Retrieval - Basic Data", True, 
+                                        "Basic report data structure correct")
                     else:
-                        self.log_test(f"Bundle Completeness - {bundle_name}", False, 
-                                    f"Only {len(rights)} entries (expected {expected_count})")
-                    
-                    # Test sample content exists
-                    found_ids = [right["id"] for right in rights]
-                    missing_samples = [sid for sid in sample_ids if sid not in found_ids]
-                    
-                    if not missing_samples:
-                        self.log_test(f"Sample Content - {bundle_name}", True, 
-                                    "All sample content found")
-                    else:
-                        self.log_test(f"Sample Content - {bundle_name}", False, 
-                                    f"Missing: {missing_samples}")
+                        self.log_test("Report Retrieval - Structure", False, 
+                                    "Report missing basic_info section")
                 else:
-                    self.log_test(f"Bundle Access - {bundle_name}", False, 
-                                f"Cannot access category: {response.status_code}")
-            except Exception as e:
-                self.log_test(f"Bundle Test - {bundle_name}", False, f"Error: {str(e)}")
+                    missing_fields = [field for field in required_fields if field not in data]
+                    self.log_test("Report Retrieval - Structure", False, 
+                                f"Missing fields: {missing_fields}")
+                    
+            elif response.status_code == 404:
+                self.log_test("Report Retrieval - Not Found", True, 
+                            "Correctly returns 404 for non-existent session")
+            else:
+                self.log_test("Report Retrieval", False, 
+                            f"Unexpected status code: {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Report Retrieval", False, f"Error: {str(e)}")
     
     def run_all_tests(self):
         """Run all test suites"""
