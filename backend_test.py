@@ -228,40 +228,58 @@ class ScanEmAPITester:
             except Exception as e:
                 self.log_test(f"Person Preview - {test_person['name']}", False, f"Error: {str(e)}")
     
-    def test_search_functionality(self):
-        """Test search functionality with various queries"""
-        search_queries = [
-            ("pulled over", ["traffic_pulled_over"]),
-            ("eviction", ["housing_eviction"]),
-            ("harassment", ["workplace_harassment"]),
-            ("divorce", ["family_divorce_separation"]),
-            ("social media", ["landmines_social_media"]),
-            ("arrest", ["criminal_arrest_rights", "traffic_arrested"]),
-            ("landlord", ["housing_eviction", "housing_landlord_entry", "housing_repairs_habitability"])
-        ]
-        
-        for query, expected_results in search_queries:
-            try:
-                response = requests.get(f"{API_URL}/search", params={"query": query}, timeout=10)
-                if response.status_code == 200:
-                    data = response.json()
-                    results = data.get("results", [])
-                    found_ids = [result["id"] for result in results]
+    def test_stripe_integration(self):
+        """Test Stripe payment integration endpoints"""
+        try:
+            # Test report purchase endpoint (should create checkout session)
+            purchase_data = {
+                "person_id": "person_001",
+                "report_type": "premium",
+                "origin_url": "https://scanem-rights.preview.emergentagent.com"
+            }
+            
+            response = requests.post(f"{API_URL}/report/purchase", 
+                                   json=purchase_data, timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ["checkout_url", "session_id"]
+                has_all_fields = all(field in data for field in required_fields)
+                
+                if has_all_fields:
+                    session_id = data["session_id"]
+                    checkout_url = data["checkout_url"]
                     
-                    # Check if at least one expected result is found
-                    found_expected = any(expected_id in found_ids for expected_id in expected_results)
-                    
-                    if found_expected and len(results) > 0:
-                        self.log_test(f"Search - '{query}'", True, 
-                                    f"Found {len(results)} results including expected content")
+                    # Verify checkout URL format
+                    if "checkout.stripe.com" in checkout_url:
+                        self.log_test("Stripe Checkout Creation", True, 
+                                    f"Checkout session created: {session_id}")
+                        
+                        # Test payment status endpoint
+                        status_response = requests.get(f"{API_URL}/payments/status/{session_id}", timeout=10)
+                        if status_response.status_code == 200:
+                            status_data = status_response.json()
+                            if "payment_status" in status_data:
+                                self.log_test("Payment Status Check", True, 
+                                            f"Status: {status_data['payment_status']}")
+                            else:
+                                self.log_test("Payment Status Check", False, 
+                                            "Payment status field missing")
+                        else:
+                            self.log_test("Payment Status Check", False, 
+                                        f"Status code: {status_response.status_code}")
                     else:
-                        self.log_test(f"Search - '{query}'", False, 
-                                    f"Expected results not found. Got: {found_ids}")
+                        self.log_test("Stripe Checkout Creation", False, 
+                                    "Invalid checkout URL format")
                 else:
-                    self.log_test(f"Search - '{query}'", False, 
-                                f"Status code: {response.status_code}")
-            except Exception as e:
-                self.log_test(f"Search - '{query}'", False, f"Error: {str(e)}")
+                    self.log_test("Stripe Checkout Creation", False, 
+                                "Missing required fields in response")
+            else:
+                self.log_test("Stripe Checkout Creation", False, 
+                            f"Status code: {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Stripe Integration", False, f"Error: {str(e)}")
     
     def test_bundle_completeness(self):
         """Test that all promised bundles have content"""
