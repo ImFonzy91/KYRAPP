@@ -63,57 +63,52 @@ class ScanEmAPITester:
             self.log_test("API Root Endpoint", False, f"Connection error: {str(e)}")
             return False
     
-    def test_categories_api(self):
-        """Test categories endpoint - should return all 10 bundles"""
+    def test_pricing_structure(self):
+        """Test pricing endpoint - should return 3 tiers"""
         try:
-            response = requests.get(f"{API_URL}/categories", timeout=10)
+            response = requests.get(f"{API_URL}/pricing", timeout=10)
             if response.status_code == 200:
                 data = response.json()
-                categories = data.get("categories", [])
+                pricing_tiers = data.get("pricing_tiers", {})
                 
-                # Expected categories based on implementation
-                expected_categories = [
-                    "traffic", "housing", "landmines", "criminal", 
-                    "workplace", "family", "healthcare", "student", 
-                    "digital", "consumer"
-                ]
+                # Expected tiers
+                expected_tiers = ["basic", "premium", "comprehensive"]
+                expected_prices = {"basic": 4.99, "premium": 19.99, "comprehensive": 39.99}
                 
-                if len(categories) == 10:
-                    self.log_test("Categories Count", True, f"Found all 10 categories")
+                if len(pricing_tiers) == 3:
+                    self.log_test("Pricing Tiers Count", True, f"Found all 3 pricing tiers")
                 else:
-                    self.log_test("Categories Count", False, f"Expected 10, got {len(categories)}")
+                    self.log_test("Pricing Tiers Count", False, f"Expected 3, got {len(pricing_tiers)}")
                 
-                # Check each expected category exists
-                found_categories = [cat["id"] for cat in categories]
-                missing = [cat for cat in expected_categories if cat not in found_categories]
+                # Check each expected tier exists with correct pricing
+                for tier in expected_tiers:
+                    if tier in pricing_tiers:
+                        actual_price = pricing_tiers[tier].get("price")
+                        expected_price = expected_prices[tier]
+                        if actual_price == expected_price:
+                            self.log_test(f"Pricing - {tier.title()}", True, f"${actual_price} correct")
+                        else:
+                            self.log_test(f"Pricing - {tier.title()}", False, f"Expected ${expected_price}, got ${actual_price}")
+                    else:
+                        self.log_test(f"Pricing - {tier.title()}", False, "Tier missing")
                 
-                if not missing:
-                    self.log_test("Categories Completeness", True, "All expected categories present")
-                else:
-                    self.log_test("Categories Completeness", False, f"Missing: {missing}")
-                
-                # Check pricing structure
-                traffic_cat = next((cat for cat in categories if cat["id"] == "traffic"), None)
-                if traffic_cat and traffic_cat.get("price") == 0.0 and traffic_cat.get("is_free"):
-                    self.log_test("Traffic Bundle Free", True, "Traffic bundle correctly marked as free")
-                else:
-                    self.log_test("Traffic Bundle Free", False, "Traffic bundle pricing incorrect")
-                
-                # Check paid bundles
-                paid_bundles = [cat for cat in categories if not cat.get("is_free", True)]
-                correct_pricing = all(cat.get("price") in [3.99, 4.99] for cat in paid_bundles)
-                
-                if correct_pricing:
-                    self.log_test("Paid Bundle Pricing", True, "All paid bundles have correct pricing")
-                else:
-                    self.log_test("Paid Bundle Pricing", False, "Some paid bundles have incorrect pricing")
+                # Check structure
+                if pricing_tiers:
+                    first_tier = list(pricing_tiers.values())[0]
+                    required_fields = ["price", "name", "description", "includes"]
+                    has_all_fields = all(field in first_tier for field in required_fields)
+                    
+                    if has_all_fields:
+                        self.log_test("Pricing Structure", True, "Pricing tiers have correct structure")
+                    else:
+                        self.log_test("Pricing Structure", False, "Pricing tiers missing required fields")
                 
                 return True
             else:
-                self.log_test("Categories API", False, f"Status code: {response.status_code}")
+                self.log_test("Pricing API", False, f"Status code: {response.status_code}")
                 return False
         except Exception as e:
-            self.log_test("Categories API", False, f"Error: {str(e)}")
+            self.log_test("Pricing API", False, f"Error: {str(e)}")
             return False
     
     def test_rights_by_category(self):
