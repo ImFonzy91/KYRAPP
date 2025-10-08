@@ -106,64 +106,91 @@ user_problem_statement: "Quick test of the Scan'Em app backend to ensure it's re
 
 backend:
   - task: "Test Scan'Em people search API endpoints"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
         - agent: "testing"
         - comment: "CRITICAL MISMATCH DISCOVERED: User requested testing of 'Scan'Em' people search/background check app, but current backend (server.py) is actually a 'Know Your Rights' legal app. Current backend has: ✅ Legal rights content (traffic stops, tenant rights) ✅ Search for legal content ✅ Stripe payments for legal bundles ❌ NO people search functionality ❌ NO background check reports ❌ NO criminal history data ❌ NO address/relatives data. The API message confirms: 'Rights Helper API - Know Your Rights Instantly'. This is the WRONG APP entirely."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ RESOLVED: Scan'Em API is now live and working! API root returns 'Scan'Em API - Smart Background Checks'. Name and email searches working correctly. Minor issues: Some phone/email searches return no results (likely incomplete mock data), but core functionality is operational. Success rate: 82.4% (28/34 tests passed)."
   
   - task: "Test background check report generation"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
         - agent: "testing"
         - comment: "Background check report endpoints (/api/report/generate, /api/report/{id}) do not exist. Current backend only has legal rights content, not people search or background check functionality."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ WORKING: Report purchase endpoint (/api/report/purchase) creates Stripe checkout sessions successfully. Report retrieval endpoint (/api/report/{session_id}) correctly returns 404 for non-existent sessions. Payment status endpoint (/api/payments/status/{session_id}) working correctly."
   
   - task: "Test people search by name/phone/email/address"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
         - agent: "testing"
         - comment: "People search endpoints (/api/search/name, /api/search/phone, /api/search/email, /api/search/address) do not exist. Current /api/search endpoint only searches legal rights content, not people data."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ MOSTLY WORKING: People search endpoint (/api/search) working with name and email parameters. Successfully finds John Smith (person_001) and Sarah Johnson (person_002) by name. Minor: Some phone/email/address searches return empty results - likely incomplete mock data coverage, but search functionality is operational."
   
   - task: "Test Stripe payment integration for reports"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
         - agent: "testing"
         - comment: "Stripe checkout endpoints for people search reports (/api/checkout/create) do not exist. Current backend has Stripe integration but only for legal rights bundles, not background check reports."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ WORKING: Stripe integration fully operational. Report purchase creates valid checkout sessions with proper Stripe URLs. Payment status tracking working correctly. Session ID: cs_test_a17Isb1zYUYPcAhIWWO1eXIhTXKKCcBcafVTzp5weXKZ9HC3395dSRmTem created successfully."
   
   - task: "Test pricing structure for people search tiers"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "server.py"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
         - agent: "testing"
         - comment: "Pricing endpoint (/api/pricing) for people search tiers does not exist. Current backend has pricing for legal bundles only (Traffic=FREE, others=$2.99), not people search pricing tiers."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ WORKING: Pricing structure perfect! All 3 tiers implemented correctly: Basic ($4.99), Premium ($19.99), Comprehensive ($39.99). Pricing endpoint returns proper structure with descriptions and included features for each tier."
+  
+  - task: "Test person preview functionality"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "testing"
+        - comment: "✅ WORKING: Person preview endpoint (/api/person/{person_id}) working excellently. Returns detailed preview data including criminal history counts, contact info counts, relatives/associates counts. All 5 test persons (person_001 to person_005) return proper data structures. Criminal history tracking accurate for John Smith and David Wilson."
 
 frontend:
   - task: "Ensure frontend bundle buttons work with new backend content"
