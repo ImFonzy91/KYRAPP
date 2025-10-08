@@ -111,52 +111,58 @@ class ScanEmAPITester:
             self.log_test("Pricing API", False, f"Error: {str(e)}")
             return False
     
-    def test_rights_by_category(self):
-        """Test rights by category for implemented bundles"""
-        implemented_categories = ["traffic", "housing", "landmines", "criminal", "workplace", "family"]
+    def test_people_search(self):
+        """Test people search functionality with various parameters"""
+        search_tests = [
+            # Name searches
+            {"params": {"name": "John Smith"}, "expected_person": "person_001", "test_name": "Search by Name - John Smith"},
+            {"params": {"name": "Sarah Johnson"}, "expected_person": "person_002", "test_name": "Search by Name - Sarah Johnson"},
+            
+            # Phone searches  
+            {"params": {"phone": "555-123-4567"}, "expected_person": "person_001", "test_name": "Search by Phone - John Smith"},
+            {"params": {"phone": "555-987-6543"}, "expected_person": "person_002", "test_name": "Search by Phone - Sarah Johnson"},
+            
+            # Email searches
+            {"params": {"email": "john.smith@email.com"}, "expected_person": "person_001", "test_name": "Search by Email - John Smith"},
+            {"params": {"email": "sarah.johnson@email.com"}, "expected_person": "person_002", "test_name": "Search by Email - Sarah Johnson"},
+            
+            # Address searches
+            {"params": {"address": "123 Main St, Springfield, IL"}, "expected_person": "person_001", "test_name": "Search by Address - John Smith"},
+        ]
         
-        for category in implemented_categories:
+        for test_case in search_tests:
             try:
-                response = requests.get(f"{API_URL}/rights/{category}", timeout=10)
+                response = requests.get(f"{API_URL}/search", params=test_case["params"], timeout=10)
                 if response.status_code == 200:
                     data = response.json()
-                    rights = data.get("rights", [])
+                    results = data.get("results", [])
                     
-                    # Expected counts based on implementation
-                    expected_counts = {
-                        "traffic": 6,
-                        "housing": 6, 
-                        "landmines": 6,
-                        "criminal": 4,
-                        "workplace": 3,
-                        "family": 2
-                    }
-                    
-                    expected_count = expected_counts.get(category, 0)
-                    if len(rights) == expected_count:
-                        self.log_test(f"Rights Count - {category.title()}", True, 
-                                    f"Found {len(rights)} rights as expected")
-                    else:
-                        self.log_test(f"Rights Count - {category.title()}", False, 
-                                    f"Expected {expected_count}, got {len(rights)}")
-                    
-                    # Check structure of rights
-                    if rights:
-                        first_right = rights[0]
-                        required_fields = ["id", "title", "situation", "is_free"]
-                        has_all_fields = all(field in first_right for field in required_fields)
+                    if results and len(results) > 0:
+                        found_person = results[0].get("person_id")
+                        if found_person == test_case["expected_person"]:
+                            self.log_test(test_case["test_name"], True, 
+                                        f"Found {found_person} with confidence {results[0].get('confidence_score', 0)}")
+                        else:
+                            self.log_test(test_case["test_name"], False, 
+                                        f"Expected {test_case['expected_person']}, got {found_person}")
+                        
+                        # Check result structure
+                        first_result = results[0]
+                        required_fields = ["person_id", "first_name", "last_name", "confidence_score"]
+                        has_all_fields = all(field in first_result for field in required_fields)
                         
                         if has_all_fields:
-                            self.log_test(f"Rights Structure - {category.title()}", True, 
-                                        "Rights have correct structure")
+                            self.log_test(f"Search Result Structure - {test_case['test_name']}", True, 
+                                        "Results have correct structure")
                         else:
-                            self.log_test(f"Rights Structure - {category.title()}", False, 
-                                        "Rights missing required fields")
+                            self.log_test(f"Search Result Structure - {test_case['test_name']}", False, 
+                                        "Results missing required fields")
+                    else:
+                        self.log_test(test_case["test_name"], False, "No results returned")
                 else:
-                    self.log_test(f"Rights API - {category.title()}", False, 
-                                f"Status code: {response.status_code}")
+                    self.log_test(test_case["test_name"], False, f"Status code: {response.status_code}")
             except Exception as e:
-                self.log_test(f"Rights API - {category.title()}", False, f"Error: {str(e)}")
+                self.log_test(test_case["test_name"], False, f"Error: {str(e)}")
     
     def test_specific_content(self):
         """Test specific content retrieval for sample entries"""
