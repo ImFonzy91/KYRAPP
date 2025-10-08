@@ -50,8 +50,8 @@ class ScanEmAPITester:
             response = requests.get(f"{API_URL}/", timeout=10)
             if response.status_code == 200:
                 data = response.json()
-                if "Rights Helper API" in data.get("message", ""):
-                    self.log_test("API Root Endpoint", True, "API is responding correctly")
+                if "Scan'Em API" in data.get("message", ""):
+                    self.log_test("API Root Endpoint", True, "Scan'Em API is responding correctly")
                     return True
                 else:
                     self.log_test("API Root Endpoint", False, f"Unexpected message: {data}")
