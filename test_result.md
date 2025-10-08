@@ -102,23 +102,68 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Create comprehensive mock legal content for all 10 bundles in the 'Know Your Rights' app while waiting for Justia Legal API key. The frontend shows 10 bundles but backend only has content for 2 categories (traffic and tenant). Need to complete all bundle content so the app is fully functional and launchable."
+user_problem_statement: "Quick test of the Scan'Em app backend to ensure it's ready for user sharing. This is the people search/background check app. Test priorities: 1) Basic API Health, 2) Search Functionality, 3) Report Generation, 4) Payment Integration, 5) Pricing Structure. Expected features: People search by name/phone/email/address, background check reports with criminal history/addresses/relatives, tiered pricing, Stripe payment integration."
 
 backend:
-  - task: "Create comprehensive mock content for all 10 legal bundles"
-    implemented: true
-    working: true
-    file: "rights_server.py"
-    stuck_count: 0
+  - task: "Test Scan'Em people search API endpoints"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
-        - working: true
-        - agent: "main"
-        - comment: "Successfully implemented 5 complete bundles with comprehensive content: Traffic & Vehicle (6 entries, FREE), Housing (6 entries), Legal Landmines (6 entries), Criminal Defense (4 entries), Business & Workplace (3 entries), Family & Personal (2 entries). Total: 27 comprehensive legal guides. Updated categories API endpoint to reflect all 10 bundles. Ready for backend testing."
-        - working: true
+        - working: false
         - agent: "testing"
-        - comment: "COMPREHENSIVE BACKEND TESTING COMPLETED - ALL 49 TESTS PASSED (100% success rate). Verified: ✅ All 10 categories API working ✅ All 6 implemented bundles with correct content counts (Traffic=6, Housing=6, Landmines=6, Criminal=4, Workplace=3, Family=2) ✅ Free traffic content fully accessible ✅ Paid content shows proper previews with purchase prompts ✅ Search functionality working across all content ✅ Proper pricing structure (Traffic=FREE, Student=$3.99, Others=$4.99) ✅ All API endpoints responding correctly. Fixed supervisor configuration issue - backend now running rights_server.py instead of old server.py. Backend is fully functional and ready for production."
+        - comment: "CRITICAL MISMATCH DISCOVERED: User requested testing of 'Scan'Em' people search/background check app, but current backend (server.py) is actually a 'Know Your Rights' legal app. Current backend has: ✅ Legal rights content (traffic stops, tenant rights) ✅ Search for legal content ✅ Stripe payments for legal bundles ❌ NO people search functionality ❌ NO background check reports ❌ NO criminal history data ❌ NO address/relatives data. The API message confirms: 'Rights Helper API - Know Your Rights Instantly'. This is the WRONG APP entirely."
+  
+  - task: "Test background check report generation"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "Background check report endpoints (/api/report/generate, /api/report/{id}) do not exist. Current backend only has legal rights content, not people search or background check functionality."
+  
+  - task: "Test people search by name/phone/email/address"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "People search endpoints (/api/search/name, /api/search/phone, /api/search/email, /api/search/address) do not exist. Current /api/search endpoint only searches legal rights content, not people data."
+  
+  - task: "Test Stripe payment integration for reports"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "Stripe checkout endpoints for people search reports (/api/checkout/create) do not exist. Current backend has Stripe integration but only for legal rights bundles, not background check reports."
+  
+  - task: "Test pricing structure for people search tiers"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "Pricing endpoint (/api/pricing) for people search tiers does not exist. Current backend has pricing for legal bundles only (Traffic=FREE, others=$2.99), not people search pricing tiers."
 
 frontend:
   - task: "Ensure frontend bundle buttons work with new backend content"
