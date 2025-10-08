@@ -164,64 +164,69 @@ class ScanEmAPITester:
             except Exception as e:
                 self.log_test(test_case["test_name"], False, f"Error: {str(e)}")
     
-    def test_specific_content(self):
-        """Test specific content retrieval for sample entries"""
-        test_cases = [
-            # Traffic (free content)
-            ("traffic", "traffic_pulled_over", True),
-            ("traffic", "traffic_search_car", True),
-            ("traffic", "traffic_dui_checkpoint", True),
-            
-            # Housing (paid content - should show preview)
-            ("housing", "housing_eviction", False),
-            ("housing", "housing_security_deposit", False),
-            
-            # Legal Landmines (paid content)
-            ("landmines", "landmines_social_media", False),
-            ("landmines", "landmines_neighbor_disputes", False),
-            
-            # Criminal Defense (paid content)
-            ("criminal", "criminal_arrest_rights", False),
-            ("criminal", "criminal_court_procedures", False),
-            
-            # Workplace (paid content)
-            ("workplace", "workplace_harassment", False),
-            ("workplace", "workplace_firing_layoffs", False),
-            
-            # Family (paid content)
-            ("family", "family_divorce_separation", False),
-            ("family", "family_child_custody", False)
+    def test_person_preview(self):
+        """Test person preview endpoint for detailed information"""
+        test_persons = [
+            {"person_id": "person_001", "name": "John Smith", "should_have_criminal": True},
+            {"person_id": "person_002", "name": "Sarah Johnson", "should_have_criminal": False},
+            {"person_id": "person_003", "name": "Michael Brown", "should_have_criminal": False},
+            {"person_id": "person_004", "name": "Emily Davis", "should_have_criminal": False},
+            {"person_id": "person_005", "name": "David Wilson", "should_have_criminal": True}
         ]
         
-        for category, right_id, is_free in test_cases:
+        for test_person in test_persons:
             try:
-                response = requests.get(f"{API_URL}/rights/{category}/{right_id}", timeout=10)
+                response = requests.get(f"{API_URL}/person/{test_person['person_id']}", timeout=10)
                 if response.status_code == 200:
                     data = response.json()
                     
-                    if is_free:
-                        # Free content should have full content
-                        if "content" in data and len(data["content"]) > 500:
-                            self.log_test(f"Free Content - {right_id}", True, 
-                                        "Full content available")
-                        else:
-                            self.log_test(f"Free Content - {right_id}", False, 
-                                        "Content missing or too short")
+                    # Check required fields
+                    required_fields = ["person_id", "first_name", "last_name", "age", "current_city", 
+                                     "state", "confidence_score", "preview_only", "available_reports"]
+                    has_all_fields = all(field in data for field in required_fields)
+                    
+                    if has_all_fields:
+                        self.log_test(f"Person Preview Structure - {test_person['name']}", True, 
+                                    "Preview has all required fields")
                     else:
-                        # Paid content should show preview
-                        if "preview" in data and "requires_purchase" in data:
-                            self.log_test(f"Paid Preview - {right_id}", True, 
-                                        "Preview and purchase info shown")
+                        missing_fields = [field for field in required_fields if field not in data]
+                        self.log_test(f"Person Preview Structure - {test_person['name']}", False, 
+                                    f"Missing fields: {missing_fields}")
+                    
+                    # Check criminal history indication
+                    criminal_records = data.get("criminal_records", 0)
+                    if test_person["should_have_criminal"]:
+                        if criminal_records > 0:
+                            self.log_test(f"Criminal History - {test_person['name']}", True, 
+                                        f"Has {criminal_records} criminal record(s) as expected")
                         else:
-                            self.log_test(f"Paid Preview - {right_id}", False, 
-                                        "Preview structure incorrect")
+                            self.log_test(f"Criminal History - {test_person['name']}", False, 
+                                        "Expected criminal history but none found")
+                    else:
+                        if criminal_records == 0:
+                            self.log_test(f"Clean Record - {test_person['name']}", True, 
+                                        "Clean record as expected")
+                        else:
+                            self.log_test(f"Clean Record - {test_person['name']}", False, 
+                                        f"Expected clean record but found {criminal_records} record(s)")
+                    
+                    # Check available reports
+                    available_reports = data.get("available_reports", [])
+                    expected_reports = ["basic", "premium", "comprehensive"]
+                    if set(available_reports) == set(expected_reports):
+                        self.log_test(f"Available Reports - {test_person['name']}", True, 
+                                    "All report types available")
+                    else:
+                        self.log_test(f"Available Reports - {test_person['name']}", False, 
+                                    f"Expected {expected_reports}, got {available_reports}")
+                        
                 elif response.status_code == 404:
-                    self.log_test(f"Content - {right_id}", False, "Content not found")
+                    self.log_test(f"Person Preview - {test_person['name']}", False, "Person not found")
                 else:
-                    self.log_test(f"Content - {right_id}", False, 
+                    self.log_test(f"Person Preview - {test_person['name']}", False, 
                                 f"Status code: {response.status_code}")
             except Exception as e:
-                self.log_test(f"Content - {right_id}", False, f"Error: {str(e)}")
+                self.log_test(f"Person Preview - {test_person['name']}", False, f"Error: {str(e)}")
     
     def test_search_functionality(self):
         """Test search functionality with various queries"""
