@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Testing for Know Your Rights App
-Tests all implemented bundles and API endpoints
+Comprehensive Backend API Testing for Scan'Em People Search App
+Tests all implemented people search and background check endpoints
 """
 
 import requests
@@ -23,7 +23,7 @@ def get_backend_url():
 BASE_URL = get_backend_url()
 API_URL = f"{BASE_URL}/api"
 
-class KnowYourRightsAPITester:
+class ScanEmAPITester:
     def __init__(self):
         self.passed_tests = 0
         self.failed_tests = 0
