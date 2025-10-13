@@ -30,6 +30,7 @@ api_router = APIRouter(prefix="/api")
 class RightsCategory(str, Enum):
     TRAFFIC = "traffic"
     HOUSING = "housing"
+    PROPERTY = "property"
     LANDMINES = "landmines"
     CRIMINAL = "criminal"
     WORKPLACE = "workplace"
