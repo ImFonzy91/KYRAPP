@@ -608,7 +608,7 @@ const RightsApp = () => {
                 <div className="bundle-card">
                   <div className="bundle-icon">💼</div>
                   <h4>Business & Workplace Rights</h4>
-                  <p>💼 Boss hitting on you? Manager harassing you? Not getting paid overtime? Know your rights!</p>
+                  <p>💼 Your boss can legally fire you for saying "NO" to overtime... UNLESS you say these exact 5 words first.</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('workplace')}>
                     Get Work Rights
