@@ -588,7 +588,7 @@ const RightsApp = () => {
                   <div className="popular-badge">🔥 POPULAR</div>
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
-                  <p>🚨 STOP before you post that angry review, date your boss, or blast your ex on social media!</p>
+                  <p>🚨 Did you know posting a bad Yelp review can get you SUED for $25,000+? Learn the ONE word that protects you legally...</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
                     Avoid Legal Trouble
