@@ -544,6 +544,7 @@ const RightsApp = () => {
 
         {currentView === 'home' && (
           <div className="home-view" data-testid="home-view">
+            <LegalDisclaimer />
             <div className="hero-section">
               <h2 className="hero-title">Know Your Rights • Protect Yourself</h2>
               <p className="hero-subtitle">
