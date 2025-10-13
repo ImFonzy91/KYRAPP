@@ -1,19 +1,8 @@
-/* Rights Helper App Styles */
+/* Rights Helper App Styles - PEARL WHITE & GOLD THEME */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* Legal Disclaimer Styles */
-.legal-disclaimer {
-  background: linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%);
-  color: #000000;
-  padding: 1.5rem;
-  margin: 1rem 2rem;
-  border-radius: 15px;
-  border: 3px solid #d4af37;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
 }
 
 .legal-disclaimer h4 {
