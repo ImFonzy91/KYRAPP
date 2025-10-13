@@ -598,7 +598,7 @@ const RightsApp = () => {
                 <div className="bundle-card">
                   <div className="bundle-icon">⚖️</div>
                   <h4>Criminal Defense Rights</h4>
-                  <p>Court procedures, bail, lawyers, Miranda rights, plea deals, sentencing</p>
+                  <p>⚖️ Say these 2 sentences during arrest and cops MUST stop questioning you. Most people don't know this...</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('criminal')}>
                     Get Defense Rights
