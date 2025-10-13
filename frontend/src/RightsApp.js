@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './pearl-theme.css';
 import axios from 'axios';
 import './RightsApp.css';
 
