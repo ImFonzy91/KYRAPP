@@ -956,8 +956,8 @@ body.neon-theme {
 }
 
 .bundle-button:hover {
+  background: #495057;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
 }
 
 /* Bundle Deals */
