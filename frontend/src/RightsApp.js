@@ -577,7 +577,7 @@ const RightsApp = () => {
                 <div className="bundle-card essential">
                   <div className="bundle-icon">🏠</div>
                   <h4>Housing Rights</h4>
-                  <p>Tenant & homeowner rights, evictions, deposits, landlord disputes, property issues</p>
+                  <p>🏠 Landlords hate this ONE trick that gets your full security deposit back 90% of the time...</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('housing')}>
                     Get Housing Rights
