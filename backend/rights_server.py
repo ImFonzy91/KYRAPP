@@ -2488,6 +2488,14 @@ async def get_categories():
                 "icon": "👨‍👩‍👧‍👦"
             },
             {
+                "id": "immigration",
+                "name": "Immigration Rights",
+                "description": "Visa status, deportation defense, green cards, citizenship - ALL immigrants: European, Asian, Latin American, African",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "🌍"
+            },
+            {
                 "id": "healthcare",
                 "name": "Healthcare & Privacy Rights",
                 "description": "Medical records, HIPAA, insurance disputes, patient rights, mental health laws",
