@@ -637,6 +637,16 @@ const RightsApp = () => {
                 </div>
 
                 <div className="bundle-card">
+                  <div className="bundle-icon">🌍</div>
+                  <h4>Immigration Rights</h4>
+                  <p>🛂 Visa status, deportation defense, green cards, citizenship - for ALL immigrants: European, Asian, Latin American, African...</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('immigration')}>
+                    Get Immigration Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
                   <div className="bundle-icon">🏥</div>
                   <h4>Healthcare & Privacy Rights</h4>
                   <p>Medical records, HIPAA, insurance disputes, patient rights, mental health laws</p>
