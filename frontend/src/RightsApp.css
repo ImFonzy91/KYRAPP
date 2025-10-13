@@ -898,9 +898,10 @@ body.neon-theme {
 }
 
 .bundle-card.popular {
-  border-color: #212529;
-  border-width: 2px;
+  border-color: #ffd700;
+  border-width: 3px;
   transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
 }
 
 .popular-badge {
