@@ -34,23 +34,38 @@ body::before {
 }
 
 .bundle-card {
-  background: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%) !important;
   color: #000000 !important;
-  border: 2px solid #ffd700 !important;
+  border: 3px solid #d4af37 !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2) !important;
 }
 
 .bundle-button {
-  background: #ffd700 !important;
+  background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%) !important;
   color: #000000 !important;
-  border: 2px solid #d4af37 !important;
+  border: 2px solid #b8860b !important;
+  font-weight: 700 !important;
 }
 
 .hero-section {
-  background: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%) !important;
   color: #000000 !important;
-  border: 2px solid #ffd700 !important;
+  border: 3px solid #d4af37 !important;
 }
 
+/* FORCE ALL ELEMENTS TO HAVE GOLD BORDERS */
+.bundle-card, .hero-section, .legal-disclaimer, .search-bar, .category-card {
+  border-color: #d4af37 !important;
+}
+
+/* OVERRIDE ANY BLUE OR RED BORDERS */
 * {
   color: #000000 !important;
+}
+
+*[style*="border-color: blue"], 
+*[style*="border-color: #007bff"],
+*[style*="border-color: red"],
+*[style*="border-color: #dc3545"] {
+  border-color: #d4af37 !important;
 }
