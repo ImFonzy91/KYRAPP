@@ -2473,7 +2473,7 @@ async def get_categories():
                 "id": "workplace",
                 "name": "Business & Workplace Rights",
                 "description": "Employment law, harassment, firing, wages, discrimination, small business protection",
-                "price": 4.99,
+                "price": 2.99,
                 "is_free": False,
                 "icon": "💼"
             },
