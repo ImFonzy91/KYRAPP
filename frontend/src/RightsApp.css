@@ -72,17 +72,17 @@ body::before {
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15) !important;
 }
 
-/* PEARL THEME - Mother of Pearl White with Gold Accents */
+/* FORCE PEARL WHITE HEADER */
 .app-header {
-  background: linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%);
-  color: #000000;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 2px 15px rgba(212, 175, 55, 0.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  border-bottom: 2px solid #d4af37;
+  background: linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%) !important;
+  color: #000000 !important;
+  padding: 1.5rem 2rem !important;
+  box-shadow: 0 2px 15px rgba(212, 175, 55, 0.2) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  border-bottom: 2px solid #d4af37 !important;
 }
 
 .hero-section {
