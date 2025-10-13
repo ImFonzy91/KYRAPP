@@ -216,14 +216,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Test Scan'Em people search API endpoints"
-    - "Test background check report generation"
-    - "Test people search by name/phone/email/address"
-    - "Test Stripe payment integration for reports"
-    - "Test pricing structure for people search tiers"
-    - "Test person preview functionality"
+    - "Know Your Rights app bundle display and payment functionality"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
