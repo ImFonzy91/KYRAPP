@@ -587,7 +587,7 @@ const RightsApp = () => {
                   <div className="popular-badge">🔥 POPULAR</div>
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
-                  <p>Avoid costly mistakes! Social media, dating, family disputes, neighbor issues, defamation</p>
+                  <p>🚨 STOP before you post that angry review, date your boss, or blast your ex on social media!</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
                     Avoid Legal Trouble
