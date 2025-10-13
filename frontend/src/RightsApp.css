@@ -71,11 +71,11 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  color: white;
-  border: 3px solid #3498db;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  color: #212529;
+  border: 1px solid #e9ecef;
 }
 
 .category-card, .right-card, .search-result-card {
