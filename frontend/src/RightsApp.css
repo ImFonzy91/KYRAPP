@@ -79,13 +79,13 @@ body {
 }
 
 .category-card, .right-card, .search-result-card {
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%);
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.1);
   transition: transform 0.3s ease;
-  border: 1px solid #e9ecef;
-  color: #212529;
+  border: 2px solid #d4af37;
+  color: #000000;
 }
 
 .category-card:hover, .right-card:hover, .search-result-card:hover {
