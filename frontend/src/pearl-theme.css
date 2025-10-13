@@ -1,0 +1,52 @@
+/* FORCE PEARL WHITE & GOLD THEME - OVERRIDE EVERYTHING */
+html, body {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f8ff 50%, #ffffff 100%) !important;
+  color: #000000 !important;
+}
+
+body::before {
+  content: "⚖️" !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  font-size: 20rem !important;
+  opacity: 0.05 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  color: #ffd700 !important;
+}
+
+.app-header {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-bottom: 3px solid #ffd700 !important;
+}
+
+.legal-disclaimer {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #ffd700 !important;
+}
+
+.bundle-card {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffd700 !important;
+}
+
+.bundle-button {
+  background: #ffd700 !important;
+  color: #000000 !important;
+  border: 2px solid #d4af37 !important;
+}
+
+.hero-section {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffd700 !important;
+}
+
+* {
+  color: #000000 !important;
+}
