@@ -2441,7 +2441,15 @@ async def get_categories():
                 "id": "housing", 
                 "name": "Housing Rights",
                 "description": "Tenant & homeowner rights, evictions, deposits, landlord disputes, property issues",
-                "price": 4.99,
+                "price": 2.99,
+                "is_free": False,
+                "icon": "🏠"
+            },
+            {
+                "id": "property",
+                "name": "Property Rights",
+                "description": "Home searches, warrants, police at door, property protection",
+                "price": 2.99,
                 "is_free": False,
                 "icon": "🏠"
             },
