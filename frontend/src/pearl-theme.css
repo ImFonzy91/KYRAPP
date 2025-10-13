@@ -15,10 +15,11 @@ body::before {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   font-size: 25rem !important;
-  opacity: 0.08 !important;
+  opacity: 0.1 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  color: #d4af37 !important;
+  color: #FFD700 !important;
+  text-shadow: 0 0 20px #FFFF00 !important;
 }
 
 .app-header {
