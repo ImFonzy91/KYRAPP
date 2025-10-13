@@ -914,28 +914,28 @@ body.neon-theme {
 }
 
 .bundle-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .bundle-card h4 {
   color: #2c3e50;
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
 }
 
 .bundle-card p {
   color: #666;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 .bundle-price {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: #e74c3c;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .bundle-button {
