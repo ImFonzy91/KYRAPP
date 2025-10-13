@@ -14,6 +14,30 @@ const getUrlParameter = (name) => {
 };
 
 // Components
+const LegalDisclaimer = () => (
+  <div className="legal-disclaimer">
+    <div className="disclaimer-content">
+      <h4>⚠️ Important Legal Disclaimer</h4>
+      <p>
+        <strong>This app provides educational information only and is NOT legal advice.</strong> 
+        Laws vary significantly by state, county, and municipality. This information should not be relied upon 
+        as a substitute for consultation with a qualified attorney. Always consult a licensed attorney in your 
+        jurisdiction for specific legal situations.
+      </p>
+      <ul>
+        <li>• Content is for educational purposes only</li>
+        <li>• Laws change frequently - verify current local laws</li>
+        <li>• No attorney-client relationship is created</li>
+        <li>• Consult qualified legal counsel for advice</li>
+      </ul>
+      <p className="disclaimer-footer">
+        <strong>By using this app, you acknowledge that you understand this is not legal advice 
+        and agree to consult appropriate legal counsel for your specific situation.</strong>
+      </p>
+    </div>
+  </div>
+);
+
 const SearchBar = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
   const [isListening, setIsListening] = useState(false);
