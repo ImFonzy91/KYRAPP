@@ -2414,6 +2414,7 @@ CATEGORY_PRICES = {
     RightsCategory.CRIMINAL: 2.99,
     RightsCategory.WORKPLACE: 2.99,
     RightsCategory.FAMILY: 2.99,
+    RightsCategory.IMMIGRATION: 4.99,  # Slightly higher due to complexity
     RightsCategory.HEALTHCARE: 2.99,
     RightsCategory.STUDENT: 2.99,
     RightsCategory.DIGITAL: 2.99,
