@@ -548,7 +548,8 @@ const RightsApp = () => {
             <div className="hero-section">
               <h2 className="hero-title">Know Your Rights • Protect Yourself</h2>
               <p className="hero-subtitle">
-                Don't get caught off guard! Get instant access to legal knowledge that could save you thousands in legal fees. 
+                🚨 Don't let your boss harass you, don't post that angry review, don't get screwed over! 
+                Prevent legal disasters before they happen - for the price of a coffee. 
                 Voice-activated, offline access, plain English explanations. <strong>Be prepared for anything!</strong>
               </p>
             </div>
