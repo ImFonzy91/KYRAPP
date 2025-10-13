@@ -585,7 +585,17 @@ const RightsApp = () => {
                 </div>
 
                 <div className="bundle-card popular">
-                  <div className="popular-badge">🔥 POPULAR</div>
+                  <div className="popular-badge">⚡ MUST HAVE</div>
+                  <div className="bundle-icon">🏠</div>
+                  <h4>Property Rights</h4>
+                  <p>🚔 Cops at your door? Learn the ONE phrase that stops illegal searches and protects your home...</p>
+                  <div className="bundle-price">$2.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('property')}>
+                    Protect Your Property
+                  </button>
+                </div>
+
+                <div className="bundle-card">
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
                   <p>🚨 Did you know posting a bad Yelp review can get you SUED for $25,000+? Learn the ONE word that protects you legally...</p>
