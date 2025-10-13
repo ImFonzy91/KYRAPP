@@ -39,21 +39,24 @@ body::before {
 .bundle-card {
   background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%) !important;
   color: #000000 !important;
-  border: 3px solid #d4af37 !important;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2) !important;
+  border: 4px solid #FFD700 !important;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3) !important;
 }
 
 .bundle-button {
-  background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%) !important;
+  background: linear-gradient(135deg, #FFFF00 0%, #FFD700 100%) !important;
   color: #000000 !important;
-  border: 2px solid #b8860b !important;
-  font-weight: 700 !important;
+  border: 3px solid #FFD700 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(255, 255, 0, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(255, 215, 0, 0.5) !important;
 }
 
 .hero-section {
   background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%) !important;
   color: #000000 !important;
-  border: 3px solid #d4af37 !important;
+  border: 4px solid #FFD700 !important;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.2) !important;
 }
 
 /* FORCE ALL ELEMENTS TO HAVE GOLD BORDERS */
