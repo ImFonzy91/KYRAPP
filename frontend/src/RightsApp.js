@@ -684,8 +684,8 @@ const RightsApp = () => {
                     <h4>Complete Rights Package</h4>
                     <p>All 10 bundles - Everything you need!</p>
                     <div className="deal-pricing">
-                      <span className="original-price">$48.91</span>
-                      <span className="deal-price">$29.99</span>
+                      <span className="original-price">$29.90</span>
+                      <span className="deal-price">$14.99</span>
                     </div>
                     <button className="deal-button">Save $19 - Get Everything</button>
                   </div>
