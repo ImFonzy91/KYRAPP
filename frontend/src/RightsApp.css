@@ -921,9 +921,10 @@ body.neon-theme {
 }
 
 .bundle-card h4 {
-  color: #2c3e50;
+  color: #212529;
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
+  font-weight: 600;
 }
 
 .bundle-card p {
