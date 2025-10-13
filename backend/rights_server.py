@@ -2406,15 +2406,15 @@ Court considers:
 # Pricing for categories
 CATEGORY_PRICES = {
     RightsCategory.TRAFFIC: 0.0,  # Free preview
-    RightsCategory.HOUSING: 4.99,
-    RightsCategory.LANDMINES: 4.99,
-    RightsCategory.CRIMINAL: 4.99,
-    RightsCategory.WORKPLACE: 4.99,
-    RightsCategory.FAMILY: 4.99,
-    RightsCategory.HEALTHCARE: 4.99,
-    RightsCategory.STUDENT: 3.99,
-    RightsCategory.DIGITAL: 4.99,
-    RightsCategory.CONSUMER: 4.99
+    RightsCategory.HOUSING: 2.99,
+    RightsCategory.LANDMINES: 2.99,
+    RightsCategory.CRIMINAL: 2.99,
+    RightsCategory.WORKPLACE: 2.99,
+    RightsCategory.FAMILY: 2.99,
+    RightsCategory.HEALTHCARE: 2.99,
+    RightsCategory.STUDENT: 2.99,
+    RightsCategory.DIGITAL: 2.99,
+    RightsCategory.CONSUMER: 2.99
 }
 
 # API Routes
