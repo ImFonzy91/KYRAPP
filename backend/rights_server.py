@@ -2457,7 +2457,7 @@ async def get_categories():
                 "id": "landmines",
                 "name": "Legal Landmines", 
                 "description": "Avoid costly mistakes! Social media, dating, family disputes, neighbor issues, defamation",
-                "price": 4.99,
+                "price": 2.99,
                 "is_free": False,
                 "icon": "⚠️"
             },
