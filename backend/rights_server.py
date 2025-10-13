@@ -2402,6 +2402,245 @@ Court considers:
         """,
         category=RightsCategory.FAMILY,
         is_free=False
+    ),
+
+    # IMMIGRATION RIGHTS BUNDLE - All Immigrants Worldwide
+    "immigration_deportation_defense": RightsContent(
+        title="Deportation Defense & Removal Proceedings",
+        situation="Facing deportation or removal proceedings",
+        content="""
+**DEPORTATION DEFENSE FOR ALL IMMIGRANTS:**
+
+**YOUR RIGHTS IN REMOVAL PROCEEDINGS:**
+✅ **Right to an attorney** (at your own expense)
+✅ **Right to an interpreter** (free of charge)
+✅ **Right to examine evidence** against you
+✅ **Right to present evidence** in your defense
+✅ **Right to remain silent** (don't admit anything)
+✅ **Right to appeal** negative decisions
+
+**WHO CAN BE DEPORTED:**
+- Undocumented immigrants from ANY country
+- Legal residents who commit certain crimes
+- People who overstayed visas (European, Asian, etc.)
+- Those who violated terms of their status
+- Anyone with fraudulent documents
+
+**COMMON DEFENSES FOR ALL NATIONALITIES:**
+**ASYLUM/WITHHOLDING OF REMOVAL:**
+- Fear of persecution in home country
+- Political, religious, or ethnic persecution
+- Available to people from ANY country
+- Must apply within 1 year of arrival (with exceptions)
+
+**CANCELLATION OF REMOVAL:**
+- 10+ years continuous presence in US
+- Good moral character
+- Removal would cause exceptional hardship to US citizen/LPR family
+- Available regardless of country of origin
+
+**ADJUSTMENT OF STATUS:**
+- Eligible for green card through family/employment
+- Marriage to US citizen
+- Asylum approval after 1 year
+- Special programs (VAWA, U-visa, etc.)
+
+**IMMEDIATE STEPS IF DETAINED:**
+1. **DO NOT SIGN ANYTHING** without attorney review
+2. **Request interpreter** in your language
+3. **Ask for list of free legal services**
+4. **Contact family/attorney immediately**
+5. **Do not discuss your case** with other detainees
+
+**BOND HEARINGS:**
+- Right to request release on bond
+- Factors: flight risk, danger to community
+- Family ties, employment history matter
+- Can be higher for certain countries (unfortunately)
+
+**SPECIAL PROTECTIONS:**
+**Convention Against Torture (CAT):**
+- Protection if you'd be tortured in home country
+- Higher standard than asylum
+- Available to people from ANY nation
+
+**ADMINISTRATIVE CLOSURE:**
+- Request to pause proceedings
+- Allows time to seek other relief
+- Prosecutorial discretion consideration
+
+**COUNTRY-SPECIFIC CONSIDERATIONS:**
+**Temporary Protected Status (TPS):**
+- Available for certain countries facing crisis
+- Changes based on conditions
+- Applies to Haiti, Venezuela, Ukraine, etc.
+
+**WITHHOLDING/CAT by Region:**
+- **Latin America:** Violence, political persecution
+- **Asia:** Religious persecution, political dissent
+- **Africa:** Ethnic conflicts, political persecution
+- **Europe:** LGBTI persecution, political issues
+- **Middle East:** Religious/political persecution
+
+**DOCUMENTATION TO GATHER:**
+- Country condition evidence
+- Medical records (torture/persecution evidence)
+- News articles about your home country
+- Witness statements from community
+- Employment/tax records showing ties to US
+
+**NEVER DO:**
+❌ Lie to immigration officers
+❌ Use false documents
+❌ Ignore court dates
+❌ Admit to crimes without attorney
+❌ Sign voluntary departure without consulting lawyer
+
+**REMEMBER:**
+Every case is different regardless of nationality. Get qualified immigration attorney help immediately.
+        """,
+        category=RightsCategory.IMMIGRATION,
+        is_free=False
+    ),
+
+    "immigration_visa_status": RightsContent(
+        title="Visa Status & Overstays",
+        situation="Questions about visa status, overstays, or maintaining legal status",
+        content="""
+**VISA STATUS GUIDE FOR ALL IMMIGRANTS:**
+
+**COMMON VISA TYPES & RIGHTS:**
+**TOURIST/VISITOR (B-1/B-2):**
+- Usually 6 months maximum stay
+- Can request extension before expiration
+- Cannot work or study
+- Available to nationals from most countries
+
+**STUDENT VISAS (F-1, M-1, J-1):**
+- Must maintain full course load
+- Limited work authorization
+- Can apply for practical training
+- Status depends on school enrollment
+
+**WORK VISAS (H-1B, L-1, E-1/E-2, etc.):**
+- Tied to specific employer
+- Can lead to green card sponsorship
+- Family members may get derivative status
+- Available to skilled workers worldwide
+
+**FAMILY-BASED VISAS:**
+- K-1 Fiancé(e) visas
+- IR/F family immigrant categories
+- Available regardless of country (but wait times vary)
+
+**OVERSTAYING YOUR VISA:**
+**CONSEQUENCES:**
+- Accrual of unlawful presence
+- 3-year bar (180+ days unlawful presence)
+- 10-year bar (1+ years unlawful presence)
+- Deportation proceedings possible
+
+**EXCEPTIONS TO BARS:**
+- Immediate relatives of US citizens (spouse, parent, unmarried child under 21)
+- Certain waivers available
+- Asylum seekers (stops accrual)
+- TPS beneficiaries
+
+**MAINTAINING STATUS:**
+**STUDENTS:**
+- Attend classes regularly
+- Maintain minimum credit hours
+- Report address changes to school
+- Get authorization before working
+
+**WORKERS:**
+- Work only for authorized employer
+- Don't work beyond authorized dates
+- File extensions before expiration
+- Maintain valid passport
+
+**VISITORS:**
+- Don't engage in unauthorized activities
+- Keep evidence of departure plans
+- Don't overstay authorized period
+- Carry proper documentation
+
+**STATUS VIOLATIONS BY NATIONALITY:**
+**European Visitors:**
+- Often overstay tourist visas
+- Visa Waiver Program (90 days max)
+- Cannot extend VWP stays
+- Must leave and re-enter
+
+**Asian Students/Workers:**
+- Large H-1B, F-1 populations
+- Complex Optional Practical Training rules
+- STEM extensions available
+- Green card backlogs (especially India, China)
+
+**Latin American Families:**
+- Family-based immigration common
+- Mixed-status families
+- DACA/TPS considerations
+- Border crossing issues
+
+**African Immigrants:**
+- Diversity Visa Program participants
+- Asylum/refugee populations
+- Educational exchanges
+- Business/investment visas
+
+**CHANGE OF STATUS:**
+**WITHIN US:**
+- File I-539 (nonimmigrant) or I-485 (immigrant)
+- Must file before current status expires
+- Cannot work during pending period (usually)
+- Approval not guaranteed
+
+**CONSULAR PROCESSING:**
+- Leave US to get new visa
+- Required for some status changes
+- Risk of bars if unlawful presence accrued
+- Interview at US consulate
+
+**TRAVEL CONSIDERATIONS:**
+**ADVANCE PAROLE:**
+- Required for pending adjustment cases
+- Allows re-entry after travel
+- Don't travel without authorization
+- Can abandon pending applications
+
+**AUTOMATIC REVALIDATION:**
+- Limited to certain situations
+- Short trips to Canada/Mexico
+- Must have valid underlying status
+- Risky for many immigrants
+
+**EMERGENCY SITUATIONS:**
+**HUMANITARIAN PAROLE:**
+- Urgent humanitarian reasons
+- Significant public benefit
+- Temporary permission to enter
+- Case-by-case basis
+
+**EXPEDITED PROCESSING:**
+- Available for certain cases
+- Additional fees required
+- Must show urgent need
+- Not available for all applications
+
+**PROTECT YOUR STATUS:**
+1. **Keep all immigration documents** current and accessible
+2. **File extensions/changes** well before deadlines
+3. **Consult attorney** before traveling or changing status
+4. **Maintain clean criminal record**
+5. **Keep evidence** of lawful status maintenance
+
+**APPLIES TO ALL NATIONALITIES:**
+Immigration law is complex and constantly changing. What works for one country's nationals may not work for others due to bilateral agreements, country quotas, and processing differences.
+        """,
+        category=RightsCategory.IMMIGRATION,
+        is_free=False
     )
 }
 
