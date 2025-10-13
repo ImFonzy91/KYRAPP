@@ -14,12 +14,13 @@ body::before {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  font-size: 25rem !important;
-  opacity: 0.1 !important;
+  font-size: 30rem !important;
+  opacity: 0.25 !important;
   z-index: -1 !important;
   pointer-events: none !important;
   color: #FFD700 !important;
-  text-shadow: 0 0 20px #FFFF00 !important;
+  text-shadow: 0 0 50px #FFD700, 0 0 100px #FFFF00, 0 0 150px #FFD700 !important;
+  filter: brightness(1.5) !important;
 }
 
 .app-header {
