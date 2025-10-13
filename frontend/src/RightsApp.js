@@ -638,7 +638,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🎓</div>
                   <h4>Student Rights</h4>
                   <p>School discipline, loans, campus safety, discrimination, free speech, housing</p>
-                  <div className="bundle-price">$3.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('student')}>
                     Get Student Rights
                   </button>
