@@ -959,8 +959,9 @@ body.neon-theme {
 }
 
 .bundle-button:hover {
-  background: #495057;
+  background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
 /* Bundle Deals */
