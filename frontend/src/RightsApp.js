@@ -607,7 +607,7 @@ const RightsApp = () => {
                 <div className="bundle-card">
                   <div className="bundle-icon">💼</div>
                   <h4>Business & Workplace Rights</h4>
-                  <p>Employment law, harassment, firing, wages, discrimination, small business protection</p>
+                  <p>💼 Boss hitting on you? Manager harassing you? Not getting paid overtime? Know your rights!</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('workplace')}>
                     Get Work Rights
