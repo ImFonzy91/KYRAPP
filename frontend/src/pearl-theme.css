@@ -73,14 +73,35 @@ body::before {
   text-shadow: 0 1px 2px rgba(255, 215, 0, 0.8) !important;
 }
 
-/* OVERRIDE ANY BLUE OR RED BORDERS */
+/* REMOVE ALL RED, BLUE, OTHER COLORS - ONLY WHITE, GOLD, BLACK */
 * {
   color: #000000 !important;
 }
 
+/* FORCE REMOVE ALL NON-GOLD COLORS */
 *[style*="border-color: blue"], 
 *[style*="border-color: #007bff"],
 *[style*="border-color: red"],
-*[style*="border-color: #dc3545"] {
-  border-color: #d4af37 !important;
+*[style*="border-color: #dc3545"],
+*[style*="border-color: #e74c3c"],
+*[style*="border-color: #c0392b"],
+*[style*="background: red"],
+*[style*="background: blue"],
+*[class*="red"],
+*[class*="blue"] {
+  border-color: #FFD700 !important;
+  background-color: #ffffff !important;
+}
+
+/* OVERRIDE ALL BUTTON COLORS */
+button, .btn, .bundle-button, .search-button {
+  background: linear-gradient(135deg, #FFFF00 0%, #FFD700 100%) !important;
+  border: 3px solid #FFD700 !important;
+  color: #000000 !important;
+}
+
+/* OVERRIDE ALL CARD COLORS */
+.card, .bundle-card, .category-card, div[class*="card"] {
+  border: 4px solid #FFD700 !important;
+  background: #ffffff !important;
 }
