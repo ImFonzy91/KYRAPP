@@ -870,20 +870,20 @@ body.neon-theme {
 
 .bundles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .bundle-card {
   background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   text-align: center;
   position: relative;
-  border: 3px solid #bdc3c7;
+  border: 2px solid #bdc3c7;
 }
 
 .bundle-card:hover {
