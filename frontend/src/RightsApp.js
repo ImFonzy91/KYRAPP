@@ -567,7 +567,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🚗</div>
                   <h4>Traffic & Vehicle Rights</h4>
                   <p>Police stops, searches, DUI checkpoints, recording rights, arrest procedures</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('traffic')}>
                     Get Traffic Rights
                   </button>
@@ -577,7 +577,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🏠</div>
                   <h4>Housing Rights</h4>
                   <p>Tenant & homeowner rights, evictions, deposits, landlord disputes, property issues</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('housing')}>
                     Get Housing Rights
                   </button>
@@ -588,7 +588,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
                   <p>Avoid costly mistakes! Social media, dating, family disputes, neighbor issues, defamation</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
                     Avoid Legal Trouble
                   </button>
@@ -598,7 +598,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">⚖️</div>
                   <h4>Criminal Defense Rights</h4>
                   <p>Court procedures, bail, lawyers, Miranda rights, plea deals, sentencing</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('criminal')}>
                     Get Defense Rights
                   </button>
@@ -608,7 +608,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">💼</div>
                   <h4>Business & Workplace Rights</h4>
                   <p>Employment law, harassment, firing, wages, discrimination, small business protection</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('workplace')}>
                     Get Work Rights
                   </button>
@@ -618,7 +618,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">👨‍👩‍👧‍👦</div>
                   <h4>Family & Personal Rights</h4>
                   <p>Marriage, divorce, child custody, domestic violence, elder care, inheritance</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('family')}>
                     Get Family Rights
                   </button>
@@ -628,7 +628,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🏥</div>
                   <h4>Healthcare & Privacy Rights</h4>
                   <p>Medical records, HIPAA, insurance disputes, patient rights, mental health laws</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('healthcare')}>
                     Get Health Rights
                   </button>
@@ -648,7 +648,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">📱</div>
                   <h4>Digital & Social Media Rights</h4>
                   <p>Online privacy, cyberbullying, social media posts, digital harassment, data protection</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('digital')}>
                     Get Digital Rights
                   </button>
@@ -658,7 +658,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🛡️</div>
                   <h4>Consumer Protection Rights</h4>
                   <p>Scams, contracts, warranties, debt collection, identity theft, small claims court</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('consumer')}>
                     Get Consumer Rights
                   </button>
