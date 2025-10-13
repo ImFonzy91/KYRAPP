@@ -2481,7 +2481,7 @@ async def get_categories():
                 "id": "family",
                 "name": "Family & Personal Rights",
                 "description": "Marriage, divorce, child custody, domestic violence, elder care, inheritance",
-                "price": 4.99,
+                "price": 2.99,
                 "is_free": False,
                 "icon": "👨‍👩‍👧‍👦"
             },
