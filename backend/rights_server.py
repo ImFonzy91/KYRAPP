@@ -2408,6 +2408,7 @@ Court considers:
 CATEGORY_PRICES = {
     RightsCategory.TRAFFIC: 0.0,  # Free preview
     RightsCategory.HOUSING: 2.99,
+    RightsCategory.PROPERTY: 2.99,
     RightsCategory.LANDMINES: 2.99,
     RightsCategory.CRIMINAL: 2.99,
     RightsCategory.WORKPLACE: 2.99,
