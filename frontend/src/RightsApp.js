@@ -673,8 +673,8 @@ const RightsApp = () => {
                     <h4>Essential 3-Pack</h4>
                     <p>Traffic + Housing + Legal Landmines</p>
                     <div className="deal-pricing">
-                      <span className="original-price">$14.97</span>
-                      <span className="deal-price">$12.99</span>
+                      <span className="original-price">$8.97</span>
+                      <span className="deal-price">$6.99</span>
                     </div>
                     <button className="deal-button">Save $2 - Get 3 Pack</button>
                   </div>
