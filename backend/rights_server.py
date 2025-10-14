@@ -35,6 +35,7 @@ class RightsCategory(str, Enum):
     CRIMINAL = "criminal"
     WORKPLACE = "workplace"
     FAMILY = "family"
+    DIVORCE = "divorce"
     IMMIGRATION = "immigration"
     HEALTHCARE = "healthcare"
     STUDENT = "student"
