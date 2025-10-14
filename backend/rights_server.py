@@ -2642,6 +2642,312 @@ Immigration law is complex and constantly changing. What works for one country's
         """,
         category=RightsCategory.IMMIGRATION,
         is_free=False
+    ),
+
+    # DIVORCE RIGHTS BUNDLE
+    "divorce_property_division": RightsContent(
+        title="Property Division & Asset Protection",
+        situation="Dividing assets and protecting your financial interests in divorce",
+        content="""
+**PROTECT YOUR ASSETS IN DIVORCE:**
+
+**MARITAL vs SEPARATE PROPERTY:**
+**SEPARATE PROPERTY (Yours to Keep):**
+✅ **Assets owned before marriage**
+✅ **Inheritance received by you alone**
+✅ **Gifts given specifically to you**
+✅ **Personal injury settlements**
+✅ **Property bought with separate funds**
+✅ **Business owned before marriage** (if kept separate)
+
+**MARITAL PROPERTY (Subject to Division):**
+- All income earned during marriage
+- Property bought during marriage
+- Retirement accounts/401k contributions during marriage
+- Business growth/value increase during marriage
+- Real estate purchased together
+
+**PROPERTY DIVISION SYSTEMS:**
+**COMMUNITY PROPERTY STATES (50/50 Split):**
+- Arizona, California, Idaho, Louisiana
+- Nevada, New Mexico, Texas, Washington, Wisconsin
+- **Everything marital = split equally**
+
+**EQUITABLE DISTRIBUTION (Most States):**
+- "Fair" division, not necessarily equal
+- Court considers multiple factors
+- You can argue for more than 50%
+
+**FACTORS FOR MORE THAN 50%:**
+✅ **Higher income contribution**
+✅ **Spouse's fault** (adultery, abuse in some states)
+✅ **Career sacrifices** made for spouse
+✅ **Length of marriage**
+✅ **Age and health differences**
+✅ **Homemaker contributions**
+
+**ASSET PROTECTION STRATEGIES:**
+**BEFORE FILING:**
+- Gather all financial documents
+- Open individual bank account
+- Establish individual credit
+- Inventory all assets and debts
+- Take photos of valuable items
+
+**HIDDEN ASSETS RED FLAGS:**
+❌ **Sudden decrease in income** 
+❌ **New business partnerships**
+❌ **Large "loans" to family/friends**
+❌ **Overpayment of taxes** (to get refund later)
+❌ **Purchase of expensive items** before filing
+❌ **Money transferred to secret accounts**
+
+**RETIREMENT ACCOUNT DIVISION:**
+**401(k)/IRA/PENSION:**
+- Requires Qualified Domestic Relations Order (QDRO)
+- Can split without early withdrawal penalty
+- Must be done properly to avoid taxes
+- Some accounts have survivor benefits
+
+**BUSINESS VALUATION:**
+**IF YOU OWN A BUSINESS:**
+- Get professional business appraisal
+- Separate pre-marital vs marital portions
+- Document spouse's involvement (or lack thereof)
+- Consider buying out spouse vs selling
+
+**HOME AND REAL ESTATE:**
+**OPTIONS:**
+1. **Sell and split proceeds**
+2. **One spouse keeps, refinances**
+3. **Co-own temporarily** (risky)
+4. **Trade house for other assets**
+
+**DEBT DIVISION:**
+**MARITAL DEBT (Both Responsible):**
+- Credit cards used for family expenses
+- Mortgage on family home
+- Car loans during marriage
+- Medical bills for family
+
+**SEPARATE DEBT:**
+- Credit cards for personal use only
+- Gambling debts
+- Business loans (if spouse didn't benefit)
+- Student loans from before marriage
+
+**ALIMONY/SPOUSAL SUPPORT:**
+**FACTORS COURTS CONSIDER:**
+- Length of marriage (longer = more likely)
+- Income disparity between spouses
+- Standard of living during marriage
+- Age and health of both parties
+- Contributions to marriage (including homemaking)
+- Ability to become self-supporting
+
+**TYPES OF ALIMONY:**
+- **Temporary:** During divorce proceedings
+- **Rehabilitative:** Short-term for education/training
+- **Permanent:** Ongoing (usually long marriages)
+- **Lump sum:** One-time payment
+
+**DIVORCE ALTERNATIVES:**
+**MEDIATION:**
+- Cheaper than court battle
+- Both parties work with neutral mediator
+- You control the outcome
+- Confidential process
+
+**COLLABORATIVE DIVORCE:**
+- Each spouse has attorney
+- Everyone agrees not to go to court
+- Team approach with financial experts
+- Focus on problem-solving
+
+**PROTECTING YOURSELF:**
+**DON'T:**
+❌ Hide assets (can backfire severely)
+❌ Spend marital money vindictively
+❌ Move out without strategy
+❌ Sign anything without attorney review
+❌ Use children as weapons
+
+**DO:**
+✅ **Document everything**
+✅ **Get copies of financial records**
+✅ **Change passwords on accounts**
+✅ **Monitor credit reports**
+✅ **Keep detailed expense records**
+
+**POST-DIVORCE FINANCIAL PLANNING:**
+- Update all beneficiaries on accounts
+- Remove spouse from credit cards
+- Establish new credit in your name
+- Create new budget based on settlement
+- Consider tax implications of settlement
+
+**REMEMBER:**
+Divorce is emotional, but property division is business. Stay focused on fair financial outcomes, not revenge.
+        """,
+        category=RightsCategory.DIVORCE,
+        is_free=False
+    ),
+
+    "divorce_child_custody_support": RightsContent(
+        title="Child Custody & Support in Divorce",
+        situation="Protecting your relationship with your children during divorce",
+        content="""
+**CHILD CUSTODY IN DIVORCE:**
+
+**CUSTODY TYPES EXPLAINED:**
+**LEGAL CUSTODY:**
+- Right to make major decisions (education, healthcare, religion)
+- Can be joint (both parents) or sole (one parent)
+- Different from where child lives
+
+**PHYSICAL CUSTODY:**
+- Where child lives day-to-day
+- Can be joint (shared time) or primary (mainly one parent)
+- Affects child support calculations
+
+**BEST INTERESTS OF CHILD STANDARD:**
+**COURTS CONSIDER:**
+✅ **Child's emotional bond** with each parent
+✅ **Stability of home environments**
+✅ **Parent's ability to provide care**
+✅ **Child's adjustment** to current situation
+✅ **Any history of domestic violence**
+✅ **Mental and physical health** of parents
+✅ **Child's preferences** (if age appropriate)
+
+**WHAT HELPS YOUR CUSTODY CASE:**
+✅ **Active involvement** in child's daily life
+✅ **Stable housing and employment**
+✅ **Following existing custody orders**
+✅ **Encouraging relationship** with other parent
+✅ **Clean criminal and driving record**
+✅ **Documentation of parenting involvement**
+
+**WHAT HURTS YOUR CUSTODY CASE:**
+❌ **Domestic violence history**
+❌ **Substance abuse problems**
+❌ **Alienating child from other parent**
+❌ **Unstable lifestyle or housing**
+❌ **Criminal record** (especially recent)
+❌ **Mental health issues** (untreated)
+
+**CHILD SUPPORT CALCULATIONS:**
+**INCOME SHARES MODEL (Most States):**
+- Based on both parents' gross incomes
+- Considers number of children
+- Accounts for overnight visitation time
+- Uses state guideline formulas
+
+**INCOME INCLUDED:**
+- Wages, salary, tips, bonuses
+- Self-employment income
+- Rental income, interest, dividends
+- Unemployment/disability benefits
+- Military allowances
+
+**ADDITIONAL COSTS:**
+- Health insurance premiums
+- Childcare/daycare costs
+- Educational expenses
+- Medical expenses not covered by insurance
+- Extracurricular activities
+
+**MODIFYING CUSTODY/SUPPORT:**
+**SUBSTANTIAL CHANGE REQUIRED:**
+- Significant change in parent's income
+- Relocation of parent or child
+- Change in child's needs or circumstances
+- Parent's failure to exercise visitation
+- Remarriage affecting living situation
+
+**RELOCATION WITH CHILDREN:**
+**NOTICE REQUIREMENTS:**
+- Must notify other parent (usually 60 days advance)
+- May need court permission for moves beyond certain distance
+- Court considers impact on child's relationship with other parent
+
+**FACTORS FOR RELOCATION:**
+- Reason for move (job, family, education)
+- Distance and impact on visitation
+- Child's relationship with both parents
+- Educational and social opportunities
+- Economic advantages of move
+
+**PARENTING PLANS:**
+**DETAILED SCHEDULE INCLUDING:**
+- Regular weekly schedule
+- Holiday and vacation time division
+- School break arrangements
+- Transportation responsibilities
+- Communication guidelines (calls, texts)
+- Decision-making procedures
+
+**ENFORCEMENT OF ORDERS:**
+**IF OTHER PARENT VIOLATES:**
+- Document all violations with dates/times
+- File contempt of court motion
+- Request make-up parenting time
+- Possible modification of custody
+- In extreme cases: criminal charges
+
+**PROTECTING YOUR CHILDREN:**
+**DURING DIVORCE PROCEEDINGS:**
+- Shield children from adult conflicts
+- Don't discuss legal proceedings with children
+- Maintain normal routines as much as possible
+- Consider counseling for children
+- Put children's needs before your anger
+
+**CO-PARENTING AFTER DIVORCE:**
+**SUCCESSFUL STRATEGIES:**
+- Communicate directly about children (not through kids)
+- Be flexible with scheduling when possible
+- Respect other parent's time and decisions
+- Don't use children as messengers or spies
+- Focus on children's best interests, not past hurts
+
+**SPECIAL SITUATIONS:**
+**DOMESTIC VIOLENCE:**
+- Supervised visitation may be required
+- Safety planning for exchanges
+- Protective orders can affect custody
+- Document all incidents thoroughly
+
+**SUBSTANCE ABUSE:**
+- Court may order treatment programs
+- Supervised or restricted visitation
+- Drug/alcohol testing requirements
+- Gradual restoration of parenting time with compliance
+
+**INTERNATIONAL CUSTODY:**
+- Hague Convention applies to international child abduction
+- Passport restrictions may be necessary
+- Complex jurisdictional issues
+- Immediate legal action required if child taken abroad
+
+**FINANCIAL PLANNING:**
+- Child support typically continues until age 18
+- College expenses may be additional obligation
+- Life insurance to secure support payments
+- Consider tax implications of dependency exemptions
+
+**RED FLAGS - SEEK IMMEDIATE HELP:**
+- Threats to take children and disappear
+- Other parent's substance abuse escalation
+- Any indication of child abuse or neglect
+- Violation of protective orders
+- International travel without permission
+
+**REMEMBER:**
+Your children's emotional well-being matters more than winning against your ex-spouse. Focus on being the best parent possible during this difficult time.
+        """,
+        category=RightsCategory.DIVORCE,
+        is_free=False
     )
 }
 
