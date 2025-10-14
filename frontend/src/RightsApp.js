@@ -637,6 +637,16 @@ const RightsApp = () => {
                 </div>
 
                 <div className="bundle-card">
+                  <div className="bundle-icon">💔</div>
+                  <h4>Divorce Rights</h4>
+                  <p>💸 Don't lose half your assets! Learn the ONE thing lawyers don't tell you about property division...</p>
+                  <div className="bundle-price">$4.99</div>
+                  <button className="bundle-button" onClick={() => handlePurchaseCategory('divorce')}>
+                    Get Divorce Rights
+                  </button>
+                </div>
+
+                <div className="bundle-card">
                   <div className="bundle-icon">🌍</div>
                   <h4>Immigration Rights</h4>
                   <p>🛂 Visa status, deportation defense, green cards, citizenship - for ALL immigrants: European, Asian, Latin American, African...</p>
