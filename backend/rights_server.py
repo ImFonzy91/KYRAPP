@@ -3048,18 +3048,18 @@ Police are trained to get you to consent. Stay calm, be polite, but NEVER give u
 # Pricing for categories
 CATEGORY_PRICES = {
     RightsCategory.TRAFFIC: 0.0,  # Free preview
-    RightsCategory.HOUSING: 2.99,
-    RightsCategory.PROPERTY: 2.99,
-    RightsCategory.LANDMINES: 2.99,
-    RightsCategory.CRIMINAL: 2.99,
-    RightsCategory.WORKPLACE: 2.99,
-    RightsCategory.FAMILY: 2.99,
-    RightsCategory.DIVORCE: 4.99,  # Higher due to complexity and importance
-    RightsCategory.IMMIGRATION: 4.99,  # Slightly higher due to complexity
-    RightsCategory.HEALTHCARE: 2.99,
-    RightsCategory.STUDENT: 2.99,
-    RightsCategory.DIGITAL: 2.99,
-    RightsCategory.CONSUMER: 2.99
+    RightsCategory.HOUSING: 0.0,  # FREE FOR TESTING
+    RightsCategory.PROPERTY: 0.0,  # FREE FOR TESTING
+    RightsCategory.LANDMINES: 0.0,  # FREE FOR TESTING
+    RightsCategory.CRIMINAL: 0.0,  # FREE FOR TESTING
+    RightsCategory.WORKPLACE: 0.0,  # FREE FOR TESTING
+    RightsCategory.FAMILY: 0.0,  # FREE FOR TESTING
+    RightsCategory.DIVORCE: 0.0,  # FREE FOR TESTING
+    RightsCategory.IMMIGRATION: 0.0,  # FREE FOR TESTING
+    RightsCategory.HEALTHCARE: 0.0,  # FREE FOR TESTING
+    RightsCategory.STUDENT: 0.0,  # FREE FOR TESTING
+    RightsCategory.DIGITAL: 0.0,  # FREE FOR TESTING
+    RightsCategory.CONSUMER: 0.0   # FREE FOR TESTING
 }
 
 # API Routes
