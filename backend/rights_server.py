@@ -2729,6 +2729,14 @@ async def get_categories():
                 "icon": "👨‍👩‍👧‍👦"
             },
             {
+                "id": "divorce",
+                "name": "Divorce Rights",
+                "description": "Property division, alimony, child custody, asset protection, spousal support",
+                "price": 4.99,
+                "is_free": False,
+                "icon": "💔"
+            },
+            {
                 "id": "immigration",
                 "name": "Immigration Rights",
                 "description": "Visa status, deportation defense, green cards, citizenship - ALL immigrants: European, Asian, Latin American, African",
