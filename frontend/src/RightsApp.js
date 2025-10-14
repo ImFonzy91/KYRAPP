@@ -471,6 +471,11 @@ const RightsApp = () => {
   };
 
   const handlePurchaseCategory = async (categoryId) => {
+    // Go directly to show content for the category
+    handleViewCategoryRights(categoryId);
+  };
+
+  const handleBuyFullAccess = async (categoryId) => {
     try {
       const originUrl = window.location.origin;
       const response = await axios.post(`${API}/purchase/${categoryId}`, {
