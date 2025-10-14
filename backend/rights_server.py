@@ -2948,6 +2948,100 @@ Your children's emotional well-being matters more than winning against your ex-s
         """,
         category=RightsCategory.DIVORCE,
         is_free=False
+    ),
+
+    # PROPERTY RIGHTS BUNDLE
+    "property_police_searches": RightsContent(
+        title="Police Searches of Your Property",
+        situation="Police want to search your home, car, or property",
+        content="""
+**POLICE SEARCH RIGHTS:**
+
+**YOUR HOME - STRONGEST PROTECTION:**
+✅ **4th Amendment protects your home**
+✅ **Police need warrant OR consent OR emergency**
+✅ **You can ALWAYS say NO to consent searches**
+✅ **Never consent - make them get a warrant**
+
+**WHEN POLICE CAN SEARCH WITHOUT WARRANT:**
+- **Hot pursuit** of fleeing felon into your home
+- **Emergency** (someone screaming for help inside)
+- **Destruction of evidence** in progress
+- **Plain view** of illegal items from public area
+
+**IF POLICE KNOCK ON YOUR DOOR:**
+**MAGIC PHRASE:** "I do not consent to any search. I'm exercising my right to remain silent."
+
+**DO NOT:**
+❌ Open the door (talk through door)
+❌ Step outside (loses home protection)
+❌ Let them in "just to talk"
+❌ Answer questions about who's home
+❌ Consent to "quick look around"
+
+**WARRANT REQUIREMENTS:**
+✅ **Signed by judge**
+✅ **Specific address listed**
+✅ **Specific items to search for**
+✅ **Must show probable cause**
+
+**WHAT TO DO IF THEY HAVE WARRANT:**
+1. **Ask to see the warrant**
+2. **Read it carefully** - what can they search?
+3. **Do not resist** but say "I do not consent"
+4. **Stay calm and observe**
+5. **Take notes** of what they do
+6. **Call lawyer immediately**
+
+**YOUR VEHICLE:**
+**DIFFERENT RULES:**
+- Less protection than your home
+- Can search if they arrest you
+- Can search "passenger compartment" if they think you might grab weapon
+- Drug dogs can sniff outside (but can't detain you long)
+
+**PROPERTY/LAND SEARCHES:**
+**CURTILAGE vs OPEN FIELDS:**
+- **Curtilage** (area around house): Protected
+- **Open fields** (distant property): Less protection
+- Garbage on street: No protection
+- Fenced yard: Some protection
+
+**CONSENT SEARCHES:**
+**THEY WILL ASK:** "Do you mind if we take a look?"
+**YOU SAY:** "I do not consent to any search."
+
+**WHY NEVER CONSENT:**
+- If they find anything, you can't challenge it later
+- Even legal items can look suspicious
+- They might plant evidence
+- Innocent people have nothing to gain
+
+**BUSINESSES AND RENTAL PROPERTY:**
+- **Your business:** Similar to home protection
+- **Rental units:** You still have 4th Amendment rights
+- **Common areas:** Less protection
+- **Landlord consent:** Cannot override your rights
+
+**RECORDING POLICE:**
+✅ **Legal to record** in public or your property
+✅ **Use your phone** to document everything
+✅ **Don't interfere** with their work
+✅ **Keep recording** until they leave
+
+**AFTER ILLEGAL SEARCH:**
+- **Document everything** immediately
+- **Get witness contact info**
+- **Take photos** of any damage
+- **Contact criminal defense attorney**
+- **File complaint** with police department
+- **Evidence might be suppressed** in court
+
+**REMEMBER:**
+Police are trained to get you to consent. Stay calm, be polite, but NEVER give up your constitutional rights.
+        """,
+        category=RightsCategory.PROPERTY,
+        is_free=False
     )
 }
 
