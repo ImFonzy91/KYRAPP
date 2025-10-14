@@ -823,6 +823,19 @@ const RightsApp = () => {
               <h2>
                 {categories.find(c => c.id === currentCategory)?.name} Rights
               </h2>
+              {currentCategory !== 'traffic' && (
+                <div className="category-purchase">
+                  <div className="category-price">
+                    ${categories.find(c => c.id === currentCategory)?.price || '2.99'}
+                  </div>
+                  <button 
+                    className="bundle-button"
+                    onClick={() => handleBuyFullAccess(currentCategory)}
+                  >
+                    🔓 Unlock Full Access
+                  </button>
+                </div>
+              )}
             </div>
             
             <div className="rights-list">
