@@ -779,7 +779,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">💔</div>
                   <h4>Divorce Rights</h4>
                   <p>💸 Don't lose half your assets! The ONE thing lawyers hide...</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                 </div>
 
                 <div className={`bundle-card compact ${selectedBundles.includes('immigration') ? 'selected' : ''}`}>
@@ -792,7 +792,7 @@ const RightsApp = () => {
                   <div className="bundle-icon">🌍</div>
                   <h4>Immigration Rights</h4>
                   <p>🛂 Visa, deportation defense, green cards - ALL immigrants covered</p>
-                  <div className="bundle-price">$4.99</div>
+                  <div className="bundle-price">$2.99</div>
                 </div>
 
                 <div className={`bundle-card compact ${selectedBundles.includes('healthcare') ? 'selected' : ''}`}>
