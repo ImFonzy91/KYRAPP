@@ -44,24 +44,25 @@ html, body {
   }
 }
 
-/* MAIN LIBRA SCALES - SUPER BRIGHT ROYAL BLUE */
+/* MAIN LIBRA SCALES - SUPER BRIGHT ROYAL BLUE - MAX VISIBILITY */
 body::before {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  font-size: 35rem !important;
-  opacity: 0.40 !important;
+  font-size: 45rem !important;
+  opacity: 0.65 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  color: #4169E1 !important;
+  color: #1E90FF !important;
   text-shadow: 
-    0 0 50px #4169E1,
-    0 0 100px #1E90FF,
-    0 0 150px #0047AB,
-    0 0 200px #4169E1 !important;
-  filter: brightness(2.0) contrast(1.3) drop-shadow(0 0 80px #1E90FF) !important;
+    0 0 60px #1E90FF,
+    0 0 120px #4169E1,
+    0 0 180px #0047AB,
+    0 0 240px #1E90FF,
+    0 0 300px #4169E1 !important;
+  filter: brightness(2.5) contrast(1.5) drop-shadow(0 0 100px #1E90FF) !important;
   animation: scaleGlow 4s ease-in-out infinite !important;
 }
 
@@ -72,15 +73,15 @@ body::after {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(15deg) !important;
-  font-size: 32rem !important;
-  opacity: 0.25 !important;
+  font-size: 40rem !important;
+  opacity: 0.45 !important;
   z-index: -2 !important;
   pointer-events: none !important;
-  color: #0047AB !important;
+  color: #4169E1 !important;
   text-shadow: 
-    0 0 40px #4169E1,
-    0 0 80px #1E90FF,
-    0 0 120px #0047AB !important;
+    0 0 60px #1E90FF,
+    0 0 120px #4169E1,
+    0 0 180px #0047AB !important;
   animation: scaleRotate 6s ease-in-out infinite !important;
 }
 
