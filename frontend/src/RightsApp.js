@@ -936,6 +936,80 @@ const RightsApp = () => {
       <footer className="app-footer">
         <p>© 2025 Rights Helper. Legal guidance for everyday situations. Not a substitute for legal advice.</p>
       </footer>
+
+      {/* FLOATING CART BUTTON - ALWAYS VISIBLE WHEN ITEMS SELECTED */}
+      {selectedBundles.length > 0 && (
+        <>
+          <button 
+            className="floating-cart-btn"
+            onClick={() => setShowCart(true)}
+          >
+            <span className="cart-icon">🛒</span>
+            <span className="cart-count">{selectedBundles.length}</span>
+            <span className="cart-text">View Cart - ${getTotalPrice().toFixed(2)}</span>
+          </button>
+
+          {/* CART MODAL OVERLAY */}
+          {showCart && (
+            <div className="cart-modal-overlay" onClick={() => setShowCart(false)}>
+              <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="cart-modal-header">
+                  <h2>🛒 Your Cart ({selectedBundles.length} items)</h2>
+                  <button className="close-modal-btn" onClick={() => setShowCart(false)}>✕</button>
+                </div>
+
+                <div className="cart-modal-items">
+                  {selectedBundles.map(bundleId => {
+                    const bundleInfo = {
+                      traffic: { name: 'Traffic & Vehicle Rights', icon: '🚗', price: 2.99 },
+                      housing: { name: 'Housing Rights', icon: '🏠', price: 2.99 },
+                      property: { name: 'Property Rights', icon: '🏡', price: 2.99 },
+                      landmines: { name: 'Legal Landmines', icon: '⚠️', price: 2.99 },
+                      criminal: { name: 'Criminal Defense Rights', icon: '⚖️', price: 2.99 },
+                      workplace: { name: 'Business & Workplace Rights', icon: '💼', price: 2.99 },
+                      family: { name: 'Family & Personal Rights', icon: '👨‍👩‍👧‍👦', price: 2.99 },
+                      divorce: { name: 'Divorce Rights', icon: '💔', price: 4.99 },
+                      immigration: { name: 'Immigration Rights', icon: '🌍', price: 4.99 },
+                      healthcare: { name: 'Healthcare & Privacy Rights', icon: '🏥', price: 2.99 },
+                      student: { name: 'Student Rights', icon: '🎓', price: 2.99 },
+                      digital: { name: 'Digital & Social Media Rights', icon: '📱', price: 2.99 },
+                      consumer: { name: 'Consumer Protection Rights', icon: '🛡️', price: 2.99 },
+                    };
+                    const bundle = bundleInfo[bundleId];
+                    
+                    return (
+                      <div key={bundleId} className="cart-modal-item">
+                        <span className="item-icon">{bundle.icon}</span>
+                        <span className="item-name">{bundle.name}</span>
+                        <span className="item-price">${bundle.price.toFixed(2)}</span>
+                        <button 
+                          className="remove-btn"
+                          onClick={() => toggleBundleSelection(bundleId)}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="cart-modal-footer">
+                  <div className="modal-total">
+                    <span>TOTAL:</span>
+                    <span className="modal-total-amount">${getTotalPrice().toFixed(2)}</span>
+                  </div>
+                  <button className="modal-clear-btn" onClick={() => setSelectedBundles([])}>
+                    Clear All
+                  </button>
+                  <button className="modal-checkout-btn" onClick={handleCheckout}>
+                    🔒 CHECKOUT NOW
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
