@@ -6,7 +6,12 @@
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
-/* MARBLE BLACK BACKGROUND */
+/* FORCE REMOVE ANY OTHER BACKGROUNDS */
+#root, .app, .app-container, .main-content, .content-wrapper {
+  background: transparent !important;
+}
+
+/* MARBLE BLACK BACKGROUND - ONLY TWO LAYERS: BACKGROUND + CARDS */
 html, body {
   background: 
     linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 50%, rgba(0, 0, 0, 0.9) 100%),
@@ -16,6 +21,11 @@ html, body {
     #0a0a0a !important;
   color: #FFD700 !important;
   min-height: 100vh !important;
+}
+
+/* KILL THE OLD SCALE FROM RightsApp.css */
+body::before {
+  display: none !important;
 }
 
 /* NEON GOLD LIBRA SCALES - ULTRA BRIGHT */
