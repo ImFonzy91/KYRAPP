@@ -1013,7 +1013,8 @@ const RightsApp = () => {
                 </div>
               </div>
             </div>
-          )}
+            );
+          })()}
         </>
       )}
     </div>
