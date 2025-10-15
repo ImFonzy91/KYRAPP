@@ -579,7 +579,7 @@ button, .btn, .bundle-button, .search-button {
 }
 
 .cart-modal {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border: 6px solid #FFD700 !important;
   border-radius: 25px !important;
   max-width: 700px !important;
@@ -588,9 +588,16 @@ button, .btn, .bundle-button, .search-button {
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
-  box-shadow: 0 20px 80px rgba(255, 215, 0, 0.5) !important;
+  box-shadow: 
+    0 25px 100px rgba(255, 215, 0, 0.7),
+    0 0 50px rgba(255, 255, 0, 0.5),
+    inset 0 0 20px rgba(255, 215, 0, 0.2) !important;
   animation: modalSlideIn 0.3s ease-out !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.cart-modal h2, .cart-modal h3, .cart-modal p, .cart-modal span {
+  color: #4169E1 !important;
 }
 
 @keyframes modalSlideIn {
