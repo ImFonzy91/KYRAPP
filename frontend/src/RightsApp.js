@@ -942,7 +942,11 @@ const RightsApp = () => {
         <>
           <button 
             className="floating-cart-btn"
-            onClick={() => setShowCart(true)}
+            onClick={() => {
+              console.log('Cart button clicked! showCart:', showCart);
+              setShowCart(true);
+              console.log('Set showCart to true');
+            }}
           >
             <span className="cart-icon">🛒</span>
             <span className="cart-count">{selectedBundles.length}</span>
