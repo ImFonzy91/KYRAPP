@@ -602,28 +602,34 @@ const RightsApp = () => {
               </div>
               
               <div className="bundles-grid">
-                {/* Essential Bundles */}
-                <div className="bundle-card essential">
+                {/* Essential Bundles with Selection */}
+                <div className={`bundle-card compact ${selectedBundles.includes('traffic') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('traffic')}
+                    onChange={() => toggleBundleSelection('traffic')}
+                  />
                   <div className="bundle-icon">🚗</div>
                   <h4>Traffic & Vehicle Rights</h4>
-                  <p>Police stops, searches, DUI checkpoints, recording rights, arrest procedures</p>
+                  <p>Police stops, searches, DUI checkpoints, recording rights</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('traffic')}>
-                    Get Traffic Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card essential">
+                <div className={`bundle-card compact ${selectedBundles.includes('housing') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('housing')}
+                    onChange={() => toggleBundleSelection('housing')}
+                  />
                   <div className="bundle-icon">🏠</div>
                   <h4>Housing Rights</h4>
-                  <p>🏠 Landlords hate this ONE trick that gets your full security deposit back 90% of the time...</p>
+                  <p>🏠 Landlords hate this ONE trick that gets your deposit back...</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('housing')}>
-                    Get Housing Rights
-                  </button>
                 </div>
 
-                <div className={`bundle-card ${selectedBundles.includes('property') ? 'selected' : ''} popular`}>
+                <div className={`bundle-card compact ${selectedBundles.includes('property') ? 'selected' : ''} popular`}>
                   <div className="popular-badge">⚡ MUST HAVE</div>
                   <input 
                     type="checkbox" 
@@ -631,16 +637,13 @@ const RightsApp = () => {
                     checked={selectedBundles.includes('property')}
                     onChange={() => toggleBundleSelection('property')}
                   />
-                  <div className="bundle-icon">🏠</div>
+                  <div className="bundle-icon">🏡</div>
                   <h4>Property Rights</h4>
-                  <p>🚔 Cops at your door? Learn the ONE phrase that stops illegal searches...</p>
+                  <p>🚔 Cops at your door? Learn the ONE phrase that stops searches...</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('property')}>
-                    View Content
-                  </button>
                 </div>
 
-                <div className={`bundle-card ${selectedBundles.includes('landmines') ? 'selected' : ''}`}>
+                <div className={`bundle-card compact ${selectedBundles.includes('landmines') ? 'selected' : ''}`}>
                   <input 
                     type="checkbox" 
                     className="bundle-checkbox"
@@ -649,44 +652,50 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
-                  <p>🚨 Bad Yelp review = $25K lawsuit? Learn the ONE word that protects you...</p>
+                  <p>🚨 Bad Yelp review = $25K lawsuit? Protection here...</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
-                    View Content
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('criminal') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('criminal')}
+                    onChange={() => toggleBundleSelection('criminal')}
+                  />
                   <div className="bundle-icon">⚖️</div>
                   <h4>Criminal Defense Rights</h4>
-                  <p>⚖️ Say these 2 sentences during arrest and cops MUST stop questioning you. Most people don't know this...</p>
+                  <p>⚖️ Say these 2 sentences during arrest to stop questioning...</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('criminal')}>
-                    Get Defense Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('workplace') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('workplace')}
+                    onChange={() => toggleBundleSelection('workplace')}
+                  />
                   <div className="bundle-icon">💼</div>
                   <h4>Business & Workplace Rights</h4>
-                  <p>💼 Your boss can legally fire you for saying "NO" to overtime... UNLESS you say these exact 5 words first.</p>
+                  <p>💼 Boss can't fire you for saying NO if you say these 5 words...</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('workplace')}>
-                    Get Work Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('family') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('family')}
+                    onChange={() => toggleBundleSelection('family')}
+                  />
                   <div className="bundle-icon">👨‍👩‍👧‍👦</div>
                   <h4>Family & Personal Rights</h4>
-                  <p>Marriage, divorce, child custody, domestic violence, elder care, inheritance</p>
+                  <p>Marriage, divorce, child custody, domestic violence, elder care</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('family')}>
-                    Get Family Rights
-                  </button>
                 </div>
 
-                <div className={`bundle-card ${selectedBundles.includes('divorce') ? 'selected' : ''}`}>
+                <div className={`bundle-card compact ${selectedBundles.includes('divorce') ? 'selected' : ''}`}>
                   <input 
                     type="checkbox" 
                     className="bundle-checkbox"
@@ -695,61 +704,73 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">💔</div>
                   <h4>Divorce Rights</h4>
-                  <p>💸 Don't lose half your assets! Learn the ONE thing lawyers don't tell you...</p>
+                  <p>💸 Don't lose half your assets! The ONE thing lawyers hide...</p>
                   <div className="bundle-price">$4.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('divorce')}>
-                    View Content
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('immigration') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('immigration')}
+                    onChange={() => toggleBundleSelection('immigration')}
+                  />
                   <div className="bundle-icon">🌍</div>
                   <h4>Immigration Rights</h4>
-                  <p>🛂 Visa status, deportation defense, green cards, citizenship - for ALL immigrants: European, Asian, Latin American, African...</p>
+                  <p>🛂 Visa, deportation defense, green cards - ALL immigrants covered</p>
                   <div className="bundle-price">$4.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('immigration')}>
-                    Get Immigration Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('healthcare') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('healthcare')}
+                    onChange={() => toggleBundleSelection('healthcare')}
+                  />
                   <div className="bundle-icon">🏥</div>
                   <h4>Healthcare & Privacy Rights</h4>
-                  <p>Medical records, HIPAA, insurance disputes, patient rights, mental health laws</p>
+                  <p>Medical records, HIPAA, insurance disputes, patient rights</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('healthcare')}>
-                    Get Health Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('student') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('student')}
+                    onChange={() => toggleBundleSelection('student')}
+                  />
                   <div className="bundle-icon">🎓</div>
                   <h4>Student Rights</h4>
-                  <p>School discipline, loans, campus safety, discrimination, free speech, housing</p>
+                  <p>School discipline, loans, campus safety, discrimination, speech</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('student')}>
-                    Get Student Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('digital') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('digital')}
+                    onChange={() => toggleBundleSelection('digital')}
+                  />
                   <div className="bundle-icon">📱</div>
                   <h4>Digital & Social Media Rights</h4>
-                  <p>Online privacy, cyberbullying, social media posts, digital harassment, data protection</p>
+                  <p>Online privacy, cyberbullying, posts, harassment, data protection</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('digital')}>
-                    Get Digital Rights
-                  </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card compact ${selectedBundles.includes('consumer') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('consumer')}
+                    onChange={() => toggleBundleSelection('consumer')}
+                  />
                   <div className="bundle-icon">🛡️</div>
                   <h4>Consumer Protection Rights</h4>
-                  <p>Scams, contracts, warranties, debt collection, identity theft, small claims court</p>
+                  <p>Scams, contracts, warranties, debt collection, identity theft</p>
                   <div className="bundle-price">$2.99</div>
-                  <button className="bundle-button" onClick={() => handlePurchaseCategory('consumer')}>
-                    Get Consumer Rights
-                  </button>
                 </div>
               </div>
 
