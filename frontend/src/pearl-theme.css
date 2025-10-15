@@ -15,34 +15,72 @@ html, body {
   color: #000000 !important;
 }
 
-/* SECOND LIBRA SCALES FOR EXTRA VISIBILITY */
-body::after {
-  content: "⚖️" !important;
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) rotate(15deg) !important;
-  font-size: 28rem !important;
-  opacity: 0.15 !important;
-  z-index: -2 !important;
-  pointer-events: none !important;
-  color: #FFD700 !important;
-  text-shadow: 0 0 40px #FFD700 !important;
+/* ULTRA VISIBLE GLOWING LIBRA SCALES WITH ANIMATION */
+@keyframes scaleGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 30px #FFD700,
+      0 0 60px #FFD700,
+      0 0 90px #FFFF00,
+      0 0 120px #FFD700;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    text-shadow: 
+      0 0 40px #FFD700,
+      0 0 80px #FFD700,
+      0 0 120px #FFFF00,
+      0 0 160px #FFD700;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
 }
 
+@keyframes scaleRotate {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-5deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+}
+
+/* MAIN LIBRA SCALES - SUPER BRIGHT AND VISIBLE */
 body::before {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  font-size: 30rem !important;
-  opacity: 0.25 !important;
+  font-size: 35rem !important;
+  opacity: 0.35 !important;
   z-index: -1 !important;
   pointer-events: none !important;
   color: #FFD700 !important;
-  text-shadow: 0 0 50px #FFD700, 0 0 100px #FFFF00, 0 0 150px #FFD700 !important;
-  filter: brightness(1.5) !important;
+  text-shadow: 
+    0 0 50px #FFD700,
+    0 0 100px #FFFF00,
+    0 0 150px #FFD700,
+    0 0 200px #FFD700 !important;
+  filter: brightness(1.8) contrast(1.2) !important;
+  animation: scaleGlow 4s ease-in-out infinite !important;
+}
+
+/* SECOND LIBRA SCALES - ROTATING ACCENT */
+body::after {
+  content: "⚖️" !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(15deg) !important;
+  font-size: 32rem !important;
+  opacity: 0.2 !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  color: #FFD700 !important;
+  text-shadow: 
+    0 0 40px #FFD700,
+    0 0 80px #FFD700 !important;
+  animation: scaleRotate 6s ease-in-out infinite !important;
 }
 
 .app-header {
