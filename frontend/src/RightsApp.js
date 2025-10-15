@@ -640,13 +640,19 @@ const RightsApp = () => {
                   </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card ${selectedBundles.includes('landmines') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('landmines')}
+                    onChange={() => toggleBundleSelection('landmines')}
+                  />
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
-                  <p>🚨 Did you know posting a bad Yelp review can get you SUED for $25,000+? Learn the ONE word that protects you legally...</p>
+                  <p>🚨 Bad Yelp review = $25K lawsuit? Learn the ONE word that protects you...</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('landmines')}>
-                    Avoid Legal Trouble
+                    View Content
                   </button>
                 </div>
 
