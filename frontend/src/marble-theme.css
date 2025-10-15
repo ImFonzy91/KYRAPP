@@ -23,12 +23,7 @@ html, body {
   min-height: 100vh !important;
 }
 
-/* KILL THE OLD SCALE FROM RightsApp.css */
-body::before {
-  display: none !important;
-}
-
-/* NEON GOLD LIBRA SCALES - ULTRA BRIGHT */
+/* NEON GOLD LIBRA SCALES - ULTRA BRIGHT AND VISIBLE */
 @keyframes neonGoldMegaPulse {
   0%, 100% {
     text-shadow: 
