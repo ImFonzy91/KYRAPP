@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './marble-theme.css';
+import './glossy-theme.css';
 import axios from 'axios';
 import './RightsApp.css';
 
