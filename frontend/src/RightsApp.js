@@ -623,14 +623,20 @@ const RightsApp = () => {
                   </button>
                 </div>
 
-                <div className="bundle-card popular">
+                <div className={`bundle-card ${selectedBundles.includes('property') ? 'selected' : ''} popular`}>
                   <div className="popular-badge">⚡ MUST HAVE</div>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('property')}
+                    onChange={() => toggleBundleSelection('property')}
+                  />
                   <div className="bundle-icon">🏠</div>
                   <h4>Property Rights</h4>
-                  <p>🚔 Cops at your door? Learn the ONE phrase that stops illegal searches and protects your home...</p>
+                  <p>🚔 Cops at your door? Learn the ONE phrase that stops illegal searches...</p>
                   <div className="bundle-price">$2.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('property')}>
-                    Protect Your Property
+                    View Content
                   </button>
                 </div>
 
