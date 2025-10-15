@@ -54,41 +54,41 @@ html, body {
   }
 }
 
-body::before {
+html::before {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  font-size: 50rem !important;
-  opacity: 0.45 !important;
-  z-index: -1 !important;
+  font-size: 55rem !important;
+  opacity: 0.55 !important;
+  z-index: 0 !important;
   pointer-events: none !important;
   color: #FFD700 !important;
   text-shadow: 
-    0 0 50px #FFD700,
-    0 0 100px #FFFF00,
-    0 0 150px #FFA500,
-    0 0 200px #FFD700 !important;
-  filter: brightness(2.8) contrast(1.8) drop-shadow(0 0 120px #FFFF00) !important;
+    0 0 60px #FFD700,
+    0 0 120px #FFFF00,
+    0 0 180px #FFA500,
+    0 0 240px #FFD700 !important;
+  filter: brightness(3) contrast(2) drop-shadow(0 0 150px #FFFF00) !important;
   animation: neonGoldMegaPulse 3s ease-in-out infinite !important;
 }
 
-body::after {
+html::after {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(12deg) !important;
-  font-size: 47rem !important;
-  opacity: 0.30 !important;
-  z-index: -2 !important;
+  font-size: 52rem !important;
+  opacity: 0.35 !important;
+  z-index: 0 !important;
   pointer-events: none !important;
   color: #FFFF00 !important;
   text-shadow: 
-    0 0 40px #FFD700,
-    0 0 80px #FFFF00,
-    0 0 120px #FFA500 !important;
+    0 0 50px #FFD700,
+    0 0 100px #FFFF00,
+    0 0 150px #FFA500 !important;
   animation: scaleRotate 5s ease-in-out infinite !important;
 }
 
