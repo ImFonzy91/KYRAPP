@@ -1074,15 +1074,23 @@ const RightsApp = () => {
                 </div>
 
                 <div className="cart-modal-footer">
+                  {selectedBundles.length >= 3 && (
+                    <div className="discount-badge">
+                      🎉 {selectedBundles.length >= 13 ? 'COMPLETE PACKAGE DEAL!' : 'BUNDLE DISCOUNT APPLIED!'}
+                    </div>
+                  )}
                   <div className="modal-total">
                     <span>TOTAL:</span>
                     <span className="modal-total-amount">${getTotalPrice().toFixed(2)}</span>
                   </div>
-                  <button className="modal-clear-btn" onClick={() => setSelectedBundles([])}>
+                  <button className="modal-clear-btn" onClick={() => {
+                    setSelectedBundles([]);
+                    setShowCart(false);
+                  }}>
                     Clear All
                   </button>
-                  <button className="modal-checkout-btn" onClick={handleCheckout}>
-                    🔒 CHECKOUT NOW
+                  <button className="modal-checkout-btn" onClick={handleCheckout} disabled={loading}>
+                    {loading ? '⏳ Processing...' : '🔒 CHECKOUT NOW'}
                   </button>
                 </div>
               </div>
