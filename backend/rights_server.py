@@ -4728,17 +4728,17 @@ async def purchase_cart(request: CartCheckoutRequest):
     # Calculate price with bundle discounts
     count = len(request.bundles)
     if count >= 13:
-        total_price = 29.99  # All 13 bundles deal
+        total_price = 20.00  # All 13 bundles deal - BEST VALUE!
         description = f"Complete Rights Package - All {count} Bundles"
-    elif count >= 3:
-        total_price = 12.99  # Any 3+ bundles deal
+    elif count >= 5:
+        total_price = 12.99  # Any 5+ bundles deal
         description = f"Bundle Deal - {count} Rights Bundles"
     else:
-        # Calculate individual prices
+        # Calculate individual prices - all $2.99 for launch
         bundle_prices = {
             "traffic": 2.99, "housing": 2.99, "property": 2.99, "landmines": 2.99,
-            "criminal": 2.99, "workplace": 2.99, "family": 2.99, "divorce": 4.99,
-            "immigration": 4.99, "healthcare": 2.99, "student": 2.99, 
+            "criminal": 2.99, "workplace": 2.99, "family": 2.99, "divorce": 2.99,
+            "immigration": 2.99, "healthcare": 2.99, "student": 2.99, 
             "digital": 2.99, "consumer": 2.99
         }
         total_price = sum(bundle_prices.get(b, 2.99) for b in request.bundles)
