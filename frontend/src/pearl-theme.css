@@ -15,22 +15,22 @@ html, body {
   color: #000000 !important;
 }
 
-/* ULTRA VISIBLE GLOWING LIBRA SCALES WITH ANIMATION */
+/* ULTRA VISIBLE GLOWING LIBRA SCALES WITH ANIMATION - ROYAL BLUE */
 @keyframes scaleGlow {
   0%, 100% {
     text-shadow: 
-      0 0 30px #FFD700,
-      0 0 60px #FFD700,
-      0 0 90px #FFFF00,
-      0 0 120px #FFD700;
+      0 0 30px #4169E1,
+      0 0 60px #0047AB,
+      0 0 90px #1E90FF,
+      0 0 120px #4169E1;
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
     text-shadow: 
-      0 0 40px #FFD700,
-      0 0 80px #FFD700,
-      0 0 120px #FFFF00,
-      0 0 160px #FFD700;
+      0 0 40px #4169E1,
+      0 0 80px #0047AB,
+      0 0 120px #1E90FF,
+      0 0 160px #4169E1;
     transform: translate(-50%, -50%) scale(1.05);
   }
 }
@@ -44,7 +44,7 @@ html, body {
   }
 }
 
-/* MAIN LIBRA SCALES - SUPER BRIGHT AND VISIBLE */
+/* MAIN LIBRA SCALES - SUPER BRIGHT ROYAL BLUE */
 body::before {
   content: "⚖️" !important;
   position: fixed !important;
@@ -52,20 +52,20 @@ body::before {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   font-size: 35rem !important;
-  opacity: 0.35 !important;
+  opacity: 0.40 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  color: #FFD700 !important;
+  color: #4169E1 !important;
   text-shadow: 
-    0 0 50px #FFD700,
-    0 0 100px #FFFF00,
-    0 0 150px #FFD700,
-    0 0 200px #FFD700 !important;
-  filter: brightness(1.8) contrast(1.2) !important;
+    0 0 50px #4169E1,
+    0 0 100px #1E90FF,
+    0 0 150px #0047AB,
+    0 0 200px #4169E1 !important;
+  filter: brightness(2.0) contrast(1.3) drop-shadow(0 0 80px #1E90FF) !important;
   animation: scaleGlow 4s ease-in-out infinite !important;
 }
 
-/* SECOND LIBRA SCALES - ROTATING ACCENT */
+/* SECOND LIBRA SCALES - ROTATING ROYAL BLUE ACCENT */
 body::after {
   content: "⚖️" !important;
   position: fixed !important;
@@ -73,13 +73,14 @@ body::after {
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(15deg) !important;
   font-size: 32rem !important;
-  opacity: 0.2 !important;
+  opacity: 0.25 !important;
   z-index: -2 !important;
   pointer-events: none !important;
-  color: #FFD700 !important;
+  color: #0047AB !important;
   text-shadow: 
-    0 0 40px #FFD700,
-    0 0 80px #FFD700 !important;
+    0 0 40px #4169E1,
+    0 0 80px #1E90FF,
+    0 0 120px #0047AB !important;
   animation: scaleRotate 6s ease-in-out infinite !important;
 }
 
