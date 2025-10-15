@@ -535,9 +535,19 @@ const RightsApp = () => {
       consumer: 2.99,
     };
     
-    return selectedBundles.reduce((total, bundleId) => {
+    const subtotal = selectedBundles.reduce((total, bundleId) => {
       return total + (bundlePrices[bundleId] || 0);
     }, 0);
+    
+    // Apply bundle discounts
+    const count = selectedBundles.length;
+    if (count >= 13) {
+      return 29.99; // All 13 bundles deal
+    } else if (count >= 3) {
+      return 12.99; // Any 3 bundles deal
+    }
+    
+    return subtotal;
   };
 
   const handleCheckout = async () => {
@@ -546,10 +556,30 @@ const RightsApp = () => {
       return;
     }
     
-    // For now, since everything is free, just grant access
-    alert(`Purchasing ${selectedBundles.length} bundles for $${getTotalPrice().toFixed(2)}`);
-    setSelectedBundles([]);
-    setShowCart(false);
+    try {
+      setLoading(true);
+      const originUrl = window.location.origin;
+      
+      // Create Stripe checkout session for multiple bundles
+      const response = await axios.post(`${API}/purchase/cart`, {
+        bundles: selectedBundles,
+        origin_url: originUrl
+      });
+
+      if (response.data.checkout_url) {
+        // Redirect to Stripe checkout
+        window.location.href = response.data.checkout_url;
+      } else {
+        alert('Checkout session created successfully!');
+        setSelectedBundles([]);
+        setShowCart(false);
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Checkout failed. Please try again or contact support.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBuyFullAccess = async (categoryId) => {
