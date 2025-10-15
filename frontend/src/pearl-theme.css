@@ -628,6 +628,28 @@ button, .btn, .bundle-button, .search-button {
   background: #cc0000 !important;
 }
 
+.discount-badge {
+  background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%) !important;
+  color: #000000 !important;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: 10px !important;
+  font-weight: 900 !important;
+  font-size: 1.1rem !important;
+  text-align: center !important;
+  border: 3px solid #FFD700 !important;
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4) !important;
+  animation: discountPulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes discountPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 .cart-modal-footer {
   background: linear-gradient(135deg, #fffef0 0%, #ffffff 100%) !important;
   padding: 2rem !important;
