@@ -774,6 +774,70 @@ const RightsApp = () => {
                 </div>
               </div>
 
+              {/* Shopping Cart Section */}
+              {selectedBundles.length > 0 && (
+                <div className="shopping-cart-section">
+                  <div className="cart-header">
+                    <h3>🛒 Your Shopping Cart ({selectedBundles.length} item{selectedBundles.length !== 1 ? 's' : ''})</h3>
+                    <button 
+                      className="clear-cart-btn"
+                      onClick={() => setSelectedBundles([])}
+                    >
+                      Clear All
+                    </button>
+                  </div>
+                  
+                  <div className="cart-items">
+                    {selectedBundles.map(bundleId => {
+                      const bundleInfo = {
+                        traffic: { name: 'Traffic & Vehicle Rights', icon: '🚗', price: 2.99 },
+                        housing: { name: 'Housing Rights', icon: '🏠', price: 2.99 },
+                        property: { name: 'Property Rights', icon: '🏡', price: 2.99 },
+                        landmines: { name: 'Legal Landmines', icon: '⚠️', price: 2.99 },
+                        criminal: { name: 'Criminal Defense Rights', icon: '⚖️', price: 2.99 },
+                        workplace: { name: 'Business & Workplace Rights', icon: '💼', price: 2.99 },
+                        family: { name: 'Family & Personal Rights', icon: '👨‍👩‍👧‍👦', price: 2.99 },
+                        divorce: { name: 'Divorce Rights', icon: '💔', price: 4.99 },
+                        immigration: { name: 'Immigration Rights', icon: '🌍', price: 4.99 },
+                        healthcare: { name: 'Healthcare & Privacy Rights', icon: '🏥', price: 2.99 },
+                        student: { name: 'Student Rights', icon: '🎓', price: 2.99 },
+                        digital: { name: 'Digital & Social Media Rights', icon: '📱', price: 2.99 },
+                        consumer: { name: 'Consumer Protection Rights', icon: '🛡️', price: 2.99 },
+                      };
+                      const bundle = bundleInfo[bundleId];
+                      
+                      return (
+                        <div key={bundleId} className="cart-item">
+                          <span className="cart-item-icon">{bundle.icon}</span>
+                          <span className="cart-item-name">{bundle.name}</span>
+                          <span className="cart-item-price">${bundle.price.toFixed(2)}</span>
+                          <button 
+                            className="remove-item-btn"
+                            onClick={() => toggleBundleSelection(bundleId)}
+                            title="Remove from cart"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  
+                  <div className="cart-summary">
+                    <div className="cart-total">
+                      <span className="total-label">Total:</span>
+                      <span className="total-amount">${getTotalPrice().toFixed(2)}</span>
+                    </div>
+                    <button 
+                      className="checkout-btn"
+                      onClick={handleCheckout}
+                    >
+                      🔒 Proceed to Checkout
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Bundle Deal Cards */}
               <div className="bundle-deals">
                 <h3>💰 Save with Bundle Deals</h3>
