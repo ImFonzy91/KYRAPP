@@ -527,8 +527,8 @@ const RightsApp = () => {
       criminal: 2.99,
       workplace: 2.99,
       family: 2.99,
-      divorce: 4.99,
-      immigration: 4.99,
+      divorce: 2.99,
+      immigration: 2.99,
       healthcare: 2.99,
       student: 2.99,
       digital: 2.99,
@@ -542,9 +542,9 @@ const RightsApp = () => {
     // Apply bundle discounts
     const count = selectedBundles.length;
     if (count >= 13) {
-      return 29.99; // All 13 bundles deal
-    } else if (count >= 3) {
-      return 12.99; // Any 3 bundles deal
+      return 20.00; // All 13 bundles deal - BEST VALUE!
+    } else if (count >= 5) {
+      return 12.99; // Any 5+ bundles deal
     }
     
     return subtotal;
