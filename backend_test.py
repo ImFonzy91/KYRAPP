@@ -17,8 +17,8 @@ def get_backend_url():
                 if line.startswith('REACT_APP_BACKEND_URL='):
                     return line.split('=', 1)[1].strip()
     except FileNotFoundError:
-        return "https://scanem-rights.preview.emergentagent.com"
-    return "https://scanem-rights.preview.emergentagent.com"
+        return "https://pearljustice.preview.emergentagent.com"
+    return "https://pearljustice.preview.emergentagent.com"
 
 BASE_URL = get_backend_url()
 API_URL = f"{BASE_URL}/api"
@@ -235,7 +235,7 @@ class ScanEmAPITester:
             purchase_data = {
                 "person_id": "person_001",
                 "report_type": "premium",
-                "origin_url": "https://scanem-rights.preview.emergentagent.com"
+                "origin_url": "https://pearljustice.preview.emergentagent.com"
             }
             
             response = requests.post(f"{API_URL}/report/purchase", 
