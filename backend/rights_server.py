@@ -3042,6 +3042,1426 @@ Police are trained to get you to consent. Stay calm, be polite, but NEVER give u
         """,
         category=RightsCategory.PROPERTY,
         is_free=False
+    ),
+
+    # HEALTHCARE & PRIVACY RIGHTS
+    "healthcare_medical_records": RightsContent(
+        title="Medical Records & HIPAA Rights",
+        situation="Accessing or protecting your medical information",
+        content="""
+**YOUR HIPAA RIGHTS:**
+
+**YOU HAVE THE RIGHT TO:**
+✅ View and get copies of your medical records
+✅ Request corrections to incorrect information
+✅ Know who accessed your records
+✅ Request privacy restrictions
+✅ File complaints about privacy violations
+✅ Choose how health info is shared with you
+
+**WHO CAN ACCESS WITHOUT YOUR PERMISSION:**
+- Your healthcare providers (for treatment)
+- Your health insurance (for payment)
+- Public health authorities (disease reporting)
+- Law enforcement (with court order/warrant)
+
+**WHO CANNOT ACCESS:**
+❌ Employers (without your permission)
+❌ Life insurance companies (without consent)
+❌ Schools (without consent)
+❌ Family members (unless you authorize)
+❌ Friends or acquaintances
+
+**GETTING YOUR RECORDS:**
+1. **Request in writing** - Some providers have forms
+2. **They must respond** - Within 30 days (60 in some cases)
+3. **Reasonable fees** - They can charge copying costs
+4. **Electronic format** - You can request digital copies
+
+**IF YOUR PRIVACY IS VIOLATED:**
+1. **File complaint with provider** - Within 180 days
+2. **Contact HHS Office for Civil Rights** - Federal enforcement
+3. **Document everything** - Keep records of violation
+4. **Consult privacy attorney** - You may have grounds to sue
+
+**PROTECT YOUR PRIVACY:**
+- Don't sign blanket authorization forms
+- Read privacy notices at doctor's offices
+- Ask who will see your information
+- Request encryption for electronic communications
+- Review your medical records regularly for accuracy
+        """,
+        category=RightsCategory.HEALTHCARE,
+        is_free=False
+    ),
+
+    "healthcare_insurance_disputes": RightsContent(
+        title="Fighting Insurance Denials",
+        situation="Health insurance denied your claim",
+        content="""
+**CLAIM DENIAL RIGHTS:**
+
+**COMMON REASONS FOR DENIAL:**
+- Service deemed "not medically necessary"
+- Out-of-network provider
+- Pre-authorization not obtained
+- Procedure considered experimental
+- Billing/coding errors
+
+**YOUR APPEAL RIGHTS:**
+✅ **Internal appeal** - Insurance company reviews decision
+✅ **External review** - Independent review by third party
+✅ **Expedited appeal** - For urgent situations (72 hours)
+✅ **File complaint** - With state insurance commissioner
+
+**INTERNAL APPEAL PROCESS:**
+1. **Act quickly** - Usually 180 days to appeal
+2. **Get denial reason** - Request in writing
+3. **Gather evidence** - Medical records, doctor letters
+4. **Write appeal letter** - Include why treatment is necessary
+5. **Submit within deadline** - Track certified mail
+
+**WHAT TO INCLUDE IN APPEAL:**
+- Patient information and policy number
+- Treatment/service denied
+- Date of service
+- Reason for denial (from EOB)
+- Why denial is wrong (medical necessity, policy coverage)
+- Supporting documents (doctor letters, medical literature)
+- Request for specific action
+
+**EXTERNAL REVIEW:**
+- Free independent review
+- Binding decision on insurer
+- Available after internal appeal denied
+- 4-month deadline to request
+- Decision within 60 days (72 hours if urgent)
+
+**EMERGENCY SITUATIONS:**
+If denial could seriously harm your health:
+- Request expedited appeal
+- Contact state insurance department
+- Consider paying out-of-pocket and appealing for reimbursement
+- Document everything for potential lawsuit
+
+**RESOURCES:**
+- Patient Advocate Foundation
+- State insurance commissioner's office
+- Hospital patient advocacy department
+- Legal aid for healthcare disputes
+        """,
+        category=RightsCategory.HEALTHCARE,
+        is_free=False
+    ),
+
+    "healthcare_billing_errors": RightsContent(
+        title="Medical Billing Errors & Overcharges",
+        situation="Disputing incorrect medical bills",
+        content="""
+**80% OF MEDICAL BILLS CONTAIN ERRORS!**
+
+**COMMON BILLING ERRORS:**
+- Duplicate charges (billed twice for same service)
+- Upcoding (charged for more expensive service)
+- Unbundling (separately billing services usually bundled)
+- Balance billing (out-of-network surprise bills)
+- Charges for services never received
+- Incorrect quantities
+
+**YOUR RIGHTS:**
+✅ Itemized bill showing each charge
+✅ Explanation of Benefits (EOB) from insurance
+✅ Dispute charges you didn't receive
+✅ Negotiate payment plans
+✅ Request financial assistance
+✅ Appeal surprise out-of-network bills
+
+**STEPS TO DISPUTE:**
+1. **Request itemized bill** - Not just summary
+2. **Compare to EOB** - Check what insurance paid
+3. **Identify errors** - Highlight suspicious charges
+4. **Contact billing department** - Explain discrepancies
+5. **Send dispute letter** - Certified mail with documentation
+6. **Follow up regularly** - Keep records of all contacts
+
+**MAGIC WORDS TO USE:**
+"I'm requesting an itemized bill and audit of all charges. I believe there are errors and want to review before payment."
+
+**NEGOTIATING MEDICAL DEBT:**
+- Ask for financial hardship application
+- Offer lump sum for discount (30-40% off)
+- Request payment plan with 0% interest
+- Apply for charity care if you qualify
+- Never put medical debt on credit card
+
+**SURPRISE BILLING PROTECTION:**
+The No Surprises Act (2022) protects against:
+- Emergency room surprise bills
+- Out-of-network providers at in-network facilities
+- Air ambulance services
+
+**PROTECT YOURSELF:**
+- Review all bills within 30 days
+- Keep records of all medical services
+- Take photos of itemized bills
+- Don't pay until you verify charges
+- Medical debt doesn't affect credit for 1 year
+        """,
+        category=RightsCategory.HEALTHCARE,
+        is_free=False
+    ),
+
+    # STUDENT RIGHTS
+    "student_discipline": RightsContent(
+        title="School Discipline & Suspension Rights",
+        situation="Facing suspension or disciplinary action",
+        content="""
+**YOUR DUE PROCESS RIGHTS:**
+
+**SCHOOLS MUST PROVIDE:**
+✅ Notice of charges against you
+✅ Explanation of evidence
+✅ Opportunity to tell your side
+✅ Hearing before suspension (for 10+ days)
+✅ Right to appeal decision
+
+**SHORT-TERM SUSPENSION (Under 10 days):**
+- Informal hearing required
+- Tell your side of story
+- Present witnesses
+- Question evidence against you
+
+**LONG-TERM SUSPENSION/EXPULSION (10+ days):**
+- Formal hearing required
+- Written notice of charges
+- Right to attorney/advocate
+- Present evidence and witnesses
+- Cross-examine witnesses
+- Written decision with reasons
+- Right to appeal
+
+**WHAT TO DO IMMEDIATELY:**
+1. **Stay calm** - Don't make it worse
+2. **Write down everything** - Your version of events
+3. **Get witness names** - Who saw what happened
+4. **Request hearing** - Don't waive your rights
+5. **Gather evidence** - Photos, messages, documents
+6. **Contact parents** - They have right to be present
+
+**PREPARE FOR HEARING:**
+- Write statement of what happened
+- Organize evidence chronologically
+- List witnesses who support your side
+- Practice telling your story calmly
+- Bring parent/attorney/advocate
+- Take notes during hearing
+
+**SPECIAL PROTECTIONS:**
+**STUDENTS WITH DISABILITIES (IEP/504):**
+- Cannot be suspended for behavior related to disability
+- Manifestation determination required
+- Continued educational services required
+- Additional protections under IDEA
+
+**DISCRIMINATORY DISCIPLINE:**
+If you believe discipline is based on:
+- Race, ethnicity, or national origin
+- Disability
+- Religion
+- Gender or sexual orientation
+File complaint with Office for Civil Rights
+
+**APPEAL OPTIONS:**
+1. School principal
+2. District superintendent
+3. School board
+4. State education department
+5. Federal Office for Civil Rights (discrimination)
+        """,
+        category=RightsCategory.STUDENT,
+        is_free=False
+    ),
+
+    "student_loans": RightsContent(
+        title="Student Loan Rights & Repayment",
+        situation="Managing or disputing student loan debt",
+        content="""
+**STUDENT LOAN BORROWER RIGHTS:**
+
+**YOUR RIGHTS:**
+✅ Choose your repayment plan
+✅ Request forbearance or deferment
+✅ Apply for income-driven repayment
+✅ Public Service Loan Forgiveness (if eligible)
+✅ Dispute incorrect loan amounts
+✅ Rehabilitation after default
+✅ Fair debt collection practices
+
+**REPAYMENT PLAN OPTIONS:**
+**STANDARD PLAN:**
+- 10-year fixed payments
+- Highest monthly payment
+- Lowest total interest paid
+
+**INCOME-DRIVEN PLANS:**
+- Pay 10-20% of discretionary income
+- 20-25 year forgiveness
+- Annual recertification required
+- Best for low income
+
+**GRADUATED PLAN:**
+- Payments start low, increase every 2 years
+- 10-year repayment
+- More interest than standard
+
+**IF YOU CAN'T PAY:**
+1. **Don't ignore it** - Contact servicer immediately
+2. **Request forbearance** - Temporary payment pause
+3. **Apply for deferment** - If you qualify
+4. **Switch to income-driven** - Lower payments
+5. **Consolidate loans** - Simplify multiple loans
+
+**LOAN FORGIVENESS PROGRAMS:**
+**PUBLIC SERVICE (PSLF):**
+- 120 qualifying payments
+- Must work for government/nonprofit
+- Must be on income-driven plan
+- Fill out employment certification annually
+
+**TEACHER FORGIVENESS:**
+- Teach 5 years in low-income school
+- Up to $17,500 forgiven
+- Specific subjects qualify for more
+
+**DISABILITY DISCHARGE:**
+- Total and permanent disability
+- Automatic discharge (as of 2021)
+- No tax penalty
+
+**DEFAULT CONSEQUENCES:**
+❌ Entire balance due immediately
+❌ Wage garnishment (up to 15%)
+❌ Tax refund seizure
+❌ Social Security offset
+❌ Credit score damage
+❌ Lawsuit possible
+❌ No more deferment/forbearance
+
+**GETTING OUT OF DEFAULT:**
+1. **Loan Rehabilitation** - 9 on-time payments
+2. **Consolidation** - Combine loans, exit default
+3. **Pay in full** - If you can afford it
+
+**DISPUTE INCORRECT AMOUNTS:**
+- Request loan history from servicer
+- Compare to original loan documents
+- File complaint with ombudsman
+- Contact Consumer Financial Protection Bureau
+
+**SCAM WARNING:**
+❌ Never pay upfront fees for "help"
+❌ Servicer contact is always free
+❌ Government doesn't charge for forgiveness applications
+❌ Don't give FSA ID to anyone
+        """,
+        category=RightsCategory.STUDENT,
+        is_free=False
+    ),
+
+    "student_discrimination": RightsContent(
+        title="Student Discrimination & Title IX",
+        situation="Facing discrimination or sexual harassment at school",
+        content="""
+**YOUR CIVIL RIGHTS IN EDUCATION:**
+
+**PROTECTED FROM DISCRIMINATION BASED ON:**
+- Race, color, national origin (Title VI)
+- Sex/Gender (Title IX)
+- Disability (Section 504, ADA)
+- Age (Age Discrimination Act)
+- Religion
+
+**TITLE IX SEXUAL HARASSMENT:**
+Schools MUST investigate and respond to:
+- Sexual assault or violence
+- Dating violence
+- Stalking
+- Hostile environment harassment
+
+**YOUR TITLE IX RIGHTS:**
+✅ File complaint with school
+✅ Request supportive measures (schedule changes, no-contact orders)
+✅ Continue education during investigation
+✅ Fair investigation process
+✅ Right to advisor/attorney
+✅ Appeal unfavorable decision
+✅ Protection from retaliation
+
+**WHAT TO DO IF HARASSED/ASSAULTED:**
+1. **Get safe** - Priority #1
+2. **Preserve evidence** - Don't delete messages, wash clothes
+3. **Seek medical care** - Document injuries, STI prevention
+4. **Report to Title IX coordinator** - School must investigate
+5. **Contact police** - Criminal option separate from school
+6. **Request supportive measures** - Housing change, schedule change, no-contact order
+
+**INVESTIGATION PROCESS:**
+- Notice of allegations
+- Investigation (interviews, evidence gathering)
+- Opportunity to respond
+- Live hearing (in some cases)
+- Written decision
+- Right to appeal
+
+**DISABILITY DISCRIMINATION:**
+Schools must provide:
+- Free appropriate public education (FAPE)
+- Reasonable accommodations
+- Accessible facilities
+- Equal opportunity to participate
+
+**504 PLAN / IEP VIOLATIONS:**
+If school isn't following your accommodations:
+1. Document violations in writing
+2. Request meeting with 504/IEP coordinator
+3. File complaint with district
+4. Contact Office for Civil Rights
+5. Request due process hearing
+
+**FILING DISCRIMINATION COMPLAINT:**
+**WITH SCHOOL:**
+- Title IX coordinator (sexual harassment)
+- Section 504 coordinator (disability)
+- Principal or dean
+
+**WITH FEDERAL GOVERNMENT:**
+- Office for Civil Rights (OCR)
+- File within 180 days
+- Online at ed.gov/ocr
+- Investigation is free
+- School cannot retaliate
+
+**RETALIATION IS ILLEGAL:**
+Schools cannot punish you for:
+- Filing complaint
+- Participating in investigation
+- Opposing discrimination
+- Requesting accommodations
+
+**RESOURCES:**
+- Know Your IX (knowyourix.org)
+- Disability Rights Education & Defense Fund
+- ACLU
+- Local legal aid
+        """,
+        category=RightsCategory.STUDENT,
+        is_free=False
+    ),
+
+    # DIGITAL & SOCIAL MEDIA RIGHTS
+    "digital_online_privacy": RightsContent(
+        title="Online Privacy & Data Protection",
+        situation="Protecting your digital privacy and personal data",
+        content="""
+**YOUR DIGITAL PRIVACY RIGHTS:**
+
+**WHAT COMPANIES COLLECT:**
+- Browsing history and search queries
+- Location data (GPS, IP address)
+- Contacts and communications
+- Purchase history
+- Biometric data (face, fingerprint)
+- Health and fitness data
+- Photos and videos
+
+**YOUR RIGHTS (Varies by State):**
+**CALIFORNIA (CCPA/CPRA):**
+✅ Know what data is collected
+✅ Delete your data
+✅ Opt out of data selling
+✅ Correct inaccurate data
+✅ Limit sensitive data use
+
+**SIMILAR LAWS IN:**
+Virginia, Colorado, Connecticut, Utah, and growing
+
+**PROTECTING YOUR PRIVACY:**
+**IMMEDIATE ACTIONS:**
+1. **Review privacy settings** - Facebook, Google, Instagram, TikTok
+2. **Use strong passwords** - Unique for each account
+3. **Enable 2-factor authentication** - Extra security layer
+4. **Use VPN** - Encrypt your internet traffic
+5. **Private browsing** - For sensitive searches
+6. **Limit location sharing** - Only when necessary
+
+**BROWSER PRIVACY:**
+- Use privacy-focused browsers (Brave, Firefox)
+- Install ad blockers
+- Clear cookies regularly
+- Disable third-party cookies
+- Use DuckDuckGo for searches
+
+**SOCIAL MEDIA PRIVACY:**
+**FACEBOOK/INSTAGRAM:**
+- Limit who sees posts (Friends only)
+- Turn off facial recognition
+- Review tagged photos
+- Limit app permissions
+- Download your data to see what they have
+
+**TIKTOK:**
+- Set account to private
+- Disable personalized ads
+- Limit data collection
+- Review who can duet/stitch your videos
+
+**TWITTER/X:**
+- Protect your tweets
+- Disable location tagging
+- Review connected apps
+- Turn off ad personalization
+
+**DATA BREACH RIGHTS:**
+If company has data breach:
+✅ Free credit monitoring (usually 1-2 years)
+✅ Notification within reasonable time
+✅ Information about what was compromised
+✅ Steps company is taking
+✅ Resources to protect yourself
+
+**REQUESTING YOUR DATA:**
+Under CCPA and similar laws:
+1. Submit data request to company
+2. They must respond within 45 days
+3. Can request deletion
+4. Can opt out of selling/sharing
+5. Free (can request 2x per year)
+
+**RED FLAGS - POTENTIAL IDENTITY THEFT:**
+- Unfamiliar charges on credit card
+- Bills for services you don't have
+- Calls from debt collectors
+- Medical bills for treatment you didn't receive
+- IRS notification about multiple tax returns
+
+**IF IDENTITY STOLEN:**
+1. **Place fraud alert** - With credit bureaus
+2. **Freeze credit** - Prevents new accounts
+3. **File FTC report** - IdentityTheft.gov
+4. **Close compromised accounts**
+5. **File police report**
+6. **Monitor credit regularly**
+
+**EMPLOYER/SCHOOL MONITORING:**
+- Assume work devices are monitored
+- School-issued laptops may have tracking
+- Don't expect privacy on work/school networks
+- Use personal devices for personal business
+        """,
+        category=RightsCategory.DIGITAL,
+        is_free=False
+    ),
+
+    "digital_cyberbullying": RightsContent(
+        title="Cyberbullying & Online Harassment",
+        situation="Being bullied or harassed online",
+        content="""
+**CYBERBULLYING IS REAL AND ILLEGAL:**
+
+**WHAT IS CYBERBULLYING:**
+- Threatening or harassing messages
+- Spreading rumors online
+- Sharing embarrassing photos/videos
+- Creating fake accounts to impersonate
+- Exclusion from online groups
+- Public shaming or humiliation
+- Doxxing (sharing private info)
+
+**YOUR RIGHTS:**
+✅ Report to platform (Facebook, Instagram, TikTok, etc.)
+✅ File police report (if threats/harassment)
+✅ Get restraining order (cyberstalking)
+✅ Sue for defamation (false statements)
+✅ School discipline (if students involved)
+✅ Press criminal charges (in some cases)
+
+**IMMEDIATE ACTIONS:**
+1. **Don't respond** - Engaging encourages bully
+2. **Screenshot everything** - Evidence for reports
+3. **Block the person** - All platforms
+4. **Report to platform** - Violates terms of service
+5. **Tell trusted adult** - Parent, teacher, counselor
+6. **Document everything** - Dates, times, content
+
+**WHEN IT'S CRIMINAL:**
+Contact police if:
+- Death threats
+- Sexual exploitation/sextortion
+- Stalking or repeated harassment
+- Hate crimes (threats based on race, religion, etc.)
+- Sharing explicit photos of minors
+- Hacking accounts
+- Identity theft
+
+**REPORTING ON PLATFORMS:**
+
+**INSTAGRAM/FACEBOOK:**
+- Report post/profile
+- Block user
+- Restrict (they can't see when you're online)
+- Turn off comments
+- Request content removal
+
+**TIKTOK:**
+- Report video/comment/user
+- Block and report
+- Privacy settings (limit who can message)
+- Duet/Stitch controls
+
+**TWITTER/X:**
+- Report tweet/account
+- Mute or block
+- Filter notifications
+- Advanced filter settings
+
+**SNAPCHAT:**
+- Report snap/profile
+- Block user
+- Screenshot policy (they're notified)
+
+**SCHOOL RESPONSIBILITIES:**
+If students are involved:
+- School must investigate
+- Can discipline students
+- Must create safe learning environment
+- Cannot ignore cyberbullying that affects school
+
+**LEGAL OPTIONS:**
+
+**RESTRAINING ORDER:**
+For stalking/harassment:
+- Shows pattern of behavior
+- Harasser must stay away
+- Violations are criminal
+- Can include online contact
+
+**CIVIL LAWSUIT:**
+Sue for:
+- Defamation (false statements harming reputation)
+- Intentional infliction of emotional distress
+- Invasion of privacy
+- Damages (therapy costs, emotional harm)
+
+**CRIMINAL CHARGES:**
+Possible charges:
+- Cyberstalking
+- Harassment
+- Threats
+- Hate crimes
+- Child pornography (explicit photos of minors)
+- Computer crimes/hacking
+
+**SUPPORT YOURSELF:**
+- Talk to counselor/therapist
+- Join support groups
+- Take social media breaks
+- Focus on real-life friends
+- Remember: It's not your fault
+
+**WARNING SIGNS (Seek Help):**
+- Depression or anxiety
+- Avoiding school/activities
+- Changes in eating/sleeping
+- Falling grades
+- Self-harm thoughts
+- Substance use
+
+**CRISIS RESOURCES:**
+- Crisis Text Line: Text HOME to 741741
+- National Suicide Prevention: 988
+- Cyberbullying Research Center
+- StopBullying.gov
+        """,
+        category=RightsCategory.DIGITAL,
+        is_free=False
+    ),
+
+    "digital_social_media_posts": RightsContent(
+        title="Social Media Posts That Can Get You Sued",
+        situation="Understanding legal risks of social media posting",
+        content="""
+**SOCIAL MEDIA ISN'T CONSEQUENCE-FREE:**
+
+**POSTS THAT CAN GET YOU SUED:**
+
+**1. DEFAMATION (False Statements):**
+❌ "John Smith is a thief who stole from his company"
+❌ "Jane Doe has an STD"
+❌ "This restaurant has rats in the kitchen" (if false)
+
+**WHAT MAKES IT DEFAMATION:**
+- Statement of fact (not opinion)
+- False and damaging
+- Published to others
+- Causes harm to reputation
+- You knew it was false or didn't care
+
+**OPINION vs FACT:**
+✅ "I think this restaurant is terrible" - Opinion, protected
+❌ "This restaurant poisoned me" - Fact, must be true
+
+**2. ONLINE REVIEWS THAT CROSS THE LINE:**
+**PROTECTED:**
+✅ Honest opinion about experience
+✅ True facts about what happened
+✅ Criticism based on facts
+
+**NOT PROTECTED:**
+❌ Made-up facts
+❌ Lies about business practices
+❌ Fake reviews (never been there)
+❌ Reviews written by competitors
+
+**MAGIC PHRASE FOR REVIEWS:**
+Add "In my opinion..." or "My experience was..."
+Turns factual claim into protected opinion
+
+**3. POSTING SOMEONE'S PRIVATE INFO (Doxxing):**
+❌ Home address
+❌ Phone number
+❌ Workplace
+❌ Social security number
+❌ Financial information
+
+Can result in:
+- Civil lawsuit (invasion of privacy)
+- Criminal charges (in some states)
+- Restraining order
+- Platform ban
+
+**4. COPYRIGHT INFRINGEMENT:**
+❌ Posting someone else's photos without permission
+❌ Using copyrighted music in videos
+❌ Sharing full articles or content
+❌ Using brand logos without permission
+
+**FAIR USE DEFENSE:**
+May be okay if:
+- Commentary or criticism
+- Parody
+- News reporting
+- Educational purposes
+- Transformative (adds new meaning)
+
+**5. HARASSMENT/THREATS:**
+❌ "I'm going to kill you"
+❌ Repeated unwanted messages
+❌ Posting to humiliate or intimidate
+❌ Encouraging others to harass someone
+
+Criminal charges possible:
+- Harassment
+- Cyberstalking
+- Terroristic threats
+- Hate crimes
+
+**6. EMPLOYMENT ISSUES:**
+
+**CAN GET YOU FIRED:**
+- Sharing confidential business info
+- Badmouthing company publicly
+- Discriminatory or hateful posts
+- Violating social media policy
+- Inappropriate photos with company uniform
+
+**PROTECTED ACTIVITY:**
+✅ Discussing wages with coworkers
+✅ Organizing union activities
+✅ Complaining about working conditions
+✅ Whistleblowing illegal activity
+
+**7. SHARING EXPLICIT IMAGES:**
+**WITHOUT CONSENT:**
+- "Revenge porn" - illegal in most states
+- Can face criminal charges
+- Civil lawsuit for damages
+- Restraining order
+- Platform removal
+
+**OF MINORS:**
+- Always illegal
+- Federal crime (child pornography)
+- Mandatory reporting
+- Sex offender registration
+- Prison time
+
+**8. IMPERSONATION:**
+Creating fake accounts to:
+❌ Pretend to be someone else
+❌ Damage their reputation
+❌ Scam others
+❌ Harass someone
+
+Violates platform terms + potential criminal charges
+
+**BEFORE YOU POST, ASK:**
+1. Is this true? (Can I prove it?)
+2. Is it private information?
+3. Could this hurt someone?
+4. Am I breaking a law or rule?
+5. Would I say this to their face?
+6. Will I regret this tomorrow?
+
+**IF YOU POSTED SOMETHING RISKY:**
+1. **Delete immediately** - May reduce damages
+2. **Screenshot the post** - You'll need evidence
+3. **Don't discuss publicly** - Could make it worse
+4. **Consult attorney** - Before responding to legal threat
+5. **Consider apology** - Sometimes resolves without lawsuit
+
+**YOU WERE SUED/THREATENED:**
+1. **Don't ignore it** - Default judgment worse
+2. **Hire attorney** - Defamation law is complex
+3. **Preserve evidence** - Posts, messages, screenshots
+4. **Don't delete everything** - Looks like destroying evidence
+5. **Stop posting about it** - Creates more evidence
+
+**DEFENSES TO DEFAMATION:**
+- Statement is true (truth is absolute defense)
+- It's opinion, not fact
+- No one believed it (no harm)
+- Public figure (higher standard to meet)
+- Privileged communication
+
+**REMEMBER:**
+- Internet is forever (screenshots exist)
+- "Private" accounts aren't really private
+- Employers/colleges check social media
+- Think before you post
+- When in doubt, don't post it
+        """,
+        category=RightsCategory.DIGITAL,
+        is_free=False
+    ),
+
+    # CONSUMER PROTECTION RIGHTS
+    "consumer_scams": RightsContent(
+        title="Recognizing & Reporting Scams",
+        situation="Identifying and responding to consumer fraud",
+        content="""
+**COMMON SCAMS & HOW TO AVOID THEM:**
+
+**1. PHONE/ROBOCALL SCAMS:**
+**IRS SCAM:**
+❌ "You owe back taxes, pay now or be arrested"
+- IRS never calls without mailing first
+- Never demands immediate payment
+- Won't threaten arrest over phone
+
+**SOCIAL SECURITY SCAM:**
+❌ "Your Social Security number is suspended"
+- SS numbers don't get "suspended"
+- SSA doesn't call about problems
+- Won't ask for payment over phone
+
+**TECH SUPPORT SCAM:**
+❌ "Your computer has a virus, let us fix it"
+- Microsoft/Apple don't call unsolicited
+- Never give remote access
+- Never pay for "tech support" from caller
+
+**HOW TO RESPOND:**
+✅ Hang up immediately
+✅ Block the number
+✅ Report to FTC (ReportFraud.ftc.gov)
+✅ Never give personal info
+
+**2. ONLINE SHOPPING SCAMS:**
+
+**RED FLAGS:**
+- Too-good-to-be-true prices
+- Only accepts wire transfer, crypto, gift cards
+- Pressure to buy NOW
+- Website URL slightly misspelled
+- No contact information
+- Fake reviews (all 5-stars posted same day)
+
+**PROTECT YOURSELF:**
+✅ Research seller (Google reviews)
+✅ Use credit card (better fraud protection)
+✅ Check URL carefully
+✅ Screenshot product description
+✅ Read return policy
+✅ Use PayPal for buyer protection
+
+**3. ROMANCE SCAMS:**
+
+**WARNING SIGNS:**
+- Professes love quickly
+- Never wants to video chat
+- Always has excuse not to meet
+- Has "emergency" needing money
+- Claims to be overseas (military, oil rig, doctor)
+- Asks for money, gift cards, cryptocurrency
+
+**THEY MAY ASK FOR:**
+- Emergency medical expenses
+- Plane ticket to visit you
+- Business investment opportunity
+- Help with customs fees
+- Victim of robbery abroad
+
+**PROTECT YOURSELF:**
+- Never send money to someone you haven't met
+- Reverse image search their photos
+- Video chat before getting serious
+- Tell friend/family about relationship
+- If they ask for money = scam
+
+**4. JOB SCAMS:**
+
+**RED FLAGS:**
+- Job offer without interview
+- "Make $5,000/week from home!"
+- Must pay upfront for training/equipment
+- Must buy products to sell
+- Receives check, asked to forward money
+- Asks for bank account or SSN early
+
+**CHECK CASHING SCAM:**
+- You get check, deposit it
+- Asked to buy gift cards/send money
+- Check bounces days later
+- You're responsible for the money
+
+**5. CHARITY SCAMS:**
+After disasters, fake charities appear:
+
+**VERIFY BEFORE DONATING:**
+✅ Research charity (CharityNavigator.org)
+✅ Watch for sound-alike names
+✅ Don't give cash or gift cards
+✅ Get charity's name, phone, address
+✅ Never donate via wire transfer
+
+**6. LANDLORD/RENTAL SCAMS:**
+
+**RED FLAGS:**
+- Must send deposit before seeing property
+- Owner is "out of country"
+- Price way below market rate
+- Pressure to act fast
+- Won't meet in person
+- Asks for wire transfer/gift cards
+
+**PROTECT YOURSELF:**
+✅ See property in person
+✅ Meet landlord face-to-face
+✅ Verify ownership (public records)
+✅ Never wire money or send gift cards
+✅ Read lease carefully
+✅ Get receipt for deposits
+
+**7. IDENTITY THEFT:**
+
+**WARNING SIGNS:**
+- Bills for services you don't have
+- Denied credit unexpectedly
+- Calls about debts you don't owe
+- Missing mail or bank statements
+- IRS notice about multiple tax returns
+
+**IF YOUR IDENTITY IS STOLEN:**
+1. **Place fraud alert** - Call one credit bureau
+2. **Freeze your credit** - All 3 bureaus
+3. **File report** - IdentityTheft.gov
+4. **Close compromised accounts**
+5. **File police report**
+6. **Monitor credit reports**
+
+**PROTECTING YOURSELF:**
+
+**GENERAL RED FLAGS:**
+- Upfront payment required
+- "Act now or lose this deal!"
+- Request for gift cards, wire transfer, crypto
+- Poor grammar/spelling
+- Pressure tactics
+- "Guaranteed" returns
+- Unsolicited contact
+
+**SAFE PAYMENT METHODS:**
+✅ Credit card (fraud protection)
+✅ PayPal (buyer protection)
+✅ Escrow services (for large purchases)
+
+**UNSAFE PAYMENT METHODS:**
+❌ Wire transfer (no recovery)
+❌ Gift cards (untraceable)
+❌ Cryptocurrency (no reversal)
+❌ Cash (no proof)
+
+**IF YOU'VE BEEN SCAMMED:**
+1. **Stop contact immediately**
+2. **Contact bank/credit card** - Report fraud
+3. **Change passwords** - All accounts
+4. **File report with FTC** - ReportFraud.ftc.gov
+5. **Report to FBI** - IC3.gov (for online crime)
+6. **File police report** - Get report number
+7. **Monitor credit** - Watch for identity theft
+8. **Tell others** - Warn friends/family
+
+**WHERE TO REPORT:**
+- Federal Trade Commission: ReportFraud.ftc.gov
+- FBI Internet Crime Complaint Center: IC3.gov
+- State Attorney General
+- Better Business Bureau (BBB.org)
+- Social media platform (if applicable)
+
+**REMEMBER:**
+- If it seems too good to be true, it is
+- Legitimate businesses don't pressure you
+- Never pay with gift cards or wire transfer
+- Research before giving money or info
+- Trust your gut - if something feels off, walk away
+        """,
+        category=RightsCategory.CONSUMER,
+        is_free=False
+    ),
+
+    "consumer_debt_collection": RightsContent(
+        title="Debt Collection Rights (FDCPA)",
+        situation="Dealing with debt collectors",
+        content="""
+**FAIR DEBT COLLECTION PRACTICES ACT (FDCPA):**
+
+**YOUR RIGHTS:**
+✅ Validation of debt (proof you owe it)
+✅ No harassment or abuse
+✅ Limited contact hours (8am-9pm)
+✅ Stop contact in writing
+✅ Sue for violations
+✅ Dispute the debt
+
+**DEBT COLLECTORS CANNOT:**
+
+**HARASSMENT:**
+❌ Call repeatedly to annoy you
+❌ Use profane or obscene language
+❌ Threaten violence or harm
+❌ Publish your name (shame tactics)
+❌ Call your workplace after being told not to
+
+**FALSE STATEMENTS:**
+❌ Claim to be law enforcement
+❌ Threaten arrest (not how debt works)
+❌ Say you committed crime
+❌ Misrepresent amount owed
+❌ Claim they'll garnish wages (without court order)
+❌ Threaten to take your property illegally
+
+**UNFAIR PRACTICES:**
+❌ Add unauthorized fees
+❌ Collect more than you owe
+❌ Take post-dated checks early
+❌ Threaten to repossess property they can't legally take
+❌ Contact you at work if told not to
+
+**WHEN THEY CAN CONTACT YOU:**
+✅ 8am - 9pm your local time
+✅ At home (unless you tell them not to)
+✅ Through attorney (if you have one)
+
+**WHEN THEY CANNOT CONTACT:**
+❌ Before 8am or after 9pm
+❌ At work (if you tell them it's not allowed)
+❌ If you have attorney (must contact attorney instead)
+❌ After you send cease contact letter
+
+**VALIDATING THE DEBT:**
+
+**WITHIN 5 DAYS, COLLECTOR MUST SEND:**
+- Amount of debt
+- Name of creditor
+- Your validation rights
+- How to dispute
+
+**YOU CAN:**
+1. **Dispute in writing** (within 30 days)
+2. **Request proof** (original contract, payment history)
+3. **Stop collection** (until they provide proof)
+
+**DEBT VALIDATION LETTER TEMPLATE:**
+```
+[Your Name]
+[Your Address]
+[Date]
+
+[Collector Name]
+[Collector Address]
+
+Re: Account #[number]
+
+I dispute this debt and request validation:
+- Copy of original signed contract
+- Itemized payment history
+- Proof you're licensed to collect in my state
+- Proof of your authority to collect this debt
+
+Cease all contact except to provide this proof.
+
+[Your Signature]
+```
+
+**CEASE & DESIST LETTER:**
+Stops collector from contacting you:
+
+```
+I demand you cease all contact regarding this debt.
+Contact me only to:
+- Confirm you'll stop contacting me
+- Notify me of specific legal action being taken
+
+All future communication must be in writing.
+```
+
+**WHAT HAPPENS AFTER:**
+- Collection stops
+- They can sue you (but often don't)
+- You may still owe the debt
+- Doesn't remove from credit report
+
+**STATUTE OF LIMITATIONS:**
+
+**TIME-BARRED DEBT:**
+Old debt past the legal deadline to sue:
+- Varies by state (3-10 years typically)
+- Clock starts from last payment OR last activity
+- Collector can still call
+- But cannot sue you
+- Making payment restarts the clock!
+
+**IF CONTACTED ABOUT OLD DEBT:**
+❌ Don't acknowledge you owe it
+❌ Don't make any payment
+❌ Don't promise to pay
+
+✅ Ask: "What's the date of last activity?"
+✅ Check your state's statute of limitations
+✅ Send cease contact letter
+
+**DEALING WITH COLLECTORS:**
+
+**DO:**
+✅ Keep records of all contact
+✅ Get everything in writing
+✅ Send letters certified mail
+✅ Record calls (if legal in your state)
+✅ Take notes (date, time, name, what was said)
+✅ Pay attention to validation period (30 days)
+
+**DON'T:**
+❌ Give bank account info
+❌ Give credit card info
+❌ Confirm you owe the debt
+❌ Make payment without validation
+❌ Let them bully you
+
+**IF COLLECTOR VIOLATES FDCPA:**
+
+**DOCUMENT:**
+- Date and time of violation
+- What was said/done
+- Witness names
+- Save voicemails
+- Keep letters
+
+**REPORT TO:**
+- Consumer Financial Protection Bureau (CFPB)
+- State Attorney General
+- Federal Trade Commission
+- Better Business Bureau
+
+**SUE THE COLLECTOR:**
+- You can sue within 1 year of violation
+- Can get actual damages
+- Up to $1,000 per violation
+- Attorney fees covered
+- Many lawyers take these cases on contingency
+
+**NEGOTIATING DEBT:**
+
+**PAY-FOR-DELETE:**
+- Offer payment in exchange for removing from credit
+- Get agreement in writing BEFORE paying
+- Not all collectors will agree
+- Worth trying
+
+**SETTLEMENT:**
+- Offer lump sum less than full amount
+- Typically 30-50% of balance
+- Get written agreement before paying
+- Agreement should say "paid in full"
+
+**CREDIT REPORTING:**
+
+**DEBT ON CREDIT REPORT:**
+- Falls off after 7 years (from first delinquency)
+- Paying doesn't remove it (stays for 7 years)
+- Dispute inaccurate information
+- Can negotiate pay-for-delete
+
+**MEDICAL DEBT:**
+- Now requires 1 year before reporting
+- Under $500 won't be reported (as of 2023)
+- Dispute errors with credit bureaus
+
+**BANKRUPTCY AS OPTION:**
+If debt is overwhelming:
+- Chapter 7: Wipes out most unsecured debt
+- Chapter 13: Repayment plan over 3-5 years
+- Stops collection calls
+- Stops lawsuits
+- Consult bankruptcy attorney
+
+**REMEMBER:**
+- You have rights
+- Collectors bank on you not knowing the rules
+- Document everything
+- Don't be afraid to assert your rights
+- Owing money doesn't make you a bad person
+        """,
+        category=RightsCategory.CONSUMER,
+        is_free=False
+    ),
+
+    "consumer_returns_refunds": RightsContent(
+        title="Returns, Refunds & Warranties",
+        situation="Returning products or getting refunds",
+        content="""
+**YOUR CONSUMER RETURN RIGHTS:**
+
+**FEDERAL LAW:**
+No general federal right to return (unless):
+- Product is defective
+- False advertising
+- Cooling-off rule (door-to-door sales)
+- FTC Mail/Internet Order Rule
+
+**STORE POLICIES:**
+- Stores set their own return policies
+- Must be clearly posted
+- Can refuse returns (except above situations)
+- Can charge restocking fees
+- Can offer store credit only
+
+**COOLING-OFF RULE (FTC):**
+3-day right to cancel for:
+✅ Sales at your home
+✅ Sales at temporary locations
+✅ Door-to-door sales over $25
+
+**DOESN'T APPLY TO:**
+❌ Sales under $25
+❌ Sales at store's permanent location
+❌ Sales for emergency home repairs
+❌ Real estate, insurance, securities
+
+**MAIL/INTERNET ORDER RULE:**
+
+**SELLER MUST:**
+✅ Ship within promised time (or 30 days)
+✅ Notify you if delay
+✅ Offer to cancel for refund
+✅ Refund promptly if canceled
+
+**IF SELLER DOESN'T SHIP:**
+- Cancel order
+- Request full refund
+- Refund within 7 days (credit card) or 20 days (other)
+
+**DEFECTIVE PRODUCTS:**
+
+**UNDER WARRANTY:**
+Seller/manufacturer must:
+- Repair the product
+- Replace the product
+- Refund your money
+
+**WITHOUT WARRANTY:**
+Still protected by:
+- Implied warranty of merchantability (it should work)
+- Implied warranty of fitness (works for stated purpose)
+- State consumer protection laws
+
+**ONLINE SHOPPING RETURNS:**
+
+**AMAZON:**
+- Most items: 30-day return
+- Some exceptions (opened software, etc.)
+- Free return shipping on defective items
+- A-to-Z guarantee for third-party sellers
+
+**EBAY:**
+- Seller sets return policy
+- eBay Money Back Guarantee if item not as described
+- 30 days to open return request
+- Free return if item not as described
+
+**CREDIT CARD CHARGEBACK:**
+
+**WHEN TO USE:**
+- Merchant won't refund defective product
+- Never received item
+- Billed wrong amount
+- Unauthorized charge
+- Cancelled subscription still charging
+
+**TIME LIMIT:**
+- Usually 60 days from statement date
+- Act quickly - sooner is better
+
+**HOW TO FILE:**
+1. **Try merchant first** - Document refusal
+2. **Call credit card company** - Dispute department
+3. **Provide evidence** - Receipts, photos, communications
+4. **Fill out dispute form** - Include all details
+5. **Provisional credit** - Often given during investigation
+6. **Resolution** - Takes 30-90 days
+
+**WARRANTIES:**
+
+**IMPLIED WARRANTY:**
+Automatic, doesn't need to be written:
+- **Merchantability:** Product does what it's supposed to
+- **Fitness:** Seller recommends it for specific use
+
+**EXPRESS WARRANTY:**
+Written or verbal promise:
+- "This will last 5 years"
+- "100% waterproof"
+- Product descriptions/ads
+- Demo/model shown
+
+**EXTENDED WARRANTIES:**
+- Usually not worth it
+- Credit card may provide extension
+- Read fine print carefully
+- Many exclusions
+
+**MAGNUSON-MOSS WARRANTY ACT:**
+
+**FULL WARRANTY MUST:**
+- Fix or replace product free
+- Within reasonable time
+- No limit on duration
+- No unreasonable duties required
+- Refund if can't fix
+
+**LIMITED WARRANTY:**
+- Can have more restrictions
+- Must be clearly disclosed
+- Can't disclaim implied warranty completely
+
+**LEMON LAWS (VEHICLES):**
+
+**NEW CAR LEMON LAW:**
+If new car has substantial defect:
+- Manufacturer gets reasonable attempts to fix
+- Usually 3-4 repair attempts, OR
+- 30 days out of service in first year
+- You get replacement or refund
+
+**USED CAR:**
+- Some states have used car lemon laws
+- Federal Used Car Rule requires "Buyers Guide"
+- As-is sales have fewer protections
+
+**COMMON RETURN TRICKS TO AVOID:**
+
+**RESTOCKING FEES:**
+- Can be 10-25%
+- Should be disclosed upfront
+- Challenge if not clearly stated
+
+**"ALL SALES FINAL":**
+- Still must honor warranty
+- Can't override consumer protection laws
+- Doesn't apply to defective products
+
+**STORE CREDIT ONLY:**
+- Legal in most cases
+- Check policy before buying
+- Credit card chargeback may help
+
+**HOW TO GET SUCCESSFUL REFUNDS:**
+
+**1. KNOW THE POLICY:**
+- Read before buying
+- Screenshot online policies
+- Ask questions upfront
+
+**2. DOCUMENT EVERYTHING:**
+- Keep receipts
+- Save packaging
+- Photo/video of defects
+- Screenshot product descriptions
+- Keep all emails
+
+**3. BE PREPARED:**
+- Original form of payment
+- All accessories/packaging
+- Proof of purchase
+- Warranty information
+
+**4. BE POLITE BUT FIRM:**
+- Ask for manager if needed
+- Reference policy specifically
+- Stay calm and factual
+- Get employee name/ID
+
+**5. ESCALATE IF NEEDED:**
+- Corporate customer service
+- Social media (Twitter/Facebook)
+- Better Business Bureau
+- State Attorney General
+- Small claims court
+
+**WHAT TO SAY:**
+
+**FOR DEFECTIVE PRODUCT:**
+"This product is defective and doesn't work as advertised. Under the implied warranty of merchantability, I'm entitled to a refund or replacement."
+
+**FOR RETURN:**
+"Your posted policy allows returns within [X] days. I'm within that period and would like to return this for a full refund."
+
+**FOR CHARGEBACK:**
+"I've attempted to resolve this with the merchant but they've refused. I'm filing a chargeback because [product not received/defective/not as described]."
+
+**SMALL CLAIMS COURT:**
+
+**WHEN TO USE:**
+- Amount in dispute is under $5,000-$10,000 (varies by state)
+- Other options failed
+- You have strong evidence
+
+**YOU DON'T NEED LAWYER:**
+- File yourself (usually $30-$100)
+- Present your case to judge
+- Bring all evidence
+- Win rate for consumers is good if you have proof
+
+**REMEMBER:**
+- Read return policies before buying
+- Save all receipts and packaging
+- Document defects with photos
+- Try resolving with merchant first
+- Know your rights - stores count on you not knowing
+- Be persistent but polite
+- You have more rights than you think
+        """,
+        category=RightsCategory.CONSUMER,
+        is_free=False
     )
 }
 
