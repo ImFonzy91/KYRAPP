@@ -477,6 +477,37 @@ const RightsApp = () => {
     handleViewCategoryRights(categoryId);
   };
 
+  const toggleBundleSelection = (categoryId) => {
+    setSelectedBundles(prev => {
+      if (prev.includes(categoryId)) {
+        // Remove from selection
+        return prev.filter(id => id !== categoryId);
+      } else {
+        // Add to selection
+        return [...prev, categoryId];
+      }
+    });
+  };
+
+  const getTotalPrice = () => {
+    return selectedBundles.reduce((total, bundleId) => {
+      const category = categories.find(c => c.id === bundleId);
+      return total + (category?.price || 0);
+    }, 0);
+  };
+
+  const handleCheckout = async () => {
+    if (selectedBundles.length === 0) {
+      alert('Please select at least one bundle to purchase!');
+      return;
+    }
+    
+    // For now, since everything is free, just grant access
+    alert(`Purchasing ${selectedBundles.length} bundles for $${getTotalPrice().toFixed(2)}`);
+    setSelectedBundles([]);
+    setShowCart(false);
+  };
+
   const handleBuyFullAccess = async (categoryId) => {
     try {
       const originUrl = window.location.origin;
