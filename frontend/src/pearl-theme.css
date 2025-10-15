@@ -44,45 +44,44 @@ html, body {
   }
 }
 
-/* MAIN LIBRA SCALES - SUPER BRIGHT ROYAL BLUE - MAX VISIBILITY */
+/* MAIN LIBRA SCALES - DARK ROYAL BLUE - MAXIMUM VISIBILITY */
 body::before {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  font-size: 45rem !important;
-  opacity: 0.65 !important;
-  z-index: -1 !important;
+  font-size: 50rem !important;
+  opacity: 0.90 !important;
+  z-index: 0 !important;
   pointer-events: none !important;
-  color: #1E90FF !important;
+  color: #0047AB !important;
   text-shadow: 
-    0 0 60px #1E90FF,
-    0 0 120px #4169E1,
-    0 0 180px #0047AB,
-    0 0 240px #1E90FF,
-    0 0 300px #4169E1 !important;
-  filter: brightness(2.5) contrast(1.5) drop-shadow(0 0 100px #1E90FF) !important;
+    0 0 80px #0047AB,
+    0 0 160px #1E90FF,
+    0 0 240px #0047AB !important;
+  filter: brightness(1.2) contrast(1.8) !important;
   animation: scaleGlow 4s ease-in-out infinite !important;
+  mix-blend-mode: multiply !important;
 }
 
-/* SECOND LIBRA SCALES - ROTATING ROYAL BLUE ACCENT */
+/* SECOND LIBRA SCALES - ROTATING DARK BLUE ACCENT */
 body::after {
   content: "⚖️" !important;
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) rotate(15deg) !important;
-  font-size: 40rem !important;
-  opacity: 0.45 !important;
-  z-index: -2 !important;
+  font-size: 45rem !important;
+  opacity: 0.70 !important;
+  z-index: 0 !important;
   pointer-events: none !important;
-  color: #4169E1 !important;
+  color: #1E90FF !important;
   text-shadow: 
     0 0 60px #1E90FF,
-    0 0 120px #4169E1,
-    0 0 180px #0047AB !important;
+    0 0 120px #0047AB !important;
   animation: scaleRotate 6s ease-in-out infinite !important;
+  mix-blend-mode: multiply !important;
 }
 
 .app-header {
