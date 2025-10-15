@@ -490,9 +490,24 @@ const RightsApp = () => {
   };
 
   const getTotalPrice = () => {
+    const bundlePrices = {
+      traffic: 2.99,
+      housing: 2.99,
+      property: 2.99,
+      landmines: 2.99,
+      criminal: 2.99,
+      workplace: 2.99,
+      family: 2.99,
+      divorce: 4.99,
+      immigration: 4.99,
+      healthcare: 2.99,
+      student: 2.99,
+      digital: 2.99,
+      consumer: 2.99,
+    };
+    
     return selectedBundles.reduce((total, bundleId) => {
-      const category = categories.find(c => c.id === bundleId);
-      return total + (category?.price || 0);
+      return total + (bundlePrices[bundleId] || 0);
     }, 0);
   };
 
