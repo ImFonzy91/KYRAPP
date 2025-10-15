@@ -896,9 +896,9 @@ body.neon-theme {
 
 .bundle-card {
   background: linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #ffffff 100%);
-  padding: 1.25rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.1);
+  padding: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
   transition: transform 0.3s ease;
   text-align: center;
   position: relative;
