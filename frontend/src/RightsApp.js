@@ -686,13 +686,19 @@ const RightsApp = () => {
                   </button>
                 </div>
 
-                <div className="bundle-card">
+                <div className={`bundle-card ${selectedBundles.includes('divorce') ? 'selected' : ''}`}>
+                  <input 
+                    type="checkbox" 
+                    className="bundle-checkbox"
+                    checked={selectedBundles.includes('divorce')}
+                    onChange={() => toggleBundleSelection('divorce')}
+                  />
                   <div className="bundle-icon">💔</div>
                   <h4>Divorce Rights</h4>
-                  <p>💸 Don't lose half your assets! Learn the ONE thing lawyers don't tell you about property division...</p>
+                  <p>💸 Don't lose half your assets! Learn the ONE thing lawyers don't tell you...</p>
                   <div className="bundle-price">$4.99</div>
                   <button className="bundle-button" onClick={() => handlePurchaseCategory('divorce')}>
-                    Get Divorce Rights
+                    View Content
                   </button>
                 </div>
 
