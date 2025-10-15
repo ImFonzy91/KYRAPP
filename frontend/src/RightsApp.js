@@ -375,70 +375,99 @@ const RightsApp = () => {
     const queryLower = query.toLowerCase();
     const directMatches = [];
     
-    // Common search terms and their matches
-    if (queryLower.includes('pulled over') || queryLower.includes('traffic stop') || queryLower.includes('police stop')) {
+    // Traffic & Vehicle Rights
+    if (queryLower.includes('pulled over') || queryLower.includes('traffic stop') || queryLower.includes('police stop') || queryLower.includes('traffic')) {
       directMatches.push({
         id: 'traffic_pulled_over',
-        title: 'I Got Pulled Over',
-        situation: 'Police officer pulls you over',
+        title: 'Traffic & Vehicle Rights',
+        situation: 'Police stops, searches, DUI checkpoints, recording rights',
         category: 'traffic',
-        is_free: true,
-        price: 0
-      });
-    }
-    
-    if (queryLower.includes('search') && (queryLower.includes('car') || queryLower.includes('vehicle'))) {
-      directMatches.push({
-        id: 'traffic_search_car',
-        title: 'Can Police Search My Car?',
-        situation: 'Officer wants to search your vehicle',
-        category: 'traffic',
-        is_free: true,
-        price: 0
-      });
-    }
-    
-    if (queryLower.includes('id') || queryLower.includes('identification')) {
-      directMatches.push({
-        id: 'traffic_show_id',
-        title: 'Do I Have to Show ID?',
-        situation: 'Officer asks for identification',
-        category: 'traffic',
-        is_free: true,
-        price: 0
-      });
-    }
-    
-    if (queryLower.includes('record') || queryLower.includes('filming')) {
-      directMatches.push({
-        id: 'traffic_recording',
-        title: 'Can I Record Police?',
-        situation: 'You want to record police interaction',
-        category: 'traffic',
-        is_free: true,
-        price: 0
-      });
-    }
-    
-    if (queryLower.includes('evict') || queryLower.includes('landlord')) {
-      directMatches.push({
-        id: 'tenant_eviction',
-        title: 'Landlord Wants to Evict Me',
-        situation: 'Facing eviction proceedings',
-        category: 'tenant',
         is_free: false,
         price: 2.99
       });
     }
     
-    if (queryLower.includes('deposit')) {
+    // Property Rights
+    if (queryLower.includes('property') || queryLower.includes('home') || queryLower.includes('house') || queryLower.includes('door') || queryLower.includes('search')) {
       directMatches.push({
-        id: 'tenant_security_deposit',
-        title: 'Getting Security Deposit Back',
-        situation: 'Moving out and want deposit returned',
-        category: 'tenant',
+        id: 'property_rights',
+        title: 'Property Rights',
+        situation: 'Cops at your door? Learn the ONE phrase that stops illegal searches',
+        category: 'property',
         is_free: false,
         price: 2.99
+      });
+    }
+    
+    // Housing/Tenant Rights
+    if (queryLower.includes('evict') || queryLower.includes('landlord') || queryLower.includes('tenant') || queryLower.includes('rent') || queryLower.includes('housing') || queryLower.includes('deposit')) {
+      directMatches.push({
+        id: 'housing_rights',
+        title: 'Housing Rights',
+        situation: 'Landlord issues, evictions, security deposits, repairs',
+        category: 'housing',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    // Legal Landmines
+    if (queryLower.includes('review') || queryLower.includes('yelp') || queryLower.includes('lawsuit') || queryLower.includes('landmine') || queryLower.includes('defamation')) {
+      directMatches.push({
+        id: 'legal_landmines',
+        title: 'Legal Landmines',
+        situation: 'Bad Yelp review = $25K lawsuit? Learn the ONE word that protects you',
+        category: 'landmines',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    // Criminal Defense
+    if (queryLower.includes('arrest') || queryLower.includes('criminal') || queryLower.includes('defense') || queryLower.includes('miranda') || queryLower.includes('lawyer')) {
+      directMatches.push({
+        id: 'criminal_rights',
+        title: 'Criminal Defense Rights',
+        situation: 'Say these 2 sentences during arrest to stop questioning',
+        category: 'criminal',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    // Workplace Rights
+    if (queryLower.includes('work') || queryLower.includes('boss') || queryLower.includes('job') || queryLower.includes('fired') || queryLower.includes('overtime') || queryLower.includes('harass')) {
+      directMatches.push({
+        id: 'workplace_rights',
+        title: 'Business & Workplace Rights',
+        situation: 'Boss harassment, firing, overtime, workplace issues',
+        category: 'workplace',
+        is_free: false,
+        price: 2.99
+      });
+    }
+    
+    // Divorce Rights
+    if (queryLower.includes('divorce') || queryLower.includes('separation') || queryLower.includes('assets') || queryLower.includes('custody')) {
+      directMatches.push({
+        id: 'divorce_rights',
+        title: 'Divorce Rights',
+        situation: 'Don\'t lose half your assets! Learn the ONE thing lawyers hide',
+        category: 'divorce',
+        is_free: false,
+        price: 4.99
+      });
+    }
+    
+    // Immigration Rights
+    if (queryLower.includes('immigra') || queryLower.includes('visa') || queryLower.includes('deport') || queryLower.includes('green card') || queryLower.includes('citizen')) {
+      directMatches.push({
+        id: 'immigration_rights',
+        title: 'Immigration Rights',
+        situation: 'Visa, deportation defense, green cards - ALL immigrants covered',
+        category: 'immigration',
+        is_free: false,
+        price: 4.99
       });
     }
     
