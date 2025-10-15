@@ -513,7 +513,7 @@ button, .btn, .bundle-button, .search-button {
 }
 
 .cart-modal {
-  background: linear-gradient(135deg, #ffffff 0%, #fffef0 50%, #ffffff 100%) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   border: 6px solid #FFD700 !important;
   border-radius: 25px !important;
   max-width: 700px !important;
@@ -524,6 +524,7 @@ button, .btn, .bundle-button, .search-button {
   flex-direction: column !important;
   box-shadow: 0 20px 80px rgba(255, 215, 0, 0.5) !important;
   animation: modalSlideIn 0.3s ease-out !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 @keyframes modalSlideIn {
