@@ -1074,9 +1074,9 @@ const RightsApp = () => {
                 </div>
 
                 <div className="cart-modal-footer">
-                  {selectedBundles.length >= 3 && (
+                  {selectedBundles.length >= 5 && (
                     <div className="discount-badge">
-                      🎉 {selectedBundles.length >= 13 ? 'COMPLETE PACKAGE DEAL!' : 'BUNDLE DISCOUNT APPLIED!'}
+                      🎉 {selectedBundles.length >= 13 ? 'COMPLETE PACKAGE - SAVE $19!' : 'BUNDLE DISCOUNT - SAVE $2!'}
                     </div>
                   )}
                   <div className="modal-total">
