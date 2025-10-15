@@ -954,7 +954,9 @@ const RightsApp = () => {
           </button>
 
           {/* CART MODAL OVERLAY */}
-          {showCart && (
+          {showCart && (() => {
+            console.log('RENDERING CART MODAL! showCart:', showCart, 'selectedBundles:', selectedBundles.length);
+            return (
             <div className="cart-modal-overlay" onClick={() => setShowCart(false)}>
               <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="cart-modal-header">
