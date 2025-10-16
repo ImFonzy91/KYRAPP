@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 
 /* BUNDLE CARDS - NEON GOLD OUTLINE */
 .bundle-card {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(0, 0, 0, 0.70) !important;
   border: 6px solid #FFD700 !important;
   border-radius: 20px !important;
   box-shadow: 
@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 }
 
 .bundle-card:hover {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(20, 0, 0, 0.80) !important;
   border-color: #FFFF00 !important;
   box-shadow: 
     0 15px 60px rgba(255, 215, 0, 0.8),
@@ -111,7 +111,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 }
 
 .bundle-card.selected {
-  background: rgba(255, 250, 200, 0.90) !important;
+  background: rgba(40, 0, 0, 0.85) !important;
   border: 7px solid #FFFF00 !important;
   box-shadow: 
     0 15px 60px rgba(255, 255, 0, 0.8),
@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 }
 
 .bundle-card h4, .bundle-card p, .bundle-card .bundle-price {
-  color: #000000 !important;
+  color: #FFFFFF !important;
   font-weight: 800 !important;
 }
 
