@@ -28,15 +28,16 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
   font-weight: 700 !important;
 }
 
-/* HEADER - NEON GOLD OUTLINE */
+/* HEADER - NEON RED OUTLINE WITH GOLD TRIM */
 .app-header {
-  background: rgba(0, 0, 0, 0.75) !important;
-  border-bottom: 6px solid #FFD700 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 6px solid #FF0000 !important;
+  border-image: linear-gradient(90deg, #FFD700 0%, #FF0000 50%, #FFD700 100%) 1 !important;
   box-shadow: 
-    0 5px 30px rgba(255, 215, 0, 0.7),
-    0 0 25px rgba(255, 255, 0, 0.5),
-    0 0 40px rgba(255, 215, 0, 0.4),
-    inset 0 -2px 10px rgba(255, 215, 0, 0.3) !important;
+    0 5px 30px rgba(255, 0, 0, 0.7),
+    0 0 25px rgba(255, 0, 0, 0.6),
+    0 0 40px rgba(255, 215, 0, 0.3),
+    inset 0 -2px 10px rgba(255, 0, 0, 0.2) !important;
 }
 
 /* LEGAL DISCLAIMER - NEON GOLD OUTLINE */
