@@ -106,27 +106,31 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
     0 0 35px rgba(255, 255, 0, 0.5) !important;
 }
 
-/* BUTTONS - GOLD WITH BLACK TEXT */
+/* BUTTONS - RED WITH GOLD TRIM */
 .bundle-button, .floating-cart-btn, .modal-checkout-btn {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-  border: 5px solid #FFD700 !important;
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%) !important;
+  border: 5px solid #FF0000 !important;
+  outline: 2px solid #FFD700 !important;
+  outline-offset: -7px !important;
   border-radius: 15px !important;
-  color: #000000 !important;
+  color: #FFFFFF !important;
   font-weight: 900 !important;
   box-shadow: 
-    0 8px 40px rgba(255, 215, 0, 0.5),
-    0 0 30px rgba(255, 215, 0, 0.4) !important;
+    0 8px 40px rgba(255, 0, 0, 0.6),
+    0 0 30px rgba(255, 0, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3) !important;
   text-shadow: 
-    0 1px 2px rgba(255, 255, 255, 0.5) !important;
+    0 2px 4px rgba(0, 0, 0, 0.8) !important;
   transition: all 0.3s ease !important;
 }
 
 .bundle-button:hover, .floating-cart-btn:hover, .modal-checkout-btn:hover {
   transform: scale(1.08) translateY(-3px) !important;
   box-shadow: 
-    0 12px 50px rgba(255, 215, 0, 0.7),
-    0 0 40px rgba(255, 165, 0, 0.6) !important;
-  background: linear-gradient(135deg, #FFFF00 0%, #FFD700 100%) !important;
+    0 12px 50px rgba(255, 0, 0, 0.8),
+    0 0 40px rgba(255, 0, 0, 0.7),
+    0 0 30px rgba(255, 215, 0, 0.5) !important;
+  background: linear-gradient(135deg, #FF0000 0%, #FF0000 100%) !important;
 }
 
 /* FLOATING CART */
