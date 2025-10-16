@@ -190,16 +190,16 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 
 /* CART MODAL - GOLD OUTLINE */
 .cart-modal {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(0, 0, 0, 0.90) !important;
   border: 6px solid #FFD700 !important;
   border-radius: 25px !important;
   box-shadow: 
-    0 30px 100px rgba(255, 215, 0, 0.5),
-    0 0 60px rgba(255, 215, 0, 0.4) !important;
+    0 30px 100px rgba(255, 215, 0, 0.7),
+    0 0 60px rgba(255, 255, 0, 0.6) !important;
 }
 
 .cart-modal h2, .cart-modal h3, .cart-modal p, .cart-modal span {
-  color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 .cart-modal-header {
