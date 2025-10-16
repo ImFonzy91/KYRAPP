@@ -1,0 +1,232 @@
+/* FINAL THEME - MOTHER-OF-PEARL + BLACK LETTERS + GOLD OUTLINES */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* STRONG MOTHER-OF-PEARL BACKGROUND */
+html, body {
+  background: 
+    radial-gradient(ellipse at 20% 50%, #FFFFFF 0%, #F5F5F5 50%),
+    radial-gradient(ellipse at 80% 20%, #FFFEF5 0%, #FAF9F0 50%),
+    radial-gradient(ellipse at 40% 80%, #FFFFFF 0%, #F8F8F8 50%),
+    linear-gradient(135deg, #FFFFFF 0%, #FFFEF5 20%, #FFFFFF 40%, #FAF9F0 60%, #FFFFFF 80%, #FFFEF5 100%) !important;
+  color: #000000 !important;
+  min-height: 100vh !important;
+}
+
+/* NO LIBRA SCALES */
+html::before, html::after, body::before, body::after {
+  display: none !important;
+}
+
+/* BLACK TEXT WITH GOLD OUTLINES */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
+  color: #000000 !important;
+  text-shadow: 
+    0 0 2px #FFD700,
+    0 0 4px #FFD700,
+    1px 1px 0 #FFD700,
+    -1px -1px 0 #FFD700,
+    1px -1px 0 #FFD700,
+    -1px 1px 0 #FFD700 !important;
+  font-weight: 700 !important;
+}
+
+/* HEADER - GOLD OUTLINE */
+.app-header {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border-bottom: 5px solid #FFD700 !important;
+  box-shadow: 
+    0 5px 30px rgba(255, 215, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* LEGAL DISCLAIMER - GOLD OUTLINE */
+.legal-disclaimer {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 5px solid #FFD700 !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 8px 40px rgba(255, 215, 0, 0.4),
+    0 0 25px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* BUNDLE CARDS - GOLD OUTLINE */
+.bundle-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 5px solid #FFD700 !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 10px 50px rgba(255, 215, 0, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.bundle-card:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: #FFA500 !important;
+  box-shadow: 
+    0 15px 60px rgba(255, 215, 0, 0.6),
+    0 0 40px rgba(255, 165, 0, 0.5) !important;
+  transform: translateY(-8px) !important;
+}
+
+.bundle-card.selected {
+  background: rgba(255, 250, 200, 0.90) !important;
+  border: 6px solid #FFFF00 !important;
+  box-shadow: 
+    0 15px 60px rgba(255, 255, 0, 0.6),
+    0 0 50px rgba(255, 215, 0, 0.5) !important;
+}
+
+.bundle-card h4, .bundle-card p, .bundle-card .bundle-price {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* HERO SECTION - GOLD OUTLINE */
+.hero-section {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 5px solid #FFD700 !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 10px 50px rgba(255, 215, 0, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* BUTTONS - GOLD WITH BLACK TEXT */
+.bundle-button, .floating-cart-btn, .modal-checkout-btn {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+  border: 5px solid #FFD700 !important;
+  border-radius: 15px !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  box-shadow: 
+    0 8px 40px rgba(255, 215, 0, 0.5),
+    0 0 30px rgba(255, 215, 0, 0.4) !important;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.3s ease !important;
+}
+
+.bundle-button:hover, .floating-cart-btn:hover, .modal-checkout-btn:hover {
+  transform: scale(1.08) translateY(-3px) !important;
+  box-shadow: 
+    0 12px 50px rgba(255, 215, 0, 0.7),
+    0 0 40px rgba(255, 165, 0, 0.6) !important;
+  background: linear-gradient(135deg, #FFFF00 0%, #FFD700 100%) !important;
+}
+
+/* FLOATING CART */
+.floating-cart-btn {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  padding: 1.2rem 2rem !important;
+  border-radius: 50px !important;
+  font-size: 1.3rem !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.8rem !important;
+  animation: cartFloat 2s ease-in-out infinite !important;
+}
+
+@keyframes cartFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.cart-text {
+  color: #000000 !important;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* CART MODAL - GOLD OUTLINE */
+.cart-modal {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 6px solid #FFD700 !important;
+  border-radius: 25px !important;
+  box-shadow: 
+    0 30px 100px rgba(255, 215, 0, 0.5),
+    0 0 60px rgba(255, 215, 0, 0.4) !important;
+}
+
+.cart-modal h2, .cart-modal h3, .cart-modal p, .cart-modal span {
+  color: #000000 !important;
+}
+
+.cart-modal-header {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 165, 0, 0.3) 100%) !important;
+  border-bottom: 4px solid #FFD700 !important;
+}
+
+.cart-modal-item {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border: 4px solid #FFD700 !important;
+  border-radius: 15px !important;
+  box-shadow: 
+    0 6px 30px rgba(255, 215, 0, 0.3),
+    0 0 20px rgba(255, 215, 0, 0.2) !important;
+}
+
+.cart-modal-footer {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-top: 4px solid #FFD700 !important;
+}
+
+/* INPUTS - GOLD OUTLINE */
+input[type="text"], input[type="search"], textarea {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border: 4px solid #FFD700 !important;
+  border-radius: 15px !important;
+  color: #000000 !important;
+  box-shadow: 
+    0 4px 20px rgba(255, 215, 0, 0.3),
+    inset 0 2px 5px rgba(255, 215, 0, 0.1) !important;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* FOOTER - GOLD OUTLINE */
+.app-footer {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border-top: 5px solid #FFD700 !important;
+  box-shadow: 
+    0 -8px 40px rgba(255, 215, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+.app-footer * {
+  color: #000000 !important;
+}
+
+/* DISCOUNT BADGE */
+.discount-badge {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+  border: 4px solid #FFD700 !important;
+  color: #000000 !important;
+  box-shadow: 
+    0 6px 30px rgba(255, 215, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3) !important;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* BUNDLE CHECKBOX */
+.bundle-checkbox {
+  accent-color: #FFD700 !important;
+  filter: drop-shadow(0 0 5px #FFD700) !important;
+  width: 28px !important;
+  height: 28px !important;
+}
