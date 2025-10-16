@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime
 from enum import Enum
 from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
+from rights_server import api_router as rights_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
