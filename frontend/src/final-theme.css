@@ -6,37 +6,38 @@
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
-/* TIGER'S EYE MARBLE BACKGROUND - BOLD & VISIBLE */
+/* TIGER STRIPES - BLACK WITH RED/ORANGE STRIPES */
 html, body {
   background: 
     repeating-linear-gradient(
-      90deg,
-      #8B5A2B 0px,
-      #A0522D 4px,
-      #CD853F 8px,
-      #DAA520 12px,
-      #B8860B 16px,
-      #CD853F 20px
+      45deg,
+      #000000 0px,
+      #000000 15px,
+      #8B0000 15px,
+      #8B0000 18px,
+      #FF4500 18px,
+      #FF4500 22px,
+      #000000 22px,
+      #000000 40px
     ),
     repeating-linear-gradient(
-      45deg,
-      rgba(139, 90, 43, 0.8) 0px,
-      rgba(218, 165, 32, 0.6) 5px,
-      rgba(205, 133, 63, 0.7) 10px,
-      rgba(160, 82, 45, 0.8) 15px
+      -45deg,
+      #000000 0px,
+      #000000 20px,
+      #DC143C 20px,
+      #DC143C 23px,
+      #FF6347 23px,
+      #FF6347 27px,
+      #000000 27px,
+      #000000 50px
     ),
     linear-gradient(
       135deg,
-      #6B4423 0%,
-      #8B5A2B 20%,
-      #A0522D 35%,
-      #CD853F 50%,
-      #DAA520 65%,
-      #B8860B 80%,
-      #6B4423 100%
+      #000000 0%,
+      #1a0000 50%,
+      #000000 100%
     ) !important;
-  background-blend-mode: overlay, multiply, normal !important;
-  color: #000000 !important;
+  color: #FFFFFF !important;
   min-height: 100vh !important;
 }
 
