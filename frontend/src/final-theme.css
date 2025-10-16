@@ -22,21 +22,9 @@ html::before, html::after, body::before, body::after {
   display: none !important;
 }
 
-/* WHITE TEXT WITH NEON GOLD OUTLINES */
+/* BLACK TEXT */
 h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
-  color: #FFFFFF !important;
-  text-shadow: 
-    0 0 5px #FFD700,
-    0 0 10px #FFFF00,
-    0 0 15px #FFD700,
-    0 0 20px #FFA500,
-    1px 1px 0 #FFD700,
-    -1px -1px 0 #FFD700,
-    1px -1px 0 #FFD700,
-    -1px 1px 0 #FFD700,
-    2px 2px 0 #FFD700,
-    -2px -2px 0 #FFD700,
-    0 3px 6px rgba(0, 0, 0, 0.8) !important;
+  color: #000000 !important;
   font-weight: 700 !important;
 }
 
