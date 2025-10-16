@@ -658,8 +658,9 @@ async def search_rights(query: str = Query(..., description="Search term")):
     
     return {"query": query, "results": results}
 
-# Include the router in the main app
+# Include the routers in the main app
 app.include_router(api_router)
+app.include_router(rights_router)
 
 app.add_middleware(
     CORSMiddleware,
