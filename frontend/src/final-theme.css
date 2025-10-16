@@ -77,7 +77,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 
 /* LEGAL DISCLAIMER - NEON GOLD OUTLINE */
 .legal-disclaimer {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(0, 0, 0, 0.70) !important;
   border: 6px solid #FFD700 !important;
   border-radius: 20px !important;
   box-shadow: 
