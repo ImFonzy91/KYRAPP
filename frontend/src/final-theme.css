@@ -6,39 +6,15 @@
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
-/* TIGER STRIPES - BLACK WITH RED/ORANGE STRIPES */
+/* NEON WHITE BACKGROUND */
 html, body {
   background: 
-    repeating-linear-gradient(
-      45deg,
-      #000000 0px,
-      #000000 15px,
-      #8B0000 15px,
-      #8B0000 18px,
-      #FF4500 18px,
-      #FF4500 22px,
-      #000000 22px,
-      #000000 40px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      #000000 0px,
-      #000000 20px,
-      #DC143C 20px,
-      #DC143C 23px,
-      #FF6347 23px,
-      #FF6347 27px,
-      #000000 27px,
-      #000000 50px
-    ),
-    linear-gradient(
-      135deg,
-      #000000 0%,
-      #1a0000 50%,
-      #000000 100%
-    ) !important;
-  color: #FFFFFF !important;
+    radial-gradient(ellipse at 30% 40%, #FFFFFF 0%, #FEFEFE 50%),
+    radial-gradient(ellipse at 70% 60%, #FFFFFF 0%, #FDFDFD 50%),
+    linear-gradient(135deg, #FFFFFF 0%, #FEFEFE 50%, #FFFFFF 100%) !important;
+  color: #000000 !important;
   min-height: 100vh !important;
+  box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.9) !important;
 }
 
 /* NO LIBRA SCALES */
