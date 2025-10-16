@@ -238,15 +238,15 @@ input::placeholder {
 
 /* FOOTER - GOLD OUTLINE */
 .app-footer {
-  background: rgba(255, 255, 255, 0.90) !important;
-  border-top: 5px solid #FFD700 !important;
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-top: 6px solid #FFD700 !important;
   box-shadow: 
-    0 -8px 40px rgba(255, 215, 0, 0.4),
-    0 0 20px rgba(255, 215, 0, 0.3) !important;
+    0 -8px 40px rgba(255, 215, 0, 0.6),
+    0 0 25px rgba(255, 255, 0, 0.5) !important;
 }
 
 .app-footer * {
-  color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 /* DISCOUNT BADGE */
