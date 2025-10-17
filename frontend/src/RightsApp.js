@@ -846,24 +846,44 @@ const RightsApp = () => {
                 <h3>💰 Save with Bundle Deals</h3>
                 <div className="deals-grid">
                   <div className="deal-card">
-                    <h4>Essential 3-Pack</h4>
-                    <p>Traffic + Housing + Legal Landmines</p>
+                    <h4>5-Bundle Pack</h4>
+                    <p>Choose any 5 bundles and save!</p>
                     <div className="deal-pricing">
-                      <span className="original-price">$8.97</span>
-                      <span className="deal-price">$6.99</span>
+                      <span className="original-price">$14.95</span>
+                      <span className="deal-price">$12.99</span>
                     </div>
-                    <button className="deal-button">Save $2 - Get 3 Pack</button>
+                    <button 
+                      className="deal-button"
+                      onClick={() => {
+                        // Auto-select first 5 bundles as example
+                        setSelectedBundles(['traffic', 'housing', 'property', 'landmines', 'criminal']);
+                        setShowCart(true);
+                      }}
+                    >
+                      Save $2 - Select 5 Bundles
+                    </button>
                   </div>
 
                   <div className="deal-card popular">
                     <div className="popular-badge">BEST VALUE</div>
                     <h4>Complete Rights Package</h4>
-                    <p>All 10 bundles - Everything you need!</p>
+                    <p>All 13 bundles - Everything you need!</p>
                     <div className="deal-pricing">
-                      <span className="original-price">$29.90</span>
-                      <span className="deal-price">$14.99</span>
+                      <span className="original-price">$38.87</span>
+                      <span className="deal-price">$20.00</span>
                     </div>
-                    <button className="deal-button">Save $19 - Get Everything</button>
+                    <button 
+                      className="deal-button"
+                      onClick={() => {
+                        // Select all bundles
+                        setSelectedBundles(['traffic', 'housing', 'property', 'landmines', 'criminal', 
+                                           'workplace', 'family', 'divorce', 'immigration', 'healthcare', 
+                                           'student', 'digital', 'consumer']);
+                        setShowCart(true);
+                      }}
+                    >
+                      Save $19 - Get Everything
+                    </button>
                   </div>
                 </div>
               </div>
