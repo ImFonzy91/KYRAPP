@@ -59,6 +59,12 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
   box-shadow: 
     0 4px 24px rgba(26, 35, 50, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  padding: 2rem 3rem !important;
+}
+
+.header-content {
+  text-align: center !important;
+  margin-bottom: 1rem !important;
 }
 
 /* GLOSSY DISCLAIMER */
