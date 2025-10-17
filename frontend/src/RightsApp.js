@@ -637,13 +637,6 @@ const RightsApp = () => {
           >
             🏠 Home
           </button>
-          <button 
-            className="nav-link" 
-            onClick={() => setCurrentView('search')}
-            data-testid="nav-search"
-          >
-            🔍 Search
-          </button>
         </nav>
       </header>
 
