@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
 
 /* LEGAL DISCLAIMER - NEON RED OUTLINE WITH GOLD TRIM */
 .legal-disclaimer {
-  background: rgba(255, 255, 255, 0.90) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border: 7px solid #FF0000 !important;
   border-radius: 20px !important;
   outline: 3px solid #FFD700 !important;
