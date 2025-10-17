@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './final-theme.css';
+import './legal-pro-theme.css';
 import axios from 'axios';
 import './RightsApp.css';
 
