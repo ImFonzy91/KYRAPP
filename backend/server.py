@@ -580,6 +580,71 @@ async def get_specific_right(category: RightsCategory, right_id: str, user_id: s
         "price": CATEGORY_PRICES[category]
     }
 
+class CartCheckoutRequest(BaseModel):
+    bundles: List[str]
+    origin_url: str
+
+@api_router.post("/purchase/cart")
+async def purchase_cart(request: CartCheckoutRequest):
+    """Purchase multiple bundles with discount pricing"""
+    
+    if not request.bundles or len(request.bundles) == 0:
+        raise HTTPException(status_code=400, detail="Cart is empty")
+    
+    # Calculate price with bundle discounts
+    count = len(request.bundles)
+    if count >= 13:
+        total_price = 20.00  # All 13 bundles deal
+        description = f"Complete Rights Package - All {count} Bundles"
+    elif count >= 5:
+        total_price = 12.99  # Any 5+ bundles deal
+        description = f"Bundle Deal - {count} Rights Bundles"
+    else:
+        # Calculate individual prices - all $2.99 for launch
+        bundle_prices = {
+            "traffic": 2.99, "housing": 2.99, "property": 2.99, "landmines": 2.99,
+            "criminal": 2.99, "workplace": 2.99, "family": 2.99, "divorce": 2.99,
+            "immigration": 2.99, "healthcare": 2.99, "student": 2.99, 
+            "digital": 2.99, "consumer": 2.99
+        }
+        total_price = sum(bundle_prices.get(b, 2.99) for b in request.bundles)
+        description = f"{count} Rights Bundle{'s' if count > 1 else ''}"
+    
+    try:
+        # Initialize Stripe checkout
+        host_url = str(request.origin_url)
+        webhook_url = f"{host_url}/api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
+        
+        # Build success and cancel URLs
+        success_url = f"{request.origin_url}/?payment=success&session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{request.origin_url}/?payment=cancelled"
+        
+        # Create checkout session
+        checkout_request = CheckoutSessionRequest(
+            amount=total_price,
+            currency="usd",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={
+                "bundles": ",".join(request.bundles),
+                "bundle_count": str(count),
+                "source": "rights_helper_cart"
+            }
+        )
+        
+        session = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        return {
+            "checkout_url": session.url,
+            "session_id": session.session_id,
+            "amount": total_price
+        }
+        
+    except Exception as e:
+        logger.error(f"Cart checkout error: {e}")
+        raise HTTPException(status_code=500, detail=f"Checkout failed: {str(e)}")
+
 @api_router.post("/purchase/{category}")
 async def purchase_category(category: RightsCategory, request: CheckoutRequest):
     """Purchase access to a rights category"""
