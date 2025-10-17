@@ -4659,61 +4659,6 @@ async def get_specific_right(category: RightsCategory, right_id: str, user_id: s
         "price": CATEGORY_PRICES[category]
     }
 
-@api_router.post("/purchase/{category}")
-async def purchase_category(category: RightsCategory, request: CheckoutRequest):
-    """Purchase access to a rights category"""
-    
-    price = CATEGORY_PRICES.get(category, 2.99)
-    
-    if price == 0:
-        return {"message": "This category is free", "access_granted": True}
-    
-    try:
-        # Initialize Stripe checkout
-        host_url = str(request.origin_url)
-        webhook_url = f"{host_url}/api/webhook/stripe"
-        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
-        
-        # Build success and cancel URLs
-        success_url = f"{request.origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}"
-        cancel_url = f"{request.origin_url}/payment-cancel"
-        
-        # Create checkout session
-        checkout_request = CheckoutSessionRequest(
-            amount=price,
-            currency="usd",
-            success_url=success_url,
-            cancel_url=cancel_url,
-            metadata={
-                "category": category.value,
-                "source": "rights_helper_app"
-            }
-        )
-        
-        session = await stripe_checkout.create_checkout_session(checkout_request)
-        
-        # Create payment transaction record
-        transaction = PaymentTransaction(
-            session_id=session.session_id,
-            amount=price,
-            currency="usd",
-            payment_status=PaymentStatus.PENDING,
-            metadata=checkout_request.metadata,
-            category=category
-        )
-        
-        await db.payment_transactions.insert_one(transaction.dict())
-        
-        return {
-            "checkout_url": session.url,
-            "session_id": session.session_id
-        }
-        
-    except Exception as e:
-        logger = logging.getLogger(__name__)
-        logger.error(f"Purchase error: {e}")
-        raise HTTPException(status_code=500, detail=f"Purchase failed: {str(e)}")
-
 class CartCheckoutRequest(BaseModel):
     bundles: List[str]
     origin_url: str
@@ -4793,6 +4738,61 @@ async def purchase_cart(request: CartCheckoutRequest):
         logger = logging.getLogger(__name__)
         logger.error(f"Cart checkout error: {e}")
         raise HTTPException(status_code=500, detail=f"Checkout failed: {str(e)}")
+
+@api_router.post("/purchase/{category}")
+async def purchase_category(category: RightsCategory, request: CheckoutRequest):
+    """Purchase access to a rights category"""
+    
+    price = CATEGORY_PRICES.get(category, 2.99)
+    
+    if price == 0:
+        return {"message": "This category is free", "access_granted": True}
+    
+    try:
+        # Initialize Stripe checkout
+        host_url = str(request.origin_url)
+        webhook_url = f"{host_url}/api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
+        
+        # Build success and cancel URLs
+        success_url = f"{request.origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{request.origin_url}/payment-cancel"
+        
+        # Create checkout session
+        checkout_request = CheckoutSessionRequest(
+            amount=price,
+            currency="usd",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={
+                "category": category.value,
+                "source": "rights_helper_app"
+            }
+        )
+        
+        session = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # Create payment transaction record
+        transaction = PaymentTransaction(
+            session_id=session.session_id,
+            amount=price,
+            currency="usd",
+            payment_status=PaymentStatus.PENDING,
+            metadata=checkout_request.metadata,
+            category=category
+        )
+        
+        await db.payment_transactions.insert_one(transaction.dict())
+        
+        return {
+            "checkout_url": session.url,
+            "session_id": session.session_id
+        }
+        
+    except Exception as e:
+        logger = logging.getLogger(__name__)
+        logger.error(f"Purchase error: {e}")
+        raise HTTPException(status_code=500, detail=f"Purchase failed: {str(e)}")
 
 @api_router.get("/search")
 async def search_rights(query: str = Query(..., description="Search term")):
