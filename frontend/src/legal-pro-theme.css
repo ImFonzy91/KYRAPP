@@ -25,6 +25,31 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, label {
   font-weight: 600 !important;
 }
 
+/* BIG BOLD HEADER TITLE */
+.app-title {
+  font-size: 3rem !important;
+  font-weight: 900 !important;
+  background: linear-gradient(135deg, #1a2332 0%, #3b82f6 50%, #1a2332 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+  letter-spacing: -1px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.app-title:hover {
+  transform: scale(1.02) !important;
+}
+
+.app-tagline {
+  font-size: 1.1rem !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+  margin-top: 0.5rem !important;
+}
+
 /* GLOSSY HEADER */
 .app-header {
   background: rgba(255, 255, 255, 0.85) !important;
