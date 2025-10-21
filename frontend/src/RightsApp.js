@@ -679,7 +679,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🚗</div>
                   <h4>Traffic & Vehicle Rights</h4>
-                  <p>Police stops, searches, DUI checkpoints, recording rights</p>
+                  <p>🚔 Say THIS when pulled over and watch cops back off</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -692,7 +692,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🏠</div>
                   <h4>Housing Rights</h4>
-                  <p>🏠 Landlords hate this ONE trick that gets your deposit back...</p>
+                  <p>💰 Say these 3 words - landlords MUST return your deposit</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -706,7 +706,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🏡</div>
                   <h4>Property Rights</h4>
-                  <p>🚔 Cops at your door? Learn the ONE phrase that stops searches...</p>
+                  <p>🚨 Cops at door? ONE phrase stops them cold - legally</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -719,7 +719,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">⚠️</div>
                   <h4>Legal Landmines</h4>
-                  <p>🚨 Bad Yelp review = $25K lawsuit? Protection here...</p>
+                  <p>⚡ Say THIS word in reviews - you're lawsuit-proof</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -732,7 +732,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">⚖️</div>
                   <h4>Criminal Defense Rights</h4>
-                  <p>⚖️ Say these 2 sentences during arrest to stop questioning...</p>
+                  <p>🛑 Arrested? Say these 2 sentences - questioning STOPS immediately</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -745,7 +745,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">💼</div>
                   <h4>Business & Workplace Rights</h4>
-                  <p>💼 Boss can't fire you for saying NO if you say these 5 words...</p>
+                  <p>💪 Boss demands overtime? These 5 words shut it down</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -758,7 +758,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">👨‍👩‍👧‍👦</div>
                   <h4>Family & Personal Rights</h4>
-                  <p>Marriage, divorce, child custody, domestic violence, elder care</p>
+                  <p>👊 Custody battle? These rights give you the upper hand</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -771,7 +771,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">💔</div>
                   <h4>Divorce Rights</h4>
-                  <p>💸 Don't lose half your assets! The ONE thing lawyers hide...</p>
+                  <p>💸 Keep your assets - lawyers WON'T tell you this move</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -784,7 +784,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🌍</div>
                   <h4>Immigration Rights</h4>
-                  <p>🛂 Visa, deportation defense, green cards - ALL immigrants covered</p>
+                  <p>🛂 ICE at your door? Know these rights BEFORE you open</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -797,7 +797,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🏥</div>
                   <h4>Healthcare & Privacy Rights</h4>
-                  <p>Medical records, HIPAA, insurance disputes, patient rights</p>
+                  <p>🏥 Insurance denied your claim? Appeal like THIS - they cave</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -810,7 +810,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🎓</div>
                   <h4>Student Rights</h4>
-                  <p>School discipline, loans, campus safety, discrimination, speech</p>
+                  <p>📚 School suspension? Invoke THIS right - they back down</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -823,7 +823,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">📱</div>
                   <h4>Digital & Social Media Rights</h4>
-                  <p>Online privacy, cyberbullying, posts, harassment, data protection</p>
+                  <p>💬 Getting sued for a post? Add THESE words - case dismissed</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
 
@@ -836,7 +836,7 @@ const RightsApp = () => {
                   />
                   <div className="bundle-icon">🛡️</div>
                   <h4>Consumer Protection Rights</h4>
-                  <p>Scams, contracts, warranties, debt collection, identity theft</p>
+                  <p>📞 Debt collector calling? Say THIS sentence - they hang up</p>
                   <div className="bundle-price">$2.99</div>
                 </div>
               </div>
