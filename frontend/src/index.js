@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "@/index.css";
-import RightsApp from "@/RightsApp";
+import KnowYourRightsApp from "@/KnowYourRightsApp";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RightsApp />
+    <KnowYourRightsApp />
   </React.StrictMode>,
 );
