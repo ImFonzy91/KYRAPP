@@ -1317,6 +1317,10 @@ const CaseAnalyzerTab = ({ user }) => {
     setLoading(false);
   };
 
+  if (loading) {
+    return <LoadingWithComparison message="⚖️ AI analyzing your situation... Lawyers charge $300/hr for this." />;
+  }
+
   return (
     <div className="case-analyzer-tab">
       <h2>⚖️ Do I Have a Case?</h2>
