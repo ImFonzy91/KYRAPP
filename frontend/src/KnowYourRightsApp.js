@@ -380,7 +380,7 @@ const SmartSearchTab = ({ user }) => {
   );
 };
 
-// Tab 2: Quiz Mode
+// Tab 2: Quiz Mode - COD Style Progression
 const QuizTab = ({ user, updateUser }) => {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [currentQuiz, setCurrentQuiz] = useState(null);
@@ -391,12 +391,27 @@ const QuizTab = ({ user, updateUser }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizComplete, setQuizComplete] = useState(false);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [streak, setStreak] = useState(0);
+  const [maxStreak, setMaxStreak] = useState(0);
+  const [newBadges, setNewBadges] = useState([]);
+  const [showBadgePopup, setShowBadgePopup] = useState(false);
+  const [difficulty, setDifficulty] = useState('easy');
+  const [fastAnswers, setFastAnswers] = useState(0);
+  const [missedThenCorrect, setMissedThenCorrect] = useState({ missed: 0, correct: 0 });
   const [userProgress, setUserProgress] = useState(() => {
     const saved = localStorage.getItem('quizProgress');
-    return saved ? JSON.parse(saved) : { completedQuizzes: [], badges: [], totalScore: 0 };
+    return saved ? JSON.parse(saved) : { 
+      completedQuizzes: [], 
+      badges: [], 
+      totalCorrect: 0, 
+      totalAnswered: 0,
+      bestStreaks: {},
+      level: 1,
+      xp: 0
+    };
   });
 
-  // Anti-screenshot: disable right-click
+  // Anti-screenshot
   useEffect(() => {
     const handleContextMenu = (e) => e.preventDefault();
     const handleKeyDown = (e) => {
@@ -405,30 +420,23 @@ const QuizTab = ({ user, updateUser }) => {
         alert('📵 Screenshots disabled! Learn it for real! 💪');
       }
     };
-    
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('keydown', handleKeyDown);
-    
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
-  // Timer
+  // Timer with difficulty
   useEffect(() => {
     if (!currentQuiz || answered || quizComplete) return;
-    
-    if (timeLeft <= 0) {
-      handleTimeout();
-      return;
-    }
-    
+    if (timeLeft <= 0) { handleTimeout(); return; }
     const timer = setTimeout(() => setTimeLeft(t => t - 1), 1000);
     return () => clearTimeout(timer);
   }, [timeLeft, currentQuiz, answered, quizComplete]);
 
-  // Shuffle answers when question changes
+  // Shuffle answers
   useEffect(() => {
     if (currentQuiz && currentQuiz.questions[questionIndex]) {
       const q = currentQuiz.questions[questionIndex];
@@ -440,18 +448,40 @@ const QuizTab = ({ user, updateUser }) => {
   const handleTimeout = () => {
     setAnswered(true);
     setSelectedAnswer('TIMEOUT');
+    setStreak(0);
+    setMissedThenCorrect(prev => ({ ...prev, missed: prev.missed + 1, correct: 0 }));
     setTimeout(nextQuestion, 1500);
   };
 
-  const startQuiz = (topic, quizIndex) => {
+  const getDifficultyTime = () => DIFFICULTY_MULTIPLIER[difficulty]?.time || 9;
+
+  const startQuiz = (topic, quizIndex, diff = 'easy') => {
     const quiz = QUIZ_DATA[topic].quizzes[quizIndex];
+    setDifficulty(diff);
     setSelectedTopic(topic);
     setCurrentQuiz({ ...quiz, topic, quizIndex });
     setQuestionIndex(0);
     setScore(0);
-    setTimeLeft(9);
+    setStreak(0);
+    setMaxStreak(0);
+    setFastAnswers(0);
+    setTimeLeft(DIFFICULTY_MULTIPLIER[diff].time);
     setAnswered(false);
     setQuizComplete(false);
+    setNewBadges([]);
+    setMissedThenCorrect({ missed: 0, correct: 0 });
+  };
+
+  const checkAndAwardBadge = (badgeId, progress) => {
+    if (!progress.badges.includes(badgeId)) {
+      progress.badges.push(badgeId);
+      const badge = BADGES.find(b => b.id === badgeId);
+      if (badge) {
+        setNewBadges(prev => [...prev, badge]);
+        setShowBadgePopup(true);
+        setTimeout(() => setShowBadgePopup(false), 2000);
+      }
+    }
   };
 
   const handleAnswer = (answer) => {
@@ -460,10 +490,63 @@ const QuizTab = ({ user, updateUser }) => {
     setSelectedAnswer(answer);
     
     const correct = currentQuiz.questions[questionIndex].a;
-    if (answer === correct) {
+    const isCorrect = answer === correct;
+    const answerTime = getDifficultyTime() - timeLeft;
+    
+    const newProgress = { ...userProgress };
+    newProgress.totalAnswered += 1;
+    
+    if (isCorrect) {
       setScore(s => s + 1);
+      setStreak(s => s + 1);
+      setMaxStreak(m => Math.max(m, streak + 1));
+      newProgress.totalCorrect += 1;
+      
+      // Check for comeback
+      if (missedThenCorrect.missed >= 2) {
+        setMissedThenCorrect(prev => ({ ...prev, correct: prev.correct + 1 }));
+        if (missedThenCorrect.correct + 1 >= 3) {
+          checkAndAwardBadge('comeback_kid', newProgress);
+        }
+      }
+      setMissedThenCorrect(prev => ({ ...prev, missed: 0 }));
+      
+      // First correct answer
+      if (newProgress.totalCorrect === 1) {
+        checkAndAwardBadge('first_blood', newProgress);
+      }
+      
+      // Speed badges
+      if (answerTime < 3) {
+        setFastAnswers(f => f + 1);
+        checkAndAwardBadge('quick_draw', newProgress);
+      }
+      
+      // Streak badges
+      if (streak + 1 >= 3) checkAndAwardBadge('hot_streak', newProgress);
+      if (streak + 1 >= 5) checkAndAwardBadge('on_fire', newProgress);
+      if (streak + 1 >= 10) checkAndAwardBadge('unstoppable', newProgress);
+      
+      // Clutch badge - last question with <2 sec
+      if (questionIndex === currentQuiz.questions.length - 1 && timeLeft < 2) {
+        checkAndAwardBadge('clutch', newProgress);
+      }
+    } else {
+      setStreak(0);
+      setMissedThenCorrect(prev => ({ ...prev, missed: prev.missed + 1, correct: 0 }));
     }
     
+    // Night owl
+    const hour = new Date().getHours();
+    if (hour >= 0 && hour < 5) {
+      checkAndAwardBadge('night_owl', newProgress);
+    }
+    
+    // Add XP
+    newProgress.xp += isCorrect ? (difficulty === 'hard' ? 30 : difficulty === 'medium' ? 20 : 10) : 2;
+    newProgress.level = Math.floor(newProgress.xp / 100) + 1;
+    
+    setUserProgress(newProgress);
     setTimeout(nextQuestion, 1500);
   };
 
@@ -472,7 +555,7 @@ const QuizTab = ({ user, updateUser }) => {
       finishQuiz();
     } else {
       setQuestionIndex(i => i + 1);
-      setTimeLeft(9);
+      setTimeLeft(getDifficultyTime());
       setAnswered(false);
       setSelectedAnswer(null);
     }
@@ -480,32 +563,54 @@ const QuizTab = ({ user, updateUser }) => {
 
   const finishQuiz = () => {
     setQuizComplete(true);
-    
     const quizId = `${currentQuiz.topic}_${currentQuiz.quizIndex}`;
     const percentage = (score / currentQuiz.questions.length) * 100;
     
-    // Update progress
     const newProgress = { ...userProgress };
-    if (!newProgress.completedQuizzes.includes(quizId)) {
+    
+    // Completed quiz
+    if (!newProgress.completedQuizzes.includes(quizId) && percentage >= 70) {
       newProgress.completedQuizzes.push(quizId);
     }
-    newProgress.totalScore += score;
     
-    // Check for badges
-    if (newProgress.completedQuizzes.length >= 1 && !newProgress.badges.includes('rookie')) {
-      newProgress.badges.push('rookie');
+    // Perfect score = Smoking Gun
+    if (score === currentQuiz.questions.length) {
+      checkAndAwardBadge('smoking_gun', newProgress);
+      if (difficulty === 'hard') {
+        checkAndAwardBadge('eagle', newProgress);
+      }
     }
-    if (newProgress.completedQuizzes.length >= 3 && !newProgress.badges.includes('learner')) {
-      newProgress.badges.push('learner');
+    
+    // Speed demon - all answers with 5+ sec left
+    if (fastAnswers === currentQuiz.questions.length) {
+      checkAndAwardBadge('speed_demon', newProgress);
     }
-    if (newProgress.completedQuizzes.length >= 12 && !newProgress.badges.includes('defender')) {
-      newProgress.badges.push('defender');
+    
+    // Progress badges
+    const completed = newProgress.completedQuizzes.length;
+    if (completed >= 1) checkAndAwardBadge('rookie', newProgress);
+    if (completed >= 3) checkAndAwardBadge('learner', newProgress);
+    if (completed >= 6) checkAndAwardBadge('scholar', newProgress);
+    if (completed >= 12) checkAndAwardBadge('defender', newProgress);
+    
+    // Topic mastery
+    const topicQuizzes = QUIZ_DATA[currentQuiz.topic].quizzes.length;
+    const topicCompleted = newProgress.completedQuizzes.filter(q => q.startsWith(currentQuiz.topic)).length;
+    if (topicCompleted >= topicQuizzes) {
+      const masteryBadge = `${currentQuiz.topic}_master`;
+      checkAndAwardBadge(masteryBadge, newProgress);
     }
-    if (percentage >= 90 && !newProgress.badges.includes('master')) {
-      newProgress.badges.push('master');
+    
+    // Accuracy badge
+    const accuracy = (newProgress.totalCorrect / newProgress.totalAnswered) * 100;
+    if (accuracy >= 90 && newProgress.totalAnswered >= 20) {
+      checkAndAwardBadge('fox', newProgress);
     }
-    if (percentage === 100 && !newProgress.badges.includes('eagle')) {
-      newProgress.badges.push('eagle');
+    
+    // Legend badge - check if has all other badges
+    const nonLegendBadges = BADGES.filter(b => b.id !== 'legend').length;
+    if (newProgress.badges.length >= nonLegendBadges - 1) {
+      checkAndAwardBadge('legend', newProgress);
     }
     
     setUserProgress(newProgress);
@@ -513,7 +618,7 @@ const QuizTab = ({ user, updateUser }) => {
   };
 
   const shareToFacebook = () => {
-    const text = `I just scored ${score}/${currentQuiz.questions.length} on Know Your Rights! 💪⚖️ Test your legal knowledge!`;
+    const text = `🔥 I'm Level ${userProgress.level} on Know Your Rights! Just scored ${score}/${currentQuiz.questions.length}! 💪⚖️ ${newBadges.length > 0 ? `Earned: ${newBadges.map(b => b.icon).join('')}` : ''}`;
     window.open(`https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -521,17 +626,36 @@ const QuizTab = ({ user, updateUser }) => {
   if (currentQuiz && !quizComplete) {
     const question = currentQuiz.questions[questionIndex];
     const correct = question.a;
+    const diffConfig = DIFFICULTY_MULTIPLIER[difficulty];
     
     return (
-      <div className="quiz-active" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
+      <div className="quiz-active" style={{ userSelect: 'none' }}>
+        {/* Badge popup */}
+        {showBadgePopup && newBadges.length > 0 && (
+          <div className="badge-popup">
+            <div className="badge-earned">
+              <span className="popup-icon">{newBadges[newBadges.length - 1].icon}</span>
+              <span className="popup-text">BADGE UNLOCKED!</span>
+              <span className="popup-name">{newBadges[newBadges.length - 1].name}</span>
+            </div>
+          </div>
+        )}
+        
         <div className="quiz-header">
           <span className="quiz-topic">{QUIZ_DATA[currentQuiz.topic].icon} {QUIZ_DATA[currentQuiz.topic].name}</span>
-          <span className="quiz-progress">Question {questionIndex + 1}/{currentQuiz.questions.length}</span>
+          <span className="difficulty-badge" style={{ background: diffConfig.color }}>{diffConfig.label}</span>
+          <span className="quiz-progress">Q{questionIndex + 1}/{currentQuiz.questions.length}</span>
         </div>
         
-        <div className={`timer ${timeLeft <= 3 ? 'danger' : ''}`}>
+        <div className="stats-bar">
+          <span className="streak-counter">🔥 Streak: {streak}</span>
+          <span className="level-display">⭐ Level {userProgress.level}</span>
+          <span className="xp-display">XP: {userProgress.xp}</span>
+        </div>
+        
+        <div className={`timer ${timeLeft <= 3 ? 'danger' : ''}`} style={{ borderColor: diffConfig.color }}>
           <span className="timer-num">{timeLeft}</span>
-          <span className="timer-label">seconds</span>
+          <span className="timer-label">sec</span>
         </div>
         
         <div className="question-box">
@@ -545,14 +669,8 @@ const QuizTab = ({ user, updateUser }) => {
               if (answer === correct) className += ' correct';
               else if (answer === selectedAnswer) className += ' wrong';
             }
-            
             return (
-              <button 
-                key={i} 
-                className={className}
-                onClick={() => handleAnswer(answer)}
-                disabled={answered}
-              >
+              <button key={i} className={className} onClick={() => handleAnswer(answer)} disabled={answered}>
                 {answer}
               </button>
             );
@@ -560,12 +678,10 @@ const QuizTab = ({ user, updateUser }) => {
         </div>
         
         {answered && selectedAnswer === 'TIMEOUT' && (
-          <div className="timeout-msg">⏰ Time's up! The answer was: {correct}</div>
+          <div className="timeout-msg">⏰ Too slow! Answer: {correct}</div>
         )}
         
-        <div className="score-display">
-          Score: {score}/{questionIndex + (answered ? 1 : 0)}
-        </div>
+        <div className="score-display">Score: {score}/{questionIndex + (answered ? 1 : 0)}</div>
       </div>
     );
   }
@@ -577,53 +693,85 @@ const QuizTab = ({ user, updateUser }) => {
     
     return (
       <div className="quiz-complete">
-        <h2>{passed ? '🎉 Quiz Passed!' : '📚 Keep Learning!'}</h2>
+        <h2>{percentage === 100 ? '🔥 PERFECT!' : passed ? '✅ PASSED!' : '📚 Keep Training!'}</h2>
         
-        <div className="score-circle">
+        <div className="score-circle" style={{ background: percentage === 100 ? 'linear-gradient(135deg, #ff6b6b, #ffd700)' : undefined }}>
           <span className="big-score">{score}/{currentQuiz.questions.length}</span>
           <span className="percentage">{percentage}%</span>
         </div>
         
-        <p className="result-msg">
-          {percentage === 100 ? '🔥 PERFECT SCORE! You\'re a Legal Eagle!' :
-           percentage >= 90 ? '👑 Amazing! You\'re a Rights Master!' :
-           percentage >= 70 ? '✅ Great job! You passed!' :
-           '💪 Keep practicing, you\'ll get there!'}
-        </p>
-        
-        <div className="earned-badges">
-          <h4>Your Badges:</h4>
-          <div className="badges-row">
-            {BADGES.map(badge => (
-              <div 
-                key={badge.id} 
-                className={`badge ${userProgress.badges.includes(badge.id) ? 'earned' : 'locked'}`}
-                title={badge.requirement}
-              >
-                <span className="badge-icon">{badge.icon}</span>
-                <span className="badge-name">{badge.name}</span>
-              </div>
-            ))}
+        <div className="stats-summary">
+          <div className="stat-item">
+            <span className="stat-icon">🔥</span>
+            <span className="stat-value">{maxStreak}</span>
+            <span className="stat-label">Best Streak</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-icon">⭐</span>
+            <span className="stat-value">{userProgress.level}</span>
+            <span className="stat-label">Level</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-icon">🎯</span>
+            <span className="stat-value">{Math.round((userProgress.totalCorrect / userProgress.totalAnswered) * 100) || 0}%</span>
+            <span className="stat-label">Accuracy</span>
           </div>
         </div>
         
+        {newBadges.length > 0 && (
+          <div className="new-badges-section">
+            <h3>🏆 BADGES EARNED!</h3>
+            <div className="new-badges-row">
+              {newBadges.map((badge, i) => (
+                <div key={i} className="new-badge-item">
+                  <span className="badge-icon-large">{badge.icon}</span>
+                  <span className="badge-name-pop">{badge.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        <div className="next-difficulty">
+          {difficulty !== 'hard' && passed && (
+            <p className="challenge-text">
+              Ready for {difficulty === 'easy' ? 'Medium' : 'Hard'} mode? ⚡
+            </p>
+          )}
+        </div>
+        
         <div className="quiz-actions">
-          <button onClick={() => { setCurrentQuiz(null); setSelectedTopic(null); }}>Back to Topics</button>
-          <button onClick={shareToFacebook} className="share-btn">Share on Facebook 📱</button>
+          <button onClick={() => { setCurrentQuiz(null); setSelectedTopic(null); }}>Back</button>
+          {passed && difficulty !== 'hard' && (
+            <button 
+              className="harder-btn"
+              onClick={() => startQuiz(currentQuiz.topic, currentQuiz.quizIndex, difficulty === 'easy' ? 'medium' : 'hard')}
+            >
+              Try {difficulty === 'easy' ? 'Medium' : 'Hard'} 💀
+            </button>
+          )}
+          <button onClick={shareToFacebook} className="share-btn">Share 📱</button>
         </div>
       </div>
     );
   }
 
-  // Topic selection
+  // Topic selection with level display
   return (
     <div className="quiz-tab">
-      <h2>🧠 Quiz Mode</h2>
-      <p>Test your rights knowledge - 9 seconds per question. Think fast!</p>
+      <div className="quiz-header-main">
+        <h2>🧠 Quiz Mode</h2>
+        <div className="player-stats">
+          <span className="level-badge">⭐ Level {userProgress.level}</span>
+          <span className="xp-bar">{userProgress.xp} XP</span>
+        </div>
+      </div>
+      <p>9 seconds per question. Think FAST. 🔥</p>
       
       <div className="progress-summary">
-        <span>✅ Quizzes Completed: {userProgress.completedQuizzes.length}/12</span>
-        <span>🏆 Badges: {userProgress.badges.length}/5</span>
+        <span>✅ {userProgress.completedQuizzes.length}/12 Quizzes</span>
+        <span>🏆 {userProgress.badges.length}/{BADGES.length} Badges</span>
+        <span>🎯 {userProgress.totalAnswered > 0 ? Math.round((userProgress.totalCorrect / userProgress.totalAnswered) * 100) : 0}% Accuracy</span>
       </div>
       
       <div className="topics-grid">
@@ -636,13 +784,23 @@ const QuizTab = ({ user, updateUser }) => {
                 const quizId = `${key}_${i}`;
                 const completed = userProgress.completedQuizzes.includes(quizId);
                 return (
-                  <button 
-                    key={i} 
-                    className={`quiz-btn ${completed ? 'completed' : ''}`}
-                    onClick={() => startQuiz(key, i)}
-                  >
-                    {completed ? '✅' : '▶️'} Quiz {i + 1}
-                  </button>
+                  <div key={i} className="quiz-row">
+                    <button 
+                      className={`quiz-btn ${completed ? 'completed' : ''}`}
+                      onClick={() => startQuiz(key, i, 'easy')}
+                    >
+                      {completed ? '✅' : '▶️'} Quiz {i + 1}
+                    </button>
+                    {completed && (
+                      <button 
+                        className="hard-mode-btn"
+                        onClick={() => startQuiz(key, i, 'hard')}
+                        title="Hard Mode - 6 seconds!"
+                      >
+                        💀
+                      </button>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -650,17 +808,18 @@ const QuizTab = ({ user, updateUser }) => {
         ))}
       </div>
       
-      <div className="badges-preview">
-        <h3>🏆 Earn Badges</h3>
-        <div className="badges-row">
+      <div className="badges-section">
+        <h3>🏆 Your Badges ({userProgress.badges.length}/{BADGES.length})</h3>
+        <div className="badges-grid">
           {BADGES.map(badge => (
             <div 
               key={badge.id} 
-              className={`badge ${userProgress.badges.includes(badge.id) ? 'earned' : 'locked'}`}
+              className={`badge-item ${userProgress.badges.includes(badge.id) ? 'earned' : 'locked'}`}
               title={badge.requirement}
             >
               <span className="badge-icon">{badge.icon}</span>
               <span className="badge-name">{badge.name}</span>
+              <span className="badge-req">{badge.requirement}</span>
             </div>
           ))}
         </div>
