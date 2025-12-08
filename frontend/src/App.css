@@ -406,6 +406,93 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Law Cards for detailed rights */
+.federal-laws-detail, .core-rights-detail, .tenant-rights-detail, 
+.immigration-rights-detail, .debt-rights-detail, .credit-rights-detail,
+.ice-encounters-detail, .illegal-actions, .what-to-do, .what-to-say {
+  margin-bottom: 1.5rem;
+}
+
+.federal-laws-detail h4, .core-rights-detail h4, .tenant-rights-detail h4,
+.immigration-rights-detail h4, .debt-rights-detail h4, .credit-rights-detail h4,
+.ice-encounters-detail h4, .illegal-actions h4, .what-to-do h4, .what-to-say h4 {
+  color: #4ecdc4;
+  margin-bottom: 1rem;
+}
+
+.law-card, .core-right-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.law-card h5, .core-right-card h5 {
+  color: #ffd700;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.law-description {
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.law-card ul, .core-right-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.law-card li {
+  padding: 0.5rem 0;
+  color: #ddd;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.core-right-card p {
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.tenant-rights-detail ul, .immigration-rights-detail ul, 
+.debt-rights-detail ul, .credit-rights-detail ul,
+.ice-encounters-detail ul, .illegal-actions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tenant-rights-detail li, .immigration-rights-detail li,
+.debt-rights-detail li, .credit-rights-detail li,
+.ice-encounters-detail li, .illegal-actions li {
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  color: #ddd;
+}
+
+.tip {
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid #4ecdc4;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #4ecdc4;
+  margin-top: 1rem;
+}
+
+.fallback-note {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 1rem;
+  border-radius: 8px;
+  color: #ffd700;
+  margin-top: 1rem;
+}
+
 .legal-text {
   background: rgba(0,0,0,0.3);
   border-left: 4px solid #ffd700;
