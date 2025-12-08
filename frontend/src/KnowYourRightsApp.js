@@ -1291,6 +1291,7 @@ const KnowYourRightsApp = () => {
 
       <nav className="tab-nav">
         <button className={activeTab === 'search' ? 'active' : ''} onClick={() => setActiveTab('search')}>🔍 Search</button>
+        <button className={activeTab === 'learn' ? 'active' : ''} onClick={() => setActiveTab('learn')}>🎬 Learn</button>
         <button className={activeTab === 'quiz' ? 'active' : ''} onClick={() => setActiveTab('quiz')}>🧠 Quiz</button>
         <button className={activeTab === 'my-rights' ? 'active' : ''} onClick={() => setActiveTab('my-rights')}>📚 My Rights</button>
         <button className={activeTab === 'case' ? 'active' : ''} onClick={() => setActiveTab('case')}>⚖️ Case?</button>
@@ -1298,6 +1299,7 @@ const KnowYourRightsApp = () => {
 
       <main className="tab-content">
         {activeTab === 'search' && <SmartSearchTab user={user} />}
+        {activeTab === 'learn' && <LearnTab user={user} />}
         {activeTab === 'quiz' && <QuizTab user={user} />}
         {activeTab === 'my-rights' && <MyRightsTab user={user} />}
         {activeTab === 'case' && <CaseAnalyzerTab user={user} />}
