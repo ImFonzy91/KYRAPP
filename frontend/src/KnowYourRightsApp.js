@@ -851,7 +851,7 @@ const QuizTab = ({ user, updateUser }) => {
     return (
       <div className="video-section">
         <button className="back-btn" onClick={() => { setShowVideos(null); setActiveVideo(null); }}>← Back to Topics</button>
-        <h2>🎬 {videoData.title}</h2>
+        <h2>🎬 {videoData.name}</h2>
         <p>Watch & learn before you quiz yourself!</p>
         
         {activeVideo ? (
