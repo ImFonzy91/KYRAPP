@@ -5,6 +5,54 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Price comparison messages for loading screens
+const PRICE_COMPARISONS = [
+  { competitor: "L*****Z***", their_price: "$299/year", our_price: "$10 one-time", savings: "96%" },
+  { competitor: "R*****", their_price: "$39.99/month", our_price: "$2.99/bundle", savings: "92%" },
+  { competitor: "Legal S**** Pro", their_price: "$149/consultation", our_price: "$3 for 5 AI consults", savings: "98%" },
+  { competitor: "A*** L***** App", their_price: "$19.99/month", our_price: "$10 lifetime", savings: "95%" },
+  { competitor: "Law F*** Online", their_price: "$79/document", our_price: "All rights included", savings: "100%" },
+];
+
+const LOADING_MESSAGES = [
+  "💰 Other apps charge $299/year... We charge $10. Period.",
+  "🚫 No subscriptions. No hidden fees. Just knowledge.",
+  "⚖️ Lawyers charge $300/hour for this info. You're getting it for pennies.",
+  "📚 Big legal sites profit off confusion. We profit off YOUR success.",
+  "💪 Know your rights without going broke.",
+  "🎓 Education shouldn't bankrupt you. $10 = All 13 rights bundles.",
+  "🔥 While others charge monthly, we believe in ONE fair price.",
+];
+
+// Loading component with price comparison
+const LoadingWithComparison = ({ message }) => {
+  const [comparisonIndex] = useState(Math.floor(Math.random() * PRICE_COMPARISONS.length));
+  const [messageIndex] = useState(Math.floor(Math.random() * LOADING_MESSAGES.length));
+  const comparison = PRICE_COMPARISONS[comparisonIndex];
+  
+  return (
+    <div className="loading-comparison">
+      <div className="loading-spinner"></div>
+      <p className="loading-message">{message || LOADING_MESSAGES[messageIndex]}</p>
+      
+      <div className="price-compare-box">
+        <div className="competitor-price">
+          <span className="blurred-name">{comparison.competitor}</span>
+          <span className="their-price">{comparison.their_price}</span>
+        </div>
+        <span className="vs">VS</span>
+        <div className="our-price-box">
+          <span className="us-label">Know Your Rights</span>
+          <span className="our-price">{comparison.our_price}</span>
+        </div>
+        <div className="savings-badge">Save {comparison.savings}!</div>
+      </div>
+      
+      <p className="loading-disclaimer">* We believe legal education should be affordable for everyone</p>
+    </div>
+  );
+};
+
 // Video content for ALL 13 RIGHTS BUNDLES
 const VIDEO_CONTENT = {
   traffic: {
