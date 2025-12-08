@@ -527,6 +527,10 @@ const SmartSearchTab = ({ user }) => {
     setLoading(false);
   };
 
+  if (loading) {
+    return <LoadingWithComparison message="🔍 Finding your rights..." />;
+  }
+
   if (selectedRight) {
     return (
       <div className="right-details">
