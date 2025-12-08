@@ -1,9 +1,166 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Quiz Questions Database - REAL legal knowledge
+const QUIZ_DATA = {
+  traffic: {
+    name: "Traffic Stop Rights",
+    icon: "🚗",
+    quizzes: [
+      {
+        id: 1,
+        questions: [
+          { q: "Can police search your car without a warrant?", a: "Only with probable cause or your consent", wrong: ["Yes, anytime they want", "No, never under any circumstances", "Only on weekends"] },
+          { q: "What should you say to refuse a search?", a: "I do not consent to any searches", wrong: ["Please don't search me", "I'd rather you didn't", "Maybe later"] },
+          { q: "Which Amendment protects against unreasonable searches?", a: "4th Amendment", wrong: ["1st Amendment", "2nd Amendment", "5th Amendment"] },
+          { q: "Do you have to answer questions during a traffic stop?", a: "No, you can remain silent", wrong: ["Yes, it's required by law", "Only if asked nicely", "Yes, or you'll be arrested"] },
+          { q: "Can you record police during a traffic stop?", a: "Yes, it's protected by the 1st Amendment", wrong: ["No, it's illegal", "Only with their permission", "Only in some states"] },
+        ]
+      },
+      {
+        id: 2,
+        questions: [
+          { q: "What documents must you provide when driving?", a: "License, registration, and insurance", wrong: ["Just your license", "Your social security card", "Nothing at all"] },
+          { q: "Can you refuse a breathalyzer test?", a: "Yes, but you may lose your license", wrong: ["No, it's mandatory", "Yes, with no consequences", "Only if you're sober"] },
+          { q: "What's the best phrase to use when pulled over?", a: "Am I free to go?", wrong: ["What's your badge number?", "I know my rights!", "You can't do this!"] },
+          { q: "Can police order you out of the car?", a: "Yes, for officer safety", wrong: ["No, you can stay inside", "Only with a warrant", "Only if you're under arrest"] },
+          { q: "If arrested during a stop, what should you do?", a: "Stay silent and ask for a lawyer", wrong: ["Explain your side", "Try to talk your way out", "Run away"] },
+        ]
+      },
+      {
+        id: 3,
+        questions: [
+          { q: "Can police search your phone during a traffic stop?", a: "No, they need a warrant", wrong: ["Yes, it's allowed", "Only if it's unlocked", "Only iPhones are protected"] },
+          { q: "What is 'probable cause'?", a: "Reasonable belief a crime occurred", wrong: ["Police suspicion", "Your nervous behavior", "Driving at night"] },
+          { q: "Can passengers be searched during a traffic stop?", a: "Only with consent or probable cause", wrong: ["Yes, automatically", "No, never", "Only the driver"] },
+          { q: "What happens if police search illegally?", a: "Evidence may be thrown out in court", wrong: ["Nothing happens", "You automatically win", "Police get fired"] },
+          { q: "DUI checkpoint - can you turn around?", a: "Yes, if you can do so legally", wrong: ["No, you must go through", "Only in California", "It's a felony to avoid"] },
+        ]
+      }
+    ]
+  },
+  arrest: {
+    name: "Arrest & Miranda Rights",
+    icon: "⚖️",
+    quizzes: [
+      {
+        id: 1,
+        questions: [
+          { q: "What are Miranda Rights?", a: "Right to remain silent and have an attorney", wrong: ["Right to make one phone call", "Right to resist arrest", "Right to know charges immediately"] },
+          { q: "When must police read Miranda Rights?", a: "Before custodial interrogation", wrong: ["Immediately upon arrest", "Only for felonies", "Never, it's optional"] },
+          { q: "Which Amendment gives you the right to remain silent?", a: "5th Amendment", wrong: ["1st Amendment", "4th Amendment", "6th Amendment"] },
+          { q: "What should you say when arrested?", a: "I invoke my right to remain silent. I want a lawyer.", wrong: ["I didn't do it!", "Let me explain", "This is a mistake"] },
+          { q: "Can police question you after you ask for a lawyer?", a: "No, questioning must stop", wrong: ["Yes, if they really need to", "Only for serious crimes", "Yes, after 24 hours"] },
+        ]
+      },
+      {
+        id: 2,
+        questions: [
+          { q: "Which Amendment guarantees right to an attorney?", a: "6th Amendment", wrong: ["5th Amendment", "4th Amendment", "8th Amendment"] },
+          { q: "What if you can't afford a lawyer?", a: "One will be provided free (public defender)", wrong: ["You must represent yourself", "You have to find the money", "You can't be tried"] },
+          { q: "Can you be tried twice for the same crime?", a: "No, that's double jeopardy (5th Amendment)", wrong: ["Yes, if new evidence found", "Yes, in different courts", "Only for misdemeanors"] },
+          { q: "What is 'due process'?", a: "Fair treatment through the legal system", wrong: ["Quick trial", "Police procedures", "Paying court fees"] },
+          { q: "Should you talk to cellmates about your case?", a: "No, they could testify against you", wrong: ["Yes, get their advice", "Only if they're friendly", "Yes, practice your story"] },
+        ]
+      },
+      {
+        id: 3,
+        questions: [
+          { q: "What does 'presumption of innocence' mean?", a: "You're innocent until proven guilty", wrong: ["Police assume you're innocent", "Charges start at zero", "First offense is forgiven"] },
+          { q: "Can you physically resist an unlawful arrest?", a: "No, fight it in court instead", wrong: ["Yes, if you're innocent", "Yes, it's your right", "Only with witnesses present"] },
+          { q: "What's the 8th Amendment protect against?", a: "Excessive bail and cruel punishment", wrong: ["Unreasonable search", "Self-incrimination", "Speedy trial"] },
+          { q: "How long can police hold you without charges?", a: "Usually 24-72 hours depending on state", wrong: ["Indefinitely", "Only 1 hour", "30 days"] },
+          { q: "What should you NOT sign without a lawyer?", a: "Anything", wrong: ["Only confessions", "Only waivers", "Nothing, signing is fine"] },
+        ]
+      }
+    ]
+  },
+  tenant: {
+    name: "Tenant Rights",
+    icon: "🏠",
+    quizzes: [
+      {
+        id: 1,
+        questions: [
+          { q: "Can a landlord change locks to kick you out?", a: "No, that's illegal self-help eviction", wrong: ["Yes, it's their property", "Only with 24hr notice", "Yes, if you owe rent"] },
+          { q: "How much notice must landlord give before entering?", a: "Usually 24-48 hours (varies by state)", wrong: ["None, it's their property", "1 week minimum", "Only if you're home"] },
+          { q: "What law protects against housing discrimination?", a: "Fair Housing Act", wrong: ["Civil Rights Act only", "Housing Protection Act", "Tenant Security Act"] },
+          { q: "Can landlord shut off utilities to force you out?", a: "No, that's illegal", wrong: ["Yes, if you owe rent", "Only electricity", "Yes, with court approval"] },
+          { q: "What must landlord provide with security deposit deduction?", a: "Itemized list of damages", wrong: ["Nothing required", "Just the remaining amount", "A phone call explanation"] },
+        ]
+      },
+      {
+        id: 2,
+        questions: [
+          { q: "What is 'habitability'?", a: "Landlord must provide safe, livable conditions", wrong: ["Right to decorate", "Luxury amenities required", "Free repairs"] },
+          { q: "Can you withhold rent for repairs?", a: "In some states, for serious issues", wrong: ["Yes, anytime", "No, never allowed", "Only for cosmetic issues"] },
+          { q: "What's considered 'normal wear and tear'?", a: "Minor scuffs, faded paint, worn carpet", wrong: ["Holes in walls", "Broken windows", "Missing fixtures"] },
+          { q: "Can landlord evict in retaliation for complaints?", a: "No, retaliation is illegal", wrong: ["Yes, it's their right", "Only in some states", "After 6 months they can"] },
+          { q: "How long for security deposit return (typically)?", a: "15-60 days depending on state", wrong: ["Whenever they want", "1 year", "Only after you ask"] },
+        ]
+      },
+      {
+        id: 3,
+        questions: [
+          { q: "Can landlord refuse to rent based on race?", a: "No, violates Fair Housing Act", wrong: ["Yes, owner's choice", "Only for apartments", "If they have a reason"] },
+          { q: "What's required for a legal eviction?", a: "Written notice and court order", wrong: ["Verbal warning only", "Just changing locks", "30 days notice only"] },
+          { q: "Can landlord enter for 'emergencies' without notice?", a: "Yes, for true emergencies only", wrong: ["No, never without notice", "Yes, anytime they say emergency", "Only with police"] },
+          { q: "Who enforces Fair Housing Act?", a: "HUD (Housing and Urban Development)", wrong: ["Local police", "FBI", "State governor"] },
+          { q: "Can landlord raise rent during lease?", a: "Generally no, unless lease allows", wrong: ["Yes, with 30 days notice", "Yes, anytime", "Only 10% per year"] },
+        ]
+      }
+    ]
+  },
+  workplace: {
+    name: "Workplace Rights",
+    icon: "💼",
+    quizzes: [
+      {
+        id: 1,
+        questions: [
+          { q: "What law requires overtime pay?", a: "Fair Labor Standards Act (FLSA)", wrong: ["Worker Protection Act", "Employment Rights Act", "Overtime Pay Act"] },
+          { q: "At what hours does overtime kick in?", a: "Over 40 hours per week", wrong: ["Over 8 hours per day", "Over 50 hours", "Any extra hours"] },
+          { q: "Can your boss make you work off the clock?", a: "No, that's wage theft", wrong: ["Yes, if asked nicely", "Only for small tasks", "Yes, if you're salaried"] },
+          { q: "What agency handles workplace safety?", a: "OSHA", wrong: ["FBI", "FDA", "SEC"] },
+          { q: "Can you be fired for reporting safety violations?", a: "No, that's illegal retaliation", wrong: ["Yes, at-will employment", "Only in unions", "After 90 days yes"] },
+        ]
+      },
+      {
+        id: 2,
+        questions: [
+          { q: "What law protects against workplace discrimination?", a: "Title VII of Civil Rights Act", wrong: ["FLSA", "OSHA", "ADA only"] },
+          { q: "What is sexual harassment?", a: "Unwelcome sexual conduct affecting work", wrong: ["Only physical contact", "Only from supervisors", "Only repeated behavior"] },
+          { q: "What does ADA stand for?", a: "Americans with Disabilities Act", wrong: ["American Defense Act", "Anti-Discrimination Act", "American Disability Association"] },
+          { q: "Can employer ask about your religion in interview?", a: "Generally no, it's discriminatory", wrong: ["Yes, for scheduling", "Yes, it's legal", "Only government jobs"] },
+          { q: "What is FMLA?", a: "Family and Medical Leave Act - up to 12 weeks unpaid leave", wrong: ["Fair Medical Leave Act", "Federal Minimum Labor Act", "Family Money Loan Act"] },
+        ]
+      },
+      {
+        id: 3,
+        questions: [
+          { q: "Can you be fired for discussing wages with coworkers?", a: "No, that's protected (NLRA)", wrong: ["Yes, it's confidential", "Only if policy says so", "Yes, it causes drama"] },
+          { q: "Federal minimum wage as of 2024?", a: "$7.25/hour (states may be higher)", wrong: ["$15/hour", "$10/hour", "$5/hour"] },
+          { q: "What's 'at-will employment'?", a: "Either party can end job anytime for legal reasons", wrong: ["You must give 2 weeks", "Employer needs cause", "Only in some states"] },
+          { q: "Who investigates workplace discrimination?", a: "EEOC", wrong: ["FBI", "State police", "OSHA"] },
+          { q: "Can employer require unpaid training?", a: "Generally no if it benefits employer", wrong: ["Yes, always legal", "Only for first week", "Yes, if under 40 hours"] },
+        ]
+      }
+    ]
+  }
+};
+
+// Badge definitions
+const BADGES = [
+  { id: 'rookie', name: 'Rights Rookie', icon: '🥉', requirement: 'Complete 1 quiz', threshold: 1 },
+  { id: 'learner', name: 'Legal Learner', icon: '🥈', requirement: 'Pass 3 quizzes', threshold: 3 },
+  { id: 'defender', name: 'Constitution Defender', icon: '🥇', requirement: 'Pass all topic quizzes', threshold: 12 },
+  { id: 'master', name: 'Rights Master', icon: '👑', requirement: '90%+ on weekly test', threshold: 90 },
+  { id: 'eagle', name: 'Legal Eagle', icon: '⚖️', requirement: 'Perfect score on any test', threshold: 100 },
+];
 
 // Login/Signup Component
 const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
@@ -45,7 +202,6 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
         <p>Real Legal Rights • Real Protection • Real Information</p>
       </div>
 
-      {/* Collapsible Disclaimer */}
       <div className="disclaimer-container">
         <button 
           className="disclaimer-toggle"
@@ -62,51 +218,22 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
               <li>No attorney-client relationship is created</li>
               <li>Consult a licensed attorney for specific legal situations</li>
             </ul>
-            <p>By using this app, you acknowledge this is educational information, not legal advice.</p>
           </div>
         )}
       </div>
 
       <div className="auth-box">
         <div className="auth-tabs">
-          <button 
-            className={isLogin ? 'active' : ''}
-            onClick={() => setIsLogin(true)}
-          >
-            Login
-          </button>
-          <button 
-            className={!isLogin ? 'active' : ''}
-            onClick={() => setIsLogin(false)}
-          >
-            Sign Up
-          </button>
+          <button className={isLogin ? 'active' : ''} onClick={() => setIsLogin(true)}>Login</button>
+          <button className={!isLogin ? 'active' : ''} onClick={() => setIsLogin(false)}>Sign Up</button>
         </div>
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required={!isLogin}
-            />
+            <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required={!isLogin} />
           )}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           {error && <p className="error">{error}</p>}
           <button type="submit" disabled={loading}>
             {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Create Account')}
@@ -114,11 +241,9 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
         </form>
       </div>
 
-      {/* Flash Sale Banner */}
       <div className="flash-sale-banner">
         <h3>🔥 48-HOUR FLASH SALE 🔥</h3>
-        <p><strong>$10</strong> = ALL 13 Rights Bundles (normally $38)</p>
-        <p><strong>Buy 3</strong> = Get 7 FREE</p>
+        <p><strong>$10</strong> = ALL 13 Rights Bundles</p>
         <p><strong>$3</strong> = 5 AI Case Consultations</p>
       </div>
     </div>
@@ -135,12 +260,9 @@ const SmartSearchTab = ({ user }) => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    
     setLoading(true);
     try {
-      const response = await axios.get(`${API}/search/rights`, {
-        params: { query }
-      });
+      const response = await axios.get(`${API}/search/rights`, { params: { query } });
       setResults(response.data.results || []);
     } catch (err) {
       console.error('Search failed:', err);
@@ -148,147 +270,44 @@ const SmartSearchTab = ({ user }) => {
     setLoading(false);
   };
 
-  const renderRightDetails = (right) => {
+  if (selectedRight) {
     return (
       <div className="right-details">
         <button className="back-btn" onClick={() => setSelectedRight(null)}>← Back</button>
-        <h2>{right.title}</h2>
-        <p className="source"><strong>Source:</strong> {right.source}</p>
+        <h2>{selectedRight.title}</h2>
+        <p className="source"><strong>Source:</strong> {selectedRight.source}</p>
         
-        {right.text && (
+        {selectedRight.text && (
           <div className="legal-text">
             <h4>Actual Legal Text:</h4>
-            <blockquote>"{right.text}"</blockquote>
+            <blockquote>"{selectedRight.text}"</blockquote>
           </div>
         )}
         
-        {right.what_it_means && (
+        {selectedRight.what_it_means && (
           <div className="what-it-means">
             <h4>What This Means For You:</h4>
-            <ul>
-              {right.what_it_means.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
+            <ul>{selectedRight.what_it_means.map((item, i) => <li key={i}>{item}</li>)}</ul>
           </div>
         )}
 
-        {right.what_to_do && (
-          <div className="what-to-do">
-            <h4>What To Do:</h4>
-            <ul>
-              {right.what_to_do.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-          </div>
-        )}
-
-        {right.magic_phrases && (
+        {selectedRight.magic_phrases && (
           <div className="magic-phrases">
             <h4>Say These Exact Words:</h4>
-            <ul>
-              {right.magic_phrases.map((phrase, i) => (
-                <li key={i} className="magic-phrase">"{phrase}"</li>
-              ))}
-            </ul>
+            <ul>{selectedRight.magic_phrases.map((phrase, i) => <li key={i} className="magic-phrase">"{phrase}"</li>)}</ul>
           </div>
         )}
 
-        {right.legal_requirements && (
+        {selectedRight.legal_requirements && (
           <div className="requirements">
             <h4>What You Must Provide:</h4>
-            <ul>
-              {right.legal_requirements.must_provide?.map((item, i) => <li key={i}>✅ {item}</li>)}
-            </ul>
+            <ul>{selectedRight.legal_requirements.must_provide?.map((item, i) => <li key={i}>✅ {item}</li>)}</ul>
             <h4>What You Do NOT Have To Do:</h4>
-            <ul>
-              {right.legal_requirements.not_required?.map((item, i) => <li key={i}>❌ {item}</li>)}
-            </ul>
-          </div>
-        )}
-
-        {right.common_rights && (
-          <div className="common-rights">
-            <h4>Your Rights:</h4>
-            <ul>
-              {right.common_rights.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-          </div>
-        )}
-
-        {right.illegal_landlord_actions && (
-          <div className="illegal-actions">
-            <h4>Illegal Landlord Actions:</h4>
-            <ul>
-              {right.illegal_landlord_actions.map((item, i) => <li key={i}>🚫 {item}</li>)}
-            </ul>
-          </div>
-        )}
-
-        {right.core_rights && (
-          <div className="core-rights">
-            <h4>Your Core Rights:</h4>
-            {right.core_rights.map((r, i) => (
-              <div key={i} className="core-right-item">
-                <strong>{r.right}:</strong> {r.meaning}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {right.what_to_say && (
-          <div className="what-to-say">
-            <h4>What To Say When Arrested:</h4>
-            <ul>
-              {right.what_to_say.map((phrase, i) => (
-                <li key={i} className="magic-phrase">"{phrase}"</li>
-              ))}
-            </ul>
-            <p className="warning">⚠️ Then STOP TALKING. Wait for your lawyer.</p>
-          </div>
-        )}
-
-        {right.federal_laws && (
-          <div className="federal-laws">
-            <h4>Federal Laws That Protect You:</h4>
-            {Object.entries(right.federal_laws).map(([key, law]) => (
-              <div key={key} className="law-item">
-                <h5>{law.name}</h5>
-                <ul>
-                  {(law.rights || law.protects_against || []).map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {right.ice_encounters && (
-          <div className="ice-info">
-            <h4>If ICE Comes to Your Home:</h4>
-            <ul>
-              {right.ice_encounters.at_home?.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-            <h4>If Encountered in Public:</h4>
-            <ul>
-              {right.ice_encounters.in_public?.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-          </div>
-        )}
-
-        {right.debt_collection && (
-          <div className="debt-info">
-            <h4>{right.debt_collection.law}</h4>
-            <ul>
-              {right.debt_collection.protections?.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-            <p className="tip"><strong>Tip:</strong> {right.debt_collection.magic_letter}</p>
+            <ul>{selectedRight.legal_requirements.not_required?.map((item, i) => <li key={i}>❌ {item}</li>)}</ul>
           </div>
         )}
       </div>
     );
-  };
-
-  if (selectedRight) {
-    return renderRightDetails(selectedRight);
   }
 
   return (
@@ -297,26 +316,17 @@ const SmartSearchTab = ({ user }) => {
       <p>Type your situation and find your rights</p>
       
       <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="e.g., 'I got pulled over', 'landlord won't return deposit', 'boss harassment'"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Searching...' : 'Search Rights'}
-        </button>
+        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g., 'pulled over', 'landlord', 'arrested'" />
+        <button type="submit" disabled={loading}>{loading ? 'Searching...' : 'Search Rights'}</button>
       </form>
 
       <div className="quick-searches">
         <p>Quick searches:</p>
         <div className="quick-btns">
-          <button onClick={() => { setQuery('pulled over'); }}>🚗 Pulled Over</button>
-          <button onClick={() => { setQuery('arrested'); }}>⚖️ Arrested</button>
-          <button onClick={() => { setQuery('landlord'); }}>🏠 Landlord</button>
-          <button onClick={() => { setQuery('work harassment'); }}>💼 Workplace</button>
-          <button onClick={() => { setQuery('immigration'); }}>🌍 Immigration</button>
-          <button onClick={() => { setQuery('debt collector'); }}>💳 Debt</button>
+          <button onClick={() => setQuery('pulled over')}>🚗 Pulled Over</button>
+          <button onClick={() => setQuery('arrested')}>⚖️ Arrested</button>
+          <button onClick={() => setQuery('landlord')}>🏠 Landlord</button>
+          <button onClick={() => setQuery('work harassment')}>💼 Workplace</button>
         </div>
       </div>
 
@@ -332,18 +342,302 @@ const SmartSearchTab = ({ user }) => {
           ))}
         </div>
       )}
-
-      {results.length === 0 && query && !loading && (
-        <p className="no-results">No results found. Try different keywords like "police", "landlord", "work", etc.</p>
-      )}
     </div>
   );
 };
 
-// Tab 2: My Rights (Purchased Bundles)
-const MyRightsTab = ({ user, purchasedBundles }) => {
+// Tab 2: Quiz Mode
+const QuizTab = ({ user, updateUser }) => {
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [currentQuiz, setCurrentQuiz] = useState(null);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(9);
+  const [answered, setAnswered] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [quizComplete, setQuizComplete] = useState(false);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [userProgress, setUserProgress] = useState(() => {
+    const saved = localStorage.getItem('quizProgress');
+    return saved ? JSON.parse(saved) : { completedQuizzes: [], badges: [], totalScore: 0 };
+  });
+
+  // Anti-screenshot: disable right-click
+  useEffect(() => {
+    const handleContextMenu = (e) => e.preventDefault();
+    const handleKeyDown = (e) => {
+      if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 'p')) {
+        e.preventDefault();
+        alert('📵 Screenshots disabled! Learn it for real! 💪');
+      }
+    };
+    
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  // Timer
+  useEffect(() => {
+    if (!currentQuiz || answered || quizComplete) return;
+    
+    if (timeLeft <= 0) {
+      handleTimeout();
+      return;
+    }
+    
+    const timer = setTimeout(() => setTimeLeft(t => t - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [timeLeft, currentQuiz, answered, quizComplete]);
+
+  // Shuffle answers when question changes
+  useEffect(() => {
+    if (currentQuiz && currentQuiz.questions[questionIndex]) {
+      const q = currentQuiz.questions[questionIndex];
+      const allAnswers = [q.a, ...q.wrong];
+      setShuffledAnswers(allAnswers.sort(() => Math.random() - 0.5));
+    }
+  }, [currentQuiz, questionIndex]);
+
+  const handleTimeout = () => {
+    setAnswered(true);
+    setSelectedAnswer('TIMEOUT');
+    setTimeout(nextQuestion, 1500);
+  };
+
+  const startQuiz = (topic, quizIndex) => {
+    const quiz = QUIZ_DATA[topic].quizzes[quizIndex];
+    setSelectedTopic(topic);
+    setCurrentQuiz({ ...quiz, topic, quizIndex });
+    setQuestionIndex(0);
+    setScore(0);
+    setTimeLeft(9);
+    setAnswered(false);
+    setQuizComplete(false);
+  };
+
+  const handleAnswer = (answer) => {
+    if (answered) return;
+    setAnswered(true);
+    setSelectedAnswer(answer);
+    
+    const correct = currentQuiz.questions[questionIndex].a;
+    if (answer === correct) {
+      setScore(s => s + 1);
+    }
+    
+    setTimeout(nextQuestion, 1500);
+  };
+
+  const nextQuestion = () => {
+    if (questionIndex + 1 >= currentQuiz.questions.length) {
+      finishQuiz();
+    } else {
+      setQuestionIndex(i => i + 1);
+      setTimeLeft(9);
+      setAnswered(false);
+      setSelectedAnswer(null);
+    }
+  };
+
+  const finishQuiz = () => {
+    setQuizComplete(true);
+    
+    const quizId = `${currentQuiz.topic}_${currentQuiz.quizIndex}`;
+    const percentage = (score / currentQuiz.questions.length) * 100;
+    
+    // Update progress
+    const newProgress = { ...userProgress };
+    if (!newProgress.completedQuizzes.includes(quizId)) {
+      newProgress.completedQuizzes.push(quizId);
+    }
+    newProgress.totalScore += score;
+    
+    // Check for badges
+    if (newProgress.completedQuizzes.length >= 1 && !newProgress.badges.includes('rookie')) {
+      newProgress.badges.push('rookie');
+    }
+    if (newProgress.completedQuizzes.length >= 3 && !newProgress.badges.includes('learner')) {
+      newProgress.badges.push('learner');
+    }
+    if (newProgress.completedQuizzes.length >= 12 && !newProgress.badges.includes('defender')) {
+      newProgress.badges.push('defender');
+    }
+    if (percentage >= 90 && !newProgress.badges.includes('master')) {
+      newProgress.badges.push('master');
+    }
+    if (percentage === 100 && !newProgress.badges.includes('eagle')) {
+      newProgress.badges.push('eagle');
+    }
+    
+    setUserProgress(newProgress);
+    localStorage.setItem('quizProgress', JSON.stringify(newProgress));
+  };
+
+  const shareToFacebook = () => {
+    const text = `I just scored ${score}/${currentQuiz.questions.length} on Know Your Rights! 💪⚖️ Test your legal knowledge!`;
+    window.open(`https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  // Quiz in progress
+  if (currentQuiz && !quizComplete) {
+    const question = currentQuiz.questions[questionIndex];
+    const correct = question.a;
+    
+    return (
+      <div className="quiz-active" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
+        <div className="quiz-header">
+          <span className="quiz-topic">{QUIZ_DATA[currentQuiz.topic].icon} {QUIZ_DATA[currentQuiz.topic].name}</span>
+          <span className="quiz-progress">Question {questionIndex + 1}/{currentQuiz.questions.length}</span>
+        </div>
+        
+        <div className={`timer ${timeLeft <= 3 ? 'danger' : ''}`}>
+          <span className="timer-num">{timeLeft}</span>
+          <span className="timer-label">seconds</span>
+        </div>
+        
+        <div className="question-box">
+          <h3>{question.q}</h3>
+        </div>
+        
+        <div className="answers-grid">
+          {shuffledAnswers.map((answer, i) => {
+            let className = 'answer-btn';
+            if (answered) {
+              if (answer === correct) className += ' correct';
+              else if (answer === selectedAnswer) className += ' wrong';
+            }
+            
+            return (
+              <button 
+                key={i} 
+                className={className}
+                onClick={() => handleAnswer(answer)}
+                disabled={answered}
+              >
+                {answer}
+              </button>
+            );
+          })}
+        </div>
+        
+        {answered && selectedAnswer === 'TIMEOUT' && (
+          <div className="timeout-msg">⏰ Time's up! The answer was: {correct}</div>
+        )}
+        
+        <div className="score-display">
+          Score: {score}/{questionIndex + (answered ? 1 : 0)}
+        </div>
+      </div>
+    );
+  }
+
+  // Quiz complete
+  if (quizComplete) {
+    const percentage = Math.round((score / currentQuiz.questions.length) * 100);
+    const passed = percentage >= 70;
+    
+    return (
+      <div className="quiz-complete">
+        <h2>{passed ? '🎉 Quiz Passed!' : '📚 Keep Learning!'}</h2>
+        
+        <div className="score-circle">
+          <span className="big-score">{score}/{currentQuiz.questions.length}</span>
+          <span className="percentage">{percentage}%</span>
+        </div>
+        
+        <p className="result-msg">
+          {percentage === 100 ? '🔥 PERFECT SCORE! You\'re a Legal Eagle!' :
+           percentage >= 90 ? '👑 Amazing! You\'re a Rights Master!' :
+           percentage >= 70 ? '✅ Great job! You passed!' :
+           '💪 Keep practicing, you\'ll get there!'}
+        </p>
+        
+        <div className="earned-badges">
+          <h4>Your Badges:</h4>
+          <div className="badges-row">
+            {BADGES.map(badge => (
+              <div 
+                key={badge.id} 
+                className={`badge ${userProgress.badges.includes(badge.id) ? 'earned' : 'locked'}`}
+                title={badge.requirement}
+              >
+                <span className="badge-icon">{badge.icon}</span>
+                <span className="badge-name">{badge.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="quiz-actions">
+          <button onClick={() => { setCurrentQuiz(null); setSelectedTopic(null); }}>Back to Topics</button>
+          <button onClick={shareToFacebook} className="share-btn">Share on Facebook 📱</button>
+        </div>
+      </div>
+    );
+  }
+
+  // Topic selection
+  return (
+    <div className="quiz-tab">
+      <h2>🧠 Quiz Mode</h2>
+      <p>Test your rights knowledge - 9 seconds per question. Think fast!</p>
+      
+      <div className="progress-summary">
+        <span>✅ Quizzes Completed: {userProgress.completedQuizzes.length}/12</span>
+        <span>🏆 Badges: {userProgress.badges.length}/5</span>
+      </div>
+      
+      <div className="topics-grid">
+        {Object.entries(QUIZ_DATA).map(([key, topic]) => (
+          <div key={key} className="topic-card">
+            <span className="topic-icon">{topic.icon}</span>
+            <h3>{topic.name}</h3>
+            <div className="quiz-list">
+              {topic.quizzes.map((quiz, i) => {
+                const quizId = `${key}_${i}`;
+                const completed = userProgress.completedQuizzes.includes(quizId);
+                return (
+                  <button 
+                    key={i} 
+                    className={`quiz-btn ${completed ? 'completed' : ''}`}
+                    onClick={() => startQuiz(key, i)}
+                  >
+                    {completed ? '✅' : '▶️'} Quiz {i + 1}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="badges-preview">
+        <h3>🏆 Earn Badges</h3>
+        <div className="badges-row">
+          {BADGES.map(badge => (
+            <div 
+              key={badge.id} 
+              className={`badge ${userProgress.badges.includes(badge.id) ? 'earned' : 'locked'}`}
+              title={badge.requirement}
+            >
+              <span className="badge-icon">{badge.icon}</span>
+              <span className="badge-name">{badge.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Tab 3: My Rights
+const MyRightsTab = ({ user }) => {
   const [bundles, setBundles] = useState([]);
-  const [selectedBundle, setSelectedBundle] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -352,9 +646,7 @@ const MyRightsTab = ({ user, purchasedBundles }) => {
 
   const fetchPurchasedBundles = async () => {
     try {
-      const response = await axios.get(`${API}/user/bundles`, {
-        params: { user_id: user.id }
-      });
+      const response = await axios.get(`${API}/user/bundles`, { params: { user_id: user.id } });
       setBundles(response.data.bundles || []);
     } catch (err) {
       console.error('Failed to fetch bundles:', err);
@@ -362,9 +654,7 @@ const MyRightsTab = ({ user, purchasedBundles }) => {
     setLoading(false);
   };
 
-  if (loading) {
-    return <div className="loading">Loading your rights...</div>;
-  }
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="my-rights-tab">
@@ -373,36 +663,26 @@ const MyRightsTab = ({ user, purchasedBundles }) => {
 
       {bundles.length === 0 ? (
         <div className="no-bundles">
-          <h3>You haven't purchased any bundles yet</h3>
-          <p>Check out our flash sale deals!</p>
-          
+          <h3>No bundles purchased yet</h3>
           <div className="promo-cards">
             <div className="promo-card flash">
               <h4>🔥 FLASH SALE</h4>
               <p className="price">$10</p>
               <p>All 13 Rights Bundles</p>
-              <span className="savings">Save $28!</span>
             </div>
             <div className="promo-card">
               <h4>Buy 3 Get 7 FREE</h4>
               <p className="price">$8.97</p>
-              <p>Get 10 Bundles Total</p>
-            </div>
-            <div className="promo-card">
-              <h4>AI Case Consult</h4>
-              <p className="price">$3</p>
-              <p>5 "Do I Have a Case?" Queries</p>
+              <p>10 Bundles Total</p>
             </div>
           </div>
         </div>
       ) : (
         <div className="bundles-grid">
-          {bundles.map((bundle, index) => (
-            <div key={index} className="bundle-card" onClick={() => setSelectedBundle(bundle)}>
+          {bundles.map((bundle, i) => (
+            <div key={i} className="bundle-card">
               <span className="bundle-icon">{bundle.icon}</span>
               <h4>{bundle.name}</h4>
-              <p>{bundle.description}</p>
-              <button>View Rights →</button>
             </div>
           ))}
         </div>
@@ -411,13 +691,12 @@ const MyRightsTab = ({ user, purchasedBundles }) => {
   );
 };
 
-// Tab 3: Do I Have a Case?
+// Tab 4: Do I Have a Case?
 const CaseAnalyzerTab = ({ user }) => {
   const [situation, setSituation] = useState('');
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [queriesLeft, setQueriesLeft] = useState(3);
-  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     fetchQueriesLeft();
@@ -425,11 +704,8 @@ const CaseAnalyzerTab = ({ user }) => {
 
   const fetchQueriesLeft = async () => {
     try {
-      const response = await axios.get(`${API}/case-analyzer/queries-left`, {
-        params: { user_id: user.id }
-      });
+      const response = await axios.get(`${API}/case-analyzer/queries-left`, { params: { user_id: user.id } });
       setQueriesLeft(response.data.queries_left);
-      setHistory(response.data.history || []);
     } catch (err) {
       console.error('Failed to fetch queries:', err);
     }
@@ -449,25 +725,9 @@ const CaseAnalyzerTab = ({ user }) => {
       setQueriesLeft(response.data.queries_left);
       setSituation('');
     } catch (err) {
-      console.error('Analysis failed:', err);
       alert(err.response?.data?.detail || 'Analysis failed');
     }
     setLoading(false);
-  };
-
-  const buyMoreQueries = async () => {
-    try {
-      const response = await axios.post(`${API}/case-analyzer/buy-queries`, {
-        user_id: user.id,
-        package: '5_queries',
-        origin_url: window.location.origin
-      });
-      if (response.data.checkout_url) {
-        window.location.href = response.data.checkout_url;
-      }
-    } catch (err) {
-      console.error('Purchase failed:', err);
-    }
   };
 
   return (
@@ -479,19 +739,14 @@ const CaseAnalyzerTab = ({ user }) => {
         <span className={`queries-left ${queriesLeft <= 0 ? 'empty' : ''}`}>
           {queriesLeft} Free Queries Left
         </span>
-        {queriesLeft <= 0 && (
-          <button className="buy-more-btn" onClick={buyMoreQueries}>
-            Get 5 More for $3
-          </button>
-        )}
       </div>
 
       <form onSubmit={handleAnalyze} className="analyzer-form">
         <textarea
           value={situation}
           onChange={(e) => setSituation(e.target.value)}
-          placeholder="Describe your legal situation in detail...\n\nExample: 'My landlord hasn't returned my security deposit after 45 days. I left the apartment clean with photos. He's claiming damages that existed before I moved in.'"
-          rows={6}
+          placeholder="Describe your legal situation..."
+          rows={5}
           disabled={queriesLeft <= 0}
         />
         <button type="submit" disabled={loading || queriesLeft <= 0 || !situation.trim()}>
@@ -502,86 +757,45 @@ const CaseAnalyzerTab = ({ user }) => {
       {analysis && (
         <div className="analysis-result">
           <h3>Analysis Result</h3>
-          
           <div className="verdict">
-            <h4>Do You Have a Case?</h4>
             <span className={`verdict-badge ${analysis.has_case ? 'yes' : 'maybe'}`}>
               {analysis.verdict}
             </span>
           </div>
-
           <div className="analysis-section">
-            <h4>📋 Summary</h4>
+            <h4>Summary</h4>
             <p>{analysis.summary}</p>
           </div>
-
-          <div className="analysis-section">
-            <h4>⚖️ Relevant Laws</h4>
-            <ul>
-              {analysis.relevant_laws?.map((law, i) => <li key={i}>{law}</li>)}
-            </ul>
-          </div>
-
-          <div className="analysis-section">
-            <h4>✅ Your Rights in This Situation</h4>
-            <ul>
-              {analysis.your_rights?.map((right, i) => <li key={i}>{right}</li>)}
-            </ul>
-          </div>
-
-          <div className="analysis-section">
-            <h4>📝 Recommended Next Steps</h4>
-            <ol>
-              {analysis.next_steps?.map((step, i) => <li key={i}>{step}</li>)}
-            </ol>
-          </div>
-
-          <div className="analysis-section">
-            <h4>💰 Is It Worth Seeing a Lawyer?</h4>
-            <p>{analysis.lawyer_recommendation}</p>
-          </div>
-
-          <div className="disclaimer-small">
-            ⚠️ This analysis is for educational purposes only and is not legal advice. 
-            Consult a licensed attorney for your specific situation.
-          </div>
-        </div>
-      )}
-
-      {history.length > 0 && (
-        <div className="analysis-history">
-          <h3>Previous Analyses</h3>
-          {history.map((item, i) => (
-            <div key={i} className="history-item">
-              <p className="situation-preview">{item.situation.substring(0, 100)}...</p>
-              <span className="date">{new Date(item.created_at).toLocaleDateString()}</span>
+          {analysis.relevant_laws?.length > 0 && (
+            <div className="analysis-section">
+              <h4>Relevant Laws</h4>
+              <ul>{analysis.relevant_laws.map((law, i) => <li key={i}>{law}</li>)}</ul>
             </div>
-          ))}
+          )}
+          {analysis.next_steps?.length > 0 && (
+            <div className="analysis-section">
+              <h4>Next Steps</h4>
+              <ol>{analysis.next_steps.map((step, i) => <li key={i}>{step}</li>)}</ol>
+            </div>
+          )}
+          <div className="disclaimer-small">
+            ⚠️ This is educational information, not legal advice.
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-// Main App Component
+// Main App
 const KnowYourRightsApp = () => {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('search');
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   useEffect(() => {
-    // Check for existing login
     const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-
-    // Check for payment success
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('payment') === 'success') {
-      alert('Payment successful! Your purchase has been added.');
-      window.history.replaceState({}, '', '/');
-    }
+    if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
 
   const handleLogout = () => {
@@ -590,18 +804,10 @@ const KnowYourRightsApp = () => {
     setUser(null);
   };
 
-  // Not logged in - show auth screen
   if (!user) {
-    return (
-      <AuthScreen 
-        onLogin={setUser} 
-        disclaimer={showDisclaimer}
-        setShowDisclaimer={setShowDisclaimer}
-      />
-    );
+    return <AuthScreen onLogin={setUser} disclaimer={showDisclaimer} setShowDisclaimer={setShowDisclaimer} />;
   }
 
-  // Logged in - show main app
   return (
     <div className="app-container">
       <header className="app-header">
@@ -613,35 +819,21 @@ const KnowYourRightsApp = () => {
       </header>
 
       <nav className="tab-nav">
-        <button 
-          className={activeTab === 'search' ? 'active' : ''}
-          onClick={() => setActiveTab('search')}
-        >
-          🔍 Smart Search
-        </button>
-        <button 
-          className={activeTab === 'my-rights' ? 'active' : ''}
-          onClick={() => setActiveTab('my-rights')}
-        >
-          📚 My Rights
-        </button>
-        <button 
-          className={activeTab === 'case-analyzer' ? 'active' : ''}
-          onClick={() => setActiveTab('case-analyzer')}
-        >
-          ⚖️ Do I Have a Case?
-        </button>
+        <button className={activeTab === 'search' ? 'active' : ''} onClick={() => setActiveTab('search')}>🔍 Search</button>
+        <button className={activeTab === 'quiz' ? 'active' : ''} onClick={() => setActiveTab('quiz')}>🧠 Quiz</button>
+        <button className={activeTab === 'my-rights' ? 'active' : ''} onClick={() => setActiveTab('my-rights')}>📚 My Rights</button>
+        <button className={activeTab === 'case' ? 'active' : ''} onClick={() => setActiveTab('case')}>⚖️ Case?</button>
       </nav>
 
       <main className="tab-content">
         {activeTab === 'search' && <SmartSearchTab user={user} />}
+        {activeTab === 'quiz' && <QuizTab user={user} />}
         {activeTab === 'my-rights' && <MyRightsTab user={user} />}
-        {activeTab === 'case-analyzer' && <CaseAnalyzerTab user={user} />}
+        {activeTab === 'case' && <CaseAnalyzerTab user={user} />}
       </main>
 
       <footer className="app-footer">
-        <p>© 2025 Know Your Rights • Real Legal Information from U.S. Constitution & Federal Law</p>
-        <p className="footer-disclaimer">Educational purposes only. Not legal advice.</p>
+        <p>© 2025 Know Your Rights • Real Legal Information from U.S. Constitution</p>
       </footer>
     </div>
   );
