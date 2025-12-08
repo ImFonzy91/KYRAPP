@@ -395,7 +395,13 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
     <div className="auth-screen">
       <div className="auth-header">
         <h1>Know Your Rights</h1>
-        <p>Real Legal Rights • Real Protection • Real Information</p>
+        <p>Stop being a mark. Start standing up for yourself.</p>
+      </div>
+
+      <div className="empowerment-message">
+        <p>🎵 You memorized every song on your playlist.</p>
+        <p>❓ But can you name 3 of your constitutional rights?</p>
+        <p className="swap-message">💡 <strong>Swap the order.</strong> Learn what actually matters.</p>
       </div>
 
       <div className="disclaimer-container">
