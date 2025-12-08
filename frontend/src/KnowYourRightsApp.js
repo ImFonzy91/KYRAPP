@@ -866,6 +866,13 @@ const QuizTab = ({ user, updateUser }) => {
           <div key={key} className="topic-card">
             <span className="topic-icon">{topic.icon}</span>
             <h3>{topic.name}</h3>
+            
+            {VIDEO_CONTENT[key] && (
+              <button className="watch-videos-btn" onClick={() => setShowVideos(key)}>
+                🎬 Watch Videos First
+              </button>
+            )}
+            
             <div className="quiz-list">
               {topic.quizzes.map((quiz, i) => {
                 const quizId = `${key}_${i}`;
