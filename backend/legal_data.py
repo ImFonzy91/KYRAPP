@@ -311,14 +311,124 @@ ALL_RIGHTS_DATA = {
     "consumer": CONSUMER_RIGHTS
 }
 
+# Expanded keyword mapping for smarter search
+SMART_KEYWORDS = {
+    # Fight/Violence scenarios -> Criminal + possibly Employment
+    "fight": ["criminal", "employment"],
+    "hit": ["criminal"],
+    "punch": ["criminal"],
+    "assault": ["criminal", "employment"],
+    "battery": ["criminal"],
+    "altercation": ["criminal", "employment"],
+    "attacked": ["criminal"],
+    "violent": ["criminal"],
+    
+    # Work scenarios
+    "employee": ["employment"],
+    "coworker": ["employment"],
+    "boss": ["employment"],
+    "manager": ["employment"],
+    "fired": ["employment"],
+    "job": ["employment"],
+    "work": ["employment"],
+    "workplace": ["employment"],
+    "hr": ["employment"],
+    "paycheck": ["employment"],
+    "overtime": ["employment"],
+    "harassment": ["employment"],
+    
+    # Police/Arrest scenarios
+    "police": ["criminal", "constitutional", "miranda"],
+    "cop": ["criminal", "constitutional", "miranda"],
+    "officer": ["criminal", "constitutional", "miranda"],
+    "arrested": ["criminal", "miranda", "constitutional"],
+    "jail": ["criminal", "miranda"],
+    "detained": ["criminal", "miranda"],
+    "handcuffs": ["criminal", "miranda"],
+    "pulled over": ["traffic", "constitutional"],
+    "traffic stop": ["traffic", "constitutional"],
+    "driving": ["traffic"],
+    "car": ["traffic", "constitutional"],
+    "vehicle": ["traffic"],
+    "dui": ["traffic", "criminal"],
+    "checkpoint": ["traffic"],
+    
+    # Housing scenarios
+    "landlord": ["tenant"],
+    "rent": ["tenant"],
+    "lease": ["tenant"],
+    "eviction": ["tenant"],
+    "apartment": ["tenant"],
+    "tenant": ["tenant"],
+    "deposit": ["tenant"],
+    "security deposit": ["tenant"],
+    
+    # Money/Debt scenarios
+    "debt": ["consumer"],
+    "collector": ["consumer"],
+    "credit": ["consumer"],
+    "collection": ["consumer"],
+    "bill": ["consumer"],
+    
+    # Immigration
+    "ice": ["immigration"],
+    "immigration": ["immigration"],
+    "deport": ["immigration"],
+    "visa": ["immigration"],
+    "undocumented": ["immigration"],
+    "border": ["immigration"],
+    
+    # General legal
+    "lawyer": ["criminal", "constitutional"],
+    "attorney": ["criminal", "constitutional"],
+    "rights": ["constitutional", "miranda"],
+    "silent": ["miranda", "constitutional"],
+    "search": ["constitutional", "traffic"],
+    "warrant": ["constitutional"],
+}
+
 def search_rights(query: str) -> list:
-    """Search all rights data for matching content"""
+    """Smart search through all legal rights data"""
     query_lower = query.lower()
     results = []
+    matched_categories = set()
     
-    # Search constitutional rights
+    # First, check smart keywords for category matching
+    for keyword, categories in SMART_KEYWORDS.items():
+        if keyword in query_lower:
+            for cat in categories:
+                matched_categories.add(cat)
+    
+    # Also check original keyword lists
     for key, right in CONSTITUTIONAL_RIGHTS.items():
         if any(kw in query_lower for kw in right.get("keywords", [])):
+            matched_categories.add("constitutional")
+            break
+    
+    if any(kw in query_lower for kw in MIRANDA_RIGHTS.get("keywords", [])):
+        matched_categories.add("miranda")
+    
+    if any(kw in query_lower for kw in TRAFFIC_STOP_RIGHTS.get("keywords", [])):
+        matched_categories.add("traffic")
+    
+    if any(kw in query_lower for kw in TENANT_RIGHTS.get("keywords", [])):
+        matched_categories.add("tenant")
+    
+    if any(kw in query_lower for kw in EMPLOYMENT_RIGHTS.get("keywords", [])):
+        matched_categories.add("employment")
+    
+    if any(kw in query_lower for kw in CRIMINAL_DEFENSE_RIGHTS.get("keywords", [])):
+        matched_categories.add("criminal")
+    
+    if any(kw in query_lower for kw in IMMIGRATION_RIGHTS.get("keywords", [])):
+        matched_categories.add("immigration")
+    
+    if any(kw in query_lower for kw in CONSUMER_RIGHTS.get("keywords", [])):
+        matched_categories.add("consumer")
+    
+    # Build results from matched categories
+    if "constitutional" in matched_categories:
+        for key, right in CONSTITUTIONAL_RIGHTS.items():
             results.append({
                 "type": "constitutional",
                 "id": key,
@@ -328,8 +438,7 @@ def search_rights(query: str) -> list:
                 "what_it_means": right["what_it_means"]
             })
     
-    # Search Miranda
-    if any(kw in query_lower for kw in MIRANDA_RIGHTS.get("keywords", [])):
+    if "miranda" in matched_categories:
         results.append({
             "type": "miranda",
             "id": "miranda_rights",
@@ -339,8 +448,7 @@ def search_rights(query: str) -> list:
             "what_to_do": MIRANDA_RIGHTS["what_to_do"]
         })
     
-    # Search traffic rights
-    if any(kw in query_lower for kw in TRAFFIC_STOP_RIGHTS.get("keywords", [])):
+    if "traffic" in matched_categories:
         results.append({
             "type": "traffic",
             "id": "traffic_stop_rights",
@@ -350,8 +458,7 @@ def search_rights(query: str) -> list:
             "magic_phrases": TRAFFIC_STOP_RIGHTS["magic_phrases"]
         })
     
-    # Search tenant rights
-    if any(kw in query_lower for kw in TENANT_RIGHTS.get("keywords", [])):
+    if "tenant" in matched_categories:
         results.append({
             "type": "tenant",
             "id": "tenant_rights",
@@ -361,8 +468,7 @@ def search_rights(query: str) -> list:
             "illegal_landlord_actions": TENANT_RIGHTS["illegal_landlord_actions"]
         })
     
-    # Search employment rights
-    if any(kw in query_lower for kw in EMPLOYMENT_RIGHTS.get("keywords", [])):
+    if "employment" in matched_categories:
         results.append({
             "type": "employment",
             "id": "employment_rights",
@@ -371,8 +477,7 @@ def search_rights(query: str) -> list:
             "federal_laws": EMPLOYMENT_RIGHTS["federal_laws"]
         })
     
-    # Search criminal rights
-    if any(kw in query_lower for kw in CRIMINAL_DEFENSE_RIGHTS.get("keywords", [])):
+    if "criminal" in matched_categories:
         results.append({
             "type": "criminal",
             "id": "criminal_defense_rights",
@@ -382,8 +487,7 @@ def search_rights(query: str) -> list:
             "what_to_say": CRIMINAL_DEFENSE_RIGHTS["what_to_say_when_arrested"]
         })
     
-    # Search immigration rights
-    if any(kw in query_lower for kw in IMMIGRATION_RIGHTS.get("keywords", [])):
+    if "immigration" in matched_categories:
         results.append({
             "type": "immigration",
             "id": "immigration_rights",
@@ -393,8 +497,7 @@ def search_rights(query: str) -> list:
             "ice_encounters": IMMIGRATION_RIGHTS["ice_encounters"]
         })
     
-    # Search consumer rights
-    if any(kw in query_lower for kw in CONSUMER_RIGHTS.get("keywords", [])):
+    if "consumer" in matched_categories:
         results.append({
             "type": "consumer",
             "id": "consumer_rights",
@@ -402,6 +505,27 @@ def search_rights(query: str) -> list:
             "source": CONSUMER_RIGHTS["source"],
             "debt_collection": CONSUMER_RIGHTS["debt_collection"],
             "credit_reporting": CONSUMER_RIGHTS["credit_reporting"]
+        })
+    
+    # NEVER return empty - if no matches, show the most common/useful rights
+    if not results:
+        # Default fallback - show general rights everyone should know
+        results.append({
+            "type": "constitutional",
+            "id": "5th_amendment",
+            "title": CONSTITUTIONAL_RIGHTS["5th_amendment"]["title"],
+            "source": CONSTITUTIONAL_RIGHTS["5th_amendment"]["source"],
+            "text": CONSTITUTIONAL_RIGHTS["5th_amendment"]["text"],
+            "what_it_means": CONSTITUTIONAL_RIGHTS["5th_amendment"]["what_it_means"]
+        })
+        results.append({
+            "type": "criminal",
+            "id": "criminal_defense_rights",
+            "title": CRIMINAL_DEFENSE_RIGHTS["title"],
+            "source": CRIMINAL_DEFENSE_RIGHTS["source"],
+            "core_rights": CRIMINAL_DEFENSE_RIGHTS["core_rights"],
+            "what_to_say": CRIMINAL_DEFENSE_RIGHTS["what_to_say_when_arrested"],
+            "fallback_note": "These are general rights that may apply to your situation. Be more specific for better results."
         })
     
     return results
