@@ -5,6 +5,43 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Video content for each topic - Real YouTube videos
+const VIDEO_CONTENT = {
+  traffic: {
+    title: "Traffic Stop Videos",
+    videos: [
+      { id: "RvjF2VW73hY", title: "NEW Supreme Court Ruling - Your Traffic Stop Rights", channel: "Hampton Law", duration: "12:34" },
+      { id: "7A-MTqLHRzY", title: "Exact Words to Say During a Traffic Stop", channel: "Hampton Law", duration: "8:45" },
+      { id: "ZG7wPR3NFJo", title: "How Cops TRICK You During Traffic Stops", channel: "Hampton Law", duration: "10:22" },
+      { id: "spZzwkyfu4E", title: "DUI Checkpoint - Know Your Rights", channel: "Hampton Law", duration: "9:15" },
+    ]
+  },
+  arrest: {
+    title: "Arrest & Miranda Videos",
+    videos: [
+      { id: "uqo5RYOp4nQ", title: "Shut The F*** Up Friday", channel: "Pot Brothers at Law", duration: "3:21" },
+      { id: "Q629R5pKMrk", title: "What to Say When Cops Question You", channel: "Pot Brothers at Law", duration: "4:55" },
+      { id: "t9Gt5MbxCgk", title: "How to Handle Police Encounters", channel: "Hampton Law", duration: "11:30" },
+      { id: "ibb2Kt9SbE4", title: "Your Rights During an Arrest", channel: "Hampton Law", duration: "8:12" },
+    ]
+  },
+  tenant: {
+    title: "Tenant Rights Videos",
+    videos: [
+      { id: "yqMjMPlXzdA", title: "Know Your Rights - Police at Your Door", channel: "Flex Your Rights", duration: "7:45" },
+      { id: "WwgoBr3FJ7k", title: "Can Police Enter Your Home?", channel: "Hampton Law", duration: "9:33" },
+      { id: "cH2esAWLEEg", title: "Dealing with Landlords - Your Rights", channel: "LegalEagle", duration: "15:22" },
+    ]
+  },
+  workplace: {
+    title: "Workplace Rights Videos",
+    videos: [
+      { id: "xgrQPAb6nCE", title: "Employment Rights You Need to Know", channel: "Hampton Law", duration: "10:44" },
+      { id: "cmZX0U8vEnI", title: "Getting Fired - Know Your Rights", channel: "Hampton Law", duration: "8:56" },
+    ]
+  }
+};
+
 // Quiz Questions Database - REAL legal knowledge
 const QUIZ_DATA = {
   traffic: {
