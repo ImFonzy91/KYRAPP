@@ -36,6 +36,30 @@ body {
 .auth-header p {
   color: #ccc;
   margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Empowerment Message */
+.empowerment-message {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  text-align: center;
+}
+
+.empowerment-message p {
+  margin: 0.5rem 0;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.empowerment-message .swap-message {
+  color: #ffd700;
+  margin-top: 1rem;
+  font-size: 1.1rem;
 }
 
 /* Collapsible Disclaimer */
