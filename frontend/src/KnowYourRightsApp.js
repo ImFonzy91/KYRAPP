@@ -15,13 +15,16 @@ const PRICE_COMPARISONS = [
 ];
 
 const LOADING_MESSAGES = [
-  "💰 Other apps charge $299/year... We charge $10. Period.",
-  "🚫 No subscriptions. No hidden fees. Just knowledge.",
-  "⚖️ Lawyers charge $300/hour for this info. You're getting it for pennies.",
-  "📚 Big legal sites profit off confusion. We profit off YOUR success.",
-  "💪 Know your rights without going broke.",
-  "🎓 Education shouldn't bankrupt you. $10 = All 13 rights bundles.",
-  "🔥 While others charge monthly, we believe in ONE fair price.",
+  "🎵 You know every lyric to 50 songs. But do you know 3 of your rights?",
+  "💭 You memorized entire albums. Time to memorize what actually matters.",
+  "🚫 Stop being a mark. Start knowing your shit.",
+  "💪 Not about being a dick. It's about not being a victim.",
+  "🧠 Your brain memorized every Cardi B song. Now give it something useful.",
+  "⚖️ Stand up for yourself. All it takes is a little knowledge.",
+  "🎤 iTunes got your money. Now invest in yourself.",
+  "🔥 They count on you not knowing. Prove them wrong.",
+  "💰 Lawyers charge $300/hr because you don't know this. Change that.",
+  "📚 Swap the order. Learn your rights like you learn lyrics.",
 ];
 
 // Loading component with price comparison
