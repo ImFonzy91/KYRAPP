@@ -661,6 +661,54 @@ const QuizTab = ({ user, updateUser }) => {
     window.open(`https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(text)}`, '_blank');
   };
 
+  // Video viewer
+  if (showVideos && !currentQuiz) {
+    const videoData = VIDEO_CONTENT[showVideos];
+    return (
+      <div className="video-section">
+        <button className="back-btn" onClick={() => { setShowVideos(null); setActiveVideo(null); }}>← Back to Topics</button>
+        <h2>🎬 {videoData.title}</h2>
+        <p>Watch & learn before you quiz yourself!</p>
+        
+        {activeVideo ? (
+          <div className="video-player">
+            <div className="video-container">
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1`}
+                title={activeVideo.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <h3>{activeVideo.title}</h3>
+            <p className="video-channel">📺 {activeVideo.channel}</p>
+            <button className="close-video-btn" onClick={() => setActiveVideo(null)}>Watch Another Video</button>
+          </div>
+        ) : (
+          <div className="video-grid">
+            {videoData.videos.map((video, i) => (
+              <div key={i} className="video-card" onClick={() => setActiveVideo(video)}>
+                <div className="video-thumbnail">
+                  <img src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} alt={video.title} />
+                  <span className="video-duration">{video.duration}</span>
+                  <div className="play-overlay">▶</div>
+                </div>
+                <h4>{video.title}</h4>
+                <p className="video-channel">📺 {video.channel}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        
+        <div className="ready-to-quiz">
+          <p>Ready to test what you learned?</p>
+          <button onClick={() => { setShowVideos(null); }}>Take the Quiz 🧠</button>
+        </div>
+      </div>
+    );
+  }
+
   // Quiz in progress
   if (currentQuiz && !quizComplete) {
     const question = currentQuiz.questions[questionIndex];
