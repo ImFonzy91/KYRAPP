@@ -435,6 +435,8 @@ const QuizTab = ({ user, updateUser }) => {
   const [difficulty, setDifficulty] = useState('easy');
   const [fastAnswers, setFastAnswers] = useState(0);
   const [missedThenCorrect, setMissedThenCorrect] = useState({ missed: 0, correct: 0 });
+  const [showVideos, setShowVideos] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
   const [userProgress, setUserProgress] = useState(() => {
     const saved = localStorage.getItem('quizProgress');
     return saved ? JSON.parse(saved) : { 
