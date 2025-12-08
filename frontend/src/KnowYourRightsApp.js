@@ -350,31 +350,141 @@ const SmartSearchTab = ({ user }) => {
         
         {selectedRight.text && (
           <div className="legal-text">
-            <h4>Actual Legal Text:</h4>
+            <h4>📜 Actual Legal Text:</h4>
             <blockquote>"{selectedRight.text}"</blockquote>
           </div>
         )}
         
         {selectedRight.what_it_means && (
           <div className="what-it-means">
-            <h4>What This Means For You:</h4>
+            <h4>💡 What This Means For You:</h4>
             <ul>{selectedRight.what_it_means.map((item, i) => <li key={i}>{item}</li>)}</ul>
+          </div>
+        )}
+
+        {selectedRight.what_to_do && (
+          <div className="what-to-do">
+            <h4>✅ What To Do:</h4>
+            <ul>{selectedRight.what_to_do.map((item, i) => <li key={i}>{item}</li>)}</ul>
           </div>
         )}
 
         {selectedRight.magic_phrases && (
           <div className="magic-phrases">
-            <h4>Say These Exact Words:</h4>
+            <h4>🗣️ Say These Exact Words:</h4>
             <ul>{selectedRight.magic_phrases.map((phrase, i) => <li key={i} className="magic-phrase">"{phrase}"</li>)}</ul>
           </div>
         )}
 
         {selectedRight.legal_requirements && (
           <div className="requirements">
-            <h4>What You Must Provide:</h4>
+            <h4>📋 What You Must Provide:</h4>
             <ul>{selectedRight.legal_requirements.must_provide?.map((item, i) => <li key={i}>✅ {item}</li>)}</ul>
-            <h4>What You Do NOT Have To Do:</h4>
+            <h4>🚫 What You Do NOT Have To Do:</h4>
             <ul>{selectedRight.legal_requirements.not_required?.map((item, i) => <li key={i}>❌ {item}</li>)}</ul>
+          </div>
+        )}
+
+        {/* Employment/Workplace Rights - Federal Laws with descriptions */}
+        {selectedRight.federal_laws && (
+          <div className="federal-laws-detail">
+            <h4>📚 Federal Laws That Protect You:</h4>
+            {Object.entries(selectedRight.federal_laws).map(([key, law]) => (
+              <div key={key} className="law-card">
+                <h5>{law.name}</h5>
+                <p className="law-description">
+                  {key === 'flsa' && "The FLSA sets minimum wage, overtime pay, recordkeeping, and child labor standards. If your employer isn't paying you fairly, this law protects you."}
+                  {key === 'title_vii' && "Title VII makes it illegal for employers to discriminate against you based on race, color, religion, sex, or national origin. This includes hiring, firing, pay, and promotions."}
+                  {key === 'ada' && "The ADA prohibits discrimination against people with disabilities and requires employers to provide reasonable accommodations so you can do your job."}
+                  {key === 'osha' && "OSHA ensures you have a safe workplace. Your employer must provide a workplace free from serious hazards. You can report unsafe conditions without fear of retaliation."}
+                  {key === 'fmla' && "FMLA allows eligible employees to take unpaid, job-protected leave for family and medical reasons. Your job must be waiting for you when you return."}
+                </p>
+                {law.rights && (
+                  <ul>{law.rights.map((r, i) => <li key={i}>✓ {r}</li>)}</ul>
+                )}
+                {law.protects_against && (
+                  <ul>{law.protects_against.map((r, i) => <li key={i}>🛡️ Protection from: {r}</li>)}</ul>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Criminal Defense - Core Rights with descriptions */}
+        {selectedRight.core_rights && (
+          <div className="core-rights-detail">
+            <h4>⚖️ Your Core Rights When Facing Criminal Charges:</h4>
+            {selectedRight.core_rights.map((right, i) => (
+              <div key={i} className="core-right-card">
+                <h5>{right.right}</h5>
+                <p>{right.meaning}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {selectedRight.what_to_say && (
+          <div className="what-to-say">
+            <h4>🗣️ If You're Arrested, Say ONLY These Words:</h4>
+            <ul>{selectedRight.what_to_say.map((phrase, i) => <li key={i} className="magic-phrase">"{phrase}"</li>)}</ul>
+            <p className="warning">⚠️ After saying these phrases, STOP TALKING. Do not explain, do not justify. Wait for your lawyer.</p>
+          </div>
+        )}
+
+        {/* Tenant Rights */}
+        {selectedRight.common_rights && (
+          <div className="tenant-rights-detail">
+            <h4>🏠 Your Rights as a Tenant:</h4>
+            <ul>{selectedRight.common_rights.map((item, i) => <li key={i}>✓ {item}</li>)}</ul>
+          </div>
+        )}
+
+        {selectedRight.illegal_landlord_actions && (
+          <div className="illegal-actions">
+            <h4>🚫 Things Your Landlord CANNOT Do:</h4>
+            <ul>{selectedRight.illegal_landlord_actions.map((item, i) => <li key={i}>❌ {item}</li>)}</ul>
+          </div>
+        )}
+
+        {/* Immigration Rights */}
+        {selectedRight.all_persons_have && (
+          <div className="immigration-rights-detail">
+            <h4>🌍 Rights ALL Persons Have (Regardless of Status):</h4>
+            <ul>{selectedRight.all_persons_have.map((item, i) => <li key={i}>✓ {item}</li>)}</ul>
+          </div>
+        )}
+
+        {selectedRight.ice_encounters && (
+          <div className="ice-encounters-detail">
+            <h4>🏠 If ICE Comes to Your Home:</h4>
+            <ul>{selectedRight.ice_encounters.at_home?.map((item, i) => <li key={i}>{item}</li>)}</ul>
+            <h4>🚶 If Encountered in Public:</h4>
+            <ul>{selectedRight.ice_encounters.in_public?.map((item, i) => <li key={i}>{item}</li>)}</ul>
+          </div>
+        )}
+
+        {/* Consumer Rights */}
+        {selectedRight.debt_collection && (
+          <div className="debt-rights-detail">
+            <h4>💰 {selectedRight.debt_collection.law}</h4>
+            <p className="law-description">Debt collectors CANNOT harass you. You have rights when dealing with collection agencies.</p>
+            <ul>{selectedRight.debt_collection.protections?.map((item, i) => <li key={i}>✓ {item}</li>)}</ul>
+            {selectedRight.debt_collection.magic_letter && (
+              <p className="tip"><strong>Pro Tip:</strong> {selectedRight.debt_collection.magic_letter}</p>
+            )}
+          </div>
+        )}
+
+        {selectedRight.credit_reporting && (
+          <div className="credit-rights-detail">
+            <h4>📊 {selectedRight.credit_reporting.law}</h4>
+            <ul>{selectedRight.credit_reporting.rights?.map((item, i) => <li key={i}>✓ {item}</li>)}</ul>
+          </div>
+        )}
+
+        {selectedRight.fallback_note && (
+          <div className="fallback-note">
+            <p>💡 {selectedRight.fallback_note}</p>
           </div>
         )}
       </div>
