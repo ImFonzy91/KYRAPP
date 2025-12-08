@@ -5,39 +5,113 @@ import './App.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Video content for each topic - Real YouTube videos
+// Video content for ALL 13 RIGHTS BUNDLES
 const VIDEO_CONTENT = {
   traffic: {
-    title: "Traffic Stop Videos",
+    name: "Traffic & Police Stops",
+    icon: "🚗",
     videos: [
-      { id: "RvjF2VW73hY", title: "NEW Supreme Court Ruling - Your Traffic Stop Rights", channel: "Hampton Law", duration: "12:34" },
-      { id: "7A-MTqLHRzY", title: "Exact Words to Say During a Traffic Stop", channel: "Hampton Law", duration: "8:45" },
-      { id: "ZG7wPR3NFJo", title: "How Cops TRICK You During Traffic Stops", channel: "Hampton Law", duration: "10:22" },
-      { id: "spZzwkyfu4E", title: "DUI Checkpoint - Know Your Rights", channel: "Hampton Law", duration: "9:15" },
+      { id: "RvjF2VW73hY", title: "NEW Supreme Court Ruling - Your Traffic Stop Rights", channel: "Hampton Law" },
+      { id: "7A-MTqLHRzY", title: "Exact Words to Say During a Traffic Stop", channel: "Hampton Law" },
+      { id: "ZG7wPR3NFJo", title: "How Cops TRICK You During Traffic Stops", channel: "Hampton Law" },
     ]
   },
   arrest: {
-    title: "Arrest & Miranda Videos",
+    name: "Criminal Defense & Arrest",
+    icon: "⚖️",
     videos: [
-      { id: "uqo5RYOp4nQ", title: "Shut The F*** Up Friday", channel: "Pot Brothers at Law", duration: "3:21" },
-      { id: "Q629R5pKMrk", title: "What to Say When Cops Question You", channel: "Pot Brothers at Law", duration: "4:55" },
-      { id: "t9Gt5MbxCgk", title: "How to Handle Police Encounters", channel: "Hampton Law", duration: "11:30" },
-      { id: "ibb2Kt9SbE4", title: "Your Rights During an Arrest", channel: "Hampton Law", duration: "8:12" },
+      { id: "uqo5RYOp4nQ", title: "Shut The F*** Up Friday - Your Right to Remain Silent", channel: "Pot Brothers at Law" },
+      { id: "t9Gt5MbxCgk", title: "How to Handle Police Encounters", channel: "Hampton Law" },
+      { id: "ibb2Kt9SbE4", title: "Your Rights During an Arrest", channel: "Hampton Law" },
     ]
   },
   tenant: {
-    title: "Tenant Rights Videos",
+    name: "Housing & Tenant Rights",
+    icon: "🏠",
     videos: [
-      { id: "yqMjMPlXzdA", title: "Know Your Rights - Police at Your Door", channel: "Flex Your Rights", duration: "7:45" },
-      { id: "WwgoBr3FJ7k", title: "Can Police Enter Your Home?", channel: "Hampton Law", duration: "9:33" },
-      { id: "cH2esAWLEEg", title: "Dealing with Landlords - Your Rights", channel: "LegalEagle", duration: "15:22" },
+      { id: "yqMjMPlXzdA", title: "Know Your Rights - Police at Your Door", channel: "Flex Your Rights" },
+      { id: "WwgoBr3FJ7k", title: "Can Police Enter Your Home Without a Warrant?", channel: "Hampton Law" },
+      { id: "ek-siMIEoYE", title: "10 Things Your Landlord Doesn't Want You To Know", channel: "LegalEagle" },
     ]
   },
   workplace: {
-    title: "Workplace Rights Videos",
+    name: "Workplace & Employment",
+    icon: "💼",
     videos: [
-      { id: "xgrQPAb6nCE", title: "Employment Rights You Need to Know", channel: "Hampton Law", duration: "10:44" },
-      { id: "cmZX0U8vEnI", title: "Getting Fired - Know Your Rights", channel: "Hampton Law", duration: "8:56" },
+      { id: "xgrQPAb6nCE", title: "Employment Rights You Need to Know", channel: "Hampton Law" },
+      { id: "cmZX0U8vEnI", title: "Can You Get Fired For That? Know Your Rights", channel: "LegalEagle" },
+    ]
+  },
+  property: {
+    name: "Property Rights",
+    icon: "🏡",
+    videos: [
+      { id: "Spo-m2Atdwg", title: "Property Rights Explained - What Can You Actually Do?", channel: "LegalEagle" },
+      { id: "WwgoBr3FJ7k", title: "Can Police Search Your Property?", channel: "Hampton Law" },
+    ]
+  },
+  landmines: {
+    name: "Legal Landmines",
+    icon: "💣",
+    videos: [
+      { id: "d-7o9xYp7eE", title: "5 Legal Mistakes That Could Ruin Your Life", channel: "LegalEagle" },
+      { id: "ZG7wPR3NFJo", title: "Cops Use These Tricks - Don't Fall For Them", channel: "Hampton Law" },
+    ]
+  },
+  family: {
+    name: "Family Law Rights",
+    icon: "👨‍👩‍👧",
+    videos: [
+      { id: "0IbWampaEcM", title: "Child Custody Rights You NEED to Know", channel: "Command the Courtroom" },
+      { id: "TJlfBqMBqzE", title: "Family Court - What to Expect", channel: "LegalEagle" },
+    ]
+  },
+  divorce: {
+    name: "Divorce Rights",
+    icon: "💔",
+    videos: [
+      { id: "CG-eYS0OCWA", title: "Divorce Rights - Protect Yourself", channel: "LegalEagle" },
+      { id: "MnME-8J_Y94", title: "What NOT to Do During a Divorce", channel: "Command the Courtroom" },
+    ]
+  },
+  immigration: {
+    name: "Immigration Rights",
+    icon: "🌍",
+    videos: [
+      { id: "hqhW4GaZyx8", title: "Know Your Rights with ICE - ACLU Guide", channel: "ACLU" },
+      { id: "yqMjMPlXzdA", title: "Can ICE Enter Your Home? Know Your Rights", channel: "Flex Your Rights" },
+    ]
+  },
+  healthcare: {
+    name: "Healthcare Rights",
+    icon: "🏥",
+    videos: [
+      { id: "WrzCUn6MNRE", title: "Your Medical Rights - What Hospitals Can't Do", channel: "LegalEagle" },
+      { id: "PPwGh0l4fvk", title: "Medical Billing Rights - Fight Unfair Bills", channel: "LegalEagle" },
+    ]
+  },
+  student: {
+    name: "Student Rights",
+    icon: "🎓",
+    videos: [
+      { id: "xZzrhn4Z6Gg", title: "Student Rights - What Schools Can't Do", channel: "LegalEagle" },
+      { id: "Q629R5pKMrk", title: "Can School Search Your Stuff? Know Your Rights", channel: "Pot Brothers at Law" },
+    ]
+  },
+  digital: {
+    name: "Digital & Privacy Rights",
+    icon: "📱",
+    videos: [
+      { id: "3c9MKUaLIco", title: "Can Police Search Your Phone?", channel: "Hampton Law" },
+      { id: "Spo-m2Atdwg", title: "Your Digital Privacy Rights Explained", channel: "LegalEagle" },
+    ]
+  },
+  consumer: {
+    name: "Consumer & Debt Rights",
+    icon: "💳",
+    videos: [
+      { id: "tq0vjCKHkwM", title: "Debt Collector Calling? Know Your Rights", channel: "LegalEagle" },
+      { id: "n0kz5aqJldA", title: "How to Fight Debt Collectors and WIN", channel: "The Credit Shifu" },
     ]
   }
 };
