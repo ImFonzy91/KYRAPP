@@ -395,6 +395,70 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
   );
 };
 
+// Tab: Learn - All 13 Rights Bundles with Videos
+const LearnTab = ({ user }) => {
+  const [selectedBundle, setSelectedBundle] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  if (selectedBundle) {
+    const bundle = VIDEO_CONTENT[selectedBundle];
+    return (
+      <div className="learn-bundle-view">
+        <button className="back-btn" onClick={() => { setSelectedBundle(null); setActiveVideo(null); }}>← Back to All Rights</button>
+        <h2>{bundle.icon} {bundle.name}</h2>
+        
+        {activeVideo ? (
+          <div className="video-player">
+            <div className="video-container">
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1`}
+                title={activeVideo.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <h3>{activeVideo.title}</h3>
+            <p className="video-channel">📺 {activeVideo.channel}</p>
+            <button className="close-video-btn" onClick={() => setActiveVideo(null)}>← Watch Another Video</button>
+          </div>
+        ) : (
+          <div className="video-grid">
+            {bundle.videos.map((video, i) => (
+              <div key={i} className="video-card" onClick={() => setActiveVideo(video)}>
+                <div className="video-thumbnail">
+                  <img src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} alt={video.title} />
+                  <div className="play-overlay">▶</div>
+                </div>
+                <h4>{video.title}</h4>
+                <p className="video-channel">📺 {video.channel}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="learn-tab">
+      <h2>🎬 Learn Your Rights</h2>
+      <p>13 Rights Bundles - Watch videos from top legal experts</p>
+      
+      <div className="bundles-grid-learn">
+        {Object.entries(VIDEO_CONTENT).map(([key, bundle]) => (
+          <div key={key} className="bundle-learn-card" onClick={() => setSelectedBundle(key)}>
+            <span className="bundle-icon-large">{bundle.icon}</span>
+            <h3>{bundle.name}</h3>
+            <p className="video-count">{bundle.videos.length} Videos</p>
+            <button className="watch-btn">Watch Now →</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 // Tab 1: Smart Search
 const SmartSearchTab = ({ user }) => {
   const [query, setQuery] = useState('');
