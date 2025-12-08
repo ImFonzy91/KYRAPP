@@ -195,7 +195,7 @@ EMPLOYMENT_RIGHTS = {
             ]
         }
     },
-    "keywords": ["work", "job", "fired", "boss", "overtime", "wage", "harassment", "discrimination", "workplace"]
+    "keywords": ["work", "job", "fired", "boss", "overtime", "wage", "harassment", "discrimination", "workplace", "employee", "coworker", "fight", "assault", "hr", "human resources", "manager", "supervisor", "hostile", "toxic", "bullying", "retaliation", "wrongful termination", "laid off", "paycheck", "salary"]
 }
 
 CRIMINAL_DEFENSE_RIGHTS = {
