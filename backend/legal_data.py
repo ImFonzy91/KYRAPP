@@ -241,7 +241,7 @@ CRIMINAL_DEFENSE_RIGHTS = {
         "I do not consent to any searches."
     ],
     "then_stop_talking": "After saying these phrases, STOP TALKING. Do not explain, do not justify, do not answer 'just a few questions.' Wait for your lawyer.",
-    "keywords": ["arrest", "criminal", "jail", "police", "charges", "court", "bail", "trial"]
+    "keywords": ["arrest", "criminal", "jail", "police", "charges", "court", "bail", "trial", "fight", "assault", "battery", "hit", "punch", "altercation", "violent", "crime", "felony", "misdemeanor", "detained", "handcuffs", "cop", "officer", "incident", "trouble"]
 }
 
 IMMIGRATION_RIGHTS = {
