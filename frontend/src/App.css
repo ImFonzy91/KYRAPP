@@ -1341,6 +1341,112 @@ body {
   border-color: #1877f2;
 }
 
+/* LOADING WITH PRICE COMPARISON */
+.loading-comparison {
+  text-align: center;
+  padding: 3rem 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255,215,0,0.2);
+  border-top-color: #ffd700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-message {
+  color: #ffd700;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.price-compare-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.competitor-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255,107,107,0.1);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.blurred-name {
+  color: #888;
+  filter: blur(2px);
+  font-size: 0.9rem;
+}
+
+.their-price {
+  color: #ff6b6b;
+  font-weight: bold;
+  text-decoration: line-through;
+  font-size: 1.1rem;
+}
+
+.vs {
+  display: block;
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
+
+.our-price-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(78,205,196,0.1);
+  border: 1px solid #4ecdc4;
+  border-radius: 8px;
+}
+
+.us-label {
+  color: #4ecdc4;
+  font-weight: bold;
+}
+
+.our-price {
+  color: #4ecdc4;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.savings-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #000;
+  font-weight: bold;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+.loading-disclaimer {
+  color: #666;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
 /* LEARN TAB STYLES */
 .learn-tab h2 {
   color: #ffd700;
