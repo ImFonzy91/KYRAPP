@@ -153,14 +153,48 @@ const QUIZ_DATA = {
   }
 };
 
-// Badge definitions
+// Badge definitions - COD style progression
 const BADGES = [
-  { id: 'rookie', name: 'Rights Rookie', icon: '🥉', requirement: 'Complete 1 quiz', threshold: 1 },
-  { id: 'learner', name: 'Legal Learner', icon: '🥈', requirement: 'Pass 3 quizzes', threshold: 3 },
-  { id: 'defender', name: 'Constitution Defender', icon: '🥇', requirement: 'Pass all topic quizzes', threshold: 12 },
-  { id: 'master', name: 'Rights Master', icon: '👑', requirement: '90%+ on weekly test', threshold: 90 },
-  { id: 'eagle', name: 'Legal Eagle', icon: '⚖️', requirement: 'Perfect score on any test', threshold: 100 },
+  // Starter badges (easy to get)
+  { id: 'first_blood', name: 'First Blood', icon: '🩸', requirement: 'Answer your first question right', category: 'starter' },
+  { id: 'rookie', name: 'Rights Rookie', icon: '🥉', requirement: 'Complete 1 quiz', category: 'progress' },
+  { id: 'quick_draw', name: 'Quick Draw', icon: '⚡', requirement: 'Answer in under 3 seconds', category: 'speed' },
+  
+  // Streak badges
+  { id: 'hot_streak', name: 'Hot Streak', icon: '🔥', requirement: '3 correct in a row', category: 'streak' },
+  { id: 'on_fire', name: 'On Fire', icon: '💥', requirement: '5 correct in a row', category: 'streak' },
+  { id: 'smoking_gun', name: 'Smoking Gun', icon: '🔫', requirement: 'Perfect quiz - no mistakes', category: 'streak' },
+  { id: 'unstoppable', name: 'Unstoppable', icon: '💀', requirement: '10 correct in a row', category: 'streak' },
+  
+  // Progress badges
+  { id: 'learner', name: 'Legal Learner', icon: '📚', requirement: 'Pass 3 quizzes', category: 'progress' },
+  { id: 'scholar', name: 'Street Scholar', icon: '🎓', requirement: 'Pass 6 quizzes', category: 'progress' },
+  { id: 'defender', name: 'Constitution Defender', icon: '🛡️', requirement: 'Pass all 12 quizzes', category: 'progress' },
+  
+  // Mastery badges
+  { id: 'traffic_master', name: 'Road Warrior', icon: '🚗', requirement: 'Master all Traffic quizzes', category: 'mastery' },
+  { id: 'arrest_master', name: 'Silent Assassin', icon: '🤐', requirement: 'Master all Arrest quizzes', category: 'mastery' },
+  { id: 'tenant_master', name: 'Landlord Slayer', icon: '🏠', requirement: 'Master all Tenant quizzes', category: 'mastery' },
+  { id: 'work_master', name: 'Boss Fighter', icon: '💼', requirement: 'Master all Workplace quizzes', category: 'mastery' },
+  
+  // Elite badges
+  { id: 'speed_demon', name: 'Speed Demon', icon: '👹', requirement: 'Complete quiz with 5+ seconds left each', category: 'elite' },
+  { id: 'fox', name: 'Sneaky Fox', icon: '🦊', requirement: '90%+ accuracy overall', category: 'elite' },
+  { id: 'eagle', name: 'Legal Eagle', icon: '🦅', requirement: 'Perfect score on hard quiz', category: 'elite' },
+  { id: 'legend', name: 'Rights Legend', icon: '👑', requirement: 'Earn all other badges', category: 'legend' },
+  
+  // Secret badges
+  { id: 'comeback_kid', name: 'Comeback Kid', icon: '🔄', requirement: 'Miss 2 then get 3 right', category: 'secret' },
+  { id: 'clutch', name: 'Clutch Master', icon: '🎯', requirement: 'Get last question right with <2 sec', category: 'secret' },
+  { id: 'night_owl', name: 'Night Owl', icon: '🦉', requirement: 'Quiz after midnight', category: 'secret' },
 ];
+
+// Difficulty levels
+const DIFFICULTY_MULTIPLIER = {
+  easy: { time: 12, label: 'Easy', color: '#4ecdc4' },
+  medium: { time: 9, label: 'Medium', color: '#ffd700' },
+  hard: { time: 6, label: 'Hard', color: '#ff6b6b' },
+};
 
 // Login/Signup Component
 const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
