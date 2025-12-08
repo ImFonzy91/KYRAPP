@@ -1341,6 +1341,77 @@ body {
   border-color: #1877f2;
 }
 
+/* LEARN TAB STYLES */
+.learn-tab h2 {
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+}
+
+.learn-tab > p {
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.bundles-grid-learn {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.bundle-learn-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.bundle-learn-card:hover {
+  border-color: #ffd700;
+  transform: translateY(-4px);
+  background: rgba(255,215,0,0.05);
+}
+
+.bundle-icon-large {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.bundle-learn-card h3 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.video-count {
+  color: #4ecdc4;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.watch-btn {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #ff6b6b, #cc0000);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.learn-bundle-view {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.learn-bundle-view h2 {
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+}
+
 /* VIDEO SECTION STYLES */
 .video-section {
   max-width: 900px;
