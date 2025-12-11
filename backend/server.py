@@ -434,13 +434,14 @@ async def purchase_cart(request: CartPurchaseRequest):
     bundle_ids = request.bundle_ids
     
     # Calculate price
-    if 'all' in bundle_ids or len(bundle_ids) >= 13:
-        price = BUNDLE_PRICES['all']
-        description = "All 13 Rights Bundles - FLASH SALE"
+    if 'premium' in bundle_ids:
+        price = BUNDLE_PRICES['premium']
+        description = "PREMIUM UNLIMITED - All 13 Bundles + Lifetime Updates"
+        bundle_ids = ['premium']
+    elif 'all' in bundle_ids or len(bundle_ids) >= 13:
+        price = BUNDLE_PRICES['all13']
+        description = "All 13 Rights Bundles"
         bundle_ids = ['all']
-    elif len(bundle_ids) >= 3:
-        price = BUNDLE_PRICES['three_plus']
-        description = f"Rights Bundles - Buy 3 Get 7 FREE ({len(bundle_ids)} selected)"
     else:
         price = len(bundle_ids) * BUNDLE_PRICES['single']
         description = f"{len(bundle_ids)} Rights Bundle{'s' if len(bundle_ids) > 1 else ''}"
@@ -469,7 +470,11 @@ async def purchase_cart(request: CartPurchaseRequest):
         session = await stripe_checkout.create_checkout_session(checkout_request)
         
         # For demo purposes, also add bundles immediately (in production, do this in webhook)
-        all_bundle_ids = list(BUNDLE_INFO.keys()) if 'all' in bundle_ids else bundle_ids
+        if 'premium' in bundle_ids or 'all' in bundle_ids:
+            all_bundle_ids = list(BUNDLE_INFO.keys())
+        else:
+            all_bundle_ids = bundle_ids
+            
         bundles_to_add = [{"id": bid, **BUNDLE_INFO.get(bid, {"name": bid, "icon": "📦"})} for bid in all_bundle_ids]
         
         await db.users.update_one(
