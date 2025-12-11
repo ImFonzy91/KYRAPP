@@ -487,9 +487,25 @@ const LearnTab = ({ user }) => {
   };
 
   const getPrice = () => {
-    if (cart.length >= 13 || cart.includes('all')) return { price: 10, label: 'FLASH SALE - All 13 Bundles' };
-    if (cart.length >= 3) return { price: 8.97, label: `${cart.length} Bundles (Buy 3 Get 7 FREE!)` };
-    return { price: cart.length * 2.99, label: `${cart.length} Bundle${cart.length > 1 ? 's' : ''}` };
+    if (cart.length === 0) return { price: 0, label: 'Select bundles' };
+    return { price: cart.length * 4.99, label: `${cart.length} Bundle${cart.length > 1 ? 's' : ''}` };
+  };
+
+  const handlePremiumPurchase = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`${API}/purchase/cart`, {
+        user_id: user.id,
+        bundle_ids: ['premium'],
+        origin_url: window.location.origin
+      });
+      if (response.data.checkout_url) {
+        window.location.href = response.data.checkout_url;
+      }
+    } catch (err) {
+      alert('Checkout failed. Please try again.');
+    }
+    setLoading(false);
   };
 
   const handleCheckout = async () => {
