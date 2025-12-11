@@ -54,6 +54,34 @@ class BuyQueriesRequest(BaseModel):
     package: str
     origin_url: str
 
+class CartPurchaseRequest(BaseModel):
+    user_id: str
+    bundle_ids: List[str]
+    origin_url: str
+
+# Bundle pricing
+BUNDLE_PRICES = {
+    "single": 2.99,
+    "three_plus": 8.97,  # Buy 3 get 7 free
+    "all": 10.00  # Flash sale - all 13
+}
+
+BUNDLE_INFO = {
+    "traffic": {"name": "Traffic & Police Stops", "icon": "🚗"},
+    "criminal": {"name": "Criminal Defense & Arrest", "icon": "⚖️"},
+    "housing": {"name": "Housing & Tenant Rights", "icon": "🏠"},
+    "workplace": {"name": "Workplace & Employment", "icon": "💼"},
+    "property": {"name": "Property Rights", "icon": "🏡"},
+    "landmines": {"name": "Legal Landmines", "icon": "💣"},
+    "family": {"name": "Family Law Rights", "icon": "👨‍👩‍👧"},
+    "divorce": {"name": "Divorce Rights", "icon": "💔"},
+    "immigration": {"name": "Immigration Rights", "icon": "🌍"},
+    "healthcare": {"name": "Healthcare Rights", "icon": "🏥"},
+    "student": {"name": "Student Rights", "icon": "🎓"},
+    "digital": {"name": "Digital & Privacy Rights", "icon": "📱"},
+    "consumer": {"name": "Consumer & Debt Rights", "icon": "💳"},
+}
+
 # Auth Routes
 @api_router.post("/auth/signup")
 async def signup(user_data: UserCreate):
