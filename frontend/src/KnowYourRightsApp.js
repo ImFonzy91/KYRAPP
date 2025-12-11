@@ -653,7 +653,7 @@ const LearnTab = ({ user }) => {
                 <button className="watch-btn">Watch Now →</button>
               ) : (
                 <button className={`buy-btn ${inCart ? 'in-cart' : ''}`}>
-                  {inCart ? '✓ In Cart' : '$2.99 - Add to Cart'}
+                  {inCart ? '✓ In Cart' : '$4.99 - Add to Cart'}
                 </button>
               )}
             </div>
