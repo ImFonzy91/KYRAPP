@@ -61,7 +61,7 @@ class CartPurchaseRequest(BaseModel):
 
 # Bundle pricing
 BUNDLE_PRICES = {
-    "single": 4.99,
+    "single": 2.99,
     "all13": 10.00,  # All 13 bundles
     "premium": 20.00  # Lifetime unlimited + all updates
 }
