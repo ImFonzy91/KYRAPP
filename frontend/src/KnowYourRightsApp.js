@@ -611,7 +611,7 @@ const LearnTab = ({ user }) => {
               <span>📄 Single Bundle</span>
               <p className="deal-desc">Pick what you need</p>
             </div>
-            <strong>$4.99</strong>
+            <strong>$2.99</strong>
           </div>
         </div>
       </div>
