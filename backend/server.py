@@ -61,9 +61,10 @@ class CartPurchaseRequest(BaseModel):
 
 # Bundle pricing
 BUNDLE_PRICES = {
-    "single": 2.99,
-    "three_plus": 8.97,  # Buy 3 get 7 free
-    "all": 10.00  # Flash sale - all 13
+    "single": 4.99,
+    "buy2get1": 9.98,  # Buy 2 get 1 free (3 bundles)
+    "all13": 12.99,  # All 13 bundles
+    "premium": 19.99  # Lifetime + all updates
 }
 
 BUNDLE_INFO = {
