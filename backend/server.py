@@ -425,6 +425,68 @@ async def buy_queries(request: BuyQueriesRequest):
         logger.error(f"Purchase error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# Cart Purchase - Buy bundles
+@api_router.post("/purchase/cart")
+async def purchase_cart(request: CartPurchaseRequest):
+    """Purchase bundles via Stripe checkout"""
+    from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionRequest
+    
+    bundle_ids = request.bundle_ids
+    
+    # Calculate price
+    if 'all' in bundle_ids or len(bundle_ids) >= 13:
+        price = BUNDLE_PRICES['all']
+        description = "All 13 Rights Bundles - FLASH SALE"
+        bundle_ids = ['all']
+    elif len(bundle_ids) >= 3:
+        price = BUNDLE_PRICES['three_plus']
+        description = f"Rights Bundles - Buy 3 Get 7 FREE ({len(bundle_ids)} selected)"
+    else:
+        price = len(bundle_ids) * BUNDLE_PRICES['single']
+        description = f"{len(bundle_ids)} Rights Bundle{'s' if len(bundle_ids) > 1 else ''}"
+    
+    try:
+        host_url = str(request.origin_url).rstrip('/')
+        webhook_url = f"{host_url}/api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
+        
+        success_url = f"{request.origin_url}/?payment=success&type=bundles"
+        cancel_url = f"{request.origin_url}/?payment=cancelled"
+        
+        checkout_request = CheckoutSessionRequest(
+            amount=price,
+            currency="usd",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={
+                "user_id": request.user_id,
+                "type": "bundles",
+                "bundle_ids": ",".join(bundle_ids),
+                "description": description
+            }
+        )
+        
+        session = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # For demo purposes, also add bundles immediately (in production, do this in webhook)
+        all_bundle_ids = list(BUNDLE_INFO.keys()) if 'all' in bundle_ids else bundle_ids
+        bundles_to_add = [{"id": bid, **BUNDLE_INFO.get(bid, {"name": bid, "icon": "📦"})} for bid in all_bundle_ids]
+        
+        await db.users.update_one(
+            {"id": request.user_id},
+            {"$addToSet": {"purchased_bundles": {"$each": bundles_to_add}}}
+        )
+        
+        return {
+            "checkout_url": session.url,
+            "session_id": session.session_id,
+            "price": price
+        }
+        
+    except Exception as e:
+        logger.error(f"Purchase error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Health check
 @api_router.get("/health")
 async def health_check():
