@@ -488,7 +488,7 @@ const LearnTab = ({ user }) => {
 
   const getPrice = () => {
     if (cart.length === 0) return { price: 0, label: 'Select bundles' };
-    return { price: cart.length * 4.99, label: `${cart.length} Bundle${cart.length > 1 ? 's' : ''}` };
+    return { price: cart.length * 2.99, label: `${cart.length} Bundle${cart.length > 1 ? 's' : ''}` };
   };
 
   const handlePremiumPurchase = async () => {
