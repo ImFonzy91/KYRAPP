@@ -575,20 +575,27 @@ const LearnTab = ({ user }) => {
       
       {/* Flash Sale Banner */}
       <div className="store-banner">
-        <div className="flash-deal" onClick={buyAllBundles}>
-          <span className="deal-badge">🔥 FLASH SALE</span>
-          <h3>ALL 13 BUNDLES - $10</h3>
-          <p>Normally $38.87 - Save 74%!</p>
-          <button disabled={loading}>{loading ? 'Processing...' : 'GET ALL 13 NOW →'}</button>
+        <div className="premium-deal" onClick={() => handlePremiumPurchase()}>
+          <span className="deal-badge">⚡ LIMITED TIME</span>
+          <h3>PREMIUM UNLIMITED - $20</h3>
+          <p>All 13 Bundles + Lifetime Updates Forever</p>
+          <p className="limited-text">🔥 Offer ends Jan 31, 2025</p>
+          <button disabled={loading}>{loading ? 'Processing...' : 'GET PREMIUM →'}</button>
         </div>
         <div className="other-deals">
-          <div className="deal-item">
-            <span>💰 Single Bundle</span>
-            <strong>$2.99</strong>
+          <div className="deal-item clickable" onClick={buyAllBundles}>
+            <div>
+              <span>📦 All 13 Bundles</span>
+              <p className="deal-desc">One-time purchase</p>
+            </div>
+            <strong>$10</strong>
           </div>
           <div className="deal-item">
-            <span>🎁 Buy 3 Get 7 FREE</span>
-            <strong>$8.97</strong>
+            <div>
+              <span>📄 Single Bundle</span>
+              <p className="deal-desc">Pick what you need</p>
+            </div>
+            <strong>$4.99</strong>
           </div>
         </div>
       </div>
