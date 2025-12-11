@@ -1471,7 +1471,7 @@ body {
   font-style: italic;
 }
 
-/* LEARN TAB STYLES */
+/* LEARN TAB STYLES - WITH STORE */
 .learn-tab h2 {
   color: #ffd700;
   margin-bottom: 0.5rem;
@@ -1482,6 +1482,120 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Store Banner */
+.store-banner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.flash-deal {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.flash-deal:hover {
+  transform: scale(1.02);
+}
+
+.deal-badge {
+  background: #ffd700;
+  color: #000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.flash-deal h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.flash-deal p {
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1rem;
+}
+
+.flash-deal button {
+  padding: 0.75rem 2rem;
+  background: #ffd700;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.other-deals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.deal-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deal-item span {
+  color: #ccc;
+}
+
+.deal-item strong {
+  color: #4ecdc4;
+  font-size: 1.25rem;
+}
+
+/* Shopping Cart */
+.shopping-cart {
+  background: rgba(78,205,196,0.1);
+  border: 1px solid #4ecdc4;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cart-info span {
+  color: #ccc;
+}
+
+.cart-info strong {
+  color: #4ecdc4;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.checkout-btn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #4ecdc4, #2ea89e);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Bundle Cards with Lock/Unlock */
 .bundles-grid-learn {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -1496,12 +1610,37 @@ body {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
 }
 
-.bundle-learn-card:hover {
+.bundle-learn-card.locked {
+  opacity: 0.85;
+}
+
+.bundle-learn-card.locked:hover {
+  border-color: #4ecdc4;
+  background: rgba(78,205,196,0.05);
+}
+
+.bundle-learn-card.unlocked {
+  border-color: rgba(78,205,196,0.5);
+  background: rgba(78,205,196,0.05);
+}
+
+.bundle-learn-card.unlocked:hover {
+  border-color: #4ecdc4;
+}
+
+.bundle-learn-card.in-cart {
   border-color: #ffd700;
-  transform: translateY(-4px);
-  background: rgba(255,215,0,0.05);
+  background: rgba(255,215,0,0.1);
+}
+
+.lock-icon, .unlock-icon, .cart-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.25rem;
 }
 
 .bundle-icon-large {
@@ -1517,19 +1656,55 @@ body {
 }
 
 .video-count {
-  color: #4ecdc4;
+  color: #888;
   font-size: 0.85rem;
   margin-bottom: 1rem;
 }
 
 .watch-btn {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #ff6b6b, #cc0000);
+  background: linear-gradient(135deg, #4ecdc4, #2ea89e);
   border: none;
   border-radius: 6px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+  width: 100%;
+}
+
+.buy-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #ffd700;
+  border-radius: 6px;
+  color: #ffd700;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.buy-btn:hover {
+  background: rgba(255,215,0,0.1);
+}
+
+.buy-btn.in-cart {
+  background: #ffd700;
+  color: #000;
+}
+
+.purchase-note {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.purchase-note p {
+  color: #ccc;
+  margin: 0;
 }
 
 .learn-bundle-view {
@@ -1540,6 +1715,17 @@ body {
 .learn-bundle-view h2 {
   color: #ffd700;
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .store-banner {
+    grid-template-columns: 1fr;
+  }
+  
+  .shopping-cart {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 /* VIDEO SECTION STYLES */
