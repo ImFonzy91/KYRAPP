@@ -54,6 +54,34 @@ class BuyQueriesRequest(BaseModel):
     package: str
     origin_url: str
 
+class CartPurchaseRequest(BaseModel):
+    user_id: str
+    bundle_ids: List[str]
+    origin_url: str
+
+# Bundle pricing
+BUNDLE_PRICES = {
+    "single": 2.99,
+    "all13": 10.00,  # All 13 bundles
+    "premium": 20.00  # Lifetime unlimited + all updates
+}
+
+BUNDLE_INFO = {
+    "traffic": {"name": "Traffic & Police Stops", "icon": "🚗"},
+    "criminal": {"name": "Criminal Defense & Arrest", "icon": "⚖️"},
+    "housing": {"name": "Housing & Tenant Rights", "icon": "🏠"},
+    "workplace": {"name": "Workplace & Employment", "icon": "💼"},
+    "property": {"name": "Property Rights", "icon": "🏡"},
+    "landmines": {"name": "Legal Landmines", "icon": "💣"},
+    "family": {"name": "Family Law Rights", "icon": "👨‍👩‍👧"},
+    "divorce": {"name": "Divorce Rights", "icon": "💔"},
+    "immigration": {"name": "Immigration Rights", "icon": "🌍"},
+    "healthcare": {"name": "Healthcare Rights", "icon": "🏥"},
+    "student": {"name": "Student Rights", "icon": "🎓"},
+    "digital": {"name": "Digital & Privacy Rights", "icon": "📱"},
+    "consumer": {"name": "Consumer & Debt Rights", "icon": "💳"},
+}
+
 # Auth Routes
 @api_router.post("/auth/signup")
 async def signup(user_data: UserCreate):
@@ -391,6 +419,73 @@ async def buy_queries(request: BuyQueriesRequest):
         return {
             "checkout_url": session.url,
             "session_id": session.session_id
+        }
+        
+    except Exception as e:
+        logger.error(f"Purchase error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Cart Purchase - Buy bundles
+@api_router.post("/purchase/cart")
+async def purchase_cart(request: CartPurchaseRequest):
+    """Purchase bundles via Stripe checkout"""
+    from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionRequest
+    
+    bundle_ids = request.bundle_ids
+    
+    # Calculate price
+    if 'premium' in bundle_ids:
+        price = BUNDLE_PRICES['premium']
+        description = "PREMIUM UNLIMITED - All 13 Bundles + Lifetime Updates"
+        bundle_ids = ['premium']
+    elif 'all' in bundle_ids or len(bundle_ids) >= 13:
+        price = BUNDLE_PRICES['all13']
+        description = "All 13 Rights Bundles"
+        bundle_ids = ['all']
+    else:
+        price = len(bundle_ids) * BUNDLE_PRICES['single']
+        description = f"{len(bundle_ids)} Rights Bundle{'s' if len(bundle_ids) > 1 else ''}"
+    
+    try:
+        host_url = str(request.origin_url).rstrip('/')
+        webhook_url = f"{host_url}/api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
+        
+        success_url = f"{request.origin_url}/?payment=success&type=bundles"
+        cancel_url = f"{request.origin_url}/?payment=cancelled"
+        
+        checkout_request = CheckoutSessionRequest(
+            amount=price,
+            currency="usd",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={
+                "user_id": request.user_id,
+                "type": "bundles",
+                "bundle_ids": ",".join(bundle_ids),
+                "description": description
+            }
+        )
+        
+        session = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # For demo purposes, also add bundles immediately (in production, do this in webhook)
+        if 'premium' in bundle_ids or 'all' in bundle_ids:
+            all_bundle_ids = list(BUNDLE_INFO.keys())
+        else:
+            all_bundle_ids = bundle_ids
+            
+        bundles_to_add = [{"id": bid, **BUNDLE_INFO.get(bid, {"name": bid, "icon": "📦"})} for bid in all_bundle_ids]
+        
+        await db.users.update_one(
+            {"id": request.user_id},
+            {"$addToSet": {"purchased_bundles": {"$each": bundles_to_add}}}
+        )
+        
+        return {
+            "checkout_url": session.url,
+            "session_id": session.session_id,
+            "price": price
         }
         
     except Exception as e:

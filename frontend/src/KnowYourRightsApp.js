@@ -452,12 +452,99 @@ const AuthScreen = ({ onLogin, disclaimer, setShowDisclaimer }) => {
   );
 };
 
-// Tab: Learn - All 13 Rights Bundles with Videos
+// Tab: Learn - All 13 Rights Bundles with Videos (LOCKED UNTIL PURCHASED)
 const LearnTab = ({ user }) => {
   const [selectedBundle, setSelectedBundle] = useState(null);
   const [activeVideo, setActiveVideo] = useState(null);
+  const [purchasedBundles, setPurchasedBundles] = useState([]);
+  const [showStore, setShowStore] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  if (selectedBundle) {
+  useEffect(() => {
+    fetchPurchasedBundles();
+  }, []);
+
+  const fetchPurchasedBundles = async () => {
+    try {
+      const response = await axios.get(`${API}/user/bundles`, { params: { user_id: user.id } });
+      setPurchasedBundles(response.data.bundles?.map(b => b.id) || []);
+    } catch (err) {
+      console.error('Failed to fetch bundles:', err);
+    }
+  };
+
+  const isUnlocked = (bundleId) => {
+    return purchasedBundles.includes(bundleId) || purchasedBundles.includes('all');
+  };
+
+  const toggleCart = (bundleId) => {
+    if (cart.includes(bundleId)) {
+      setCart(cart.filter(id => id !== bundleId));
+    } else {
+      setCart([...cart, bundleId]);
+    }
+  };
+
+  const getPrice = () => {
+    if (cart.length === 0) return { price: 0, label: 'Select bundles' };
+    return { price: cart.length * 2.99, label: `${cart.length} Bundle${cart.length > 1 ? 's' : ''}` };
+  };
+
+  const handlePremiumPurchase = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`${API}/purchase/cart`, {
+        user_id: user.id,
+        bundle_ids: ['premium'],
+        origin_url: window.location.origin
+      });
+      if (response.data.checkout_url) {
+        window.location.href = response.data.checkout_url;
+      }
+    } catch (err) {
+      alert('Checkout failed. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) return;
+    setLoading(true);
+    try {
+      const response = await axios.post(`${API}/purchase/cart`, {
+        user_id: user.id,
+        bundle_ids: cart.length >= 13 ? ['all'] : cart,
+        origin_url: window.location.origin
+      });
+      if (response.data.checkout_url) {
+        window.location.href = response.data.checkout_url;
+      }
+    } catch (err) {
+      alert('Checkout failed. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  const buyAllBundles = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`${API}/purchase/cart`, {
+        user_id: user.id,
+        bundle_ids: ['all'],
+        origin_url: window.location.origin
+      });
+      if (response.data.checkout_url) {
+        window.location.href = response.data.checkout_url;
+      }
+    } catch (err) {
+      alert('Checkout failed. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  // Viewing a purchased bundle
+  if (selectedBundle && isUnlocked(selectedBundle)) {
     const bundle = VIDEO_CONTENT[selectedBundle];
     return (
       <div className="learn-bundle-view">
@@ -499,18 +586,85 @@ const LearnTab = ({ user }) => {
 
   return (
     <div className="learn-tab">
-      <h2>🎬 Learn Your Rights</h2>
-      <p>13 Rights Bundles - Watch videos from top legal experts</p>
+      <h2>🎬 Know Your Rights - 13 Bundles</h2>
+      <p>Unlock the knowledge that could save you thousands</p>
       
-      <div className="bundles-grid-learn">
-        {Object.entries(VIDEO_CONTENT).map(([key, bundle]) => (
-          <div key={key} className="bundle-learn-card" onClick={() => setSelectedBundle(key)}>
-            <span className="bundle-icon-large">{bundle.icon}</span>
-            <h3>{bundle.name}</h3>
-            <p className="video-count">{bundle.videos.length} Videos</p>
-            <button className="watch-btn">Watch Now →</button>
+      {/* Flash Sale Banner */}
+      <div className="store-banner">
+        <div className="premium-deal" onClick={() => handlePremiumPurchase()}>
+          <span className="deal-badge">⚡ LIMITED TIME</span>
+          <h3>PREMIUM UNLIMITED - $20</h3>
+          <p>All 13 Bundles + Lifetime Updates Forever</p>
+          <p className="limited-text">🔥 Offer ends Jan 31, 2025</p>
+          <button disabled={loading}>{loading ? 'Processing...' : 'GET PREMIUM →'}</button>
+        </div>
+        <div className="other-deals">
+          <div className="deal-item clickable" onClick={buyAllBundles}>
+            <div>
+              <span>📦 All 13 Bundles</span>
+              <p className="deal-desc">One-time purchase</p>
+            </div>
+            <strong>$10</strong>
           </div>
-        ))}
+          <div className="deal-item">
+            <div>
+              <span>📄 Single Bundle</span>
+              <p className="deal-desc">Pick what you need</p>
+            </div>
+            <strong>$2.99</strong>
+          </div>
+        </div>
+      </div>
+
+      {/* Cart */}
+      {cart.length > 0 && (
+        <div className="shopping-cart">
+          <div className="cart-info">
+            <span>🛒 {cart.length} bundle{cart.length > 1 ? 's' : ''} selected</span>
+            <strong>${getPrice().price.toFixed(2)}</strong>
+          </div>
+          <button className="checkout-btn" onClick={handleCheckout} disabled={loading}>
+            {loading ? 'Processing...' : `Checkout - $${getPrice().price.toFixed(2)}`}
+          </button>
+        </div>
+      )}
+
+      {/* Bundle Grid */}
+      <div className="bundles-grid-learn">
+        {Object.entries(VIDEO_CONTENT).map(([key, bundle]) => {
+          const unlocked = isUnlocked(key);
+          const inCart = cart.includes(key);
+          
+          return (
+            <div 
+              key={key} 
+              className={`bundle-learn-card ${unlocked ? 'unlocked' : 'locked'} ${inCart ? 'in-cart' : ''}`}
+            >
+              {!unlocked && <div className="lock-icon">🔒</div>}
+              {unlocked && <div className="unlock-icon">✅</div>}
+              {inCart && <div className="cart-check">🛒</div>}
+              
+              <span className="bundle-icon-large">{bundle.icon}</span>
+              <h3>{bundle.name}</h3>
+              <p className="video-count">{bundle.videos.length} Videos</p>
+              
+              {unlocked ? (
+                <button className="watch-btn" onClick={() => setSelectedBundle(key)}>Watch Now →</button>
+              ) : (
+                <button 
+                  className={`buy-btn ${inCart ? 'in-cart' : ''}`}
+                  onClick={() => toggleCart(key)}
+                >
+                  {inCart ? '✓ In Cart - Click to Remove' : '$2.99 - Add to Cart'}
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="purchase-note">
+        <p>💡 <strong>Why pay?</strong> Lawyers charge $300/hr for this info. You're getting lifetime access for less than a coffee.</p>
       </div>
     </div>
   );
