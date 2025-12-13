@@ -543,9 +543,13 @@ const LearnTab = ({ user }) => {
     setLoading(false);
   };
 
-  // Viewing a purchased bundle
-  if (selectedBundle && isUnlocked(selectedBundle)) {
+  // Viewing a bundle (with preview or full access)
+  if (selectedBundle) {
     const bundle = VIDEO_CONTENT[selectedBundle];
+    const unlocked = isUnlocked(selectedBundle);
+    const previewVideo = bundle.videos[0]; // First video is always the FREE preview
+    const lockedVideos = bundle.videos.slice(1); // Rest are locked
+    
     return (
       <div className="learn-bundle-view">
         <button className="back-btn" onClick={() => { setSelectedBundle(null); setActiveVideo(null); }}>← Back to All Rights</button>
@@ -564,21 +568,68 @@ const LearnTab = ({ user }) => {
             </div>
             <h3>{activeVideo.title}</h3>
             <p className="video-channel">📺 {activeVideo.channel}</p>
-            <button className="close-video-btn" onClick={() => setActiveVideo(null)}>← Watch Another Video</button>
+            <button className="close-video-btn" onClick={() => setActiveVideo(null)}>← Back to Videos</button>
           </div>
         ) : (
-          <div className="video-grid">
-            {bundle.videos.map((video, i) => (
-              <div key={i} className="video-card" onClick={() => setActiveVideo(video)}>
+          <>
+            {/* FREE PREVIEW - Always visible */}
+            <div className="preview-section">
+              <h3 className="preview-label">🎁 FREE PREVIEW</h3>
+              <div className="video-card preview-card" onClick={() => setActiveVideo(previewVideo)}>
                 <div className="video-thumbnail">
-                  <img src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} alt={video.title} />
+                  <img src={`https://img.youtube.com/vi/${previewVideo.id}/mqdefault.jpg`} alt={previewVideo.title} />
                   <div className="play-overlay">▶</div>
+                  <span className="free-badge">FREE</span>
                 </div>
-                <h4>{video.title}</h4>
-                <p className="video-channel">📺 {video.channel}</p>
+                <h4>{previewVideo.title}</h4>
+                <p className="video-channel">📺 {previewVideo.channel}</p>
               </div>
-            ))}
-          </div>
+            </div>
+            
+            {/* LOCKED VIDEOS - Only if NOT unlocked */}
+            {!unlocked && lockedVideos.length > 0 && (
+              <div className="locked-section">
+                <h3 className="locked-label">🔒 {lockedVideos.length} MORE VIDEOS - UNLOCK FOR $2.99</h3>
+                <div className="video-grid locked-grid">
+                  {lockedVideos.map((video, i) => (
+                    <div key={i} className="video-card locked-card">
+                      <div className="video-thumbnail locked-thumb">
+                        <img src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} alt={video.title} style={{filter: 'blur(8px)'}} />
+                        <div className="lock-overlay">🔒</div>
+                      </div>
+                      <h4>{video.title}</h4>
+                      <p className="video-channel">📺 {video.channel}</p>
+                    </div>
+                  ))}
+                </div>
+                <button 
+                  className="unlock-bundle-btn"
+                  onClick={() => { toggleCart(selectedBundle); }}
+                >
+                  {cart.includes(selectedBundle) ? '✓ Added to Cart' : `🔓 Unlock All ${bundle.videos.length} Videos - $2.99`}
+                </button>
+              </div>
+            )}
+            
+            {/* FULL ACCESS - If unlocked */}
+            {unlocked && (
+              <div className="unlocked-section">
+                <h3 className="unlocked-label">✅ FULL ACCESS - {lockedVideos.length} MORE VIDEOS</h3>
+                <div className="video-grid">
+                  {lockedVideos.map((video, i) => (
+                    <div key={i} className="video-card" onClick={() => setActiveVideo(video)}>
+                      <div className="video-thumbnail">
+                        <img src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} alt={video.title} />
+                        <div className="play-overlay">▶</div>
+                      </div>
+                      <h4>{video.title}</h4>
+                      <p className="video-channel">📺 {video.channel}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     );
