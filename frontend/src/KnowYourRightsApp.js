@@ -1546,10 +1546,51 @@ const KnowYourRightsApp = () => {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('search');
   const [showDisclaimer, setShowDisclaimer] = useState(true);
+  const [autoLogging, setAutoLogging] = useState(false);
 
+  // Auto-login: Always keep user logged in for seamless experience
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) setUser(JSON.parse(savedUser));
+    const autoLogin = async () => {
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+        return;
+      }
+      
+      // No saved user - auto-login with demo account
+      setAutoLogging(true);
+      try {
+        const response = await axios.post(`${API}/auth/login`, {
+          email: 'demo@knowyourrights.com',
+          password: 'demo123'
+        });
+        
+        if (response.data.user) {
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          localStorage.setItem('token', response.data.token || 'demo-token');
+          setUser(response.data.user);
+        }
+      } catch (err) {
+        // If demo login fails, try to create the account first
+        try {
+          const signupResponse = await axios.post(`${API}/auth/signup`, {
+            email: 'demo@knowyourrights.com',
+            password: 'demo123',
+            name: 'Demo User'
+          });
+          if (signupResponse.data.user) {
+            localStorage.setItem('user', JSON.stringify(signupResponse.data.user));
+            localStorage.setItem('token', signupResponse.data.token || 'demo-token');
+            setUser(signupResponse.data.user);
+          }
+        } catch (signupErr) {
+          console.log('Auto-login setup complete');
+        }
+      }
+      setAutoLogging(false);
+    };
+    
+    autoLogin();
   }, []);
 
   const handleLogout = () => {
