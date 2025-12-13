@@ -689,24 +689,29 @@ const LearnTab = ({ user }) => {
           return (
             <div 
               key={key} 
-              className={`bundle-learn-card ${unlocked ? 'unlocked' : 'locked'} ${inCart ? 'in-cart' : ''}`}
+              className={`bundle-learn-card ${unlocked ? 'unlocked' : ''} ${inCart ? 'in-cart' : ''}`}
             >
-              {!unlocked && <div className="lock-icon">🔒</div>}
               {unlocked && <div className="unlock-icon">✅</div>}
               {inCart && <div className="cart-check">🛒</div>}
               
               <span className="bundle-icon-large">{bundle.icon}</span>
               <h3>{bundle.name}</h3>
-              <p className="video-count">{bundle.videos.length} Videos</p>
+              <p className="video-count">{bundle.videos.length} Videos • 1 FREE Preview</p>
               
-              {unlocked ? (
-                <button className="watch-btn" onClick={() => setSelectedBundle(key)}>Watch Now →</button>
-              ) : (
+              {/* Always show Preview button - teaser approach */}
+              <button 
+                className="preview-btn" 
+                onClick={() => setSelectedBundle(key)}
+              >
+                👀 Free Preview
+              </button>
+              
+              {!unlocked && (
                 <button 
                   className={`buy-btn ${inCart ? 'in-cart' : ''}`}
-                  onClick={() => toggleCart(key)}
+                  onClick={(e) => { e.stopPropagation(); toggleCart(key); }}
                 >
-                  {inCart ? '✓ In Cart - Click to Remove' : '$2.99 - Add to Cart'}
+                  {inCart ? '✓ In Cart' : '$2.99 - Unlock All'}
                 </button>
               )}
             </div>
