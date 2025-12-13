@@ -17,8 +17,8 @@ def get_backend_url():
                 if line.startswith('REACT_APP_BACKEND_URL='):
                     return line.split('=', 1)[1].strip()
     except FileNotFoundError:
-        return "https://knowyourrights-3.preview.emergentagent.com"
-    return "https://knowyourrights-3.preview.emergentagent.com"
+        return "https://lawsearch-5.preview.emergentagent.com"
+    return "https://lawsearch-5.preview.emergentagent.com"
 
 BASE_URL = get_backend_url()
 API_URL = f"{BASE_URL}/api"
