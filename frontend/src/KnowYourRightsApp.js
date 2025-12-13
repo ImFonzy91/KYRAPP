@@ -639,7 +639,6 @@ const LearnTab = ({ user }) => {
             <div 
               key={key} 
               className={`bundle-learn-card ${unlocked ? 'unlocked' : 'locked'} ${inCart ? 'in-cart' : ''}`}
-              onClick={() => unlocked ? setSelectedBundle(key) : toggleCart(key)}
             >
               {!unlocked && <div className="lock-icon">🔒</div>}
               {unlocked && <div className="unlock-icon">✅</div>}
@@ -650,10 +649,13 @@ const LearnTab = ({ user }) => {
               <p className="video-count">{bundle.videos.length} Videos</p>
               
               {unlocked ? (
-                <button className="watch-btn">Watch Now →</button>
+                <button className="watch-btn" onClick={() => setSelectedBundle(key)}>Watch Now →</button>
               ) : (
-                <button className={`buy-btn ${inCart ? 'in-cart' : ''}`}>
-                  {inCart ? '✓ In Cart' : '$2.99 - Add to Cart'}
+                <button 
+                  className={`buy-btn ${inCart ? 'in-cart' : ''}`}
+                  onClick={() => toggleCart(key)}
+                >
+                  {inCart ? '✓ In Cart - Click to Remove' : '$2.99 - Add to Cart'}
                 </button>
               )}
             </div>
