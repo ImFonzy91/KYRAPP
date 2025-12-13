@@ -1599,6 +1599,19 @@ const KnowYourRightsApp = () => {
     setUser(null);
   };
 
+  // Show loading while auto-login is in progress
+  if (autoLogging) {
+    return (
+      <div className="auth-screen">
+        <div className="auth-header">
+          <h1>Know Your Rights</h1>
+          <p>Loading your account...</p>
+        </div>
+        <LoadingWithComparison message="🔐 Getting you logged in automatically..." />
+      </div>
+    );
+  }
+
   if (!user) {
     return <AuthScreen onLogin={setUser} disclaimer={showDisclaimer} setShowDisclaimer={setShowDisclaimer} />;
   }
